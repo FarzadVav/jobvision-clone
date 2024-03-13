@@ -1,4 +1,5 @@
 import Button from "@/components/Button"
+import Input from "@/components/Input"
 import Title from "@/components/Title"
 import Link from "next/link"
 
@@ -13,18 +14,9 @@ const Page = () => {
           سیستم به صورت خودکار ثبت نام یا ورود شما را تشخیص می‌دهد
         </span>
         <form className="w-full px-3 my-6 lg:px-6">
-          <input
-            className="border border-solid border-primary w-full h-10 px-4 rounded"
-            type="email"
-            placeholder="ایمیل"
-          />
-          <input
-            className="border border-solid border-primary w-full h-10 px-4 mt-3 rounded"
-            type="text"
-            placeholder="رمز عبور"
-          />
-
-          <Button className="w-full mt-3" variant={"primary"}>
+          <Input type="email" placeholder="ایمیل" />
+          <Input className="mt-3" type="text" placeholder="رمز عبور" />
+          <Button className="w-full mt-3" size={"lg"} variant={"primary"}>
             ادامه
           </Button>
         </form>
