@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Categories {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  tags    Tags[]
+  job_ads JobAds[]
+}
+
+model Tags {
+  id          String         @id @default(uuid())
+  name        String         @unique
+  category_id String
+  category    Categories     @relation(fields: [category_id], references: [id])
+  job_ads     TagsOnJobAds[]
+}
+
+model Provinces {
+  id        String      @id @default(uuid())
+  name      String      @unique
+  cities    Cities[]
+  companies Companies[]
+}
+
+model Cities {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  province_id String
+  province    Provinces   @relation(fields: [province_id], references: [id])
+  companies   Companies[]
+}
+
+model CooperationTypes {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  job_ads JobAds[]
+}
+
+model Companies {
+  id             String     @id @default(uuid())
+  email          String     @unique
+  password       String
+  logo           String?
+  name           String?
+  about          String?
+  activity       String?
+  knowledgeBased Boolean?   @default(false)
+  employees      Json       @default("[]")
+  score          Int?       @default(5)
+  year           Int?
+  province_id    String?
+  province       Provinces? @relation(fields: [province_id], references: [id])
+  city_id        String?
+  city           Cities?    @relation(fields: [city_id], references: [id])
+  job_ads        JobAds[]
+  created_at     DateTime   @default(now())
+}
+
+model JobAds {
+  id                  String           @id @default(uuid())
+  title               String
+  description         String
+  work_times          String
+  business_trips      String
+  age                 Json             @default("[]")
+  salary              Json             @default("[]")
+  benefits            Json             @default("[]")
+  abilities           Json             @default("[]")
+  education           Json             @default("[]")
+  languages           Json             @default("[]")
+  techs               Json             @default("[]")
+  gender              Boolean
+  end_military_ervice Boolean
+  is_urgent           Boolean
+  is_remote           Boolean
+  category_id         String
+  category            Categories       @relation(fields: [category_id], references: [id])
+  cooperation_type_id String
+  cooperation_type    CooperationTypes @relation(fields: [cooperation_type_id], references: [id])
+  company_id          String
+  company             Companies        @relation(fields: [company_id], references: [id])
+  tags                TagsOnJobAds[]
+  created_at          DateTime         @default(now())
+}
+
+model TagsOnJobAds {
+  tag_id    String @default(uuid())
+  tags      Tags   @relation(fields: [tag_id], references: [id])
+  job_ad_id String @default(uuid())
+  job_ads   JobAds @relation(fields: [job_ad_id], references: [id])
+
+  @@id([tag_id, job_ad_id])
+}

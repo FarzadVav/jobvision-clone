@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "dana";
+  src: url("/fonts/dana.woff"), url("/fonts/dana.woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "dana-bold";
+  src: url("/fonts/dana-bold.woff"), url("/fonts/dana-bold.woff2");
+  font-weight: bold;
+  font-display: swap;
+}
+
+:root {
+  --white: 0 0% 100%;
+  --black: 220 8% 8%;
+  --light: 213 15% 91.7%;
+  --dark: 222 8% 32%;
+  --primary: 236 86% 64%;
+  --danger: 0 94% 66%;
+  --success: 140 51% 52%;
+  --warning: 48 75% 52%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
+body {
+  font-family: "dana";
+  max-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "dana-bold";
+}
+
+input,
+p,
+p * {
+  user-select: text;
+}
+
+button {
+  background: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+@layer utilities {
+  .dana-base {
+    font-family: "dana";
+    font-weight: normal;
+  }
+
+  .dana-bold {
+    font-family: "dana-bold";
+    font-weight: bold;
+  }
+
+  .current-height {
+    @apply h-[calc(100vh-4.5rem)];
+  }
+}
