@@ -10,7 +10,7 @@ import RedirectBtn from "./RedirectBtn"
 const Header = async () => {
   const megaMenu = await getMegaMenu()
 
-  const isLogin = true
+  const isLogin = false
   const location = "/kiki"
 
   return (
