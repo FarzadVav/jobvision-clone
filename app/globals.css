@@ -85,4 +85,40 @@ a {
   .current-height {
     @apply h-[calc(100vh-4.5rem)];
   }
+
+  .active-circle {
+    @apply fill-primary;
+  }
 }
+
+/* Animations */
+.show-message-box {
+  animation: show-message-box 1s ease forwards;
+}
+
+@keyframes show-message-box {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hidden-message-box {
+  animation: hidden-message-box 1s ease forwards;
+}
+
+@keyframes hidden-message-box {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+/* Animations */

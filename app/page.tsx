@@ -7,10 +7,10 @@ const Page = () => {
     <>
       {/* Hero section */}
       <main className={"container w-full flex flex-col justify-center items-center"}>
-        <div className={"w-full flex justify-center items-center"}>
+        <div className={"w-full flex justify-between items-center"}>
           <div
             className={
-              "w-full flex flex-col justify-center items-center text-center md:w-2/3 md:text-right md:items-start"
+              "w-full flex flex-col justify-center items-center text-center md:w-1/2 md:text-right md:items-start"
             }
           >
             <h1 className={"md:mt-16"}>
@@ -37,7 +37,7 @@ const Page = () => {
               </Link>
             </div>
           </div>
-          <div className={"w-1/3 hidden justify-center items-center md:flex"}>
+          <div className={"w-[400px] hidden justify-center items-center md:flex"}>
             <IranAnimation />
           </div>
         </div>
