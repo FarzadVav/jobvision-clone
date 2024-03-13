@@ -17,8 +17,8 @@ const buttonVariants = cva(
         fill: "bg-light",
       },
       size: {
-        md: "h-10 px-4",
         sm: "h-8 text-xs px-3",
+        md: "h-10 px-4",
         lg: "h-11 rounded-md px-5",
       },
     },
@@ -28,7 +28,7 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
+interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {}
 
