@@ -63,6 +63,10 @@ p * {
   user-select: text;
 }
 
+input:focus {
+  outline: none;
+}
+
 button {
   background: none;
 }
