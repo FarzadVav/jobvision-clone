@@ -5,54 +5,37 @@ import { useEffect, useRef, useState } from "react"
 const IranAnimation = () => {
   const [svgPath, setSvgPath] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
 
-  const runAnimationRef = useRef<boolean>(false)
   const messageBoxRef = useRef<HTMLDivElement>(null)
   const gRef = useRef<SVGGElement>(null)
 
   useEffect(() => {
-    // handle active a circle in iran map animation
+    // Handle active a circle in iran map animation
     const animate = () => {
-      console.log(123)
-      const circles: NodeListOf<SVGCircleElement> = gRef.current?.querySelectorAll("circle")!
+      if (window.innerWidth >= 1024) {
+        const circles: NodeListOf<SVGCircleElement> = gRef.current?.querySelectorAll("circle")!
 
-      gRef.current?.querySelector(".active-circle")?.classList.remove("active-circle")
+        gRef.current?.querySelector(".active-circle")?.classList.remove("active-circle")
 
-      const rnd = Math.floor(Math.random() * circles.length) + 1
-      const nextCircleElem = circles[rnd]
-      nextCircleElem?.classList.add("active-circle")
+        const rnd = Math.floor(Math.random() * circles.length) + 1
+        const nextCircleElem = circles[rnd]
+        nextCircleElem?.classList.add("active-circle")
 
-      messageBoxRef.current?.classList.remove("hidden-message-box")
-      messageBoxRef.current?.classList.add("show-message-box")
-      setSvgPath({
-        x: nextCircleElem?.cx.animVal.value || 0,
-        y: nextCircleElem?.cy.animVal.value || 0,
-      })
-      setTimeout(() => {
-        messageBoxRef.current?.classList.remove("show-message-box")
-        messageBoxRef.current?.classList.add("hidden-message-box")
-      }, 4000)
-    }
-
-    // inital animation interVal
-    const interVal = setInterval(animate, 5000)
-
-    // handle remove animation in mobile size and play again in larger sizes
-    const windowSizeHandler = () => {
-      const width = window.innerWidth
-
-      if (width < 768 && runAnimationRef.current) {
-        setSvgPath({ x: 0, y: 0 })
-        clearInterval(interVal)
-        runAnimationRef.current = false
-      } else if (width >= 768 && !runAnimationRef.current) {
-        animate()
-        runAnimationRef.current = true
+        messageBoxRef.current?.classList.remove("hidden-message-box")
+        messageBoxRef.current?.classList.add("show-message-box")
+        setSvgPath({
+          x: nextCircleElem?.cx.animVal.value || 0,
+          y: nextCircleElem?.cy.animVal.value || 0,
+        })
+        setTimeout(() => {
+          messageBoxRef.current?.classList.remove("show-message-box")
+          messageBoxRef.current?.classList.add("hidden-message-box")
+        }, 4000)
       }
     }
-    // check window size for handeling playing animation in first app runnig
-    windowSizeHandler()
+    // Run animation in first effect
+    animate()
 
-    window.addEventListener("resize", windowSizeHandler)
+    const interVal = setInterval(animate, 5000)
     return () => clearInterval(interVal)
   }, [])
 
