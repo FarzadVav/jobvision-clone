@@ -1,5 +1,9 @@
+"use client"
+
 import { forwardRef } from "react"
+import { useFormStatus } from "react-dom"
 import { cva, type VariantProps } from "class-variance-authority"
+import { PulseLoader } from "react-spinners"
 
 import { cn } from "../lib/utils"
 
@@ -34,9 +38,18 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {}
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, children, ...props }, ref) => {
+    const { pending } = useFormStatus()
+
     return (
-      <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <button
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        disabled={pending}
+        {...props}
+      >
+        {pending ? <PulseLoader color="white" size={6} /> : children}
+      </button>
     )
   }
 )
