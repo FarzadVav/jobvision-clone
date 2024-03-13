@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Toaster } from "react-hot-toast"
 
 import Header from "@/components/Header"
 import "./globals.css"
@@ -17,6 +18,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body>
         <Header />
         {children}
+        <Toaster />
       </body>
     </html>
   )

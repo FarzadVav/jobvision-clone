@@ -1,13 +1,28 @@
 "use client"
 
 import Link from "next/link"
+import { useFormState } from "react-dom"
 
 import register from "@/app/actions/register"
 import Button from "@/components/Button"
 import Input from "@/components/Input"
 import Title from "@/components/Title"
 
+export type registerStateT = {
+  status: boolean
+  message: null | string
+}
+
 const Page = () => {
+  const [state, formAction] = useFormState<
+    registerStateT,
+    (prevState: registerStateT, formData: FormData) => Promise<{}>
+    // @ts-ignore
+  >(register, {
+    status: false,
+    message: null,
+  })
+
   return (
     <div className="container">
       <div className="border border-solid border-light w-96 mx-auto rounded-lg overflow-hidden">
@@ -17,9 +32,18 @@ const Page = () => {
         <span className="text-dark block text-sm text-center leading-relaxed px-3 lg:px-9 mt-3">
           سیستم به صورت خودکار ثبت نام یا ورود شما را تشخیص می‌دهد
         </span>
-        <form className="w-full px-3 my-6 lg:px-6" action={register}>
+        <form className="w-full px-3 my-6 lg:px-6" action={formAction}>
           <Input type="email" placeholder="ایمیل" name="email" />
           <Input className="mt-3" type="text" placeholder="رمز عبور" name="password" />
+          {state.message && (
+            <span
+              className={`${
+                state.status ? "text-success" : "text-danger"
+              } block text-sm text-center mt-3`}
+            >
+              {state.message}
+            </span>
+          )}
           <Button className="w-full mt-3" size={"lg"} variant={"primary"}>
             ادامه
           </Button>
