@@ -11,6 +11,14 @@ export const getToken = (user: {}) => {
   }
 }
 
+export const verifyToken = (token: string) => {
+  try {
+    return jwt.verify(token, process.env.TOKEN_KEY as string) as ({ email: string; password: string } | undefined)
+  } catch (error) {
+    console.log("Error on verify token --->", error)
+  }
+}
+
 export const hashPassword = (password: string) => {
   try {
     return bcrypt.hashSync(password, 10)

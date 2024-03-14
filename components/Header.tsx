@@ -6,9 +6,11 @@ import Button from "./Button"
 import Icon from "./Icon"
 import getMegaMenu from "@/app/actions/getMegaMenu"
 import RedirectBtn from "./RedirectBtn"
+import getMe from "@/app/actions/getMe"
 
 const Header = async () => {
   const megaMenu = await getMegaMenu()
+  const user = await getMe()
 
   const isLogin = false
   const location = "/kiki"
