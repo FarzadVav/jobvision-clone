@@ -1,7 +1,10 @@
 "use server"
 
 import { PrismaClient } from "@prisma/client"
-import { registerStateT } from "../register/page"
+
+import { registerStateT } from "@/app/register/page"
+import { hashPassword } from "@/lib/auth"
+import { checkUserForRegister } from "@/lib/validations"
 
 const prisma = new PrismaClient()
 
