@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",
+    "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "jsonwebtoken": "^9.0.2",

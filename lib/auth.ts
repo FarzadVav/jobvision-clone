@@ -1,12 +1,28 @@
 import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt"
 
 export const signUser = (user: {}) => {
   try {
-    const token = jwt.sign(user, process.env.TOKEN_KEY as string, {
+    return jwt.sign(user, process.env.TOKEN_KEY as string, {
       expiresIn: "30d"
     })
-    return token
   } catch (error) {
     console.log("Error on generate token --->", error)
+  }
+}
+
+export const hashPassword = (password: string) => {
+  try {
+    return bcrypt.hashSync(password, 10)
+  } catch (error) {
+    console.log("Error on hash password --->", error)
+  }
+}
+
+export const comparePassword = (password: string, hash: string) => {
+  try {
+    return bcrypt.compareSync(password, hash)
+  } catch (error) {
+    console.log("Error on compare hashed password --->", error)
   }
 }
