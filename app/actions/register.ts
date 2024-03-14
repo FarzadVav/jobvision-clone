@@ -21,7 +21,7 @@ const register = async (prevState: registerStateT, formData: FormData) => {
     return prevState = { message: "رمز عبور امن تری وارد کنید" }
   }
 
-  let user = await prisma.companies.findUnique({ where: { email } })
+  const user = await prisma.companies.findUnique({ where: { email } })
   if (user) {
     if (comparePassword(password, user.password)) {
       cookies().set(

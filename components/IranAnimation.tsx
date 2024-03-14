@@ -11,31 +11,34 @@ const IranAnimation = () => {
   useEffect(() => {
     // Handle active a circle in iran map animation
     const animate = () => {
-      if (window.innerWidth >= 1024) {
-        const circles: NodeListOf<SVGCircleElement> = gRef.current?.querySelectorAll("circle")!
+      const circles: NodeListOf<SVGCircleElement> = gRef.current?.querySelectorAll("circle")!
 
-        gRef.current?.querySelector(".active-circle")?.classList.remove("active-circle")
+      gRef.current?.querySelector(".active-circle")?.classList.remove("active-circle")
 
-        const rnd = Math.floor(Math.random() * circles.length) + 1
-        const nextCircleElem = circles[rnd]
-        nextCircleElem?.classList.add("active-circle")
+      const rnd = Math.floor(Math.random() * circles.length) + 1
+      const nextCircleElem = circles[rnd]
+      nextCircleElem?.classList.add("active-circle")
 
-        messageBoxRef.current?.classList.remove("hidden-message-box")
-        messageBoxRef.current?.classList.add("show-message-box")
-        setSvgPath({
-          x: nextCircleElem?.cx.animVal.value || 0,
-          y: nextCircleElem?.cy.animVal.value || 0,
-        })
-        setTimeout(() => {
-          messageBoxRef.current?.classList.remove("show-message-box")
-          messageBoxRef.current?.classList.add("hidden-message-box")
-        }, 4000)
-      }
+      messageBoxRef.current?.classList.remove("hidden-message-box")
+      messageBoxRef.current?.classList.add("show-message-box")
+      setSvgPath({
+        x: nextCircleElem?.cx.animVal.value || 0,
+        y: nextCircleElem?.cy.animVal.value || 0,
+      })
+      setTimeout(() => {
+        messageBoxRef.current?.classList.remove("show-message-box")
+        messageBoxRef.current?.classList.add("hidden-message-box")
+      }, 4000)
     }
-    // Run animation in first effect
-    animate()
 
-    const interVal = setInterval(animate, 5000)
+    // Check window size for implement interVal
+    let interVal: ReturnType<typeof setInterval> | undefined = undefined
+    if (window.innerWidth >= 1024) {
+      // Run animation in first effect
+      animate()
+      interVal = setInterval(animate, 5000)
+    }
+
     return () => clearInterval(interVal)
   }, [])
 
