@@ -1,10 +1,12 @@
 "use server"
 
+import { z } from "zod"
 import { PrismaClient } from "@prisma/client"
 
 import { registerStateT } from "@/app/register/page"
-import { hashPassword } from "@/lib/auth"
-import { checkUserForRegister } from "@/lib/validations"
+import { comparePassword, getToken, hashPassword } from "@/lib/auth"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
 const prisma = new PrismaClient()
 
@@ -12,19 +14,39 @@ const register = async (prevState: registerStateT, formData: FormData) => {
   const email = formData.get("email") as string
   const password = formData.get("password") as string
 
+  if (!z.string().email().safeParse(email).success) {
+    return prevState = { message: "ایمیل را به درستی وارد کنید" }
+  }
+  if (!z.string().min(4).safeParse(password).success) {
+    return prevState = { message: "رمز عبور امن تری وارد کنید" }
+  }
+
   let user = await prisma.companies.findUnique({ where: { email } })
   if (user) {
-    if (user.password === password) return prevState = { status: true, message: "با موفقیت وارد حسابتان شدید" }
-    else return prevState = { status: false, message: "رمز عبور به درستی وارد نشده است!" }
+    if (comparePassword(password, user.password)) {
+      cookies().set(
+        "token",
+        getToken({ email, password: user.password }) as string,
+        { path: "/", httpOnly: true, maxAge: 2_592_000 }
+      )
+      redirect("/")
+    }
+    else return prevState = { message: "رمز عبور به درستی وارد نشده است!" }
   }
   else {
+    const hashedPassword = hashPassword(password) as string
     await prisma.companies.create({
       data: {
         email,
-        password
+        password: hashedPassword
       }
     })
-    return prevState = { status: true, message: "با موفقیت ثبت نام شدید" }
+    cookies().set(
+      "token",
+      getToken({ email, password: hashedPassword }) as string,
+      { path: "/", httpOnly: true, maxAge: 2_592_000 }
+    )
+    redirect("/")
   }
 }
 

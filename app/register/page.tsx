@@ -9,7 +9,6 @@ import Input from "@/components/Input"
 import Title from "@/components/Title"
 
 export type registerStateT = {
-  status: boolean
   message: null | string
 }
 
@@ -29,21 +28,16 @@ const Page = () => {
         <Title className="mt-3 lg:mt-6" size={"sm"}>
           <h1 className="text-center">ورود / ثبت نام</h1>
         </Title>
-        <span className="text-dark block text-sm text-center leading-relaxed px-3 lg:px-9 mt-3">
-          سیستم به صورت خودکار ثبت نام یا ورود شما را تشخیص می‌دهد
+        <span
+          className={`${
+            state.message ? "text-danger" : "text-dark"
+          } block text-sm text-center leading-relaxed px-3 lg:px-9 mt-3`}
+        >
+          {state.message || "به تیم بزرگ جاب‌ویژن خوش اومدی"}
         </span>
-        <form className="w-full px-3 my-6 lg:px-6" action={formAction}>
-          <Input type="email" placeholder="ایمیل" name="email" />
-          <Input className="mt-3" type="text" placeholder="رمز عبور" name="password" />
-          {state.message && (
-            <span
-              className={`${
-                state.status ? "text-success" : "text-danger"
-              } block text-sm text-center mt-3`}
-            >
-              {state.message}
-            </span>
-          )}
+        <form className="w-full px-3 my-3 lg:px-6" action={formAction}>
+          <Input type="email" placeholder="example@gmail.com" name="email" dir="ltr" />
+          <Input className="mt-3" type="text" placeholder="pass****" name="password" dir="ltr" />
           <Button className="w-full mt-3" size={"lg"} variant={"primary"}>
             ادامه
           </Button>

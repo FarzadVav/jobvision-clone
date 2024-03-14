@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-export const signUser = (user: {}) => {
+export const getToken = (user: {}) => {
   try {
     return jwt.sign(user, process.env.TOKEN_KEY as string, {
       expiresIn: "30d"
