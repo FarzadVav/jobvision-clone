@@ -7,13 +7,11 @@ import Icon from "./Icon"
 import getMegaMenu from "@/app/actions/getMegaMenu"
 import RedirectBtn from "./RedirectBtn"
 import getMe from "@/app/actions/getMe"
+import LogOutBtn from "./LogOutBtn"
 
 const Header = async () => {
   const megaMenu = await getMegaMenu()
   const user = await getMe()
-
-  const isLogin = false
-  const location = "/kiki"
 
   return (
     <header
@@ -182,18 +180,9 @@ const Header = async () => {
           </li>
         </ul>
         <div className={"h-full flex justify-center items-center mr-auto"}>
-          {isLogin ? (
+          {user ? (
             <>
-              {location.includes("/employer") ? (
-                <Button variant={"danger"}>
-                  <Icon name="log-out" />
-                </Button>
-              ) : null}
-              <Link className="h-full mr-3" href={"/employer"}>
-                <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
-                  پنل کارفرمایان
-                </Button>
-              </Link>
+              <LogOutBtn />
             </>
           ) : (
             <Link className="h-full" href={"/register"}>
@@ -220,15 +209,7 @@ const Header = async () => {
             <Image src="/images/logo-white.svg" height={33.5} width={76} alt="لوگوی جاب ویژن" />
           </Button>
         </Link>
-        {location.includes("employer") ? (
-          <Button className="text-white">
-            <Icon name="log-out" size={22} />
-          </Button>
-        ) : (
-          <Button className="text-white">
-            <Icon name="user" size={22} />
-          </Button>
-        )}
+        <LogOutBtn />
       </nav>
       {/* mobile nav */}
     </header>
