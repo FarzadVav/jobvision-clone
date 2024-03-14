@@ -4,7 +4,7 @@ import dynamicIconImports from "lucide-react/dynamicIconImports"
 
 interface IconProps extends Omit<LucideProps, "ref"> {
   name: keyof typeof dynamicIconImports
-  size?: 14 | 18 | 24
+  size?: 14 | 18 | 22
 }
 
 const Icon = ({ name, size = 18, ...props }: IconProps) => {

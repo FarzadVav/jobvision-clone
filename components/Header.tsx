@@ -152,21 +152,21 @@ const Header = async () => {
           </li>
           <li className={"h-full"}>
             <Link className="h-full" href={"/"}>
-              <Button className="h-full" variant={"link"}>
+              <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
                 محصولات
               </Button>
             </Link>
           </li>
           <li className={"h-full"}>
             <Link className="h-full" href={"/"}>
-              <Button className="h-full" variant={"link"}>
+              <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
                 رده بندی شرکت ها
               </Button>
             </Link>
           </li>
           <li className={"h-full"}>
             <Link className="h-full" href={"/"}>
-              <Button className="h-full" variant={"link"}>
+              <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
                 رزومه ساز
               </Button>
             </Link>
@@ -188,14 +188,14 @@ const Header = async () => {
                 </Button>
               ) : null}
               <Link className="h-full mr-3" href={"/employer"}>
-                <Button className="h-full" variant={"link"}>
+                <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
                   پنل کارفرمایان
                 </Button>
               </Link>
             </>
           ) : (
             <Link className="h-full" href={"/register"}>
-              <Button className="h-full" variant={"link"}>
+              <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
                 ورود / ثبت نام
               </Button>
             </Link>
@@ -211,7 +211,7 @@ const Header = async () => {
       {/* mobile nav */}
       <nav className={"container h-[4.5rem] flex justify-between items-center lg:hidden"}>
         <Button className="text-white">
-          <Icon name="menu" size={24} />
+          <Icon name="menu" size={22} />
         </Button>
         <Link className="h-full" href={"/"}>
           <Button className="h-full">
@@ -220,11 +220,11 @@ const Header = async () => {
         </Link>
         {location.includes("employer") ? (
           <Button className="text-white">
-            <Icon name="log-out" size={24} />
+            <Icon name="log-out" size={22} />
           </Button>
         ) : (
           <Button className="text-white">
-            <Icon name="user" size={24} />
+            <Icon name="user" size={22} />
           </Button>
         )}
       </nav>

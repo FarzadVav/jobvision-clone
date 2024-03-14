@@ -17,7 +17,7 @@ const buttonVariants = cva(
         danger: "bg-danger text-white",
         outline: "bg-white border border-solid border-light",
         ghost: "hover:bg-light",
-        link: "underline decoration-transparent hover:decoration-dark/75",
+        link: "text-primary underline decoration-transparent hover:decoration-primary",
         fill: "bg-light",
       },
       size: {
