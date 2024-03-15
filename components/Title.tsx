@@ -30,4 +30,6 @@ const Title = forwardRef<HTMLDivElement, TitleProps>(
   }
 )
 
+Title.displayName = "Title"
+
 export default Title

@@ -10,6 +10,7 @@ const prisma = new PrismaClient()
 const getMe = async () => {
   const token = cookies().get("token")?.value || ""
   const tokenPayLoad = verifyToken(token)
+  
   return await prisma.companies.findUnique({ where: { email: `${tokenPayLoad?.email}` } })
 }
 
