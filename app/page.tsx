@@ -17,7 +17,7 @@ const Page = () => {
             <Title size={"md"}>
               <h1>
                 بین
-                <span className={"text-primary underline mx-2 sm:mx-3"}>37,540</span>
+                <span className={"dana-bold text-primary underline mx-2 sm:mx-3"}>37,540</span>
                 آگهی مختلف,
                 <br />
                 شغل رویایی خودت رو پیدا کن و استخدام شو!

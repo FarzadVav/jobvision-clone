@@ -16,6 +16,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "morabba";
+  src: url("/fonts/morabba-bold.woff"), url("/fonts/morabba-bold.woff2");
+  font-weight: bold;
+  font-display: swap;
+}
+
 :root {
   --white: 0 0% 100%;
   --black: 220 8% 8%;
@@ -49,15 +56,6 @@ body {
   user-select: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "dana-bold";
-}
-
 input,
 p,
 p * {
@@ -79,12 +77,14 @@ a {
 @layer utilities {
   .dana-base {
     font-family: "dana";
-    font-weight: normal;
   }
 
   .dana-bold {
     font-family: "dana-bold";
-    font-weight: bold;
+  }
+
+  .morabba {
+    font-family: "morabba";
   }
 
   .current-height {

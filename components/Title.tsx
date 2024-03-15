@@ -3,7 +3,7 @@ import { VariantProps, cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-const titleVariants = cva("dana-bold w-full !leading-relaxed", {
+const titleVariants = cva("morabba w-full !leading-relaxed", {
   variants: {
     size: {
       sm: "text-base sm:text-lg lg:text-xl",
