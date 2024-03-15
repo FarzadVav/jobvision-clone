@@ -12,7 +12,6 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "active:scale-100",
         primary: "bg-primary text-white",
         danger: "bg-danger text-white",
         outline: "bg-white border border-solid border-light",
@@ -27,7 +26,6 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
       size: "md",
     },
   }

@@ -7,7 +7,6 @@ import Icon from "./Icon"
 import getMegaMenu from "@/app/actions/getMegaMenu"
 import RedirectBtn from "./RedirectBtn"
 import getMe from "@/app/actions/getMe"
-import LogOutBtn from "./LogOutBtn"
 
 const Header = async () => {
   const megaMenu = await getMegaMenu()
@@ -22,7 +21,7 @@ const Header = async () => {
       <nav className={"container w-full h-[4.5rem] hidden lg:flex"}>
         <ul className={"h-full flex items-center"}>
           <li className={"h-full group"}>
-            <Button className="h-full" variant={"default"}>
+            <Button className="h-full">
               فرصت های شغلی
               <Icon className="transition group-hover:-scale-y-100" name="chevron-down" size={18} />
             </Button>
@@ -43,10 +42,7 @@ const Header = async () => {
                       key={uuid()}
                       className={"h-full flex items-center cursor-pointer group/item"}
                     >
-                      <Button
-                        className="dana-bold border-l border-solid border-light h-1/2"
-                        variant={"default"}
-                      >
+                      <Button className="dana-bold border-l border-solid border-light h-1/2">
                         {item.name}
                       </Button>
                       <ul
@@ -181,9 +177,11 @@ const Header = async () => {
         </ul>
         <div className={"h-full flex justify-center items-center mr-auto"}>
           {user ? (
-            <>
-              <LogOutBtn />
-            </>
+            <Link className="h-full" href={"/employer"}>
+              <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
+                پنل کارفرمایان
+              </Button>
+            </Link>
           ) : (
             <Link className="h-full" href={"/register"}>
               <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
@@ -201,7 +199,7 @@ const Header = async () => {
       </nav>
       {/* mobile nav */}
       <nav className={"container h-[4.5rem] flex justify-between items-center lg:hidden"}>
-        <Button className="text-white">
+        <Button className="text-white h-full">
           <Icon name="menu" size={22} />
         </Button>
         <Link className="h-full" href={"/"}>
@@ -209,7 +207,19 @@ const Header = async () => {
             <Image src="/images/logo-white.svg" height={33.5} width={76} alt="لوگوی جاب ویژن" />
           </Button>
         </Link>
-        <LogOutBtn />
+        {user ? (
+          <Link className="h-full" href={"/employer"}>
+            <Button className="text-white h-full">
+              <Icon name="user" size={22} />
+            </Button>
+          </Link>
+        ) : (
+          <Link className="h-full" href={"/register"}>
+            <Button className="text-white h-full">
+              <Icon name="log-out" size={22} />
+            </Button>
+          </Link>
+        )}
       </nav>
       {/* mobile nav */}
     </header>
