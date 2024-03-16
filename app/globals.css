@@ -62,7 +62,8 @@ p * {
   user-select: text;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   outline: none;
 }
 

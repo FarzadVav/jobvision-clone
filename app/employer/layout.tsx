@@ -13,7 +13,9 @@ const layout: React.FC<PropsWithChildren> = ({ children }) => {
         </Title>
         <SideBarLinks />
       </aside>
-      <section className="bg-light h-max w-3/4 p-3 mr-3 rounded-lg lg:p-6">{children}</section>
+      <section className="border border-solid border-light h-max w-3/4 p-3 mr-3 rounded-lg lg:p-6">
+        {children}
+      </section>
     </div>
   )
 }
