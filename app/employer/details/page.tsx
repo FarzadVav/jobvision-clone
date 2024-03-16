@@ -1,11 +1,29 @@
+"use client"
+
+import { useFormState } from "react-dom"
+
+import addDetails from "@/app/actions/addDetails"
 import Button from "@/components/Button"
 import Icon from "@/components/Icon"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 
+type addDetailsSateT = {
+  name: null | string
+  year: null | string
+  minEmployee: null | string
+  maxEmployee: null | string
+  about: null | string
+  activity: null | string
+  file: null | string
+}
+
 const Page = () => {
+  // @ts-ignore
+  const [state, formAction] = useFormState(addDetails, {} as addDetailsSateT)
+
   return (
-    <form className="w-full">
+    <form className="w-full" action={formAction}>
       <div className="w-full flex items-center">
         <div className="w-1/2">
           <label className="dana-bold flex" htmlFor="logo">
@@ -68,6 +86,18 @@ const Page = () => {
         شرکت دانش بنیان
         <input id="based" className="mr-3" type="checkbox" />
       </label>
+
+      <ul className="w-full">
+        {Object.entries(state).map((item) => {
+          if (item[1])
+            return (
+              <li className="text-danger w-full flex items-center mt-6">
+                <Icon name="ban" />
+                <span className="mr-3">{JSON.stringify(item[1])}</span>
+              </li>
+            )
+        })}
+      </ul>
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
         ثبت اطلاعات

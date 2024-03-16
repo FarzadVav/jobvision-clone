@@ -1,10 +1,10 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { v4 as uuid } from "uuid"
 
 import Button from "../Button"
-import { usePathname } from "next/navigation"
 
 const links = [
   { href: "/employer", value: "داشبورد" },
@@ -22,7 +22,7 @@ const SideBarLinks = () => {
           <Link className="w-full" href={link.href}>
             <Button
               className={`${
-                pathname.includes(link.href)
+                pathname.endsWith(link.href)
                   ? "text-primary"
                   : "bg-primary text-white hover:bg-white hover:text-primary"
               } w-full`}
