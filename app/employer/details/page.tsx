@@ -24,95 +24,96 @@ const Page = () => {
   const [state, formAction] = useFormState(addDetails, {} as addDetailsSateT)
 
   return (
-    <form className="w-full" action={formAction}>
-      <div className="w-full flex items-center">
-        <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="logo">
-            <Icon name="pen-line" className="ml-3" />
-            نام شرکت
-          </label>
-          <Input className="mt-3" type="text" placeholder="مثل جاب‌ویژن" name="name" />
+    <>
+      <form className="w-full" action={formAction}>
+        <div className="w-full flex items-center">
+          <div className="w-1/2">
+            <label className="dana-bold flex" htmlFor="logo">
+              <Icon name="pen-line" className="ml-3" />
+              نام شرکت
+            </label>
+            <Input className="mt-3" type="text" placeholder="مثل جاب‌ویژن" name="name" />
+          </div>
+          <div className="w-1/2 mr-3">
+            <label className="dana-bold flex" htmlFor="logo">
+              <Icon name="calendar" className="ml-3" />
+              سال تاسیس
+            </label>
+            <Input className="mt-3" type="number" placeholder="100 نفر" name="year" />
+          </div>
         </div>
-        <div className="w-1/2 mr-3">
-          <label className="dana-bold flex" htmlFor="logo">
-            <Icon name="calendar" className="ml-3" />
-            سال تاسیس
-          </label>
-          <Input className="mt-3" type="number" placeholder="100 نفر" name="year" />
+
+        <div className="w-full flex items-center mt-6">
+          <div className="w-1/2">
+            <label className="dana-bold flex" htmlFor="logo">
+              <Icon name="user-minus" className="ml-3" />
+              حداقل تعداد کارکنان
+            </label>
+            <Input className="mt-3" type="number" placeholder="از 10 نفر" name="minEmployee" />
+          </div>
+          <div className="w-1/2 mr-3">
+            <label className="dana-bold flex" htmlFor="logo">
+              <Icon name="user-plus" className="ml-3" />
+              حداکثر آنها
+            </label>
+            <Input className="mt-3" type="number" placeholder="تا 15 نفر" name="maxEmployee" />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full flex items-center mt-6">
-        <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="logo">
-            <Icon name="user-minus" className="ml-3" />
-            حداقل تعداد کارکنان
-          </label>
-          <Input className="mt-3" type="number" placeholder="از 10 نفر" name="minEmployee" />
-        </div>
-        <div className="w-1/2 mr-3">
-          <label className="dana-bold flex" htmlFor="logo">
-            <Icon name="user-plus" className="ml-3" />
-            حداکثر آنها
-          </label>
-          <Input className="mt-3" type="number" placeholder="تا 15 نفر" name="maxEmployee" />
-        </div>
-      </div>
+        <label className="dana-bold flex mt-6" htmlFor="logo">
+          <Icon name="info" className="ml-3" />
+          درباره شرکت
+        </label>
+        <TextArea
+          className="mt-3"
+          placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
+          name="about"
+        />
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
-        <Icon name="info" className="ml-3" />
-        درباره شرکت
-      </label>
-      <TextArea
-        className="mt-3"
-        placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
-        name="about"
-      />
+        <label className="dana-bold flex mt-6" htmlFor="logo">
+          <Icon name="text-search" className="ml-3" />
+          حوزه فعالیت
+        </label>
+        <TextArea
+          className="mt-3"
+          placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
+          name="activity"
+        />
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
-        <Icon name="text-search" className="ml-3" />
-        حوزه فعالیت
-      </label>
-      <TextArea
-        className="mt-3"
-        placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
-        name="activity"
-      />
+        <label className="dana-bold flex mt-6" htmlFor="logo">
+          <Icon name="image" className="ml-3" />
+          عکس لوگو
+        </label>
+        <Input
+          className="mt-3"
+          type="file"
+          placeholder="فرمت های png"
+          accept=".png, .jpg, .jpeg"
+          name="file"
+        />
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
-        <Icon name="image" className="ml-3" />
-        عکس لوگو
-      </label>
-      <Input
-        className="mt-3"
-        type="file"
-        placeholder="فرمت های png"
-        accept=".png, .jpg, .jpeg"
-        name="file"
-      />
+        <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="knowledgeBased">
+          شرکت دانش بنیان
+          <input id="knowledgeBased" className="mr-3" type="checkbox" name="knowledgeBased" />
+        </label>
 
-      <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="knowledgeBased">
-        شرکت دانش بنیان
-        <input id="knowledgeBased" className="mr-3" type="checkbox" name="knowledgeBased" />
-      </label>
-
-      <ul className="w-full">
-        {Object.entries(state).map((item) => {
-          const message = item[1] as string | null
-          if (message)
-            return (
-              <li key={uuid()} className="text-danger w-full flex items-center mt-6">
-                <Icon name="ban" />
-                <span className="mr-3">{message}</span>
-              </li>
-            )
-        })}
-      </ul>
-
-      <Button className="mt-6" variant={"primary"} size={"lg"}>
-        ثبت اطلاعات
-      </Button>
-    </form>
+        <ul className="w-full">
+          {Object.entries(state).map((item) => {
+            const message = item[1] as string | null
+            if (message)
+              return (
+                <li key={uuid()} className="text-danger w-full flex items-center mt-6">
+                  <Icon name="ban" />
+                  <span className="mr-3">{message}</span>
+                </li>
+              )
+          })}
+        </ul>
+        <Button className="mt-6" variant={"primary"} size={"lg"}>
+          ثبت اطلاعات
+        </Button>
+      </form>
+    </>
   )
 }
 

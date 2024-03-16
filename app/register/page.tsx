@@ -13,14 +13,7 @@ export type registerStateT = {
 }
 
 const Page = () => {
-  const [state, formAction] = useFormState<
-    registerStateT,
-    (prevState: registerStateT, formData: FormData) => Promise<{}>
-    // @ts-ignore
-  >(register, {
-    status: false,
-    message: null,
-  })
+  const [state, formAction] = useFormState(register, {} as registerStateT)
 
   return (
     <div className="container">

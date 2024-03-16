@@ -27,7 +27,8 @@ const addDetails = async (prevState: addDetailsSateT, formData: FormData) => {
     if (item[1]) detailsIsValid = false
   })
 
-  if (!detailsIsValid) return prevState
+  console.log("prevState --->", prevState)
+  if (!detailsIsValid) return prevState = {} as addDetailsSateT
 
   console.log("details --->", {
     name,
@@ -40,7 +41,7 @@ const addDetails = async (prevState: addDetailsSateT, formData: FormData) => {
     knowledgeBased
   })
 
-  return {} as addDetailsSateT
+  return prevState
 }
 
 export default addDetails
