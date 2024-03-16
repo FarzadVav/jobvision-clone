@@ -5,8 +5,8 @@ import { PropsWithChildren } from "react"
 
 const layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="container flex">
-      <aside className="bg-primary text-white w-1/4 flex flex-col items-center p-3 rounded-lg lg:p-6">
+    <div className="container flex pb-3 lg:pb-6">
+      <aside className="bg-primary text-white h-max w-1/4 flex flex-col items-center p-3 rounded-lg sticky top-[5.25rem] lg:p-6">
         <Image className="bg-white rounded-full" src={""} alt="" height={100} width={100} />
         <Title className="mt-3" size={"sm"}>
           <h1 className="text-center">دیجی‌کالا</h1>
