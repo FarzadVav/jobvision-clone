@@ -1,6 +1,7 @@
 "use client"
 
 import { useFormState } from "react-dom"
+import { v4 as uuid } from "uuid"
 
 import addDetails from "@/app/actions/addDetails"
 import Button from "@/components/Button"
@@ -8,7 +9,7 @@ import Icon from "@/components/Icon"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 
-type addDetailsSateT = {
+export type addDetailsSateT = {
   name: null | string
   year: null | string
   minEmployee: null | string
@@ -30,14 +31,14 @@ const Page = () => {
             <Icon name="pen-line" className="ml-3" />
             نام شرکت
           </label>
-          <Input className="mt-3" type="text" placeholder="مثل جاب‌ویژن" />
+          <Input className="mt-3" type="text" placeholder="مثل جاب‌ویژن" name="name" />
         </div>
         <div className="w-1/2 mr-3">
           <label className="dana-bold flex" htmlFor="logo">
             <Icon name="calendar" className="ml-3" />
             سال تاسیس
           </label>
-          <Input className="mt-3" type="number" placeholder="100 نفر" />
+          <Input className="mt-3" type="number" placeholder="100 نفر" name="year" />
         </div>
       </div>
 
@@ -47,14 +48,14 @@ const Page = () => {
             <Icon name="user-minus" className="ml-3" />
             حداقل تعداد کارکنان
           </label>
-          <Input className="mt-3" type="number" placeholder="از 10 نفر" />
+          <Input className="mt-3" type="number" placeholder="از 10 نفر" name="minEmployee" />
         </div>
         <div className="w-1/2 mr-3">
           <label className="dana-bold flex" htmlFor="logo">
             <Icon name="user-plus" className="ml-3" />
             حداکثر آنها
           </label>
-          <Input className="mt-3" type="number" placeholder="تا 15 نفر" />
+          <Input className="mt-3" type="number" placeholder="تا 15 نفر" name="maxEmployee" />
         </div>
       </div>
 
@@ -65,6 +66,7 @@ const Page = () => {
       <TextArea
         className="mt-3"
         placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
+        name="about"
       />
 
       <label className="dana-bold flex mt-6" htmlFor="logo">
@@ -74,26 +76,34 @@ const Page = () => {
       <TextArea
         className="mt-3"
         placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
+        name="activity"
       />
 
       <label className="dana-bold flex mt-6" htmlFor="logo">
         <Icon name="image" className="ml-3" />
         عکس لوگو
       </label>
-      <Input className="mt-3" type="file" placeholder="فرمت های png" accept=".png, .jpg, .jpeg" />
+      <Input
+        className="mt-3"
+        type="file"
+        placeholder="فرمت های png"
+        accept=".png, .jpg, .jpeg"
+        name="file"
+      />
 
-      <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="based">
+      <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="knowledgeBased">
         شرکت دانش بنیان
-        <input id="based" className="mr-3" type="checkbox" />
+        <input id="knowledgeBased" className="mr-3" type="checkbox" name="knowledgeBased" />
       </label>
 
       <ul className="w-full">
         {Object.entries(state).map((item) => {
-          if (item[1])
+          const message = item[1] as string | null
+          if (message)
             return (
-              <li className="text-danger w-full flex items-center mt-6">
+              <li key={uuid()} className="text-danger w-full flex items-center mt-6">
                 <Icon name="ban" />
-                <span className="mr-3">{JSON.stringify(item[1])}</span>
+                <span className="mr-3">{message}</span>
               </li>
             )
         })}
