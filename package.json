@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",
+    "@tabler/icons-react": "^3.1.0",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
     "bcrypt": "^5.1.1",

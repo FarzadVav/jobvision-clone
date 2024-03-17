@@ -5,9 +5,18 @@ import { v4 as uuid } from "uuid"
 
 import addDetails from "@/app/actions/addDetails"
 import Button from "@/components/Button"
-import Icon from "@/components/Icon"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
+import {
+  IconBan,
+  IconCalendarEvent,
+  IconInfoCircle,
+  IconListSearch,
+  IconPencilMinus,
+  IconPhoto,
+  IconUserMinus,
+  IconUserPlus,
+} from "@tabler/icons-react"
 
 export type addDetailsSateT = {
   name: null | string
@@ -29,14 +38,14 @@ const Page = () => {
         <div className="w-full flex items-center">
           <div className="w-1/2">
             <label className="dana-bold flex" htmlFor="logo">
-              <Icon name="pen-line" className="ml-3" />
+              <IconPencilMinus className="icon ml-3" />
               نام شرکت
             </label>
             <Input className="mt-3" type="text" placeholder="مثل جاب‌ویژن" name="name" />
           </div>
           <div className="w-1/2 mr-3">
             <label className="dana-bold flex" htmlFor="logo">
-              <Icon name="calendar" className="ml-3" />
+              <IconCalendarEvent className="icon ml-3" />
               سال تاسیس
             </label>
             <Input className="mt-3" type="number" placeholder="100 نفر" name="year" />
@@ -46,14 +55,14 @@ const Page = () => {
         <div className="w-full flex items-center mt-6">
           <div className="w-1/2">
             <label className="dana-bold flex" htmlFor="logo">
-              <Icon name="user-minus" className="ml-3" />
+              <IconUserMinus className="icon ml-3" />
               حداقل تعداد کارکنان
             </label>
             <Input className="mt-3" type="number" placeholder="از 10 نفر" name="minEmployee" />
           </div>
           <div className="w-1/2 mr-3">
             <label className="dana-bold flex" htmlFor="logo">
-              <Icon name="user-plus" className="ml-3" />
+              <IconUserPlus className="icon ml-3" />
               حداکثر آنها
             </label>
             <Input className="mt-3" type="number" placeholder="تا 15 نفر" name="maxEmployee" />
@@ -61,7 +70,7 @@ const Page = () => {
         </div>
 
         <label className="dana-bold flex mt-6" htmlFor="logo">
-          <Icon name="info" className="ml-3" />
+          <IconInfoCircle className="icon ml-3" />
           درباره شرکت
         </label>
         <TextArea
@@ -71,7 +80,7 @@ const Page = () => {
         />
 
         <label className="dana-bold flex mt-6" htmlFor="logo">
-          <Icon name="text-search" className="ml-3" />
+          <IconListSearch className="icon ml-3" />
           حوزه فعالیت
         </label>
         <TextArea
@@ -81,7 +90,7 @@ const Page = () => {
         />
 
         <label className="dana-bold flex mt-6" htmlFor="logo">
-          <Icon name="image" className="ml-3" />
+          <IconPhoto className="icon ml-3" />
           عکس لوگو
         </label>
         <Input
@@ -103,7 +112,7 @@ const Page = () => {
             if (message)
               return (
                 <li key={uuid()} className="text-danger w-full flex items-center mt-6">
-                  <Icon name="ban" />
+                  <IconBan className="icon" />
                   <span className="mr-3">{message}</span>
                 </li>
               )

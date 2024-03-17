@@ -97,6 +97,20 @@ a {
   }
 }
 
+@layer components {
+  .icon-sm {
+    @apply h-4 w-4;
+  }
+
+  .icon {
+    @apply h-5 w-5;
+  }
+
+  .icon-lg {
+    @apply h-6 w-6;
+  }
+}
+
 /* Animations */
 .show-message-box {
   animation: show-message-box 1s ease forwards;
