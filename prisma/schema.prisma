@@ -49,8 +49,8 @@ model Companies {
   password       String
   logo           String?
   name           String?
-  about          String?
-  activity       String?
+  about          String?    @db.Text
+  activity       String?    @db.Text
   knowledgeBased Boolean?   @default(false)
   employees      Json       @default("[]")
   score          Int?       @default(5)
@@ -66,9 +66,9 @@ model Companies {
 model JobAds {
   id                  String           @id @default(uuid())
   title               String
-  description         String
-  work_times          String
-  business_trips      String
+  description         String           @db.Text
+  work_times          String           @db.Text
+  business_trips      String           @db.Text
   age                 Json             @default("[]")
   salary              Json             @default("[]")
   benefits            Json             @default("[]")

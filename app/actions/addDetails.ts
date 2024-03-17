@@ -12,6 +12,7 @@ const addDetails = async (formData: FormData) => {
   const year = formData.get("year") as string
   const minEmployee = formData.get("minEmployee") as string
   const maxEmployee = formData.get("maxEmployee") as string
+  const city = formData.get("city") as string
   const about = formData.get("about") as string
   const activity = formData.get("activity") as string
   const file = formData.get("file") as File
@@ -27,6 +28,7 @@ const addDetails = async (formData: FormData) => {
           ? null
           : "حداکثر تعداد کارکنان باید کمتر از حداقل آن باشد"
         : "تعداد کارکنان شرکت باید حداکثر هزار نفر باشند",
+      city: city ? null : "لطفا یک شهر انتخاب کنید",
       about: about.trim().length >= 3 ? null : "متن درباره شرکت کوتاه است",
       activity: activity.trim().length >= 3 ? null : "متن حوزه فعالیت کوتاه است",
       file: file.size > 0 ? null : "لطفا یک عکس با فرمت (png یا jpg یا jpeg) انتخاب کنید",

@@ -8,7 +8,6 @@ import {
   IconCalendarEvent,
   IconInfoCircle,
   IconListSearch,
-  IconMap,
   IconMapPin,
   IconPencilMinus,
   IconPhoto,
@@ -22,6 +21,7 @@ import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import toast from "react-hot-toast"
 import getCities from "@/app/actions/getCities"
+import SelectBox from "@/components/SelectBox"
 
 export type detailsFormStateT = {
   isSuccess?: boolean
@@ -31,6 +31,7 @@ export type detailsFormStateT = {
     year: null | string
     minEmployee: null | string
     maxEmployee: null | string
+    city: null | string
     about: null | string
     activity: null | string
     file: null | string
@@ -123,14 +124,14 @@ const Page = () => {
           <IconMapPin className="icon ml-3" />
           شهر شما
         </label>
-        <select className="w-full mt-3" name="city">
+        <SelectBox className="w-full mt-3" error={!!formState.fields.city} name="city">
           <option value="">یک شهر انتخاب کنید</option>
           {cities.map((city) => (
             <option key={city.id} value={city.id}>
               {city.name}
             </option>
           ))}
-        </select>
+        </SelectBox>
 
         <label className="dana-bold flex mt-6" htmlFor="logo">
           <IconInfoCircle className="icon ml-3" />
