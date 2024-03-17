@@ -1,7 +1,8 @@
+import { IconArrowLeft, IconFile, IconFlame, IconSearch } from "@tabler/icons-react"
+
 import IranAnimation from "@/components/IranAnimation"
 import Title from "@/components/Title"
 import Button from "@/components/Button"
-import Icon from "@/components/Icon"
 
 const Page = () => {
   return (
@@ -25,16 +26,16 @@ const Page = () => {
             </Title>
             <ul className="w-full flex items-center mt-3">
               <li className="bg-primary/10 text-primary border border-solid border-primary/25 flex items-center text-sm px-3 py-1 rounded">
-                <Icon name="search" size={14} />
+                <IconSearch className="icon-sm" />
                 <span className="mr-3 mt-0.5">فیلتر سرچ پیشرفته</span>
               </li>
               <li className="bg-sky-50 text-sky-500 border border-solid border-sky-200 flex items-center text-sm px-3 py-1 mr-3 rounded">
-                <Icon name="file" size={14} />
+                <IconFile className="icon-sm" />
                 <span className="mr-3 mt-0.5">ارسال رزومه</span>
               </li>
               <li className="text-2xl mx-3 mt-1">&</li>
               <li className="bg-success/10 text-success border border-solid border-success/25 flex items-center text-sm px-3 py-1 rounded">
-                <Icon name="flame" size={14} />
+                <IconFlame className="icon-sm" />
                 <span className="mr-3 mt-0.5">رقابت و استخدام</span>
               </li>
             </ul>
@@ -47,7 +48,7 @@ const Page = () => {
             <div className={"hidden items-center mt-9 lg:flex"}>
               <Button size={"lg"} variant={"primary"}>
                 شروع رایگان
-                <Icon name="arrow-left" size={22} />
+                <IconArrowLeft className="icon-lg" />
               </Button>
               <Button className="mr-3" size={"lg"} variant={"link"}>
                 ساخت رزومه
