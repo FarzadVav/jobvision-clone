@@ -54,6 +54,8 @@ const addDetails = async (formData: FormData) => {
           year: parseInt(year),
           about,
           activity,
+          city_id: JSON.parse(city).id,
+          province_id: JSON.parse(city).province_id,
           employees: [minEmployee, maxEmployee],
           knowledgeBased: knowledgeBased === "on"
         }

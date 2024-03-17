@@ -127,7 +127,7 @@ const Page = () => {
         <SelectBox className="w-full mt-3" error={!!formState.fields.city} name="city">
           <option value="">یک شهر انتخاب کنید</option>
           {cities.map((city) => (
-            <option key={city.id} value={city.id}>
+            <option key={city.id} value={JSON.stringify(city)}>
               {city.name}
             </option>
           ))}
