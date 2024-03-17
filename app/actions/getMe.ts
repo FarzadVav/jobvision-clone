@@ -11,7 +11,11 @@ const getMe = async () => {
   const token = cookies().get("token")?.value || ""
   const tokenPayLoad = verifyToken(token)
   
-  return await prisma.companies.findUnique({ where: { email: `${tokenPayLoad?.email}` } })
+  try {
+    return await prisma.companies.findUnique({ where: { email: `${tokenPayLoad?.email}` } })
+  } catch (error) {
+    console.log("Unknown error on get user in getMe --->", error)
+  }
 }
 
 export default getMe
