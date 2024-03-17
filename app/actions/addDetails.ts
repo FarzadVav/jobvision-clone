@@ -16,7 +16,11 @@ const addDetails = async (prevState: addDetailsSateT, formData: FormData) => {
     name: name.trim().length >= 3 ? null : "نام شرکت کوتاه است",
     year: year.trim().length === 4 ? null : "سال تاسیس باید 4 رقمی باشد",
     minEmployee: parseInt(minEmployee.trim()) > 1 ? null : "تعداد کارکنان شرکت باید حداقل 2 نفر باشند",
-    maxEmployee: parseInt(maxEmployee.trim()) > 1000 ? null : "تعداد کارکنان شرکت باید حداکثر هزار نفر باشند",
+    maxEmployee: parseInt(maxEmployee.trim()) < 1000
+      ? parseInt(maxEmployee.trim()) > parseInt(minEmployee.trim())
+        ? null
+        : "حداکثر تعداد کارکنان باید کمتر از حداقل آن باشد"
+      : "تعداد کارکنان شرکت باید حداکثر هزار نفر باشند",
     about: about.trim().length >= 3 ? null : "متن درباره شرکت کوتاه است",
     activity: activity.trim().length >= 3 ? null : "متن حوزه فعالیت کوتاه است",
     file: file.size > 0 ? null : "لطفا یک عکس با فرمت (png یا jpg یا jpeg) انتخاب کنید",
@@ -28,7 +32,7 @@ const addDetails = async (prevState: addDetailsSateT, formData: FormData) => {
   })
 
   console.log("prevState --->", prevState)
-  if (!detailsIsValid) return prevState = {} as addDetailsSateT
+  if (!detailsIsValid) return prevState
 
   console.log("details --->", {
     name,

@@ -2,11 +2,6 @@
 
 import { useFormState } from "react-dom"
 import { v4 as uuid } from "uuid"
-
-import addDetails from "@/app/actions/addDetails"
-import Button from "@/components/Button"
-import Input from "@/components/Input"
-import TextArea from "@/components/TextArea"
 import {
   IconBan,
   IconCalendarEvent,
@@ -17,6 +12,11 @@ import {
   IconUserMinus,
   IconUserPlus,
 } from "@tabler/icons-react"
+
+import addDetails from "@/app/actions/addDetails"
+import Button from "@/components/Button"
+import Input from "@/components/Input"
+import TextArea from "@/components/TextArea"
 
 export type addDetailsSateT = {
   name: null | string
@@ -41,14 +41,14 @@ const Page = () => {
               <IconPencilMinus className="icon ml-3" />
               نام شرکت
             </label>
-            <Input className="mt-3" type="text" placeholder="مثل جاب‌ویژن" name="name" />
+            <Input className="mt-3" error={!!state.name} type="text" placeholder="مثل جاب‌ویژن" name="name" />
           </div>
           <div className="w-1/2 mr-3">
             <label className="dana-bold flex" htmlFor="logo">
               <IconCalendarEvent className="icon ml-3" />
               سال تاسیس
             </label>
-            <Input className="mt-3" type="number" placeholder="100 نفر" name="year" />
+            <Input className="mt-3" error={!!state.year} type="number" placeholder="سال 1384" name="year" />
           </div>
         </div>
 
@@ -58,14 +58,14 @@ const Page = () => {
               <IconUserMinus className="icon ml-3" />
               حداقل تعداد کارکنان
             </label>
-            <Input className="mt-3" type="number" placeholder="از 10 نفر" name="minEmployee" />
+            <Input className="mt-3" error={!!state.minEmployee} type="number" placeholder="از 10 نفر" name="minEmployee" />
           </div>
           <div className="w-1/2 mr-3">
             <label className="dana-bold flex" htmlFor="logo">
               <IconUserPlus className="icon ml-3" />
               حداکثر آنها
             </label>
-            <Input className="mt-3" type="number" placeholder="تا 15 نفر" name="maxEmployee" />
+            <Input className="mt-3" error={!!state.maxEmployee} type="number" placeholder="تا 15 نفر" name="maxEmployee" />
           </div>
         </div>
 
@@ -75,6 +75,7 @@ const Page = () => {
         </label>
         <TextArea
           className="mt-3"
+          error={!!state.about}
           placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
           name="about"
         />
@@ -85,6 +86,7 @@ const Page = () => {
         </label>
         <TextArea
           className="mt-3"
+          error={!!state.activity}
           placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
           name="activity"
         />
@@ -94,7 +96,7 @@ const Page = () => {
           عکس لوگو
         </label>
         <Input
-          className="mt-3"
+          className="mt-3" error={!!state.file}
           type="file"
           placeholder="فرمت های png"
           accept=".png, .jpg, .jpeg"
