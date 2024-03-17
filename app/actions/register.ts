@@ -1,12 +1,12 @@
 "use server"
 
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 import { z } from "zod"
 import { PrismaClient } from "@prisma/client"
 
 import { registerStateT } from "@/app/register/page"
 import { comparePassword, getToken, hashPassword } from "@/lib/auth"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
 
 const prisma = new PrismaClient()
 

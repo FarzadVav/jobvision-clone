@@ -1,21 +1,20 @@
 "use server"
 
 import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 import { PrismaClient } from "@prisma/client"
 
 import { verifyToken } from "@/lib/auth"
 
 const prisma = new PrismaClient()
 
-const getMe = async () => {
+const getMe = async (redirectTo?: `/${string}`) => {
   const token = cookies().get("token")?.value || ""
   const tokenPayLoad = verifyToken(token)
-  
-  try {
-    return await prisma.companies.findUnique({ where: { email: `${tokenPayLoad?.email}` } })
-  } catch (error) {
-    console.log("Unknown error on get user in getMe --->", error)
-  }
+
+  const user = await prisma.companies.findUnique({ where: { email: `${tokenPayLoad?.email}` } })
+  if (!user && redirectTo) return redirect(redirectTo)
+  return user
 }
 
 export default getMe

@@ -1,9 +1,14 @@
-import Title from "@/components/Title"
-import SideBarLinks from "@/components/dashboard/SideBarLinks"
+import { redirect } from "next/navigation"
 import Image from "next/image"
 import { PropsWithChildren } from "react"
 
-const layout: React.FC<PropsWithChildren> = ({ children }) => {
+import getMe from "../actions/getMe"
+import Title from "@/components/Title"
+import SideBarLinks from "@/components/dashboard/SideBarLinks"
+
+const layout: React.FC<PropsWithChildren> = async ({ children }) => {
+  await getMe("/register")
+
   return (
     <div className="container flex pb-3 lg:pb-6">
       <aside className="bg-primary text-white h-max w-1/4 flex flex-col items-center p-3 rounded-lg sticky top-[5.25rem] lg:p-6">
