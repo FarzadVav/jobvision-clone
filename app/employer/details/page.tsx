@@ -1,12 +1,15 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { v4 as uuid } from "uuid"
+import { Cities } from "@prisma/client"
 import {
   IconBan,
   IconCalendarEvent,
   IconInfoCircle,
   IconListSearch,
+  IconMap,
+  IconMapPin,
   IconPencilMinus,
   IconPhoto,
   IconUserMinus,
@@ -18,6 +21,7 @@ import Button from "@/components/Button"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import toast from "react-hot-toast"
+import getCities from "@/app/actions/getCities"
 
 export type detailsFormStateT = {
   isSuccess?: boolean
@@ -34,8 +38,13 @@ export type detailsFormStateT = {
 }
 
 const Page = () => {
+  const [cities, setCities] = useState<Cities[]>([])
   const [formState, setFormState] = useState<detailsFormStateT>({ fields: {} } as detailsFormStateT)
   const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    getCities().then((res) => setCities(res || []))
+  }, [])
 
   return (
     <>
@@ -109,6 +118,19 @@ const Page = () => {
             />
           </div>
         </div>
+
+        <label className="dana-bold flex mt-6" htmlFor="logo">
+          <IconMapPin className="icon ml-3" />
+          شهر شما
+        </label>
+        <select className="w-full mt-3" name="city">
+          <option value="">یک شهر انتخاب کنید</option>
+          {cities.map((city) => (
+            <option key={city.id} value={city.id}>
+              {city.name}
+            </option>
+          ))}
+        </select>
 
         <label className="dana-bold flex mt-6" htmlFor="logo">
           <IconInfoCircle className="icon ml-3" />
