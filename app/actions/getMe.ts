@@ -13,7 +13,7 @@ const getMe = async (redirectTo?: `/${string}`) => {
   const tokenPayLoad = verifyToken(token)
 
   const user = await prisma.companies.findUnique({ where: { email: `${tokenPayLoad?.email}` } })
-  if (!user && redirectTo) return redirect(redirectTo)
+  if (!user && redirectTo) redirect(redirectTo)
   return user
 }
 
