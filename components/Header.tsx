@@ -3,10 +3,16 @@ import Image from "next/image"
 import { v4 as uuid } from "uuid"
 
 import Button from "./Button"
-import Icon from "./Icon"
 import getMegaMenu from "@/app/actions/getMegaMenu"
 import RedirectBtn from "./RedirectBtn"
 import getMe from "@/app/actions/getMe"
+import {
+  IconChevronDown,
+  IconChevronLeft,
+  IconLogout,
+  IconMenuDeep,
+  IconUser,
+} from "@tabler/icons-react"
 
 const Header = async () => {
   const megaMenu = await getMegaMenu()
@@ -23,7 +29,7 @@ const Header = async () => {
           <li className={"h-full group"}>
             <Button className="h-full">
               فرصت های شغلی
-              <Icon className="transition group-hover:-scale-y-100" name="chevron-down" size={18} />
+              <IconChevronDown className="icon transition group-hover:-scale-y-100" />
             </Button>
             {/* Mega menu */}
             <div
@@ -68,12 +74,10 @@ const Header = async () => {
                                           "dana-base w-full flex items-center mt-2 first:mt-0 group/sub"
                                         }
                                       >
-                                        <Icon
+                                        <IconChevronLeft
                                           className={
-                                            "no-trans text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100"
+                                            "icon-sm text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100"
                                           }
-                                          name="chevron-left"
-                                          size={14}
                                         />
                                         <Link
                                           className={
@@ -200,7 +204,7 @@ const Header = async () => {
       {/* mobile nav */}
       <nav className={"container h-[4.5rem] flex justify-between items-center lg:hidden"}>
         <Button className="text-white h-full">
-          <Icon name="menu" size={22} />
+          <IconMenuDeep className="icon" />
         </Button>
         <Link className="h-full" href={"/"}>
           <Button className="h-full">
@@ -210,13 +214,13 @@ const Header = async () => {
         {user ? (
           <Link className="h-full" href={"/employer"}>
             <Button className="text-white h-full">
-              <Icon name="user" size={22} />
+              <IconUser className="icon" />
             </Button>
           </Link>
         ) : (
           <Link className="h-full" href={"/register"}>
             <Button className="text-white h-full">
-              <Icon name="log-out" size={22} />
+              <IconLogout className="icon" />
             </Button>
           </Link>
         )}
