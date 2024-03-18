@@ -3,8 +3,11 @@
 import {
   IconAlignRight,
   IconArrowUpLeft,
+  IconBriefcase,
   IconCash,
   IconClockHour3,
+  IconFileDescription,
+  IconGenderBigender,
   IconPencilMinus,
   IconPlane,
 } from "@tabler/icons-react"
@@ -12,17 +15,19 @@ import {
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import { useState } from "react"
+import SelectBox from "@/components/SelectBox"
 
 const Page = () => {
   const [salaryTo, setSalaryTo] = useState(false)
 
   return (
     <form className="w-full">
-      <label className="dana-bold flex" htmlFor="logo">
+      <label className="dana-bold flex" htmlFor="title">
         <IconPencilMinus className="icon ml-3" />
         عنوان آگهی
       </label>
       <Input
+        id="title"
         className="mt-3"
         error={!!false}
         type="text"
@@ -30,11 +35,12 @@ const Page = () => {
         name="title"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
+      <label className="dana-bold flex mt-6" htmlFor="description">
         <IconAlignRight className="icon ml-3" />
         توضیحات لازم
       </label>
       <TextArea
+        id="description"
         className="mt-3"
         error={!!false}
         placeholder="توضیحات این موقعیت شغلی ..."
@@ -43,11 +49,12 @@ const Page = () => {
 
       <div className="w-full flex items-center mt-6">
         <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="logo">
+          <label className="dana-bold flex" htmlFor="workTime">
             <IconClockHour3 className="icon ml-3" />
             شرح ساعت کاری
           </label>
           <Input
+            id="workTime"
             className="mt-3"
             error={!!false}
             type="text"
@@ -56,11 +63,12 @@ const Page = () => {
           />
         </div>
         <div className="w-1/2 mr-3">
-          <label className="dana-bold flex" htmlFor="logo">
+          <label className="dana-bold flex" htmlFor="businessTrip">
             <IconPlane className="icon ml-3 -rotate-90" />
             شرح سفر های کاری
           </label>
           <Input
+            id="businessTrip"
             className="mt-3"
             error={!!false}
             type="text"
@@ -72,11 +80,12 @@ const Page = () => {
 
       <div className="w-full flex items-center mt-6">
         <div className={salaryTo ? "w-1/2" : "w-full"}>
-          <label className="dana-bold flex mt-6" htmlFor="logo">
+          <label className="dana-bold flex" htmlFor="salaryFrom">
             <IconCash className="icon ml-3" />
             میزان حقوق
           </label>
           <Input
+            id="salaryFrom"
             className="mt-3"
             error={!!false}
             type="text"
@@ -85,11 +94,12 @@ const Page = () => {
           />
         </div>
         <div className={`w-1/2 ${salaryTo ? "block" : "hidden"} mr-3`}>
-          <label className="dana-bold flex mt-6" htmlFor="logo">
+          <label className="dana-bold flex" htmlFor="salaryTo">
             <IconArrowUpLeft className="icon ml-3" />
             تا این قیمت
           </label>
           <Input
+            id="salaryTo"
             className="mt-3"
             error={!!false}
             type="text"
@@ -98,15 +108,44 @@ const Page = () => {
           />
         </div>
       </div>
-      <label className="flex mt-3 cursor-pointer" htmlFor="salaryTo">
+      <label className="flex mt-3 cursor-pointer" htmlFor="show-salaryTo">
         ایجاد بازه قیمت
         <input
-          id="salaryTo"
           className="mr-3"
           type="checkbox"
+          name="show-salaryTo"
           onChange={(e) => setSalaryTo(e.target.checked)}
         />
       </label>
+
+      <label className="dana-bold flex mt-6" htmlFor="catogory">
+        <IconBriefcase className="icon ml-3" />
+        دسته بندی شغلی
+      </label>
+      <SelectBox id="catogory" className="w-full mt-3" error={!!false} name="catogory">
+        <option value="">یک مورد انتخاب کنید</option>
+      </SelectBox>
+
+      <label className="dana-bold flex mt-6" htmlFor="cooperatoinType">
+        <IconFileDescription className="icon ml-3" />
+        نوع قرارداد
+      </label>
+      <SelectBox
+        id="cooperatoinType"
+        className="w-full mt-3"
+        error={!!false}
+        name="cooperatoinType"
+      >
+        <option value="">یک مورد انتخاب کنید</option>
+      </SelectBox>
+
+      <label className="dana-bold flex mt-6" htmlFor="gender">
+        <IconGenderBigender className="icon ml-3" />
+        جنسیت
+      </label>
+      <SelectBox id="gender" className="w-full mt-3" error={!!false} name="gender">
+        <option value="">یک مورد انتخاب کنید</option>
+      </SelectBox>
     </form>
   )
 }
