@@ -20,8 +20,8 @@ import Button from "@/components/Button"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import toast from "react-hot-toast"
-import getCities from "@/app/actions/getCities"
 import SelectBox from "@/components/SelectBox"
+import ContentT from "@/types/content.types"
 
 export type detailsFormStateT = {
   isSuccess?: boolean
@@ -44,7 +44,9 @@ const Page = () => {
   const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
-    getCities().then((res) => setCities(res || []))
+    fetch("/api/content")
+      .then((res) => res.json())
+      .then((data: ContentT) => setCities(data.cities))
   }, [])
 
   return (
