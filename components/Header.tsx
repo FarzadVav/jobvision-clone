@@ -15,7 +15,7 @@ import RedirectBtn from "./RedirectBtn"
 import getMe from "@/app/actions/getMe"
 
 const getMegaMenu = async () => {
-  const res = await fetch(process.env.BASE_URL + "/api/content")
+  const res = await fetch(process.env.BASE_URL + "/api/content", { next: { revalidate: 3_600 } })
   const data = (await res.json()) as ContentT
   return data.megaMenu
 }

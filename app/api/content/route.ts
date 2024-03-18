@@ -2,7 +2,6 @@ import ContentT from "@/types/content.types";
 import { PrismaClient } from "@prisma/client"
 import { v4 as uuid } from "uuid";
 
-
 const prisma = new PrismaClient()
 
 export const GET = async () => {
