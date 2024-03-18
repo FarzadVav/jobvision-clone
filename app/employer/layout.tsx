@@ -7,7 +7,8 @@ import Title from "@/components/Title"
 import SideBarLinks from "@/components/dashboard/SideBarLinks"
 
 const layout: React.FC<PropsWithChildren> = async ({ children }) => {
-  await getMe("/register")
+  const user = await getMe()
+  !user && redirect("/register")
 
   return (
     <div className="container flex pb-3 lg:pb-6">
