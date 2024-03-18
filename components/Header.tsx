@@ -1,11 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { v4 as uuid } from "uuid"
-
-import Button from "./Button"
-import getMegaMenu from "@/app/actions/getMegaMenu"
-import RedirectBtn from "./RedirectBtn"
-import getMe from "@/app/actions/getMe"
 import {
   IconChevronDown,
   IconChevronLeft,
@@ -13,6 +8,17 @@ import {
   IconMenuDeep,
   IconUser,
 } from "@tabler/icons-react"
+
+import ContentT from "@/types/content.types"
+import Button from "./Button"
+import RedirectBtn from "./RedirectBtn"
+import getMe from "@/app/actions/getMe"
+
+const getMegaMenu = async () => {
+  const res = await fetch(process.env.BASE_URL + "/api/content")
+  const data = (await res.json()) as ContentT
+  return data.megaMenu
+}
 
 const Header = async () => {
   const megaMenu = await getMegaMenu()
