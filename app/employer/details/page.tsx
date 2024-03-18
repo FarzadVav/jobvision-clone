@@ -50,152 +50,149 @@ const Page = () => {
   }, [])
 
   return (
-    <>
-      <form
-        className="w-full"
-        ref={formRef}
-        action={async (formData: FormData) => {
-          const newState = await addDetails(formData)
-          console.log(newState)
-          setFormState(newState || ({ fields: {} } as detailsFormStateT))
-          if (newState?.isSuccess) {
-            toast.success("اطلاعات شما با موفقیت ثبت شد")
-            formRef.current?.reset()
-          }
-        }}
-      >
-        <div className="w-full flex items-center">
-          <div className="w-1/2">
-            <label className="dana-bold flex" htmlFor="logo">
-              <IconPencilMinus className="icon ml-3" />
-              نام شرکت
-            </label>
-            <Input
-              className="mt-3"
-              error={!!formState.fields.name}
-              type="text"
-              placeholder="مثل جاب‌ویژن"
-              name="name"
-            />
-          </div>
-          <div className="w-1/2 mr-3">
-            <label className="dana-bold flex" htmlFor="logo">
-              <IconCalendarEvent className="icon ml-3" />
-              سال تاسیس
-            </label>
-            <Input
-              className="mt-3"
-              error={!!formState.fields.year}
-              type="number"
-              placeholder="سال 1384"
-              name="year"
-            />
-          </div>
+    <form
+      className="w-full"
+      ref={formRef}
+      action={async (formData: FormData) => {
+        const newState = await addDetails(formData)
+        setFormState(newState || ({ fields: {} } as detailsFormStateT))
+        if (newState?.isSuccess) {
+          toast.success("اطلاعات شما با موفقیت ثبت شد")
+          formRef.current?.reset()
+        }
+      }}
+    >
+      <div className="w-full flex items-center">
+        <div className="w-1/2">
+          <label className="dana-bold flex" htmlFor="logo">
+            <IconPencilMinus className="icon ml-3" />
+            نام شرکت
+          </label>
+          <Input
+            className="mt-3"
+            error={!!formState.fields.name}
+            type="text"
+            placeholder="مثل جاب‌ویژن"
+            name="name"
+          />
         </div>
-
-        <div className="w-full flex items-center mt-6">
-          <div className="w-1/2">
-            <label className="dana-bold flex" htmlFor="logo">
-              <IconUserMinus className="icon ml-3" />
-              حداقل تعداد کارکنان
-            </label>
-            <Input
-              className="mt-3"
-              error={!!formState.fields.minEmployee}
-              type="number"
-              placeholder="از 10 نفر"
-              name="minEmployee"
-            />
-          </div>
-          <div className="w-1/2 mr-3">
-            <label className="dana-bold flex" htmlFor="logo">
-              <IconUserPlus className="icon ml-3" />
-              حداکثر آنها
-            </label>
-            <Input
-              className="mt-3"
-              error={!!formState.fields.maxEmployee}
-              type="number"
-              placeholder="تا 15 نفر"
-              name="maxEmployee"
-            />
-          </div>
+        <div className="w-1/2 mr-3">
+          <label className="dana-bold flex" htmlFor="logo">
+            <IconCalendarEvent className="icon ml-3" />
+            سال تاسیس
+          </label>
+          <Input
+            className="mt-3"
+            error={!!formState.fields.year}
+            type="number"
+            placeholder="سال 1384"
+            name="year"
+          />
         </div>
+      </div>
 
-        <label className="dana-bold flex mt-6" htmlFor="logo">
-          <IconMapPin className="icon ml-3" />
-          شهر شما
-        </label>
-        <SelectBox className="w-full mt-3" error={!!formState.fields.city} name="city">
-          <option value="">یک شهر انتخاب کنید</option>
-          {cities.map((city) => (
-            <option key={city.id} value={JSON.stringify(city)}>
-              {city.name}
-            </option>
-          ))}
-        </SelectBox>
+      <div className="w-full flex items-center mt-6">
+        <div className="w-1/2">
+          <label className="dana-bold flex" htmlFor="logo">
+            <IconUserMinus className="icon ml-3" />
+            حداقل تعداد کارکنان
+          </label>
+          <Input
+            className="mt-3"
+            error={!!formState.fields.minEmployee}
+            type="number"
+            placeholder="از 10 نفر"
+            name="minEmployee"
+          />
+        </div>
+        <div className="w-1/2 mr-3">
+          <label className="dana-bold flex" htmlFor="logo">
+            <IconUserPlus className="icon ml-3" />
+            حداکثر آنها
+          </label>
+          <Input
+            className="mt-3"
+            error={!!formState.fields.maxEmployee}
+            type="number"
+            placeholder="تا 15 نفر"
+            name="maxEmployee"
+          />
+        </div>
+      </div>
 
-        <label className="dana-bold flex mt-6" htmlFor="logo">
-          <IconInfoCircle className="icon ml-3" />
-          درباره شرکت
-        </label>
-        <TextArea
-          className="mt-3"
-          error={!!formState.fields.about}
-          placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
-          name="about"
-        />
+      <label className="dana-bold flex mt-6" htmlFor="logo">
+        <IconMapPin className="icon ml-3" />
+        شهر شما
+      </label>
+      <SelectBox className="w-full mt-3" error={!!formState.fields.city} name="city">
+        <option value="">یک شهر انتخاب کنید</option>
+        {cities.map((city) => (
+          <option key={city.id} value={JSON.stringify(city)}>
+            {city.name}
+          </option>
+        ))}
+      </SelectBox>
 
-        <label className="dana-bold flex mt-6" htmlFor="logo">
-          <IconListSearch className="icon ml-3" />
-          حوزه فعالیت
-        </label>
-        <TextArea
-          className="mt-3"
-          error={!!formState.fields.activity}
-          placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
-          name="activity"
-        />
+      <label className="dana-bold flex mt-6" htmlFor="logo">
+        <IconInfoCircle className="icon ml-3" />
+        درباره شرکت
+      </label>
+      <TextArea
+        className="mt-3"
+        error={!!formState.fields.about}
+        placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
+        name="about"
+      />
 
-        <label className="dana-bold flex mt-6" htmlFor="logo">
-          <IconPhoto className="icon ml-3" />
-          عکس لوگو
-        </label>
-        <Input
-          className="mt-3"
-          error={!!formState.fields.file}
-          type="file"
-          placeholder="فرمت های png"
-          accept=".png, .jpg, .jpeg"
-          name="file"
-        />
+      <label className="dana-bold flex mt-6" htmlFor="logo">
+        <IconListSearch className="icon ml-3" />
+        حوزه فعالیت
+      </label>
+      <TextArea
+        className="mt-3"
+        error={!!formState.fields.activity}
+        placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
+        name="activity"
+      />
 
-        <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="knowledgeBased">
-          شرکت دانش بنیان
-          <input id="knowledgeBased" className="mr-3" type="checkbox" name="knowledgeBased" />
-        </label>
+      <label className="dana-bold flex mt-6" htmlFor="logo">
+        <IconPhoto className="icon ml-3" />
+        عکس لوگو
+      </label>
+      <Input
+        className="mt-3"
+        error={!!formState.fields.file}
+        type="file"
+        placeholder="فرمت های png"
+        accept=".png, .jpg, .jpeg"
+        name="file"
+      />
 
-        <ul className="w-full">
-          {Object.entries(formState.fields).map((item) => {
-            const message = item[1] as string | null
-            if (message)
-              return (
-                <li key={uuid()} className="text-danger w-full flex items-center mt-6">
-                  <IconBan className="icon" />
-                  <span className="mr-3">{message}</span>
-                </li>
-              )
-          })}
-        </ul>
-        {formState.message ? (
-          <span className="text-danger block mt-6">{formState.message}</span>
-        ) : null}
+      <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="knowledgeBased">
+        شرکت دانش بنیان
+        <input id="knowledgeBased" className="mr-3" type="checkbox" name="knowledgeBased" />
+      </label>
 
-        <Button className="mt-6" variant={"primary"} size={"lg"}>
-          ثبت اطلاعات
-        </Button>
-      </form>
-    </>
+      <ul className="w-full">
+        {Object.entries(formState.fields).map((item) => {
+          const message = item[1] as string | null
+          if (message)
+            return (
+              <li key={uuid()} className="text-danger w-full flex items-center mt-6">
+                <IconBan className="icon" />
+                <span className="mr-3">{message}</span>
+              </li>
+            )
+        })}
+      </ul>
+      {formState.message ? (
+        <span className="text-danger block mt-6">{formState.message}</span>
+      ) : null}
+
+      <Button className="mt-6" variant={"primary"} size={"lg"}>
+        ثبت اطلاعات
+      </Button>
+    </form>
   )
 }
 
