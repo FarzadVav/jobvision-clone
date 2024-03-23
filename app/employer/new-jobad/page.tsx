@@ -15,7 +15,7 @@ import {
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import { useState } from "react"
-import SelectBox from "@/components/SelectBox"
+import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
 
 const Page = () => {
   const [salaryTo, setSalaryTo] = useState(false)
@@ -122,30 +122,31 @@ const Page = () => {
         <IconBriefcase className="icon ml-3" />
         دسته بندی شغلی
       </label>
-      <SelectBox id="catogory" className="w-full mt-3" error={!!false} name="catogory">
-        <option value="">یک مورد انتخاب کنید</option>
-      </SelectBox>
+      <SelectBoxWrapper className="mt-3">
+        <SelectBox id="catogory" error={!!false} name="catogory">
+          <option value="">یک مورد انتخاب کنید</option>
+        </SelectBox>
+      </SelectBoxWrapper>
 
       <label className="dana-bold flex mt-6" htmlFor="cooperatoinType">
         <IconFileDescription className="icon ml-3" />
         نوع قرارداد
       </label>
-      <SelectBox
-        id="cooperatoinType"
-        className="w-full mt-3"
-        error={!!false}
-        name="cooperatoinType"
-      >
-        <option value="">یک مورد انتخاب کنید</option>
-      </SelectBox>
+      <SelectBoxWrapper className="mt-3">
+        <SelectBox id="cooperatoinType" error={!!false} name="cooperatoinType">
+          <option value="">یک مورد انتخاب کنید</option>
+        </SelectBox>
+      </SelectBoxWrapper>
 
       <label className="dana-bold flex mt-6" htmlFor="gender">
         <IconGenderBigender className="icon ml-3" />
         جنسیت
       </label>
-      <SelectBox id="gender" className="w-full mt-3" error={!!false} name="gender">
-        <option value="">یک مورد انتخاب کنید</option>
-      </SelectBox>
+      <SelectBoxWrapper className="mt-3">
+        <SelectBox id="gender" error={!!false} name="gender">
+          <option value="">یک مورد انتخاب کنید</option>
+        </SelectBox>
+      </SelectBoxWrapper>
     </form>
   )
 }
