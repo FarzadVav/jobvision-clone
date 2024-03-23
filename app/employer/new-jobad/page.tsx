@@ -16,7 +16,7 @@ import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import { useState } from "react"
 import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
-import MultiSelect from "@/components/MultiSelect"
+import AutoComplete from "@/components/AutoComplete"
 
 const data = ["hello", "world", "javascript"]
 const data2 = ["aaa", "vvv", "ggg"]
@@ -136,7 +136,7 @@ const Page = () => {
         <IconBriefcase className="icon ml-3" />
         دسته بندی شغلی
       </label>
-      <MultiSelect
+      <AutoComplete
         id="catogory"
         wrapperclassName="mt-3"
         error={!!false}
@@ -149,7 +149,7 @@ const Page = () => {
         <IconFileDescription className="icon ml-3" />
         نوع قرارداد
       </label>
-      <MultiSelect
+      <AutoComplete
         id="cooperatoinType"
         wrapperclassName="mt-3"
         error={!!false}

@@ -6,13 +6,13 @@ import { cn } from "../lib/utils"
 import { IconChevronDown } from "@tabler/icons-react"
 import { v4 as uuid } from "uuid"
 
-interface MultiSelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> {
   wrapperclassName?: string
   error?: boolean
   data: string[]
 }
 
-const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
+const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
   ({ wrapperclassName, error, className, data, ...props }, ref) => {
     const [value, setValue] = useState("")
     const [isFocus, setIsFocus] = useState(false)
@@ -69,6 +69,6 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
   }
 )
 
-MultiSelect.displayName = "MultiSelect"
+AutoComplete.displayName = "AutoComplete"
 
-export default MultiSelect
+export default AutoComplete
