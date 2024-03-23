@@ -17,9 +17,11 @@ import TextArea from "@/components/TextArea"
 import { useState } from "react"
 import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
 import AutoComplete from "@/components/AutoComplete"
+import MultiSelect from "@/components/MultiSelect"
 
 const data = ["hello", "world", "javascript"]
 const data2 = ["aaa", "vvv", "ggg"]
+const data3 = ["front", "back", "ios"]
 
 const Page = () => {
   const [salaryTo, setSalaryTo] = useState(false)
@@ -156,6 +158,19 @@ const Page = () => {
         data={data2}
         name="cooperatoinType"
         placeholder="یک مورد را سرچ و انتخاب کنید"
+      />
+
+      <label className="dana-bold flex mt-6" htmlFor="tags">
+        <IconFileDescription className="icon ml-3" />
+        تگ های شغلی
+      </label>
+      <MultiSelect
+        id="tags"
+        wrapperclassName="mt-3"
+        error={!!false}
+        data={data3}
+        name="tags"
+        placeholder="چند مورد را سرچ و انتخاب کنید"
       />
     </form>
   )
