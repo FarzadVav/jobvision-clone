@@ -28,18 +28,22 @@ export const MultiSelectWrapper = forwardRef<HTMLDivElement, MultiSelectWrapperP
           } z-50`}
         >
           {data.length ? (
-            data.map((item) => {
-              if (item.includes(value))
-                return (
-                  <li
-                    key={uuid()}
-                    className="w-full py-1.5 px-3 rounded cursor-pointer transition-colors hover:bg-light/50"
-                    onMouseDown={() => useMultiSelect.setState({ value: item })}
-                  >
-                    {item}
-                  </li>
-                )
-            })
+            data.filter((item) => item.includes(value)).length ? (
+              data.map((item) => {
+                if (item.includes(value))
+                  return (
+                    <li
+                      key={uuid()}
+                      className="w-full py-1.5 px-3 rounded cursor-pointer transition-colors hover:bg-light/50"
+                      onMouseDown={() => useMultiSelect.setState({ value: item })}
+                    >
+                      {item}
+                    </li>
+                  )
+              })
+            ) : (
+              <li className="py-1.5">موردی پیدا نشد</li>
+            )
           ) : (
             <li className="py-1.5">لیستی برای انتخاب وجود ندارد</li>
           )}
