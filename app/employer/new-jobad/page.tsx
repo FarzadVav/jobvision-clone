@@ -16,9 +16,10 @@ import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import { useState } from "react"
 import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
-import MultiSelect, { MultiSelectWrapper } from "@/components/MultiSelect"
+import MultiSelect from "@/components/MultiSelect"
 
 const data = ["hello", "world", "javascript"]
+const data2 = ["aaa", "vvv", "ggg"]
 
 const Page = () => {
   const [salaryTo, setSalaryTo] = useState(false)
@@ -135,24 +136,27 @@ const Page = () => {
         <IconBriefcase className="icon ml-3" />
         دسته بندی شغلی
       </label>
-      <MultiSelectWrapper className="mt-3" data={data}>
-        <MultiSelect
-          id="catogory"
-          error={!!false}
-          name="catogory"
-          placeholder="یک مورد را سرچ و انتخاب کنید"
-        />
-      </MultiSelectWrapper>
+      <MultiSelect
+        id="catogory"
+        wrapperclassName="mt-3"
+        error={!!false}
+        data={data}
+        name="catogory"
+        placeholder="یک مورد را سرچ و انتخاب کنید"
+      />
 
       <label className="dana-bold flex mt-6" htmlFor="cooperatoinType">
         <IconFileDescription className="icon ml-3" />
         نوع قرارداد
       </label>
-      <SelectBoxWrapper className="mt-3">
-        <SelectBox id="cooperatoinType" error={!!false} name="cooperatoinType">
-          <option value="">یک مورد انتخاب کنید</option>
-        </SelectBox>
-      </SelectBoxWrapper>
+      <MultiSelect
+        id="cooperatoinType"
+        wrapperclassName="mt-3"
+        error={!!false}
+        data={data2}
+        name="cooperatoinType"
+        placeholder="یک مورد را سرچ و انتخاب کنید"
+      />
     </form>
   )
 }
