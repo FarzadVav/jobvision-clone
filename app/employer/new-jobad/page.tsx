@@ -16,6 +16,9 @@ import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import { useState } from "react"
 import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
+import MultiSelect, { MultiSelectWrapper } from "@/components/MultiSelect"
+
+const data = ["hello", "world", "javascript"]
 
 const Page = () => {
   const [salaryTo, setSalaryTo] = useState(false)
@@ -118,15 +121,28 @@ const Page = () => {
         />
       </label>
 
+      <label className="dana-bold flex mt-6" htmlFor="gender">
+        <IconGenderBigender className="icon ml-3" />
+        جنسیت
+      </label>
+      <SelectBoxWrapper className="mt-3">
+        <SelectBox id="gender" error={!!false} name="gender">
+          <option value="">یک مورد انتخاب کنید</option>
+        </SelectBox>
+      </SelectBoxWrapper>
+
       <label className="dana-bold flex mt-6" htmlFor="catogory">
         <IconBriefcase className="icon ml-3" />
         دسته بندی شغلی
       </label>
-      <SelectBoxWrapper className="mt-3">
-        <SelectBox id="catogory" error={!!false} name="catogory">
-          <option value="">یک مورد انتخاب کنید</option>
-        </SelectBox>
-      </SelectBoxWrapper>
+      <MultiSelectWrapper className="mt-3" data={data}>
+        <MultiSelect
+          id="catogory"
+          error={!!false}
+          name="catogory"
+          placeholder="یک مورد را سرچ و انتخاب کنید"
+        />
+      </MultiSelectWrapper>
 
       <label className="dana-bold flex mt-6" htmlFor="cooperatoinType">
         <IconFileDescription className="icon ml-3" />
@@ -134,16 +150,6 @@ const Page = () => {
       </label>
       <SelectBoxWrapper className="mt-3">
         <SelectBox id="cooperatoinType" error={!!false} name="cooperatoinType">
-          <option value="">یک مورد انتخاب کنید</option>
-        </SelectBox>
-      </SelectBoxWrapper>
-
-      <label className="dana-bold flex mt-6" htmlFor="gender">
-        <IconGenderBigender className="icon ml-3" />
-        جنسیت
-      </label>
-      <SelectBoxWrapper className="mt-3">
-        <SelectBox id="gender" error={!!false} name="gender">
           <option value="">یک مورد انتخاب کنید</option>
         </SelectBox>
       </SelectBoxWrapper>
