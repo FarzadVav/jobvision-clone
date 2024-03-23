@@ -13,7 +13,7 @@ interface MultiSelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
-  ({ wrapperclassName, error, className, data, name, ...props }, ref) => {
+  ({ wrapperclassName, error, className, data, name, placeholder, ...props }, ref) => {
     const [value, setValue] = useState("")
     const [isFocus, setIsFocus] = useState(false)
     const [selectedData, setSelectedData] = useState<string[]>([])
@@ -45,6 +45,9 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
             )}
             ref={ref}
             value={value}
+            placeholder={
+              selectedData.length ? `${selectedData.length} مورد انتخاب شده` : placeholder
+            }
             onChange={(e) => setValue(e.target.value)}
             onFocus={() => setIsFocus(true)}
             {...props}
