@@ -81,10 +81,10 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
                   )
               })
             ) : (
-              <li className="py-1.5">موردی پیدا نشد</li>
+              <li className="py-1.5 text-sm">موردی پیدا نشد</li>
             )
           ) : (
-            <li className="py-1.5">لیستی برای انتخاب وجود ندارد</li>
+            <li className="py-1.5 text-sm">لیستی برای انتخاب وجود ندارد</li>
           )}
         </ul>
       </div>
