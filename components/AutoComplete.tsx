@@ -22,7 +22,7 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
         <div className="flex items-center relative">
           <input
             className={cn(
-              `ring-1 h-11 w-full px-5 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
+              `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
                 error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
               }`,
               className
@@ -34,9 +34,11 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
             onBlur={() => setIsFocus(false)}
             {...props}
           />
-          <IconChevronDown
-            className={`icon absolute left-3 transition-transform ${isFocus ? "-scale-y-100" : ""}`}
-          />
+          <div className="h-11 w-12 flex justify-center items-center absolute left-0 top-0">
+            <IconChevronDown
+              className={`icon transition-transform ${isFocus ? "-scale-y-100" : ""}`}
+            />
+          </div>
         </div>
         <ul
           className={`bg-white border border-solid border-light w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all ${
@@ -58,10 +60,10 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                   )
               })
             ) : (
-              <li className="py-1.5">موردی پیدا نشد</li>
+              <li className="py-1.5 text-sm">موردی پیدا نشد</li>
             )
           ) : (
-            <li className="py-1.5">لیستی برای انتخاب وجود ندارد</li>
+            <li className="py-1.5 text-sm">لیستی برای انتخاب وجود ندارد</li>
           )}
         </ul>
       </div>

@@ -20,7 +20,7 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
           <input type="hidden" name={name} value={JSON.stringify(list)} />
           <input
             className={cn(
-              `ring-1 h-11 w-full pr-5 pl-11 rounded-md transition-shadow focus:ring-2 file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
+              `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
                 error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
               }`,
               className
@@ -30,15 +30,17 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
             onChange={(event) => setValue(event.target.value)}
             {...props}
           />
-          <IconPlus
-            className="icon absolute left-3 cursor-pointer"
+          <div
+            className="h-11 w-12 flex justify-center items-center absolute left-0 top-0 cursor-pointer active:scale-90"
             onClick={() => {
               if (!value.length) return
               if (list.includes(value)) return toast.error("این آیتم از قبل اضافه شده است")
               setList((prev) => [...prev, value])
               setValue("")
             }}
-          />
+          >
+            <IconPlus className="icon" />
+          </div>
         </div>
         <ul className="w-full mt-3">
           {list.length ? (
