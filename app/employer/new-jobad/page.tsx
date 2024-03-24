@@ -20,20 +20,24 @@ import {
 
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SelectBox from "@/components/SelectBox"
 import AutoComplete from "@/components/AutoComplete"
 import MultiSelect from "@/components/MultiSelect"
 import ComboBox from "@/components/ComboBox"
 import Button from "@/components/Button"
 import Label from "@/components/Label"
-
-const data = ["hello", "world", "javascript"]
-const data2 = ["aaa", "vvv", "ggg"]
-const data3 = ["front", "back", "ios"]
+import ContentT from "@/types/content.types"
 
 const Page = () => {
+  const [content, setContent] = useState<ContentT | undefined>(undefined)
   const [salaryTo, setSalaryTo] = useState(false)
+
+  useEffect(() => {
+    fetch("/api/content")
+      .then((res) => res.json())
+      .then((data: ContentT) => setContent(data))
+  }, [])
 
   return (
     <form className="w-full">
@@ -155,7 +159,9 @@ const Page = () => {
         جنسیت
       </Label>
       <SelectBox id="gender" error={!!false} name="gender">
-        <option value="">یک مورد انتخاب کنید</option>
+        <option value="">فرقی ندارد</option>
+        <option value="male">مرد</option>
+        <option value="female">زن</option>
       </SelectBox>
 
       <Label className="mt-6" htmlFor="catogory">
@@ -165,7 +171,7 @@ const Page = () => {
       <AutoComplete
         id="catogory"
         error={!!false}
-        data={data}
+        data={content?.categories.map((category) => category.name) || []}
         name="catogory"
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
@@ -177,7 +183,7 @@ const Page = () => {
       <AutoComplete
         id="cooperatoinType"
         error={!!false}
-        data={data2}
+        data={content?.cooperationTypes.map((type) => type.name) || []}
         name="cooperatoinType"
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
@@ -189,7 +195,7 @@ const Page = () => {
       <MultiSelect
         id="tags"
         error={!!false}
-        data={data3}
+        data={content?.tags.map((tag) => tag.name) || []}
         name="tags"
         placeholder="چند مورد را سرچ و انتخاب کنید"
       />
