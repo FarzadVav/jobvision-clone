@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
+import useSWR from "swr"
 import { v4 as uuid } from "uuid"
-import { Cities } from "@prisma/client"
 import {
   IconBan,
   IconCalendarEvent,
@@ -15,13 +15,13 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react"
 
+import { contentFetcher } from "@/utils/fetcher"
 import addDetails from "@/app/actions/addDetails"
 import Button from "@/components/Button"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import toast from "react-hot-toast"
 import SelectBox from "@/components/SelectBox"
-import ContentT from "@/types/content.types"
 import Label from "@/components/Label"
 
 export type detailsFormStateT = {
@@ -40,15 +40,9 @@ export type detailsFormStateT = {
 }
 
 const Page = () => {
-  const [cities, setCities] = useState<Cities[]>([])
+  const { data: content } = useSWR("/api/content", contentFetcher)
   const [formState, setFormState] = useState<detailsFormStateT>({ fields: {} } as detailsFormStateT)
   const formRef = useRef<HTMLFormElement>(null)
-
-  useEffect(() => {
-    fetch("/api/content")
-      .then((res) => res.json())
-      .then((data: ContentT) => setCities(data.cities))
-  }, [])
 
   return (
     <form
@@ -127,7 +121,7 @@ const Page = () => {
       </Label>
       <SelectBox id="city" error={!!formState.fields.city} name="city">
         <option value="">یک شهر انتخاب کنید</option>
-        {cities.map((city) => (
+        {content?.cities.map((city) => (
           <option key={city.id} value={JSON.stringify(city)}>
             {city.name}
           </option>

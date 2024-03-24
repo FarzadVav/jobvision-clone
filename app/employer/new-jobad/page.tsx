@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import useSWR from "swr"
 import {
   IconAlignBoxLeftMiddle,
   IconAlignRight,
@@ -18,26 +20,19 @@ import {
   IconWorld,
 } from "@tabler/icons-react"
 
+import { contentFetcher } from "@/utils/fetcher"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
-import { useEffect, useState } from "react"
 import SelectBox from "@/components/SelectBox"
 import AutoComplete from "@/components/AutoComplete"
 import MultiSelect from "@/components/MultiSelect"
 import ComboBox from "@/components/ComboBox"
 import Button from "@/components/Button"
 import Label from "@/components/Label"
-import ContentT from "@/types/content.types"
 
 const Page = () => {
-  const [content, setContent] = useState<ContentT | undefined>(undefined)
+  const { data: content } = useSWR("/api/content", contentFetcher)
   const [salaryTo, setSalaryTo] = useState(false)
-
-  useEffect(() => {
-    fetch("/api/content")
-      .then((res) => res.json())
-      .then((data: ContentT) => setContent(data))
-  }, [])
 
   return (
     <form className="w-full">
