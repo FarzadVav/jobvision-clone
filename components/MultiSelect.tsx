@@ -34,7 +34,7 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
           <input type="hidden" name={name} value={JSON.stringify(selectedData)} />
           <input
             className={cn(
-              `ring-1 h-11 w-full pr-5 pl-11 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
+              `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
                 error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
               }`,
               className
@@ -48,9 +48,11 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
             onFocus={() => setIsFocus(true)}
             {...props}
           />
-          <IconChevronDown
-            className={`icon absolute left-3 transition-transform ${isFocus ? "-scale-y-100" : ""}`}
-          />
+          <div className="h-11 w-12 flex justify-center items-center absolute left-0 top-0">
+            <IconChevronDown
+              className={`icon transition-transform ${isFocus ? "-scale-y-100" : ""}`}
+            />
+          </div>
         </div>
         <ul
           className={`bg-white border border-solid border-light w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all ${
