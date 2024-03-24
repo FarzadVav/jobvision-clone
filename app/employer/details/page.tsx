@@ -70,6 +70,7 @@ const Page = () => {
             نام شرکت
           </Label>
           <Input
+            id="logo"
             error={!!formState.fields.name}
             type="text"
             placeholder="مثل جاب‌ویژن"
@@ -77,21 +78,28 @@ const Page = () => {
           />
         </div>
         <div className="w-1/2 mr-3">
-          <Label htmlFor="logo">
+          <Label htmlFor="year">
             <IconCalendarEvent className="icon ml-3" />
             سال تاسیس
           </Label>
-          <Input error={!!formState.fields.year} type="number" placeholder="سال 1384" name="year" />
+          <Input
+            id="year"
+            error={!!formState.fields.year}
+            type="number"
+            placeholder="سال 1384"
+            name="year"
+          />
         </div>
       </div>
 
       <div className="w-full flex items-center mt-6">
         <div className="w-1/2">
-          <Label htmlFor="logo">
+          <Label htmlFor="minEmployee">
             <IconUserMinus className="icon ml-3" />
             حداقل تعداد کارکنان
           </Label>
           <Input
+            id="minEmployee"
             error={!!formState.fields.minEmployee}
             type="number"
             placeholder="از 10 نفر"
@@ -99,11 +107,12 @@ const Page = () => {
           />
         </div>
         <div className="w-1/2 mr-3">
-          <Label htmlFor="logo">
+          <Label htmlFor="maxEmployee">
             <IconUserPlus className="icon ml-3" />
             حداکثر آنها
           </Label>
           <Input
+            id="maxEmployee"
             error={!!formState.fields.maxEmployee}
             type="number"
             placeholder="تا 15 نفر"
@@ -112,11 +121,11 @@ const Page = () => {
         </div>
       </div>
 
-      <Label className="mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="city">
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
-      <SelectBox error={!!formState.fields.city} name="city">
+      <SelectBox id="city" error={!!formState.fields.city} name="city">
         <option value="">یک شهر انتخاب کنید</option>
         {cities.map((city) => (
           <option key={city.id} value={JSON.stringify(city)}>
@@ -125,31 +134,34 @@ const Page = () => {
         ))}
       </SelectBox>
 
-      <Label className="mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="about">
         <IconInfoCircle className="icon ml-3" />
         درباره شرکت
       </Label>
       <TextArea
+        id="about"
         error={!!formState.fields.about}
         placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
         name="about"
       />
 
-      <Label className="mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="activity">
         <IconListSearch className="icon ml-3" />
         حوزه فعالیت
       </Label>
       <TextArea
+        id="activity"
         error={!!formState.fields.activity}
         placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
         name="activity"
       />
 
-      <Label className="mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="file">
         <IconPhoto className="icon ml-3" />
         عکس لوگو
       </Label>
       <Input
+        id="file"
         error={!!formState.fields.file}
         type="file"
         placeholder="فرمت های png"
