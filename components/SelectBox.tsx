@@ -1,37 +1,38 @@
-import { forwardRef } from "react"
+"use client"
+
+import { forwardRef, useState } from "react"
 
 import { cn } from "../lib/utils"
 import { IconChevronDown } from "@tabler/icons-react"
 
-type SelectBoxWrapperProps = React.HTMLAttributes<HTMLDivElement>
-export const SelectBoxWrapper = forwardRef<HTMLDivElement, SelectBoxWrapperProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div className={cn("w-full flex items-center relative", className)} ref={ref} {...props}>
-        {children}
-        <IconChevronDown className="icon absolute left-3" />
-      </div>
-    )
-  }
-)
-SelectBoxWrapper.displayName = "SelectBoxWrapper"
-
 interface SelectBoxProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  wrapperClassName?: string
   error?: boolean
 }
 const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
-  ({ error, className, ...props }, ref) => {
+  ({ wrapperClassName, error, className, ...props }, ref) => {
+    const [isFocus, setIsFocus] = useState(false)
+
     return (
-      <select
-        className={cn(
-          `ring-1 h-11 w-full pr-5 pl-11 rounded-md transition-shadow focus:ring-2 cursor-pointer appearance-none focus:outline-0 ${
-            error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
-          }`,
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
+      <div className={cn("w-full flex items-center relative", wrapperClassName)}>
+        <select
+          className={cn(
+            `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 cursor-pointer appearance-none focus:outline-0 ${
+              error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
+            }`,
+            className
+          )}
+          ref={ref}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          {...props}
+        />
+        <div className="h-11 w-12 flex justify-center items-center absolute left-0 top-0">
+          <IconChevronDown
+            className={`icon transition-transform ${isFocus ? "-scale-y-100" : ""}`}
+          />
+        </div>
+      </div>
     )
   }
 )

@@ -15,7 +15,7 @@ import {
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import { useState } from "react"
-import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
+import SelectBox from "@/components/SelectBox"
 import AutoComplete from "@/components/AutoComplete"
 import MultiSelect from "@/components/MultiSelect"
 import ComboBox from "@/components/ComboBox"
@@ -129,11 +129,9 @@ const Page = () => {
         <IconGenderBigender className="icon ml-3" />
         جنسیت
       </label>
-      <SelectBoxWrapper className="mt-3">
-        <SelectBox id="gender" error={!!false} name="gender">
-          <option value="">یک مورد انتخاب کنید</option>
-        </SelectBox>
-      </SelectBoxWrapper>
+      <SelectBox id="gender" wrapperClassName="mt-3" error={!!false} name="gender">
+        <option value="">یک مورد انتخاب کنید</option>
+      </SelectBox>
 
       <label className="dana-bold flex mt-6" htmlFor="catogory">
         <IconBriefcase className="icon ml-3" />
