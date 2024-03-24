@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 import { PrismaClient } from "@prisma/client"
 
-import { verifyToken } from "@/lib/auth"
+import { verifyToken } from "@/utils/auth"
 
 const prisma = new PrismaClient()
 

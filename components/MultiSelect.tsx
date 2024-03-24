@@ -2,7 +2,7 @@
 
 import { forwardRef, useEffect, useState } from "react"
 
-import { cn } from "../lib/utils"
+import { cn } from "../utils/utility"
 import { IconChevronDown } from "@tabler/icons-react"
 import { v4 as uuid } from "uuid"
 

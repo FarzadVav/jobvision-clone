@@ -6,7 +6,7 @@ import { z } from "zod"
 import { PrismaClient } from "@prisma/client"
 
 import { registerStateT } from "@/app/register/page"
-import { comparePassword, getToken, hashPassword } from "@/lib/auth"
+import { comparePassword, getToken, hashPassword } from "@/utils/auth"
 
 const prisma = new PrismaClient()
 

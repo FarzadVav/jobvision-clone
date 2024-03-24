@@ -2,7 +2,7 @@
 
 import { forwardRef, useState } from "react"
 
-import { cn } from "../lib/utils"
+import { cn } from "../utils/utility"
 import { IconChevronDown } from "@tabler/icons-react"
 
 interface SelectBoxProps extends React.SelectHTMLAttributes<HTMLSelectElement> {

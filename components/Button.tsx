@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom"
 import { cva, type VariantProps } from "class-variance-authority"
 import { PulseLoader } from "react-spinners"
 
-import { cn } from "../lib/utils"
+import { cn } from "../utils/utility"
 
 const buttonVariants = cva(
   "w-max flex justify-center items-center gap-3 rounded cursor-pointer transition active:scale-95",
