@@ -3,7 +3,6 @@
 import {
   IconAlignBoxLeftMiddle,
   IconAlignRight,
-  IconArrowUpLeft,
   IconBriefcase,
   IconCash,
   IconClockHour3,
@@ -27,6 +26,7 @@ import AutoComplete from "@/components/AutoComplete"
 import MultiSelect from "@/components/MultiSelect"
 import ComboBox from "@/components/ComboBox"
 import Button from "@/components/Button"
+import Label from "@/components/Label"
 
 const data = ["hello", "world", "javascript"]
 const data2 = ["aaa", "vvv", "ggg"]
@@ -37,26 +37,24 @@ const Page = () => {
 
   return (
     <form className="w-full">
-      <label className="dana-bold flex" htmlFor="title">
+      <Label htmlFor="title">
         <IconPencilMinus className="icon ml-3" />
         عنوان آگهی
-      </label>
+      </Label>
       <Input
         id="title"
-        className="mt-3"
         error={!!false}
         type="text"
         placeholder="مثل استخدام مهندس نرم افزار"
         name="title"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="description">
+      <Label className="mt-6" htmlFor="description">
         <IconAlignRight className="icon ml-3" />
         توضیحات لازم
-      </label>
+      </Label>
       <TextArea
         id="description"
-        className="mt-3"
         error={!!false}
         placeholder="توضیحات این موقعیت شغلی ..."
         name="description"
@@ -64,13 +62,12 @@ const Page = () => {
 
       <div className="w-full flex items-center mt-6">
         <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="workTime">
+          <Label htmlFor="workTime">
             <IconClockHour3 className="icon ml-3" />
             شرح ساعت کاری
-          </label>
+          </Label>
           <Input
             id="workTime"
-            className="mt-3"
             error={!!false}
             type="text"
             placeholder="5 روز در هفته از ساعت صبح تا ..."
@@ -78,13 +75,12 @@ const Page = () => {
           />
         </div>
         <div className="w-1/2 mr-3">
-          <label className="dana-bold flex" htmlFor="businessTrip">
+          <Label htmlFor="businessTrip">
             <IconPlane className="icon ml-3 -rotate-90" />
             شرح سفر های کاری
-          </label>
+          </Label>
           <Input
             id="businessTrip"
-            className="mt-3"
             error={!!false}
             type="text"
             placeholder="3 روز در سال برای تفریح ..."
@@ -95,13 +91,12 @@ const Page = () => {
 
       <div className="w-full flex items-end mt-6">
         <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="ageFrom">
+          <Label htmlFor="ageFrom">
             <IconUserUp className="icon ml-3" />
             میزان بازه سنی
-          </label>
+          </Label>
           <Input
             id="ageFrom"
-            className="mt-3"
             error={!!false}
             type="text"
             placeholder={"برای مثال از 18 سال"}
@@ -122,13 +117,12 @@ const Page = () => {
 
       <div className="w-full flex items-end mt-6">
         <div className={salaryTo ? "w-1/2" : "w-full"}>
-          <label className="dana-bold flex" htmlFor="salaryFrom">
+          <Label htmlFor="salaryFrom">
             <IconCash className="icon ml-3" />
             میزان حقوق
-          </label>
+          </Label>
           <Input
             id="salaryFrom"
-            className="mt-3"
             error={!!false}
             type="text"
             placeholder={`برای مثال${salaryTo ? " از" : ""} 15 میلیون`}
@@ -146,7 +140,7 @@ const Page = () => {
           />
         </div>
       </div>
-      <label className="flex mt-3 cursor-pointer" htmlFor="show-salaryTo">
+      <Label className="mt-3" htmlFor="show-salaryTo">
         ایجاد بازه قیمت
         <input
           id="show-salaryTo"
@@ -154,114 +148,101 @@ const Page = () => {
           type="checkbox"
           onChange={(e) => setSalaryTo(e.target.checked)}
         />
-      </label>
+      </Label>
 
-      <label className="dana-bold flex mt-6" htmlFor="gender">
+      <Label className="mt-6" htmlFor="gender">
         <IconGenderBigender className="icon ml-3" />
         جنسیت
-      </label>
-      <SelectBox id="gender" wrapperClassName="mt-3" error={!!false} name="gender">
+      </Label>
+      <SelectBox id="gender" error={!!false} name="gender">
         <option value="">یک مورد انتخاب کنید</option>
       </SelectBox>
 
-      <label className="dana-bold flex mt-6" htmlFor="catogory">
+      <Label className="mt-6" htmlFor="catogory">
         <IconBriefcase className="icon ml-3" />
         دسته بندی شغلی
-      </label>
+      </Label>
       <AutoComplete
         id="catogory"
-        wrapperclassName="mt-3"
         error={!!false}
         data={data}
         name="catogory"
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="cooperatoinType">
+      <Label className="mt-6" htmlFor="cooperatoinType">
         <IconFileDescription className="icon ml-3" />
         نوع قرارداد
-      </label>
+      </Label>
       <AutoComplete
         id="cooperatoinType"
-        wrapperclassName="mt-3"
         error={!!false}
         data={data2}
         name="cooperatoinType"
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="tags">
+      <Label className="mt-6" htmlFor="tags">
         <IconTags className="icon ml-3" />
         تگ های شغلی
-      </label>
+      </Label>
       <MultiSelect
         id="tags"
-        wrapperclassName="mt-3"
         error={!!false}
         data={data3}
         name="tags"
         placeholder="چند مورد را سرچ و انتخاب کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="benefits">
+      <Label className="mt-6" htmlFor="benefits">
         <IconSparkles className="icon ml-3" />
         مزیت های این شغل
-      </label>
+      </Label>
       <ComboBox
         id="benefits"
-        wrapperclassName="mt-3"
         error={!!false}
         name="benefits"
         placeholder="چند مورد را اضافه کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="abilities">
+      <Label className="mt-6" htmlFor="abilities">
         <IconAlignBoxLeftMiddle className="icon ml-3" />
         شاخص های کلیدی فرد
-      </label>
+      </Label>
       <ComboBox
         id="abilities"
-        wrapperclassName="mt-3"
         error={!!false}
         name="abilities"
         placeholder="چند مورد را اضافه کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="education">
+      <Label className="mt-6" htmlFor="education">
         <IconSchool className="icon ml-3" />
         مدارک تحصیلی
-      </label>
+      </Label>
       <ComboBox
         id="education"
-        wrapperclassName="mt-3"
         error={!!false}
         name="education"
         placeholder="چند مورد را اضافه کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="language">
+      <Label className="mt-6" htmlFor="language">
         <IconWorld className="icon ml-3" />
         زبان های بین المللی
-      </label>
+      </Label>
       <ComboBox
         id="language"
-        wrapperclassName="mt-3"
         error={!!false}
         name="language"
         placeholder="چند مورد را اضافه کنید"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="tech">
+      <Label className="mt-6" htmlFor="tech">
         <IconComponents className="icon ml-3" />
         تکنولوژی ها
-      </label>
-      <ComboBox
-        id="tech"
-        wrapperclassName="mt-3"
-        error={!!false}
-        name="tech"
-        placeholder="چند مورد را اضافه کنید"
-      />
+      </Label>
+      <ComboBox id="tech" error={!!false} name="tech" placeholder="چند مورد را اضافه کنید" />
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
         ایجاد آگهی
