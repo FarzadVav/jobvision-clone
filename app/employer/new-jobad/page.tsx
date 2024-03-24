@@ -144,7 +144,7 @@ const Page = () => {
         ایجاد بازه قیمت
         <input
           id="show-salaryTo"
-          className="mr-3"
+          className="mr-3 mb-0.5"
           type="checkbox"
           onChange={(e) => setSalaryTo(e.target.checked)}
         />

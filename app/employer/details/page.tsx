@@ -22,6 +22,7 @@ import TextArea from "@/components/TextArea"
 import toast from "react-hot-toast"
 import SelectBox from "@/components/SelectBox"
 import ContentT from "@/types/content.types"
+import Label from "@/components/Label"
 
 export type detailsFormStateT = {
   isSuccess?: boolean
@@ -64,12 +65,11 @@ const Page = () => {
     >
       <div className="w-full flex items-center">
         <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="logo">
+          <Label htmlFor="logo">
             <IconPencilMinus className="icon ml-3" />
             نام شرکت
-          </label>
+          </Label>
           <Input
-            className="mt-3"
             error={!!formState.fields.name}
             type="text"
             placeholder="مثل جاب‌ویژن"
@@ -77,28 +77,21 @@ const Page = () => {
           />
         </div>
         <div className="w-1/2 mr-3">
-          <label className="dana-bold flex" htmlFor="logo">
+          <Label htmlFor="logo">
             <IconCalendarEvent className="icon ml-3" />
             سال تاسیس
-          </label>
-          <Input
-            className="mt-3"
-            error={!!formState.fields.year}
-            type="number"
-            placeholder="سال 1384"
-            name="year"
-          />
+          </Label>
+          <Input error={!!formState.fields.year} type="number" placeholder="سال 1384" name="year" />
         </div>
       </div>
 
       <div className="w-full flex items-center mt-6">
         <div className="w-1/2">
-          <label className="dana-bold flex" htmlFor="logo">
+          <Label htmlFor="logo">
             <IconUserMinus className="icon ml-3" />
             حداقل تعداد کارکنان
-          </label>
+          </Label>
           <Input
-            className="mt-3"
             error={!!formState.fields.minEmployee}
             type="number"
             placeholder="از 10 نفر"
@@ -106,12 +99,11 @@ const Page = () => {
           />
         </div>
         <div className="w-1/2 mr-3">
-          <label className="dana-bold flex" htmlFor="logo">
+          <Label htmlFor="logo">
             <IconUserPlus className="icon ml-3" />
             حداکثر آنها
-          </label>
+          </Label>
           <Input
-            className="mt-3"
             error={!!formState.fields.maxEmployee}
             type="number"
             placeholder="تا 15 نفر"
@@ -120,11 +112,11 @@ const Page = () => {
         </div>
       </div>
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="logo">
         <IconMapPin className="icon ml-3" />
         شهر شما
-      </label>
-      <SelectBox className="w-full mt-3" error={!!formState.fields.city} name="city">
+      </Label>
+      <SelectBox error={!!formState.fields.city} name="city">
         <option value="">یک شهر انتخاب کنید</option>
         {cities.map((city) => (
           <option key={city.id} value={JSON.stringify(city)}>
@@ -133,34 +125,31 @@ const Page = () => {
         ))}
       </SelectBox>
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="logo">
         <IconInfoCircle className="icon ml-3" />
         درباره شرکت
-      </label>
+      </Label>
       <TextArea
-        className="mt-3"
         error={!!formState.fields.about}
         placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
         name="about"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="logo">
         <IconListSearch className="icon ml-3" />
         حوزه فعالیت
-      </label>
+      </Label>
       <TextArea
-        className="mt-3"
         error={!!formState.fields.activity}
         placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
         name="activity"
       />
 
-      <label className="dana-bold flex mt-6" htmlFor="logo">
+      <Label className="mt-6" htmlFor="logo">
         <IconPhoto className="icon ml-3" />
         عکس لوگو
-      </label>
+      </Label>
       <Input
-        className="mt-3"
         error={!!formState.fields.file}
         type="file"
         placeholder="فرمت های png"
@@ -168,10 +157,10 @@ const Page = () => {
         name="file"
       />
 
-      <label className="dana-bold flex items-center mt-6 cursor-pointer" htmlFor="knowledgeBased">
+      <Label className="mt-6" htmlFor="knowledgeBased">
         شرکت دانش بنیان
-        <input id="knowledgeBased" className="mr-3" type="checkbox" name="knowledgeBased" />
-      </label>
+        <input id="knowledgeBased" className="mr-3 mb-0.5" type="checkbox" name="knowledgeBased" />
+      </Label>
 
       <ul className="w-full">
         {Object.entries(formState.fields).map((item) => {
