@@ -19,10 +19,7 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
     const [selectedData, setSelectedData] = useState<string[]>([])
 
     useEffect(() => {
-      const clickHandler = () => {
-        console.log(123)
-        setIsFocus(false)
-      }
+      const clickHandler = () => setIsFocus(false)
 
       window.addEventListener("click", clickHandler)
       return () => window.removeEventListener("click", clickHandler)
@@ -31,14 +28,13 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
     return (
       <div
         className={cn("w-full relative", wrapperclassName)}
-        ref={ref}
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex items-center relative">
+        <div className="w-full flex items-center relative">
           <input type="hidden" name={name} value={JSON.stringify(selectedData)} />
           <input
             className={cn(
-              `ring-1 h-11 w-full px-5 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
+              `ring-1 h-11 w-full pr-5 pl-11 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
                 error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
               }`,
               className

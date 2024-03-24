@@ -18,6 +18,7 @@ import { useState } from "react"
 import SelectBox, { SelectBoxWrapper } from "@/components/SelectBox"
 import AutoComplete from "@/components/AutoComplete"
 import MultiSelect from "@/components/MultiSelect"
+import ComboBox from "@/components/ComboBox"
 
 const data = ["hello", "world", "javascript"]
 const data2 = ["aaa", "vvv", "ggg"]
@@ -171,6 +172,18 @@ const Page = () => {
         data={data3}
         name="tags"
         placeholder="چند مورد را سرچ و انتخاب کنید"
+      />
+
+      <label className="dana-bold flex mt-6" htmlFor="abilities">
+        <IconFileDescription className="icon ml-3" />
+        شاخص های کلیدی فرد
+      </label>
+      <ComboBox
+        id="abilities"
+        wrapperclassName="mt-3"
+        error={!!false}
+        name="abilities"
+        placeholder="چند مورد را اضافه کنید"
       />
     </form>
   )
