@@ -64,30 +64,30 @@ model Companies {
 }
 
 model JobAds {
-  id                  String           @id @default(uuid())
-  title               String
-  description         String           @db.Text
-  work_times          String           @db.Text
-  business_trips      String           @db.Text
-  age                 Json             @default("[]")
-  salary              Json             @default("[]")
-  benefits            Json             @default("[]")
-  abilities           Json             @default("[]")
-  education           Json             @default("[]")
-  languages           Json             @default("[]")
-  techs               Json             @default("[]")
-  gender              Boolean
-  end_military_ervice Boolean
-  is_urgent           Boolean
-  is_remote           Boolean
-  category_id         String
-  category            Categories       @relation(fields: [category_id], references: [id])
-  cooperation_type_id String
-  cooperation_type    CooperationTypes @relation(fields: [cooperation_type_id], references: [id])
-  company_id          String
-  company             Companies        @relation(fields: [company_id], references: [id])
-  tags                TagsOnJobAds[]
-  created_at          DateTime         @default(now())
+  id                   String           @id @default(uuid())
+  title                String
+  description          String           @db.Text
+  work_times           String           @db.Text
+  business_trips       String           @db.Text
+  age                  Json             @default("[]")
+  salary               Json             @default("[]")
+  benefits             Json             @default("[]")
+  abilities            Json             @default("[]")
+  education            Json             @default("[]")
+  languages            Json             @default("[]")
+  techs                Json             @default("[]")
+  gender               Boolean?
+  end_military_service Boolean?
+  is_urgent            Boolean
+  is_remote            Boolean
+  category_id          String
+  category             Categories       @relation(fields: [category_id], references: [id])
+  cooperation_type_id  String
+  cooperation_type     CooperationTypes @relation(fields: [cooperation_type_id], references: [id])
+  company_id           String
+  company              Companies        @relation(fields: [company_id], references: [id])
+  tags                 TagsOnJobAds[]
+  created_at           DateTime         @default(now())
 }
 
 model TagsOnJobAds {

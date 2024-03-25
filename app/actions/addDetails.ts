@@ -35,16 +35,15 @@ const addDetails = async (formData: FormData) => {
     }
   }
 
-  let detailsIsValid: boolean = true
+  let formIsValid: boolean = true
   Object.entries(formState.fields).map(item => {
-    if (item[1]) return detailsIsValid = false
+    if (item[1]) return formIsValid = false
   })
 
-  if (!detailsIsValid) return formState
+  if (!formIsValid) return formState
 
   try {
     const user = await getMe()
-    console.log("user --->", user)
     if (user) {
       await prisma.companies.update({
         where: { email: user.email },
@@ -71,7 +70,6 @@ const addDetails = async (formData: FormData) => {
     formState.message = "هنگام ثبت اطلاعات شما خطایی رخ داده است، لطفا بعدا تلاش کنید."
     return formState
   }
-
 }
 
 export default addDetails

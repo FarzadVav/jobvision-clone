@@ -38,8 +38,8 @@ export type newJobAdFormStateT = {
   fields: {
     title: null | string
     description: null | string
-    workTime: null | string
-    businessTrip: null | string
+    workTimes: null | string
+    businessTrips: null | string
     minAge: null | string
     maxAge: null | string
     minSalary: null | string
@@ -95,45 +95,45 @@ const Page = () => {
         name="description"
       />
 
-      <div className="w-full flex items-center mt-6">
+      <div className="w-full flex mt-6">
         <div className="w-1/2">
-          <Label htmlFor="workTime">
+          <Label htmlFor="workTimes">
             <IconClockHour3 className="icon ml-3" />
             شرح ساعت کاری
           </Label>
           <Input
-            id="workTime"
-            error={formState.fields.workTime}
+            id="workTimes"
+            error={formState.fields.workTimes}
             type="text"
             placeholder="5 روز در هفته از ساعت صبح تا ..."
-            name="workTime"
+            name="workTimes"
           />
         </div>
         <div className="w-1/2 mr-3">
-          <Label htmlFor="businessTrip">
+          <Label htmlFor="businessTrips">
             <IconPlane className="icon ml-3 -rotate-90" />
             شرح سفر های کاری
           </Label>
           <Input
-            id="businessTrip"
-            error={formState.fields.businessTrip}
+            id="businessTrips"
+            error={formState.fields.businessTrips}
             type="text"
             placeholder="3 روز در سال برای تفریح ..."
-            name="businessTrip"
+            name="businessTrips"
           />
         </div>
       </div>
 
-      <div className="w-full flex items-end mt-6">
+      <Label className="mt-6" htmlFor="minAge">
+        <IconUserUp className="icon ml-3" />
+        میزان بازه سنی
+      </Label>
+      <div className="w-full flex">
         <div className="w-1/2">
-          <Label htmlFor="minAge">
-            <IconUserUp className="icon ml-3" />
-            میزان بازه سنی
-          </Label>
           <Input
             id="minAge"
             error={formState.fields.minAge}
-            type="text"
+            type="number"
             placeholder={"برای مثال از 18 سال"}
             name="minAge"
           />
@@ -141,35 +141,33 @@ const Page = () => {
         <div className="w-1/2 mr-3">
           <Input
             id="maxAge"
-            className="mt-3"
             error={formState.fields.maxAge}
-            type="text"
+            type="number"
             placeholder="تا 24 سال"
             name="maxAge"
           />
         </div>
       </div>
 
-      <div className="w-full flex items-end mt-6">
+      <Label className="mt-6" htmlFor="minSalary">
+        <IconCash className="icon ml-3" />
+        میزان حقوق
+      </Label>
+      <div className="w-full flex">
         <div className={showMaxSalary ? "w-1/2" : "w-full"}>
-          <Label htmlFor="minSalary">
-            <IconCash className="icon ml-3" />
-            میزان حقوق
-          </Label>
           <Input
             id="minSalary"
             error={formState.fields.minSalary}
-            type="text"
-            placeholder={`برای مثال${showMaxSalary ? " از" : ""} 15 میلیون`}
+            type="number"
+            placeholder={`برای مثال${showMaxSalary ? " از" : ""} 4 میلیون`}
             name="minSalary"
           />
         </div>
         <div className={`w-1/2 ${showMaxSalary ? "block" : "hidden"} mr-3`}>
           <Input
             id="maxSalary"
-            className="mt-3"
             error={formState.fields.maxSalary}
-            type="text"
+            type="number"
             placeholder="تا 20 میلیون"
             name="maxSalary"
           />
@@ -180,6 +178,7 @@ const Page = () => {
         <input
           id="show-maxSalary"
           className="mr-3 mb-0.5"
+          name="show-maxSalary"
           type="checkbox"
           onChange={(e) => setShowMaxSalary(e.target.checked)}
         />
@@ -226,6 +225,7 @@ const Page = () => {
       <MultiSelect
         id="tags"
         data={content?.tags.map((tag) => tag.name) || []}
+        error={formState.fields.tags}
         name="tags"
         placeholder="چند مورد را سرچ و انتخاب کنید"
       />
@@ -259,6 +259,26 @@ const Page = () => {
         تکنولوژی ها
       </Label>
       <ComboBox id="techs" name="techs" placeholder="چند مورد را اضافه کنید" />
+
+      <div className="w-full flex items-center mt-6">
+        <Label htmlFor="end_military_service">
+          کارت پایان خدمت
+          <input
+            id="end_military_service"
+            className="mr-3 mb-0.5"
+            name="end_military_service"
+            type="checkbox"
+          />
+        </Label>
+        <Label className="mx-3" htmlFor="is_remote">
+          امکان دورکاری
+          <input id="is_remote" className="mr-3 mb-0.5" name="is_remote" type="checkbox" />
+        </Label>
+        <Label htmlFor="is_urgent">
+          آگهی فوری
+          <input id="is_urgent" className="mr-3 mb-0.5" name="is_urgent" type="checkbox" />
+        </Label>
+      </div>
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
         ایجاد آگهی
