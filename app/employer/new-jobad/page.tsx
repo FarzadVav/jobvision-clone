@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useSWR from "swr"
 import {
   IconAlignBoxLeftMiddle,
@@ -30,8 +30,33 @@ import ComboBox from "@/components/ComboBox"
 import Button from "@/components/Button"
 import Label from "@/components/Label"
 
+export type newJobAdFormStateT = {
+  isSuccess?: boolean
+  message?: null | string
+  fields: {
+    title: null | string
+    description: null | string
+    workTime: null | string
+    businessTrip: null | string
+    minAge: null | string
+    maxAge: null | string
+    minSalary: null | string
+    maxSalary?: null | string
+    gender: null | string
+    category: null | string
+    cooperationType: null | string
+    tags: null | string
+    benefits: null | string
+    abilities: null | string
+    education: null | string
+    language: null | string
+    tech: null | string
+  }
+}
+
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
+  const [formState, setFormState] = useState<newJobAdFormStateT>({ fields: {} } as newJobAdFormStateT)
   const [salaryTo, setSalaryTo] = useState(false)
 
   return (
