@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import useSWR from "swr"
+import toast from "react-hot-toast"
 import {
   IconAlignBoxLeftMiddle,
   IconAlignRight,
@@ -21,6 +22,7 @@ import {
 } from "@tabler/icons-react"
 
 import { contentFetcher } from "@/utils/fetcher"
+import addNewJobAd from "@/app/actions/addNewJobAd"
 import Input from "@/components/Input"
 import TextArea from "@/components/TextArea"
 import SelectBox from "@/components/SelectBox"
@@ -42,32 +44,41 @@ export type newJobAdFormStateT = {
     maxAge: null | string
     minSalary: null | string
     maxSalary?: null | string
-    gender: null | string
+    gender?: null | string
     category: null | string
     cooperationType: null | string
     tags: null | string
-    benefits: null | string
-    abilities: null | string
-    education: null | string
-    language: null | string
-    tech: null | string
   }
 }
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const [formState, setFormState] = useState<newJobAdFormStateT>({ fields: {} } as newJobAdFormStateT)
-  const [salaryTo, setSalaryTo] = useState(false)
+  const [formState, setFormState] = useState<newJobAdFormStateT>({
+    fields: {},
+  } as newJobAdFormStateT)
+  const [showMaxSalary, setShowMaxSalary] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
 
   return (
-    <form className="w-full">
+    <form
+      className="w-full"
+      ref={formRef}
+      action={async (formData: FormData) => {
+        const newState = await addNewJobAd(formData)
+        setFormState(newState || ({ fields: {} } as newJobAdFormStateT))
+        if (newState?.isSuccess) {
+          toast.success("آگهی جدید با موفقیت ثبت شد")
+          formRef.current?.reset()
+        }
+      }}
+    >
       <Label htmlFor="title">
         <IconPencilMinus className="icon ml-3" />
         عنوان آگهی
       </Label>
       <Input
         id="title"
-        error={!!false}
+        error={!!formState.fields.title}
         type="text"
         placeholder="مثل استخدام مهندس نرم افزار"
         name="title"
@@ -115,62 +126,62 @@ const Page = () => {
 
       <div className="w-full flex items-end mt-6">
         <div className="w-1/2">
-          <Label htmlFor="ageFrom">
+          <Label htmlFor="minAge">
             <IconUserUp className="icon ml-3" />
             میزان بازه سنی
           </Label>
           <Input
-            id="ageFrom"
+            id="minAge"
             error={!!false}
             type="text"
             placeholder={"برای مثال از 18 سال"}
-            name="ageFrom"
+            name="minAge"
           />
         </div>
         <div className="w-1/2 mr-3">
           <Input
-            id="ageTo"
+            id="maxAge"
             className="mt-3"
             error={!!false}
             type="text"
             placeholder="تا 24 سال"
-            name="ageTo"
+            name="maxAge"
           />
         </div>
       </div>
 
       <div className="w-full flex items-end mt-6">
-        <div className={salaryTo ? "w-1/2" : "w-full"}>
-          <Label htmlFor="salaryFrom">
+        <div className={showMaxSalary ? "w-1/2" : "w-full"}>
+          <Label htmlFor="minSalary">
             <IconCash className="icon ml-3" />
             میزان حقوق
           </Label>
           <Input
-            id="salaryFrom"
+            id="minSalary"
             error={!!false}
             type="text"
-            placeholder={`برای مثال${salaryTo ? " از" : ""} 15 میلیون`}
-            name="salaryFrom"
+            placeholder={`برای مثال${showMaxSalary ? " از" : ""} 15 میلیون`}
+            name="minSalary"
           />
         </div>
-        <div className={`w-1/2 ${salaryTo ? "block" : "hidden"} mr-3`}>
+        <div className={`w-1/2 ${showMaxSalary ? "block" : "hidden"} mr-3`}>
           <Input
-            id="salaryTo"
+            id="maxSalary"
             className="mt-3"
             error={!!false}
             type="text"
             placeholder="تا 20 میلیون"
-            name="salaryTo"
+            name="maxSalary"
           />
         </div>
       </div>
-      <Label className="mt-3" htmlFor="show-salaryTo">
+      <Label className="mt-3" htmlFor="show-maxSalary">
         ایجاد بازه قیمت
         <input
-          id="show-salaryTo"
+          id="show-maxSalary"
           className="mr-3 mb-0.5"
           type="checkbox"
-          onChange={(e) => setSalaryTo(e.target.checked)}
+          onChange={(e) => setShowMaxSalary(e.target.checked)}
         />
       </Label>
 
@@ -184,27 +195,27 @@ const Page = () => {
         <option value="female">زن</option>
       </SelectBox>
 
-      <Label className="mt-6" htmlFor="catogory">
+      <Label className="mt-6" htmlFor="category">
         <IconBriefcase className="icon ml-3" />
         دسته بندی شغلی
       </Label>
       <AutoComplete
-        id="catogory"
+        id="category"
         error={!!false}
         data={content?.categories.map((category) => category.name) || []}
-        name="catogory"
+        name="category"
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
 
-      <Label className="mt-6" htmlFor="cooperatoinType">
+      <Label className="mt-6" htmlFor="cooperationType">
         <IconFileDescription className="icon ml-3" />
         نوع قرارداد
       </Label>
       <AutoComplete
-        id="cooperatoinType"
+        id="cooperationType"
         error={!!false}
         data={content?.cooperationTypes.map((type) => type.name) || []}
-        name="cooperatoinType"
+        name="cooperationType"
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
 
@@ -253,22 +264,22 @@ const Page = () => {
         placeholder="چند مورد را اضافه کنید"
       />
 
-      <Label className="mt-6" htmlFor="language">
+      <Label className="mt-6" htmlFor="languages">
         <IconWorld className="icon ml-3" />
         زبان های بین المللی
       </Label>
       <ComboBox
-        id="language"
+        id="languages"
         error={!!false}
-        name="language"
+        name="languages"
         placeholder="چند مورد را اضافه کنید"
       />
 
-      <Label className="mt-6" htmlFor="tech">
+      <Label className="mt-6" htmlFor="techs">
         <IconComponents className="icon ml-3" />
         تکنولوژی ها
       </Label>
-      <ComboBox id="tech" error={!!false} name="tech" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox id="techs" error={!!false} name="techs" placeholder="چند مورد را اضافه کنید" />
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
         ایجاد آگهی
