@@ -78,7 +78,7 @@ const Page = () => {
       </Label>
       <Input
         id="title"
-        error={!!formState.fields.title}
+        error={formState.fields.title}
         type="text"
         placeholder="مثل استخدام مهندس نرم افزار"
         name="title"
@@ -90,7 +90,7 @@ const Page = () => {
       </Label>
       <TextArea
         id="description"
-        error={!!false}
+        error={formState.fields.description}
         placeholder="توضیحات این موقعیت شغلی ..."
         name="description"
       />
@@ -103,7 +103,7 @@ const Page = () => {
           </Label>
           <Input
             id="workTime"
-            error={!!false}
+            error={formState.fields.workTime}
             type="text"
             placeholder="5 روز در هفته از ساعت صبح تا ..."
             name="workTime"
@@ -116,7 +116,7 @@ const Page = () => {
           </Label>
           <Input
             id="businessTrip"
-            error={!!false}
+            error={formState.fields.businessTrip}
             type="text"
             placeholder="3 روز در سال برای تفریح ..."
             name="businessTrip"
@@ -132,7 +132,7 @@ const Page = () => {
           </Label>
           <Input
             id="minAge"
-            error={!!false}
+            error={formState.fields.minAge}
             type="text"
             placeholder={"برای مثال از 18 سال"}
             name="minAge"
@@ -142,7 +142,7 @@ const Page = () => {
           <Input
             id="maxAge"
             className="mt-3"
-            error={!!false}
+            error={formState.fields.maxAge}
             type="text"
             placeholder="تا 24 سال"
             name="maxAge"
@@ -158,7 +158,7 @@ const Page = () => {
           </Label>
           <Input
             id="minSalary"
-            error={!!false}
+            error={formState.fields.minSalary}
             type="text"
             placeholder={`برای مثال${showMaxSalary ? " از" : ""} 15 میلیون`}
             name="minSalary"
@@ -168,7 +168,7 @@ const Page = () => {
           <Input
             id="maxSalary"
             className="mt-3"
-            error={!!false}
+            error={formState.fields.maxSalary}
             type="text"
             placeholder="تا 20 میلیون"
             name="maxSalary"
@@ -189,7 +189,7 @@ const Page = () => {
         <IconGenderBigender className="icon ml-3" />
         جنسیت
       </Label>
-      <SelectBox id="gender" error={!!false} name="gender">
+      <SelectBox id="gender" name="gender">
         <option value="">فرقی ندارد</option>
         <option value="male">مرد</option>
         <option value="female">زن</option>
@@ -201,7 +201,7 @@ const Page = () => {
       </Label>
       <AutoComplete
         id="category"
-        error={!!false}
+        error={formState.fields.category}
         data={content?.categories.map((category) => category.name) || []}
         name="category"
         placeholder="یک مورد را سرچ و انتخاب کنید"
@@ -213,7 +213,7 @@ const Page = () => {
       </Label>
       <AutoComplete
         id="cooperationType"
-        error={!!false}
+        error={formState.fields.cooperationType}
         data={content?.cooperationTypes.map((type) => type.name) || []}
         name="cooperationType"
         placeholder="یک مورد را سرچ و انتخاب کنید"
@@ -225,7 +225,6 @@ const Page = () => {
       </Label>
       <MultiSelect
         id="tags"
-        error={!!false}
         data={content?.tags.map((tag) => tag.name) || []}
         name="tags"
         placeholder="چند مورد را سرچ و انتخاب کنید"
@@ -235,51 +234,31 @@ const Page = () => {
         <IconSparkles className="icon ml-3" />
         مزیت های این شغل
       </Label>
-      <ComboBox
-        id="benefits"
-        error={!!false}
-        name="benefits"
-        placeholder="چند مورد را اضافه کنید"
-      />
+      <ComboBox id="benefits" name="benefits" placeholder="چند مورد را اضافه کنید" />
 
       <Label className="mt-6" htmlFor="abilities">
         <IconAlignBoxLeftMiddle className="icon ml-3" />
         شاخص های کلیدی فرد
       </Label>
-      <ComboBox
-        id="abilities"
-        error={!!false}
-        name="abilities"
-        placeholder="چند مورد را اضافه کنید"
-      />
+      <ComboBox id="abilities" name="abilities" placeholder="چند مورد را اضافه کنید" />
 
       <Label className="mt-6" htmlFor="education">
         <IconSchool className="icon ml-3" />
         مدارک تحصیلی
       </Label>
-      <ComboBox
-        id="education"
-        error={!!false}
-        name="education"
-        placeholder="چند مورد را اضافه کنید"
-      />
+      <ComboBox id="education" name="education" placeholder="چند مورد را اضافه کنید" />
 
       <Label className="mt-6" htmlFor="languages">
         <IconWorld className="icon ml-3" />
         زبان های بین المللی
       </Label>
-      <ComboBox
-        id="languages"
-        error={!!false}
-        name="languages"
-        placeholder="چند مورد را اضافه کنید"
-      />
+      <ComboBox id="languages" name="languages" placeholder="چند مورد را اضافه کنید" />
 
       <Label className="mt-6" htmlFor="techs">
         <IconComponents className="icon ml-3" />
         تکنولوژی ها
       </Label>
-      <ComboBox id="techs" error={!!false} name="techs" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox id="techs" name="techs" placeholder="چند مورد را اضافه کنید" />
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
         ایجاد آگهی

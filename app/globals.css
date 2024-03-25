@@ -98,6 +98,10 @@ a {
 }
 
 @layer components {
+  .icon-xs {
+    @apply h-3 w-3;
+  }
+
   .icon-sm {
     @apply h-4 w-4;
   }
