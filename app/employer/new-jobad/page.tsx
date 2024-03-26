@@ -31,6 +31,7 @@ import MultiSelect from "@/components/MultiSelect"
 import ComboBox from "@/components/ComboBox"
 import Button from "@/components/Button"
 import Label from "@/components/Label"
+import Alert from "@/components/Alert"
 
 export type newJobAdFormStateT = {
   isSuccess?: boolean
@@ -279,6 +280,10 @@ const Page = () => {
           <input id="is_urgent" className="mr-3 mb-0.5" name="is_urgent" type="checkbox" />
         </Label>
       </div>
+
+      {formState.message ? (
+        <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
+      ) : null}
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
         ایجاد آگهی

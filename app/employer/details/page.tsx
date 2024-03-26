@@ -23,6 +23,7 @@ import TextArea from "@/components/TextArea"
 import toast from "react-hot-toast"
 import SelectBox from "@/components/SelectBox"
 import Label from "@/components/Label"
+import Alert from "@/components/Alert"
 
 export type detailsFormStateT = {
   isSuccess?: boolean
@@ -65,7 +66,7 @@ const Page = () => {
           </Label>
           <Input
             id="logo"
-            error={!!formState.fields.name}
+            error={formState.fields.name}
             type="text"
             placeholder="مثل جاب‌ویژن"
             name="name"
@@ -78,7 +79,7 @@ const Page = () => {
           </Label>
           <Input
             id="year"
-            error={!!formState.fields.year}
+            error={formState.fields.year}
             type="number"
             placeholder="سال 1384"
             name="year"
@@ -94,7 +95,7 @@ const Page = () => {
           </Label>
           <Input
             id="minEmployee"
-            error={!!formState.fields.minEmployee}
+            error={formState.fields.minEmployee}
             type="number"
             placeholder="از 10 نفر"
             name="minEmployee"
@@ -107,7 +108,7 @@ const Page = () => {
           </Label>
           <Input
             id="maxEmployee"
-            error={!!formState.fields.maxEmployee}
+            error={formState.fields.maxEmployee}
             type="number"
             placeholder="تا 15 نفر"
             name="maxEmployee"
@@ -119,7 +120,7 @@ const Page = () => {
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
-      <SelectBox id="city" error={!!formState.fields.city} name="city">
+      <SelectBox id="city" error={formState.fields.city} name="city">
         <option value="">یک شهر انتخاب کنید</option>
         {content?.cities.map((city) => (
           <option key={city.id} value={JSON.stringify(city)}>
@@ -134,7 +135,7 @@ const Page = () => {
       </Label>
       <TextArea
         id="about"
-        error={!!formState.fields.about}
+        error={formState.fields.about}
         placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
         name="about"
       />
@@ -145,7 +146,7 @@ const Page = () => {
       </Label>
       <TextArea
         id="activity"
-        error={!!formState.fields.activity}
+        error={formState.fields.activity}
         placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
         name="activity"
       />
@@ -156,7 +157,7 @@ const Page = () => {
       </Label>
       <Input
         id="file"
-        error={!!formState.fields.file}
+        error={formState.fields.file}
         type="file"
         placeholder="فرمت های png"
         accept=".png, .jpg, .jpeg"
@@ -168,20 +169,8 @@ const Page = () => {
         <input id="knowledgeBased" className="mr-3 mb-0.5" type="checkbox" name="knowledgeBased" />
       </Label>
 
-      <ul className="w-full">
-        {Object.entries(formState.fields).map((item) => {
-          const message = item[1] as string | null
-          if (message)
-            return (
-              <li key={uuid()} className="text-danger w-full flex items-center mt-6">
-                <IconBan className="icon" />
-                <span className="mr-3">{message}</span>
-              </li>
-            )
-        })}
-      </ul>
       {formState.message ? (
-        <span className="text-danger block mt-6">{formState.message}</span>
+        <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
       ) : null}
 
       <Button className="mt-6" variant={"primary"} size={"lg"}>
