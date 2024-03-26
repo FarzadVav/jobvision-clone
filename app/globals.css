@@ -44,7 +44,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: hsl(var(--dark));
 }
 
 body {
@@ -86,10 +86,6 @@ a {
 
   .morabba {
     font-family: "morabba";
-  }
-
-  .current-height {
-    @apply h-[calc(100vh-4.5rem)];
   }
 
   .active-circle {

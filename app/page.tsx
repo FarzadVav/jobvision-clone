@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <>
       {/* Hero section */}
-      <main className={"container w-full flex flex-col justify-center items-center"}>
+      <main className={"container w-full flex flex-col justify-center items-center mt-12"}>
         <div className={"w-full flex justify-between items-center"}>
           <div
             className={
