@@ -46,7 +46,7 @@ const Filters = () => {
       <Button
         className="rounded-full"
         variant={"outline"}
-        onClick={() => mutateFilter("/military")}
+        onClick={() => mutateFilter("/knowledgeBased")}
       >
         امریه سربازی
       </Button>

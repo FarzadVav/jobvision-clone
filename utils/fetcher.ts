@@ -13,8 +13,8 @@ export const jobAdsFetcher = async (filters?: string[]) => {
     data = data.filter(jobAd => jobAd.is_remote)
   }
 
-  if (filters?.includes("military")) {
-    data = data.filter(jobAd => jobAd.end_military_service)
+  if (filters?.includes("knowledgeBased")) {
+    data = data.filter(jobAd => jobAd.company.knowledgeBased)
   }
 
   const params = new URLSearchParams(location.search)
