@@ -1,5 +1,6 @@
-import JobAdsT from "@/types/jobads.types"
 import { create } from "zustand"
+
+import JobAdsT from "@/types/jobads.types"
 
 type UseJobsT = {
   jobAds: JobAdsT[]

@@ -1,10 +1,10 @@
 "use client"
 
 import { PropsWithChildren } from "react"
-import { JobAds } from "@prisma/client"
 
 import useJobs from "@/hooks/store/useJobs"
 import Filters from "@/components/modules/Filters"
+import JobAdsBox from "@/components/JobAdBox"
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const { jobAds } = useJobs((s) => s)
@@ -20,7 +20,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <main className="bg-light w-full py-9">
         <div className="container flex py-3">
           <aside className="bg-white h-max w-1/3 p-3 rounded-md">
-            {jobAds.length ? jobAds.map((jobAd: JobAds) => jobAd.title) : null}
+            {jobAds.length ? jobAds.map((jobAd) => <JobAdsBox {...jobAd} />) : null}
           </aside>
           <section className="bg-white h-[calc(100vh-6rem)] w-2/3 p-3 mr-3 rounded-md sticky top-[5.25rem] overflow-y-auto">
             single job-ad

@@ -1,6 +1,5 @@
-import { JobAds } from "@prisma/client";
-
 import ContentT from "@/types/content.types";
+import JobAdsT from "@/types/jobads.types";
 
 export const contentFetcher = () => fetch("/api/content")
   .then((res) => res.json())
@@ -8,7 +7,7 @@ export const contentFetcher = () => fetch("/api/content")
 
 export const jobAdsFetcher = async (filters?: string[]) => {
   const res = await fetch("/api/jobads")
-  let data = await res.json() as JobAds[]
+  let data = await res.json() as JobAdsT[]
 
   if (filters?.includes("remote")) {
     data = data.filter(jobAd => jobAd.is_remote)
