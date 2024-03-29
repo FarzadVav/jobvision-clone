@@ -1,3 +1,6 @@
+"use client"
+
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { v4 as uuid } from "uuid"
 
@@ -7,11 +10,22 @@ type MultiFilterButtonProps = {
   query: string
   name: string
   filters: { key: string; name: string }[]
-  mutateFilter: (filter: string) => void
 }
 
-const MultiFilterButton = ({ query, name, filters, mutateFilter }: MultiFilterButtonProps) => {
+const MultiFilterButton = ({ query, name, filters }: MultiFilterButtonProps) => {
+  const router = useRouter()
   const [showList, setShowList] = useState(false)
+
+  const mutateFilter = (key: string, value: string) => {
+    const params = new URLSearchParams(location.search)
+    // if filter exist, will be remove
+    if (params.has(key, value)) {
+      params.delete(key, value)
+      return router.push(location.pathname + `?${params.toString()}`)
+    }
+    params.set(key, value)
+    router.push(location.pathname + `?${params.toString()}`)
+  }
 
   return (
     <Button
@@ -30,9 +44,7 @@ const MultiFilterButton = ({ query, name, filters, mutateFilter }: MultiFilterBu
           <li
             key={uuid()}
             className="w-full py-1.5 rounded-md hover:bg-light/50"
-            onClick={() => {
-              mutateFilter(`?${query}=${filter.key}`)
-            }}
+            onClick={() => mutateFilter(query, filter.key)}
           >
             {filter.name}
           </li>

@@ -18,8 +18,29 @@ export const jobAdsFetcher = async (filters?: string[]) => {
     data = data.filter(jobAd => jobAd.end_military_service)
   }
 
-  console.log("Filters --->", filters)
-  console.log("Data --->", data)
+  const urlParams = new URLSearchParams(location.search)
+
+  const salary = urlParams.get('salary')
+  if (salary) {
+    const arraySalary = salary.split("-")
+    data = data.filter(jobAd => {
+      const jobAdSalary = Array.from(jobAd.salary as [] || [])
+      if (
+        +jobAdSalary[0] >= +arraySalary[0]
+        && +jobAdSalary[0] < +arraySalary[1]
+        && (+jobAdSalary[1] || 0) <= +arraySalary[1]
+      ) {
+        return jobAd
+      }
+    })
+  }
+
+  const type = urlParams.get('type')
+  console.log(type)
+  if (type) {
+    console.log(data[0].cooperation_type_id, type)
+    data = data.filter(jobAd => jobAd.cooperation_type_id === type)
+  }
 
   return data
 }
