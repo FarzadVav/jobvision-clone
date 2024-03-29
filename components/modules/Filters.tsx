@@ -23,19 +23,18 @@ const salaryFilters: { key: string; name: string }[] = [
 
 const Filters = () => {
   const router = useRouter()
+  const pathname = usePathname()
   const { data } = useSWR("/api/content", contentFetcher)
   const { addFilter, removeFilter } = useJobs((s) => s)
 
   const mutateFilter = (filter: string) => {
-    const pathname = usePathname()
-
+    const params = new URLSearchParams(location.search)
     // if filter exist, will be remove
     if (pathname.includes(filter)) {
-      router.push(pathname.replace(filter, ""))
+      router.push(pathname.replace(filter, "") + `?${params.toString()}`)
       return removeFilter(filter)
     }
-
-    router.push(pathname + filter)
+    router.push(pathname + filter + `?${params.toString()}`)
     addFilter(filter)
   }
 
