@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
 
-import { cn } from "../utils/utility"
+import { cn } from "../utils/lib"
 
 type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>
 

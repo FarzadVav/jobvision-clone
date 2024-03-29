@@ -2,7 +2,7 @@ import { forwardRef, useState } from "react"
 import toast from "react-hot-toast"
 import { IconAsterisk, IconPlus, IconTrash } from "@tabler/icons-react"
 
-import { cn } from "../utils/utility"
+import { cn } from "../utils/lib"
 
 interface ComboBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   wrapperclassName?: string

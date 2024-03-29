@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react"
 import { VariantProps, cva } from "class-variance-authority"
 
-import { cn } from "@/utils/utility"
+import { cn } from "@/utils/lib"
 
 const alertVariants = cva("w-full flex items-center justify-between px-3 py-1.5 rounded", {
   variants: {

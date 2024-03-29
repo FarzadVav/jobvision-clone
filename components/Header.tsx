@@ -40,7 +40,7 @@ const Header = async () => {
             {/* Mega menu */}
             <div
               className={
-                "current-height bg-dark/25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0 opacity-0 invisible scale-y-95 origin-top transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:scale-y-100"
+                "bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] pb-9 fixed top-[4.5rem] left-0 right-0 opacity-0 invisible scale-y-95 origin-top transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:scale-y-100"
               }
             >
               <div

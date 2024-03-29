@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react"
 import { VariantProps, cva } from "class-variance-authority"
 
-import { cn } from "@/utils/utility"
+import { cn } from "@/utils/lib"
 
 const titleVariants = cva("morabba w-full !leading-relaxed", {
   variants: {
