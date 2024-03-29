@@ -1,43 +1,20 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { PropsWithChildren } from "react"
 import { JobAds } from "@prisma/client"
 
-import Button from "@/components/Button"
 import useJobs from "@/hooks/store/useJobs"
+import Filters from "@/components/modules/Filters"
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-  const router = useRouter()
   const { jobAds } = useJobs((s) => s)
-
-  const mutateFilter = (route: string) => {
-    if (location.pathname.includes(route)) {
-      router.push(location.pathname.replace(`/${route}`, ""))
-    } else {
-      router.push(location.pathname + `/${route}`)
-    }
-  }
 
   return (
     <>
       {children}
-      <div className="bg-white border-b border-solid border-light w-full py-3">
+      <div className="bg-white border-b border-solid border-light w-full py-6">
         <div className="container flex items-center gap-3">
-          <Button
-            className="rounded-full"
-            variant={"outline"}
-            onClick={() => mutateFilter("remote")}
-          >
-            دورکاری
-          </Button>
-          <Button
-            className="rounded-full"
-            variant={"outline"}
-            onClick={() => mutateFilter("military")}
-          >
-            امریه سربازی
-          </Button>
+          <Filters />
         </div>
       </div>
       <main className="bg-light w-full py-9">
