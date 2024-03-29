@@ -7,17 +7,32 @@ import { PropsWithChildren } from "react"
 const layout: React.FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter()
 
-  const addFilter = (route: string) => {
-    !location.pathname.includes(route) && router.push(location.pathname + `/${route}`)
+  const mutateFilter = (route: string) => {
+    if (location.pathname.includes(route)) {
+      router.push(location.pathname.replace(`/${route}`, ""))
+    } else {
+      router.push(location.pathname + `/${route}`)
+    }
   }
 
   return (
     <>
       {children}
       <div className="bg-white border-b border-solid border-light w-full py-3">
-        <div className="container">
-          <Button className="rounded-full" variant={"outline"} onClick={() => addFilter("remote")}>
+        <div className="container flex items-center gap-3">
+          <Button
+            className="rounded-full"
+            variant={"outline"}
+            onClick={() => mutateFilter("remote")}
+          >
             دورکاری
+          </Button>
+          <Button
+            className="rounded-full"
+            variant={"outline"}
+            onClick={() => mutateFilter("military")}
+          >
+            امریه سربازی
           </Button>
         </div>
       </div>

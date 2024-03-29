@@ -1,5 +1,11 @@
+"use client"
+
+import { useEffect } from "react"
+
 const page = ({ params }: { params: { filters: string[] } }) => {
-  console.log(params)
+  useEffect(() => {
+    console.log(params)
+  }, [location.pathname])
 
   return null
 }
