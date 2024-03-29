@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react"
 import toast from "react-hot-toast"
+import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconPlus, IconTrash } from "@tabler/icons-react"
 
 import { cn } from "../utils/lib"
@@ -46,7 +47,10 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
           <ul className="w-full mt-3">
             {list.length ? (
               list.map((item) => (
-                <li className="border-solid border-light w-full flex justify-between items-center text-sm px-3 py-1.5 rounded-md transition-colors hover:bg-light/50 last-of-type:border-b last-of-type:rounded-b-none group">
+                <li
+                  key={uuid()}
+                  className="border-solid border-light w-full flex justify-between items-center text-sm px-3 py-1.5 rounded-md transition-colors hover:bg-light/50 last-of-type:border-b last-of-type:rounded-b-none group"
+                >
                   <span>{item}</span>
                   <IconTrash
                     className="icon-sm opacity-0 text-danger cursor-pointer transition-opacity group-hover:opacity-100"

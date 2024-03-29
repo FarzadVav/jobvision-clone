@@ -1,11 +1,15 @@
 "use client"
 
-import Button from "@/components/Button"
 import { useRouter } from "next/navigation"
 import { PropsWithChildren } from "react"
+import { JobAds } from "@prisma/client"
 
-const layout: React.FC<PropsWithChildren> = ({ children }) => {
+import Button from "@/components/Button"
+import useJobs from "@/hooks/store/useJobs"
+
+const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter()
+  const { jobAds } = useJobs((s) => s)
 
   const mutateFilter = (route: string) => {
     if (location.pathname.includes(route)) {
@@ -38,7 +42,9 @@ const layout: React.FC<PropsWithChildren> = ({ children }) => {
       </div>
       <main className="bg-light w-full py-9">
         <div className="container flex py-3">
-          <aside className="bg-white h-max w-1/3 p-3 rounded-md">job-ads</aside>
+          <aside className="bg-white h-max w-1/3 p-3 rounded-md">
+            {jobAds.length ? jobAds.map((jobAd: JobAds) => jobAd.title) : null}
+          </aside>
           <section className="bg-white h-[calc(100vh-6rem)] w-2/3 p-3 mr-3 rounded-md sticky top-[5.25rem] overflow-y-auto">
             single job-ad
           </section>
@@ -48,4 +54,4 @@ const layout: React.FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
-export default layout
+export default Layout

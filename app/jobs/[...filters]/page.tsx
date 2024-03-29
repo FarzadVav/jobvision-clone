@@ -1,13 +1,18 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import { useEffect } from "react"
+import { jobAdsFetcher } from "@/utils/fetcher"
+import useJobs from "@/hooks/store/useJobs"
 
-const page = ({ params }: { params: { filters: string[] } }) => {
+const Page = ({ params }: { params: { filters: string[] } }) => {
+  const pathname = usePathname()
+
   useEffect(() => {
-    console.log(params)
-  }, [location.pathname])
+    jobAdsFetcher(params.filters).then((jobAds) => useJobs.setState({ jobAds }))
+  }, [pathname])
 
   return null
 }
 
-export default page
+export default Page
