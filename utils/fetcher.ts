@@ -18,9 +18,9 @@ export const jobAdsFetcher = async (filters?: string[]) => {
     data = data.filter(jobAd => jobAd.end_military_service)
   }
 
-  const urlParams = new URLSearchParams(location.search)
+  const params = new URLSearchParams(location.search)
 
-  const salary = urlParams.get('salary')
+  const salary = params.get('salary')
   if (salary) {
     const arraySalary = salary.split("-")
     data = data.filter(jobAd => {
@@ -35,10 +35,8 @@ export const jobAdsFetcher = async (filters?: string[]) => {
     })
   }
 
-  const type = urlParams.get('type')
-  console.log(type)
+  const type = params.get('type')
   if (type) {
-    console.log(data[0].cooperation_type_id, type)
     data = data.filter(jobAd => jobAd.cooperation_type_id === type)
   }
 
