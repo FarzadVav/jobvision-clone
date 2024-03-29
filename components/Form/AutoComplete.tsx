@@ -1,38 +1,26 @@
 "use client"
 
-import { forwardRef, useEffect, useState } from "react"
-import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
+import { forwardRef, useState } from "react"
 import { v4 as uuid } from "uuid"
+import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 
-import { cn } from "../utils/lib"
+import { cn } from "../../utils/lib"
 
-interface MultiSelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> {
   wrapperclassName?: string
   error?: string | null
   data: string[]
 }
 
-const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
-  ({ wrapperclassName, error, className, data, name, placeholder, ...props }, ref) => {
+const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
+  ({ wrapperclassName, error, className, data, ...props }, ref) => {
     const [value, setValue] = useState("")
     const [isFocus, setIsFocus] = useState(false)
-    const [selectedData, setSelectedData] = useState<string[]>([])
-
-    useEffect(() => {
-      const clickHandler = () => setIsFocus(false)
-
-      window.addEventListener("click", clickHandler)
-      return () => window.removeEventListener("click", clickHandler)
-    }, [])
 
     return (
       <>
-        <div
-          className={cn("w-full relative", wrapperclassName)}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <div className="w-full flex items-center relative">
-            <input type="hidden" name={name} value={JSON.stringify(selectedData)} />
+        <div className={cn("w-full relative", wrapperclassName)} ref={ref}>
+          <div className="flex items-center relative">
             <input
               className={cn(
                 `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
@@ -41,12 +29,10 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
                 className
               )}
               ref={ref}
-              value={value}
-              placeholder={
-                selectedData.length ? `${selectedData.length} مورد انتخاب شده` : placeholder
-              }
               onChange={(e) => setValue(e.target.value)}
+              value={value}
               onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
               {...props}
             />
             <div className="h-11 w-12 flex justify-center items-center absolute left-0 top-0">
@@ -67,17 +53,8 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
                     return (
                       <li
                         key={uuid()}
-                        className={`${
-                          selectedData.includes(item) ? "bg-light" : ""
-                        } w-full py-1.5 px-3 my-1.5 rounded cursor-pointer transition-colors hover:bg-light/50`}
-                        onMouseDown={() =>
-                          setSelectedData((prev) => {
-                            const currentSelectedData = prev.includes(item)
-                              ? prev.filter((selected) => selected !== item)
-                              : [...prev, item]
-                            return currentSelectedData
-                          })
-                        }
+                        className="w-full py-1.5 px-3 rounded cursor-pointer transition-colors hover:bg-light/50"
+                        onMouseDown={() => setValue(item)}
                       >
                         {item}
                       </li>
@@ -102,6 +79,6 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
   }
 )
 
-MultiSelect.displayName = "MultiSelect"
+AutoComplete.displayName = "AutoComplete"
 
-export default MultiSelect
+export default AutoComplete

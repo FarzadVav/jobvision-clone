@@ -3,7 +3,7 @@ import toast from "react-hot-toast"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconPlus, IconTrash } from "@tabler/icons-react"
 
-import { cn } from "../utils/lib"
+import { cn } from "../../utils/lib"
 
 interface ComboBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   wrapperclassName?: string
