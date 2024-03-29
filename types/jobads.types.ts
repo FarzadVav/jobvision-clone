@@ -1,11 +1,10 @@
-import { Cities, Companies, JobAds, Provinces } from "@prisma/client"
+import { JobAds } from "@prisma/client"
+
+import CompaniesT from "./companies.types"
 
 type JobAdsT = JobAds & {
   salary: string[]
-  company: Companies & {
-    province: Provinces
-    city: Cities
-  }
+  company: CompaniesT
 }
 
 export default JobAdsT
