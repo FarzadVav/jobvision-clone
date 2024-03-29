@@ -1,8 +1,9 @@
-import { JobAds } from "@prisma/client"
+import JobAdsT from "@/types/jobads.types"
 import { create } from "zustand"
 
 type UseJobsT = {
-  jobAds: JobAds[]
+  jobAds: JobAdsT[]
+  selectedJobAd: JobAdsT | undefined
   activeFilters: string[]
   addFilter: (filter: string) => void
   removeFilter: (filter: string) => void
@@ -10,6 +11,7 @@ type UseJobsT = {
 
 const useJobs = create<UseJobsT>((set) => ({
   jobAds: [],
+  selectedJobAd: undefined,
   activeFilters: [],
   addFilter: (filter) => set(state => ({ activeFilters: [...state.activeFilters, filter] })),
   removeFilter: (filter) => set(state => ({
