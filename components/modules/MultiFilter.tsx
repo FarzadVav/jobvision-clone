@@ -23,12 +23,12 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
     // if filter exist, will be remove
     if (params.has(key, value)) {
       params.delete(key, value)
-      return router.push(pathname + `?${params.toString()}`)
+      return router.push(pathname + "?" + params.toString())
     }
 
     // add filter
     params.set(key, value)
-    router.push(pathname + `?${params.toString()}`)
+    router.push(pathname + "?" + params.toString())
   }
 
   return (
@@ -49,8 +49,8 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
           <li
             key={uuid()}
             className={`${
-              searchParams.has(query, filter.key) ? "dana-bold text-primary" : ""
-            } text-dark w-full py-1.5 rounded-md hover:bg-light/50`}
+              searchParams.has(query, filter.key) ? "dana-bold text-primary hover:text-danger" : ""
+            } text-dark w-full py-1.5 rounded-md transition-colors hover:bg-light/50`}
             onClick={() => mutateFilter(query, filter.key)}
           >
             {filter.name}

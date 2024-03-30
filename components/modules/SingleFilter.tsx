@@ -4,7 +4,7 @@ import React from "react"
 import Button from "../Button"
 
 type SingleFilterProps = {
-  route: `/${string}`
+  route: string
   name: string
 }
 
@@ -18,11 +18,11 @@ const SingleFilter = ({ route, name }: SingleFilterProps) => {
 
     // if filter exist, will be remove
     if (pathname.includes(filter)) {
-      return router.push(pathname.replace(filter, "") + `?${params.toString()}`)
+      return router.push(pathname.replace(filter, "") + "?" + params.toString())
     }
 
     // add filter
-    router.push(pathname + filter + `?${params.toString()}`)
+    router.push(pathname + filter + "?" + params.toString())
   }
 
   return (
