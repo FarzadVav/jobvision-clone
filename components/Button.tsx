@@ -8,17 +8,17 @@ import { PulseLoader } from "react-spinners"
 import { cn } from "../utils/lib"
 
 const buttonVariants = cva(
-  "w-max flex justify-center items-center gap-3 rounded cursor-pointer transition active:scale-95",
+  "w-max flex justify-center items-center gap-2 rounded cursor-pointer transition active:scale-95",
   {
     variants: {
       variant: {
-        primary: "bg-primary text-white hover:brightness-110",
-        success: "bg-success text-white hover:brightness-110",
-        danger: "bg-danger text-white",
+        primary: "bg-primary text-white hover:bg-primary/95",
+        success: "bg-success text-white hover:bg-success/90",
+        danger: "bg-danger text-white hover:bg-danger/95",
         outline: "bg-white border border-solid border-light",
         ghost: "hover:bg-light",
         link: "text-primary underline decoration-transparent hover:decoration-primary",
-        fill: "bg-light",
+        fill: "bg-light hover:bg-light/95",
       },
       size: {
         sm: "h-8 text-xs px-3",
