@@ -1,9 +1,6 @@
-export const FILTER_URL_KEYS = {
-  remote: "/remote",
-  knowledgeBased: "/knowledgeBased"
-}
-
-export const FILTER_QUERY_KEYS = {
+export const FILTER_KEYS = {
+  remote: "remote",
+  knowledgeBased: "knowledgeBased",
   type: "type",
   salary: "salary"
 }

@@ -1,5 +1,6 @@
 import ContentT from "@/types/content.types";
 import JobAdsT from "@/types/jobads.types";
+import { FILTER_KEYS } from "./initialData";
 
 export const contentFetcher = () => fetch("/api/content")
   .then((res) => res.json())
@@ -9,17 +10,17 @@ export const jobAdsFetcher = async (filters?: string[]) => {
   const res = await fetch("/api/jobads")
   let data = await res.json() as JobAdsT[]
 
-  if (filters?.includes("remote")) {
+  if (filters?.includes(FILTER_KEYS.remote)) {
     data = data.filter(jobAd => jobAd.is_remote)
   }
 
-  if (filters?.includes("knowledgeBased")) {
+  if (filters?.includes(FILTER_KEYS.knowledgeBased)) {
     data = data.filter(jobAd => jobAd.company.knowledgeBased)
   }
 
   const params = new URLSearchParams(location.search)
 
-  const salary = params.get('salary')
+  const salary = params.get(FILTER_KEYS.salary)
   if (salary) {
     const arraySalary = salary.split("-")
     data = data.filter(jobAd => {
@@ -34,7 +35,7 @@ export const jobAdsFetcher = async (filters?: string[]) => {
     })
   }
 
-  const type = params.get('type')
+  const type = params.get(FILTER_KEYS.type)
   if (type) {
     data = data.filter(jobAd => jobAd.cooperation_type_id === type)
   }
