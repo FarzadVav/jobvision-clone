@@ -42,3 +42,13 @@ export const jobAdsFetcher = async (filters?: string[]) => {
 
   return data
 }
+
+export const singleJobAdFetcher = async () => {
+  const params = new URLSearchParams(location.search)
+  const id = params.get(FILTER_KEYS.id)
+
+  const res = await fetch(`/api/jobads/${id}`)
+  const data = await res.json() as JobAdsT
+
+  return data
+}

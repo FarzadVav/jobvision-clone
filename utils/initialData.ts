@@ -54,7 +54,8 @@ export const FILTER_KEYS = {
   remote: "remote",
   knowledgeBased: "knowledgeBased",
   type: "type",
-  salary: "salary"
+  salary: "salary",
+  id: "id",
 }
 
 export const SALARY_FILTERS: [number, number][] = [

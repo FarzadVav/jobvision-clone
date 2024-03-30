@@ -5,6 +5,7 @@ import { PropsWithChildren } from "react"
 import useJobs from "@/hooks/store/useJobAds"
 import Filters from "@/components/modules/Filters"
 import JobAdsBox from "@/components/JobAdBox"
+import SelectedJobAd from "@/components/modules/SelectedJobAd"
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const { jobAds } = useJobs((s) => s)
@@ -27,7 +28,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
               : null}
           </aside>
           <section className="bg-white h-[calc(100vh-6rem)] w-2/3 p-3 mr-3 rounded-md sticky top-[5.25rem] overflow-y-auto">
-            single job-ad
+            <SelectedJobAd />
           </section>
         </div>
       </main>
