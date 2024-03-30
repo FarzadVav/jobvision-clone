@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
 export const GET = async () => {
   const jobAds = await prisma.jobAds.findMany({
     include: {
+      cooperation_type: true,
       company: {
         include: {
           province: true,

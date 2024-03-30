@@ -2,7 +2,7 @@
 
 import { PropsWithChildren } from "react"
 
-import useJobs from "@/hooks/store/useJobs"
+import useJobs from "@/hooks/store/useJobAds"
 import Filters from "@/components/modules/Filters"
 import JobAdsBox from "@/components/JobAdBox"
 

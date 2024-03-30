@@ -4,7 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 
 import { jobAdsFetcher } from "@/utils/fetcher"
-import useJobs from "@/hooks/store/useJobs"
+import useJobs from "@/hooks/store/useJobAds"
 
 const Page = ({ params }: { params: { filters: string[] } }) => {
   const pathname = usePathname()

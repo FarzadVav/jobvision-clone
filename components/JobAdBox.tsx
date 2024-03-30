@@ -1,17 +1,16 @@
 "use client"
 
-import useJobs from "@/hooks/store/useJobs"
-import JobAdsT from "@/types/jobads.types"
-import { IconStarFilled } from "@tabler/icons-react"
-import Button from "./Button"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
+import { IconStarFilled } from "@tabler/icons-react"
+
+import JobAdsT from "@/types/jobads.types"
+import Button from "./Button"
 
 const JobAdsBox = (jobAd: JobAdsT) => {
-  console.log(jobAd)
-
-  const { selectedJobAd } = useJobs((s) => s)
-
-  const selected = selectedJobAd?.id === jobAd.id
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const prevCategoriesHandler = () => {
     const prevCategories: string[] = JSON.parse(localStorage.getItem("prevCategories") || "[]")
@@ -35,32 +34,35 @@ const JobAdsBox = (jobAd: JobAdsT) => {
       className="bg-white w-full group"
       onClick={() => {
         prevCategoriesHandler()
-        useJobs.setState({ selectedJobAd: jobAd })
+        const params = new URLSearchParams(searchParams.toString())
+        params.set("id", jobAd.id)
+        router.push(pathname + "?" + params.toString())
       }}
       data-id={jobAd.id}
       data-category={jobAd.category_id}
     >
       <div
-        className={`text-dark border border-solid border-light w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${
-          selected ? "lg:border-primary lg:text-primary" : ""
+        className={`text-dark ring-1 ring-light w-full h-full flex flex-col justify-between p-3 rounded-md cursor-pointer transition-shadow ${
+          searchParams.has("id", jobAd.id) ? "ring-primary ring-2" : "hover:ring-2"
         }`}
       >
         <div className="flex">
-          <div className="col-span-3 flex flex-col items-center">
-            <Image
-              className="text-sm object-fill object-center rounded-md"
-              height={80}
-              width={80}
-              src={""}
-              alt={`لوگوی شرکت ${jobAd.company.name}`}
-            />
-          </div>
-          <div className="col-span-9 flex flex-col px-3">
-            <span className="dana-bold inline-block max-h-[4.5rem] overflow-hidden lg:text-sm xl:text-bas">
+          <Image
+            className="text-sm object-fill object-center rounded-md"
+            height={80}
+            width={80}
+            src={""}
+            alt={`لوگوی شرکت ${jobAd.company.name}`}
+          />
+          <div className="flex flex-col pr-3">
+            <span className="dana-bold inline-block max-h-[4.5rem] overflow-hidden">
               {jobAd.title}
             </span>
-            <div className="flex items-center mt-2">
+            <div className="flex items-center mt-2.5">
               <span className="text-xs">{jobAd.company.name}</span>
+              <span className="border-r border-solid border-light text-xs pr-2 mr-2">
+                {jobAd.cooperation_type.name}
+              </span>
               {jobAd.is_remote ? (
                 <span className="italic border-r border-solid border-light text-xs pr-2 mr-2">
                   دورکاری
@@ -72,7 +74,7 @@ const JobAdsBox = (jobAd: JobAdsT) => {
                 </span>
               ) : null}
             </div>
-            <div className="flex items-center mt-2">
+            <div className="flex items-center mt-2.5">
               <span className="text-xs">
                 {jobAd.company.province.name}، {jobAd.company.city.name}
               </span>
@@ -82,10 +84,7 @@ const JobAdsBox = (jobAd: JobAdsT) => {
             </div>
           </div>
         </div>
-        <div
-          className={`border-t border-dashed border-light col-span-12 flex justify-between items-center pt-3 mt-5
-        ${selected ? "lg:border-primary" : ""}`}
-        >
+        <div className="border-t border-dashed border-light flex items-center pt-4 mt-5">
           {jobAd.is_urgent ? (
             <span className="badge badge-danger">فوری</span>
           ) : (
@@ -99,8 +98,10 @@ const JobAdsBox = (jobAd: JobAdsT) => {
           )}
           {jobAd.company.score ? (
             <div
-              className={`text-sm flex items-center ml-auto mr-3 transition-opacity ${
-                selected ? "lg:ml-0" : "lg:opacity-0 group-hover:opacity-100"
+              className={`text-sm flex items-center mr-auto ${
+                pathname.includes("/jobs")
+                  ? ""
+                  : "transition-opacity group-hover:opacity-100 lg:opacity-0"
               }`}
             >
               <IconStarFilled className="icon-sm text-warning" />
@@ -109,9 +110,7 @@ const JobAdsBox = (jobAd: JobAdsT) => {
               </span>
             </div>
           ) : null}
-          <Button className={selected ? "lg:hidden" : ""} variant={"success"}>
-            ارسال رزومه
-          </Button>
+          {pathname.includes("/jobs") ? null : <Button variant={"success"}>ارسال رزومه</Button>}
         </div>
       </div>
     </article>
