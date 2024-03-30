@@ -1,64 +1,15 @@
 "use server"
 
-import { PrismaClient, Categories, Tags, Provinces, Cities, CooperationTypes } from "@prisma/client"
-import { v4 as uuid } from "uuid"
+import { CATEGORIES, TAGS, PROVINCES, CITIES, COOPERATION_TYPES } from "@/utils/initialData"
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
-
-const categoriesData: Categories[] = [
-  { id: uuid(), name: "برنامه نویسی" },
-  { id: uuid(), name: "گرافیک" },
-  { id: uuid(), name: "مارکتینگ" }
-]
-
-const tagsData: Tags[] = [
-  { id: uuid(), name: "فرانت اند", category_id: categoriesData[0].id },
-  { id: uuid(), name: "بک اند", category_id: categoriesData[0].id },
-  { id: uuid(), name: "موبایل android", category_id: categoriesData[0].id },
-  { id: uuid(), name: "موبایل ios", category_id: categoriesData[0].id },
-
-  { id: uuid(), name: "طراح رابط کاربری", category_id: categoriesData[1].id },
-  { id: uuid(), name: "فتوشاپ", category_id: categoriesData[1].id },
-  { id: uuid(), name: "طراح مانگا", category_id: categoriesData[1].id },
-
-  { id: uuid(), name: "دیجیتال مارکتر", category_id: categoriesData[2].id },
-  { id: uuid(), name: "فیسبوک ads", category_id: categoriesData[2].id },
-  { id: uuid(), name: "بازاریاب", category_id: categoriesData[2].id },
-]
-
-const provincesData: Provinces[] = [
-  { id: uuid(), name: "خراسان رضوی" },
-  { id: uuid(), name: "تهران" },
-  { id: uuid(), name: "شمال" }
-]
-
-const citiesData: Cities[] = [
-  { id: uuid(), name: "مشهد", province_id: provincesData[0].id },
-  { id: uuid(), name: "نیشابور", province_id: provincesData[0].id },
-  { id: uuid(), name: "سبزوار", province_id: provincesData[0].id },
-
-  { id: uuid(), name: "تهران", province_id: provincesData[1].id },
-  { id: uuid(), name: "کرج", province_id: provincesData[1].id },
-  { id: uuid(), name: "شهریار", province_id: provincesData[1].id },
-
-  { id: uuid(), name: "مازندران", province_id: provincesData[2].id },
-  { id: uuid(), name: "رشت", province_id: provincesData[2].id },
-  { id: uuid(), name: "چالوس", province_id: provincesData[2].id },
-  { id: uuid(), name: "انزلی", province_id: provincesData[2].id },
-  { id: uuid(), name: "گیلان", province_id: provincesData[2].id },
-]
-
-const cooperationTypesData: CooperationTypes[] = [
-  { id: uuid(), name: "تمام وقت" },
-  { id: uuid(), name: "پاره وقت" },
-  { id: uuid(), name: "پروژه ای" }
-]
 
 const addInitialDatasToDB = async () => {
   try {
     const categories = await prisma.categories.findMany()
     if (categories.length === 0) {
-      await prisma.categories.createMany({ data: categoriesData })
+      await prisma.categories.createMany({ data: CATEGORIES })
       console.log("Created initial [categories] :))")
     }
   } catch (error) {
@@ -68,7 +19,7 @@ const addInitialDatasToDB = async () => {
   try {
     const tags = await prisma.tags.findMany()
     if (tags.length === 0) {
-      await prisma.tags.createMany({ data: tagsData })
+      await prisma.tags.createMany({ data: TAGS })
       console.log("Created initial [tags] :))")
     }
   } catch (error) {
@@ -78,7 +29,7 @@ const addInitialDatasToDB = async () => {
   try {
     const provinces = await prisma.provinces.findMany()
     if (provinces.length === 0) {
-      await prisma.provinces.createMany({ data: provincesData })
+      await prisma.provinces.createMany({ data: PROVINCES })
       console.log("Created initial [provinces] :))")
     }
   } catch (error) {
@@ -88,7 +39,7 @@ const addInitialDatasToDB = async () => {
   try {
     const cities = await prisma.cities.findMany()
     if (cities.length === 0) {
-      await prisma.cities.createMany({ data: citiesData })
+      await prisma.cities.createMany({ data: CITIES })
       console.log("Created initial [cities] :))")
     }
   } catch (error) {
@@ -98,7 +49,7 @@ const addInitialDatasToDB = async () => {
   try {
     const cooperationTypes = await prisma.cooperationTypes.findMany()
     if (cooperationTypes.length === 0) {
-      await prisma.cooperationTypes.createMany({ data: cooperationTypesData })
+      await prisma.cooperationTypes.createMany({ data: COOPERATION_TYPES })
       console.log("Created initial [cooperationTypes] :))")
     }
   } catch (error) {
