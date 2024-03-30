@@ -18,7 +18,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
   const [showList, setShowList] = useState(false)
 
   const mutateFilter = (key: string, value: string) => {
-    const params = new URLSearchParams(location.search)
+    const params = new URLSearchParams(searchParams.toString())
 
     // if filter exist, will be remove
     if (params.has(key, value)) {

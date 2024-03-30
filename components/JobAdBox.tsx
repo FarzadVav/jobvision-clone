@@ -59,7 +59,7 @@ const JobAdBox = ({
     >
       <div
         className={`text-dark ring-1 ring-light w-full h-full flex flex-col justify-between p-3 rounded-md cursor-pointer transition-shadow ${
-          searchParams.has("id", id) ? "ring-primary ring-2" : "hover:ring-2"
+          searchParams.has("id", id) ? "ring-primary/50 ring-2" : "hover:ring-2"
         }`}
       >
         <div className="flex">

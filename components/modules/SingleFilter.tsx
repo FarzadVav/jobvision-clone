@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import React from "react"
 
 import Button from "../Button"
@@ -11,9 +11,10 @@ type SingleFilterProps = {
 const SingleFilter = ({ route, name }: SingleFilterProps) => {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const mutateFilter = (filter: string) => {
-    const params = new URLSearchParams(location.search)
+    const params = new URLSearchParams(searchParams.toString())
 
     // if filter exist, will be remove
     if (pathname.includes(filter)) {
