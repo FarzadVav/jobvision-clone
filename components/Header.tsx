@@ -11,7 +11,6 @@ import {
 
 import ContentT from "@/types/content.types"
 import Button from "./Button"
-import RedirectBtn from "./RedirectBtn"
 import getMe from "@/app/actions/getMe"
 
 const getMegaMenu = async () => {
@@ -48,57 +47,52 @@ const Header = async () => {
                   "bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative cursor-default"
                 }
               >
-                <ul className={"border-t border-solid border-light w-full h-16 flex px-6"}>
+                <ul className={"border-t border-solid border-light w-full h-16 flex"}>
                   {megaMenu.map((item) => (
                     <li
                       key={uuid()}
                       className={"h-full flex items-center cursor-pointer group/item"}
                     >
-                      <Button className="dana-bold border-l border-solid border-light h-1/2">
+                      <button className="dana-bold border-l border-solid border-light h-1/2 px-6">
                         {item.name}
-                      </Button>
+                      </button>
                       <ul
                         className={
-                          "bg-white border-t border-solid border-light columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3 pt-1.5 rounded-b-xl overflow-y-auto opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
+                          "bg-white border-t border-solid border-light columns-5 py-3 px-6 rounded-b-xl absolute top-16 bottom-0 left-0 right-0 cursor-default overflow-y-auto opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
                         }
                       >
                         {item.menu.map((menuItem) => (
-                          <li key={uuid()} className={"h-max max-h-max m-1"}>
-                            <RedirectBtn href={`/jobs?${item.query}=${menuItem.link.id}`}>
-                              <button
-                                className={
-                                  "text-dark dana-bold w-full h-full flex flex-col px-3 py-1 cursor-pointer hover:text-primary"
-                                }
-                              >
-                                {menuItem.link.name}
-                                {menuItem.subMenu.length ? (
-                                  <ul className={"w-full py-2 px-1 cursor-default"}>
-                                    {menuItem.subMenu.map((subMenuItem) => (
-                                      <li
-                                        key={uuid()}
-                                        className={
-                                          "dana-base w-full flex items-center mt-2 first:mt-0 group/sub"
-                                        }
-                                      >
-                                        <IconChevronLeft
-                                          className={
-                                            "icon-sm text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100"
-                                          }
-                                        />
-                                        <Link
-                                          className={
-                                            "text-dark w-full inline-block text-sm text-right hover:text-primary"
-                                          }
-                                          href={`/jobs?${menuItem.query}=${subMenuItem.id}`}
-                                        >
-                                          {subMenuItem.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                ) : null}
-                              </button>
-                            </RedirectBtn>
+                          <li key={uuid()}>
+                            <Link
+                              className="dana-bold hover:text-primary"
+                              href={`/jobs?${item.query}=${menuItem.link.id}`}
+                            >
+                              {menuItem.link.name}
+                            </Link>
+                            {menuItem.subMenu.length ? (
+                              <ul className={"w-full h-full max-h-max inline-block py-2 pr-1"}>
+                                {menuItem.subMenu.map((subMenuItem) => (
+                                  <li
+                                    key={uuid()}
+                                    className={"flex items-center mt-2 first:mt-0 group/sub"}
+                                  >
+                                    <IconChevronLeft
+                                      className={
+                                        "icon-sm text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100"
+                                      }
+                                    />
+                                    <Link
+                                      className={
+                                        "text-dark inline-block text-sm text-right hover:text-primary"
+                                      }
+                                      href={`/jobs?${menuItem.query}=${subMenuItem.id}`}
+                                    >
+                                      {subMenuItem.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : null}
                           </li>
                         ))}
                       </ul>
