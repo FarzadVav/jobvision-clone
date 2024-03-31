@@ -40,6 +40,39 @@ export const jobAdsFetcher = async (filters?: string[]) => {
     data = data.filter(jobAd => jobAd.cooperation_type_id === type)
   }
 
+  const category = params.get(FILTER_KEYS.category)
+  if (category) {
+    data = data.filter(jobAd => jobAd.category_id === category)
+  }
+
+  const tag = params.get(FILTER_KEYS.tag)
+  if (tag) {
+    data = data.filter(jobAd => jobAd.tags.some(jobAdTag => jobAdTag.tag_id === tag))
+  }
+
+  const province = params.get(FILTER_KEYS.province)
+  if (province) {
+    data = data.filter(jobAd => jobAd.company.province_id === province)
+  }
+
+  const city = params.get(FILTER_KEYS.city)
+  if (city) {
+    data = data.filter(jobAd => jobAd.company.city_id === city)
+  }
+
+  const cooperationType = params.get(FILTER_KEYS.cooperationType)
+  if (cooperationType) {
+    data = data.filter(jobAd => jobAd.cooperation_type_id === cooperationType)
+  }
+
+  const cooperationTypeCity = params.get(FILTER_KEYS.cooperationTypeCity)
+  if (cooperationTypeCity) {
+    data = data.filter(jobAd =>
+      jobAd.cooperation_type_id === cooperationTypeCity.split("_")[0]
+      && jobAd.company.city_id === cooperationTypeCity.split("_")[1]
+    )
+  }
+
   return data
 }
 

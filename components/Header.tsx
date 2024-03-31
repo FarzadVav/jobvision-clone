@@ -62,18 +62,18 @@ const Header = async () => {
                           "bg-white border-t border-solid border-light columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3 pt-1.5 rounded-b-xl overflow-y-auto opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
                         }
                       >
-                        {item.menu.map((subItem) => (
+                        {item.menu.map((menuItem) => (
                           <li key={uuid()} className={"h-max max-h-max m-1"}>
-                            <RedirectBtn href={`/jobs?${item.query}=${subItem.link.id}`}>
+                            <RedirectBtn href={`/jobs?${item.query}=${menuItem.link.id}`}>
                               <button
                                 className={
                                   "text-dark dana-bold w-full h-full flex flex-col px-3 py-1 cursor-pointer hover:text-primary"
                                 }
                               >
-                                {subItem.link.name}
-                                {subItem.subMenu.length ? (
+                                {menuItem.link.name}
+                                {menuItem.subMenu.length ? (
                                   <ul className={"w-full py-2 px-1 cursor-default"}>
-                                    {subItem.subMenu.map((subLink) => (
+                                    {menuItem.subMenu.map((subMenuItem) => (
                                       <li
                                         key={uuid()}
                                         className={
@@ -89,9 +89,9 @@ const Header = async () => {
                                           className={
                                             "text-dark w-full inline-block text-sm text-right hover:text-primary"
                                           }
-                                          href={`/jobs?${subItem.query}=${subLink.id}`}
+                                          href={`/jobs?${menuItem.query}=${subMenuItem.id}`}
                                         >
-                                          {subLink.name}
+                                          {subMenuItem.name}
                                         </Link>
                                       </li>
                                     ))}

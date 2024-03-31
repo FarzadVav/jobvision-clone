@@ -1,6 +1,8 @@
-import ContentT from "@/types/content.types";
-import { PrismaClient } from "@prisma/client"
 import { v4 as uuid } from "uuid";
+import { PrismaClient } from "@prisma/client"
+
+import ContentT from "@/types/content.types";
+import { FILTER_KEYS } from "@/utils/initialData";
 
 const prisma = new PrismaClient()
 
@@ -21,31 +23,31 @@ export const GET = async () => {
       {
         id: uuid(),
         name: 'دسته بندی مشاغل',
-        query: 'category',
+        query: FILTER_KEYS.category,
         menu: categories?.map(category => ({
           link: { id: category.id, name: category.name },
-          query: 'tag',
+          query: FILTER_KEYS.tag,
           subMenu: category.tags.map(tag => ({ id: tag.id, name: tag.name }))
         }))
       },
       {
         id: uuid(),
         name: 'استان و شهر',
-        query: 'province',
+        query: FILTER_KEYS.province,
         menu: provinces?.map(province => ({
           link: { id: province.id, name: province.name },
-          query: 'city',
+          query: FILTER_KEYS.city,
           subMenu: province.cities.map(city => ({ id: city.id, name: city.name }))
         }))
       },
       {
         id: uuid(),
         name: 'نوع همکاری',
-        query: 'cooperationType',
+        query: FILTER_KEYS.cooperationType,
         menu: cooperationTypes?.map(type => ({
           link: { id: type.id, name: type.name },
-          query: 'cooperationType-city',
-          subMenu: cities?.map(city => ({ id: city.id, name: `در ${city.name}` }))
+          query: FILTER_KEYS.cooperationTypeCity,
+          subMenu: cities?.map(city => ({ id: `${type.id}_${city.id}`, name: `در ${city.name}` }))
         }))
       }
     ]

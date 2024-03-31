@@ -56,6 +56,12 @@ export const FILTER_KEYS = {
   type: "type",
   salary: "salary",
   id: "id",
+  category: "category",
+  tag: "tag",
+  province: "province",
+  city: "city",
+  cooperationType: "cooperationType",
+  cooperationTypeCity: "cooperationType-city",
 }
 
 export const SALARY_FILTERS: [number, number][] = [
