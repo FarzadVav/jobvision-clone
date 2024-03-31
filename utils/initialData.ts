@@ -55,7 +55,6 @@ export const FILTER_KEYS = {
   knowledgeBased: "knowledgeBased",
   type: "type",
   salary: "salary",
-  id: "id",
   category: "category",
   tag: "tag",
   province: "province",

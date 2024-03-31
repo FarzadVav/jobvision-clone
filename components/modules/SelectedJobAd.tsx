@@ -3,7 +3,6 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 import useSWR from "swr"
 
-import { FILTER_KEYS } from "@/utils/initialData"
 import { singleJobAdFetcher } from "@/utils/fetcher"
 import { IconHeart, IconHelp, IconShare, IconUser, IconX } from "@tabler/icons-react"
 import Button from "../Button"
@@ -11,7 +10,7 @@ import Button from "../Button"
 const SelectedJobAd = () => {
   const searchParams = useSearchParams()
   const { data: jobAd } = useSWR(
-    `/api/jobads/${searchParams.get(FILTER_KEYS.id)}`,
+    `/api/jobads/${searchParams.get("id")}`,
     singleJobAdFetcher
   )
 

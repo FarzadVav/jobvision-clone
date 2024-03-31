@@ -1,14 +1,14 @@
 "use client"
 
+import Link from "next/link"
 import useSWR from "swr"
+import { IconTrashXFilled } from "@tabler/icons-react"
 
 import { contentFetcher } from "@/utils/fetcher"
 import Button from "../Button"
 import MultiFilter from "./MultiFilter"
 import SingleFilter from "./SingleFilter"
 import { FILTER_KEYS, SALARY_FILTERS } from "@/utils/initialData"
-import Link from "next/link"
-import { IconCircleXFilled, IconTrashXFilled, IconX } from "@tabler/icons-react"
 
 const Filters = () => {
   const { data } = useSWR("/api/content", contentFetcher)
