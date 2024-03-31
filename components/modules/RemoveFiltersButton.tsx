@@ -1,3 +1,5 @@
+"use client"
+
 import { usePathname, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { IconTrashXFilled } from "@tabler/icons-react"
