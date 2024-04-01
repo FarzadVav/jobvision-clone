@@ -22,10 +22,18 @@ const Filters = async () => {
       <MultiFilter
         query={FILTER_KEYS.salary}
         name="حقوق"
-        filters={SALARY_FILTERS.map((filter) => ({
-          key: `${filter[0]}-${filter[1]}`,
-          name: `از ${filter[0] || "صفر"} تا ${filter[1]} میلیون`,
-        }))}
+        filters={SALARY_FILTERS.map((filter, i) => {
+          if (i === 0) {
+            return { key: `${filter[0]}-${filter[1]}`, name: `تا ${filter[1]} میلیون` }
+          }
+          if (i + 1 === SALARY_FILTERS.length) {
+            return { key: `${filter[0]}-${filter[1]}`, name: `بالای ${filter[0]} میلیون` }
+          }
+          return {
+            key: `${filter[0]}-${filter[1]}`,
+            name: `بین ${filter[0] || "صفر"} تا ${filter[1]} میلیون`,
+          }
+        })}
       />
     </div>
   )

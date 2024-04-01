@@ -160,7 +160,7 @@ const Page = () => {
             id="minSalary"
             error={formState.fields.minSalary}
             type="number"
-            placeholder={`برای مثال${showMaxSalary ? " از" : ""} 4 میلیون`}
+            placeholder={`برای مثال${showMaxSalary ? " از" : ""} 5 میلیون`}
             name="minSalary"
           />
         </div>
@@ -169,7 +169,7 @@ const Page = () => {
             id="maxSalary"
             error={formState.fields.maxSalary}
             type="number"
-            placeholder="تا 20 میلیون"
+            placeholder="تا 10 میلیون"
             name="maxSalary"
           />
         </div>

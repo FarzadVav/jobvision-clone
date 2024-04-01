@@ -42,11 +42,13 @@ const addNewJobAd = async (formData: FormData) => {
           ? null
           : "حداقل سن کارجو نمی‌تواند بیشتر از حداکثر آن باشد"
         : "سن کارجو نمی‌تواند بیشتر از 69 باشد",
-      minSalary: parseInt(minSalary.trim()) >= 4 ? null : "مبلغ استخدام باید حداقل 4 میلیون باشد",
+      minSalary: parseInt(minSalary.trim()) >= 5 ? null : "مبلغ استخدام باید حداقل 5 میلیون باشد",
       maxSalary: showMaxSalary === "on"
         ? parseInt(maxSalary.trim()) > parseInt(minSalary.trim())
-          ? null
-          : "حداقل میبلغ استخدام نمی‌تواند بیشتر از حداکثر آن باشد"
+          ? parseInt(maxSalary.trim()) - parseInt(minSalary.trim()) <= 5
+            ? null
+            : "اختلاف قیمت نمی‌تواند بیشتر از 5 میلیون باشد"
+          : "حداقل مبلغ استخدام نمی‌تواند بیشتر از حداکثر آن باشد"
         : null,
       category: category.trim().length ? null : "لطفا یک دسته بندی را انتخاب کنید",
       cooperationType: cooperationType.trim().length ? null : "لطفا نوع قرارداد را انتخاب کنید",
