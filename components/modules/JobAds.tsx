@@ -22,7 +22,7 @@ const JobAds = () => {
       {useMemo(() => {
         return jobAds.length
           ? jobAds.map((jobAd) => (
-              <JobAdBox key={uuid()} className="mt-3 first-of-type:mt-0" {...jobAd} />
+              <JobAdBox key={uuid()} className="mt-3 first-of-type:mt-0" jobAd={jobAd} />
             ))
           : null
       }, [jobAds])}

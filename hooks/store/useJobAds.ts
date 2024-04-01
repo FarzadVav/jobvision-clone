@@ -3,11 +3,11 @@ import { create } from "zustand"
 import JobAdsT from "@/types/jobads.types"
 
 type UseJobAdsT = {
-  jobAds: JobAdsT[]
+  selectedJobAd: JobAdsT | undefined
 }
 
 const useJobAds = create<UseJobAdsT>(() => ({
-  jobAds: [],
+  selectedJobAd: undefined,
 }))
 
 export default useJobAds
