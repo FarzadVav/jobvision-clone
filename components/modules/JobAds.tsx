@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { v4 as uuid } from "uuid"
 
 import JobAdsT from "@/types/jobads.types"
@@ -19,11 +19,13 @@ const JobAds = () => {
 
   return (
     <aside className="bg-white h-max w-1/3 p-3 rounded-md">
-      {jobAds.length
-        ? jobAds.map((jobAd) => (
-            <JobAdBox key={uuid()} className="mt-3 first-of-type:mt-0" {...jobAd} />
-          ))
-        : null}
+      {useMemo(() => {
+        return jobAds.length
+          ? jobAds.map((jobAd) => (
+              <JobAdBox key={uuid()} className="mt-3 first-of-type:mt-0" {...jobAd} />
+            ))
+          : null
+      }, [jobAds])}
     </aside>
   )
 }

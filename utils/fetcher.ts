@@ -9,6 +9,7 @@ export const contentFetcher = () => fetch("/api/content")
 export const jobAdsFetcher = async (filters?: string[]) => {
   const res = await fetch("/api/jobads")
   let data = await res.json() as JobAdsT[]
+  const params = new URLSearchParams(location.search)
 
   if (filters?.includes(FILTER_KEYS.remote)) {
     data = data.filter(jobAd => jobAd.is_remote)
@@ -17,8 +18,6 @@ export const jobAdsFetcher = async (filters?: string[]) => {
   if (filters?.includes(FILTER_KEYS.knowledgeBased)) {
     data = data.filter(jobAd => jobAd.company.knowledgeBased)
   }
-
-  const params = new URLSearchParams(location.search)
 
   const salary = params.get(FILTER_KEYS.salary)
   if (salary) {

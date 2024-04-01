@@ -15,8 +15,9 @@ export const GET = async () => {
           job_ads: true
         }
       }
-    }
+    },
+    orderBy: { created_at: "desc" }
   })
-  
+
   return Response.json(jobAds)
 }

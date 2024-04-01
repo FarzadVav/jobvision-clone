@@ -52,7 +52,7 @@ const JobAdBox = ({
         prevCategoriesHandler()
         const params = new URLSearchParams(searchParams.toString())
         params.set("id", id)
-        router.push(pathname + "?" + params.toString())
+        router.push(pathname + "?" + params.toString(), { scroll: false })
       }}
       data-id={id}
       data-category={category_id}
@@ -80,11 +80,6 @@ const JobAdBox = ({
               {is_remote ? (
                 <span className="italic border-r border-solid border-light text-xs pr-2 mr-2">
                   دورکاری
-                </span>
-              ) : null}
-              {company.knowledgeBased ? (
-                <span className="italic border-r border-solid border-light text-xs pr-2 mr-2">
-                  امریه سربازی
                 </span>
               ) : null}
             </div>
