@@ -1,31 +1,32 @@
 "use client"
 
 import { usePathname, useSearchParams } from "next/navigation"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo } from "react"
+import useSWR, { useSWRConfig } from "swr"
 import { v4 as uuid } from "uuid"
 
-import JobAdsT from "@/types/jobads.types"
-import { jobAdsFetcher } from "@/utils/fetcher"
+import { jobAdsFilterFetcher } from "@/utils/fetcher"
 import JobAdBox from "../JobAdBox"
 
 const JobAds = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [jobAds, setJobAds] = useState<JobAdsT[]>([])
+  const { data } = useSWR("/jobs", jobAdsFilterFetcher)
+  const { mutate } = useSWRConfig()
 
   useEffect(() => {
-    jobAdsFetcher(location.pathname.split("/")).then((jobAds) => setJobAds(jobAds))
+    mutate("/jobs")
   }, [pathname, searchParams])
 
   return (
     <aside className="bg-white h-max w-1/3 p-3 rounded-md">
       {useMemo(() => {
-        return jobAds.length
-          ? jobAds.map((jobAd) => (
+        return data
+          ? data.map((jobAd) => (
               <JobAdBox key={uuid()} className="mt-3 first-of-type:mt-0" jobAd={jobAd} />
             ))
           : null
-      }, [jobAds])}
+      }, [data])}
     </aside>
   )
 }

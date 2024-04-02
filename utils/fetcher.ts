@@ -6,9 +6,17 @@ export const contentFetcher = () => fetch("/api/content")
   .then((res) => res.json())
   .then((data) => data as ContentT)
 
-export const jobAdsFetcher = async (filters?: string[]) => {
+export const jobAdsFetcher = async () => {
   const res = await fetch("/api/jobads")
-  let data = await res.json() as JobAdsT[]
+  const data = await res.json() as JobAdsT[]
+
+  return data
+}
+
+export const jobAdsFilterFetcher = async () => {
+  let data = await jobAdsFetcher()
+
+  const filters = location.pathname.split("/")
   const params = new URLSearchParams(location.search)
 
   if (filters?.includes(FILTER_KEYS.remote)) {

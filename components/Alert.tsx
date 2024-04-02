@@ -3,12 +3,12 @@ import { VariantProps, cva } from "class-variance-authority"
 
 import { cn } from "@/utils/lib"
 
-const alertVariants = cva("w-full flex items-center justify-between px-3 py-1.5 rounded", {
+const alertVariants = cva("text-white w-full flex items-center justify-between px-3 py-1.5 rounded", {
   variants: {
     variant: {
-      info: "bg-primary/5 text-primary border border-solid border-primary",
-      warning: "bg-warning/5 text-warning border border-solid border-warning",
-      danger: "bg-danger/10 text-danger border border-solid border-danger",
+      info: "bg-primary",
+      warning: "bg-warning",
+      danger: "bg-danger",
     },
     size: {
       sm: "min-h-8 text-xs px-3",

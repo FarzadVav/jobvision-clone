@@ -2,16 +2,21 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import useSWR from "swr"
 import { v4 as uuid } from "uuid"
 import { IconHeart, IconHelp, IconInfoCircle, IconShare, IconUser } from "@tabler/icons-react"
 
+import { jobAdsFetcher } from "@/utils/fetcher"
 import useJobAds from "@/hooks/store/useJobAds"
 import Button from "../Button"
 import Tabs from "../Tabs"
 import Title from "../Title"
+import JobAdBox from "../JobAdBox"
+import Alert from "../Alert"
 
 const SelectedJobAd = () => {
   const { selectedJobAd } = useJobAds((s) => s)
+  const { data: jobAds } = useSWR(selectedJobAd ? `/jobs/${selectedJobAd.id}` : null, jobAdsFetcher)
 
   return (
     <div className="list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto">
@@ -130,12 +135,12 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>شاخص های کلیدی از نظر کارفرما</span>
                     </Title>
-                    <ul className={`w-full flex flex-wrap gap-2 mt-1.5`}>
+                    <ul className={`w-full flex flex-wrap gap-2 mt-3`}>
                       {selectedJobAd.abilities.length
                         ? selectedJobAd.abilities.map((ability) => (
                             <li
                               key={uuid()}
-                              className={`bg-light/25 min-w-max flex-1 text-center px-3 py-1.5`}
+                              className={`border border-solid border-dark min-w-max text-center px-2 rounded`}
                             >
                               {ability}
                             </li>
@@ -151,7 +156,7 @@ const SelectedJobAd = () => {
                     <Title className={`mt-6`} size={"sm"}>
                       <span>شرایط احراز شغل</span>
                     </Title>
-                    <ul className={`w-full flex flex-col mt-1.5`}>
+                    <ul className={`w-full flex flex-col mt-3`}>
                       <li className={`selected-jobAd-ability`}>
                         <span>سن</span>
                         <span>
@@ -232,34 +237,32 @@ const SelectedJobAd = () => {
                       </Button>
                     </div>
 
-                    <Title className={`mt-6`} size={"sm"}>
+                    <Title className={`mt-3 mb-3`} size={"sm"}>
                       <span>فرصت‌های شغلی مشابه</span>
                     </Title>
+
                     <div className={`w-full mt-1.5`}>
-                      {/* {jobAds?.length &&
-                      jobAds.filter(
-                        (job) =>
-                          job.category?.name === selectedJobAd?.category?.name &&
-                          job._id !== selectedJobAd?._id
-                      ).length ? (
-                        <div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
-                          {jobAds.map((job, i) => {
-                            if (
-                              i < 6 &&
-                              job.category?.name === selectedJobAd?.category?.name &&
-                              job._id !== selectedJobAd?._id
-                            ) {
-                              return <JobAdsBox key={uuid()} jobAd={job} />
-                            }
-                          })}
-                        </div>
-                      ) : (
-                        <div dir="ltr">
-                          <Alert className={`!justify-between`} severity="warning">
-                            آگهی وجود ندارد
-                          </Alert>
-                        </div>
-                      )} */}
+                      {jobAds?.length ? (
+                        jobAds.filter(
+                          (jobAd) =>
+                            jobAd.category.name === selectedJobAd.category.name &&
+                            jobAd.id !== selectedJobAd.id
+                        ).length ? (
+                          <div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
+                            {jobAds.map((jobAd2, i) => {
+                              if (
+                                i < 6 &&
+                                jobAd2.category.name === selectedJobAd.category.name &&
+                                jobAd2.id !== selectedJobAd.id
+                              ) {
+                                return <JobAdBox key={uuid()} jobAd={jobAd2} />
+                              }
+                            })}
+                          </div>
+                        ) : (
+                          <Alert message="آگهی وجود ندارد" variant={"warning"} />
+                        )
+                      ) : null}
                     </div>
                   </div>
                 ),
