@@ -68,7 +68,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
                 {jobAd.cooperation_type.name}
               </span>
               {jobAd.is_remote ? (
-                <span className="italic border-r border-solid border-light text-xs pr-2 mr-2">
+                <span className="border-r border-solid border-light text-xs pr-2 mr-2">
                   دورکاری
                 </span>
               ) : null}

@@ -94,6 +94,39 @@ a {
 }
 
 @layer components {
+  .list-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  .list-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--light);
+    border-radius: 2px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .no-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .selected-jobAd-ability {
+    @apply w-full flex items-center;
+  }
+
+  .selected-jobAd-ability span {
+    @apply list-scrollbar bg-light/25 flex items-center w-4/12 px-3 py-1.5 rounded overflow-x-auto sm:w-2/12;
+  }
+
+  .selected-jobAd-ability span:last-child {
+    @apply w-8/12 mr-2 sm:w-10/12;
+  }
+}
+
+@layer components {
   .icon-xs {
     @apply h-3 w-3;
   }
