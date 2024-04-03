@@ -83,8 +83,8 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             </div>
           </div>
         </div>
-        <div className="border-t border-dashed border-light flex items-center pt-4 mt-5">
-          <span className="text-xs h-3">
+        <div className="border-t border-dashed border-light flex items-center pt-3 mt-5">
+          <span className="h-8 text-xs leading-8">
             {new Date(jobAd.created_at)
               .toLocaleDateString("fa-ir")
               .split("/")
@@ -106,7 +106,11 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
               فوری
             </span>
           ) : null}
-          {pathname.includes("/jobs") ? null : <Button variant={"success"}>ارسال رزومه</Button>}
+          {pathname.includes("/jobs") ? null : (
+            <Button className="mr-3" variant={"success"} size={"sm"}>
+              ارسال رزومه
+            </Button>
+          )}
         </div>
       </div>
     </article>

@@ -84,7 +84,7 @@ const SelectedJobAd = () => {
             </div>
             <div className="flex items-center mr-6" title="حوزه فعالیت">
               <IconHelp className="icon" />
-              <p className="mr-3">{selectedJobAd.company.activity?.slice(0, 75)}</p>
+              <p className="mr-3">{selectedJobAd.company.activity}</p>
             </div>
           </div>
 

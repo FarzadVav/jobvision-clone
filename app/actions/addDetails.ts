@@ -30,7 +30,11 @@ const addDetails = async (formData: FormData) => {
         : "تعداد کارکنان شرکت باید حداکثر هزار نفر باشند",
       city: city ? null : "لطفا یک شهر انتخاب کنید",
       about: about.trim().length >= 3 ? null : "متن درباره شرکت کوتاه است",
-      activity: activity.trim().length >= 3 ? null : "متن حوزه فعالیت کوتاه است",
+      activity: activity.trim().length >= 3
+        ? activity.trim().length <= 64
+          ? null
+          : "متن حوزه فعالیت نمی‌تواند طولانی باشد"
+        : "متن حوزه فعالیت کوتاه است",
       file: file.size > 0 ? null : "لطفا یک عکس با فرمت (png یا jpg یا jpeg) انتخاب کنید",
     }
   }

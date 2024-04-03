@@ -50,7 +50,7 @@ model Companies {
   logo           String?
   name           String?
   about          String?    @db.Text
-  activity       String?    @db.Text
+  activity       String?    @db.VarChar(64)
   knowledgeBased Boolean?   @default(false)
   employees      Json       @default("[]")
   score          Int?       @default(5)
