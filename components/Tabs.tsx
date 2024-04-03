@@ -4,13 +4,12 @@ import { ReactNode, useState } from "react"
 import { v4 as uuid } from "uuid"
 
 type TabsTypes = {
-  id: string
-  title: string
+  name: string
   content: ReactNode
 }[]
 
 const Tabs = ({ tabs }: { tabs: TabsTypes }) => {
-  const [selectedTab, setSelectedTab] = useState<string>(tabs[0].id)
+  const [selectedTab, setSelectedTab] = useState<string>(tabs[0].name)
 
   return (
     <div className="w-full">
@@ -19,17 +18,15 @@ const Tabs = ({ tabs }: { tabs: TabsTypes }) => {
           <li
             key={uuid()}
             className={`border-b border-solid min-w-max h-full flex items-center px-6 ${
-              tab.id === selectedTab ? "border-primary text-primary" : "border-transparent"
+              tab.name === selectedTab ? "border-primary text-primary" : "border-transparent"
             } rounded-t-md cursor-pointer transition-colors hover:text-primary active:bg-primary/10`}
-            onClick={() => setSelectedTab(tab.id)}
+            onClick={() => setSelectedTab(tab.name)}
           >
-            {tab.title}
+            {tab.name}
           </li>
         ))}
       </ul>
-      <div key={uuid()} className="w-full pt-6">
-        {tabs.find((tab) => tab.id === selectedTab)?.content}
-      </div>
+      <div className="w-full pt-6">{tabs.find((tab) => tab.name === selectedTab)?.content}</div>
     </div>
   )
 }
