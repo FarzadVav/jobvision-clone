@@ -14,7 +14,7 @@ const Filters = async () => {
   const data = await getCooperationTypeFilter()
 
   return (
-    <div className="w-full flex items-center gap-3">
+    <div className="w-full flex items-center gap-3 mt-3">
       <RemoveFiltersButton />
       <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
       <SingleFilter route={"/" + FILTER_KEYS.knowledgeBased} name="دانش بنیان" />

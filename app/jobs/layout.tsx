@@ -3,13 +3,15 @@ import { PropsWithChildren } from "react"
 import Filters from "@/components/modules/Filters"
 import SelectedJobAd from "@/components/modules/SelectedJobAd"
 import JobAds from "@/components/modules/JobAds"
+import SearchForm from "@/components/SearchForm"
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       {children}
       <div className="bg-white border-b border-solid border-light w-full py-6">
-        <div className="container flex items-center gap-3">
+        <div className="container">
+          <SearchForm />
           <Filters />
         </div>
       </div>
