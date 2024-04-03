@@ -100,7 +100,7 @@ a {
   }
 
   .list-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--light);
+    background: hsl(var(--light));
     border-radius: 2px;
   }
 

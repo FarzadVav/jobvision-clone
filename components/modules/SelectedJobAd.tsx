@@ -97,7 +97,7 @@ const SelectedJobAd = () => {
                     <Title size={"sm"}>
                       <span>مشخصات موقعیت شغلی</span>
                     </Title>
-                    <div className="w-full flex flex-wrap gap-y-3 mt-1.5">
+                    <div className="w-full flex flex-wrap gap-y-3 pr-3 mt-1.5">
                       <div className="w-full sm:w-1/2">
                         <span className="dana-bold block">روز و ساعت کاری</span>
                         <span className="block text-sm mt-1">{selectedJobAd.work_times}</span>
@@ -140,7 +140,7 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>شاخص های کلیدی از نظر کارفرما</span>
                     </Title>
-                    <ul className="w-full flex flex-wrap gap-2 mt-3">
+                    <ul className="w-full flex flex-wrap gap-2 mt-1.5">
                       {selectedJobAd.abilities.length
                         ? selectedJobAd.abilities.map((ability) => (
                             <li
@@ -156,7 +156,7 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>شرح شغل و وظایف</span>
                     </Title>
-                    <p className="w-full pr-2 mt-1.5">{selectedJobAd?.description}</p>
+                    <p className="w-full mt-1.5">{selectedJobAd?.description}</p>
 
                     <Title className="mt-6" size={"sm"}>
                       <span>شرایط احراز شغل</span>
@@ -282,7 +282,7 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>{selectedJobAd.company.name} در یک نگاه</span>
                     </Title>
-                    <div className="w-full flex flex-wrap gap-y-3 pr-3 mt-2">
+                    <div className="w-full flex flex-wrap gap-y-3 pr-3 mt-1.5">
                       <div className="w-1/2">
                         <span className="dana-bold block">سال تاسیس</span>
                         <span className="block text-sm mt-1">{selectedJobAd.company.year}</span>
@@ -317,6 +317,32 @@ const SelectedJobAd = () => {
                   </>
                 ),
               },
+              {
+                name: "سایر آگهی های این شرکت",
+                content: (
+                  <>
+                    {jobAds?.length ? (
+                      jobAds.filter(
+                        (job) =>
+                          job.company.id === selectedJobAd.company.id && job.id !== selectedJobAd.id
+                      ).length ? (
+                        <div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
+                          {jobAds.map((job) => {
+                            if (
+                              job.company.id === selectedJobAd.company.id &&
+                              job.id !== selectedJobAd.id
+                            ) {
+                              return <JobAdBox key={uuid()} jobAd={job} />
+                            }
+                          })}
+                        </div>
+                      ) : (
+                        <Alert message="آگهی وجود ندارد" variant={"warning"} />
+                      )
+                    ) : null}
+                  </>
+                ),
+              },
             ]}
           />
         </>
@@ -326,7 +352,7 @@ const SelectedJobAd = () => {
             src="/images/job-detail-empty-state.svg"
             height={300}
             width={300}
-            alt="job detials"
+            alt="job-detail-empty-state"
           />
           <span className="text-center opacity-50 -translate-y-6">
             جهت مشاهده اطلاعات آگهی شغلی یکی از موارد را از سمت <br /> راست انتخاب کنید.
