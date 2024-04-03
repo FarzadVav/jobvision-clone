@@ -4,7 +4,14 @@ import Link from "next/link"
 import Image from "next/image"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
-import { IconHeart, IconHelp, IconInfoCircle, IconShare, IconUser } from "@tabler/icons-react"
+import {
+  IconHeart,
+  IconHelp,
+  IconInfoCircle,
+  IconShare,
+  IconStarFilled,
+  IconUser,
+} from "@tabler/icons-react"
 
 import { jobAdsFetcher } from "@/utils/fetcher"
 import useJobAds from "@/hooks/store/useJobAds"
@@ -259,6 +266,53 @@ const SelectedJobAd = () => {
                           <Alert message="آگهی وجود ندارد" variant={"warning"} />
                         )
                       ) : null}
+                    </div>
+                  </>
+                ),
+              },
+              {
+                name: "درباره شرکت",
+                content: (
+                  <>
+                    <Title size={"sm"}>
+                      <span>درباره {selectedJobAd.company.name}</span>
+                    </Title>
+                    <p className="w-full mt-1.5">{selectedJobAd.company.about}</p>
+
+                    <Title className="mt-6" size={"sm"}>
+                      <span>{selectedJobAd.company.name} در یک نگاه</span>
+                    </Title>
+                    <div className="w-full flex flex-wrap gap-y-3 pr-3 mt-2">
+                      <div className="w-1/2">
+                        <span className="dana-bold block">سال تاسیس</span>
+                        <span className="block text-sm mt-1">{selectedJobAd.company.year}</span>
+                      </div>
+                      <div className="w-1/2">
+                        <span className="dana-bold block">اندازه سازمان</span>
+                        <span className="block text-sm mt-1">
+                          {selectedJobAd.company.employees[0] || 0} تا{" "}
+                          {selectedJobAd.company.employees[1] || 0} نفر
+                        </span>
+                      </div>
+                      <div className="w-1/2">
+                        <span className="dana-bold block">حوزه فعالیت</span>
+                        <span className="block text-sm mt-1">{selectedJobAd.company.activity}</span>
+                      </div>
+                      <div className="w-1/2">
+                        <span className="dana-bold block">امتیاز شرکت</span>
+                        <span className="flex gap-0.5 text-sm mt-1">
+                          {Array(Math.floor(selectedJobAd.company.score || 0))
+                            .fill("")
+                            .map(() => (
+                              <IconStarFilled key={uuid()} className="icon-sm text-warning" />
+                            ))}
+                          {Array(Math.ceil(5 - (selectedJobAd.company.score || 0)))
+                            .fill("")
+                            .map(() => (
+                              <IconStarFilled key={uuid()} className="icon-sm text-light" />
+                            ))}
+                        </span>
+                      </div>
                     </div>
                   </>
                 ),
