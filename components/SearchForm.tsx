@@ -1,5 +1,6 @@
 "use client"
 
+import { useSearchParams } from "next/navigation"
 import { useRef } from "react"
 import useSWR from "swr"
 
@@ -11,6 +12,7 @@ import AutoComplete from "./Form/AutoComplete"
 import search from "@/app/actions/search"
 
 const SearchForm = () => {
+  const searchParams = useSearchParams()
   const { data: content } = useSWR("/api/content", contentFetcher)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -23,16 +25,22 @@ const SearchForm = () => {
         formRef.current?.reset()
       }}
     >
-      <Input placeholder="عنوان شغلی یا شرکت ..." name={FILTER_KEYS.search} />
+      <Input
+        placeholder="عنوان شغلی یا شرکت ..."
+        value={searchParams.get(FILTER_KEYS.search) || ""}
+        name={FILTER_KEYS.search}
+      />
       <AutoComplete
         placeholder="گروه شغلی"
-        data={content?.categories.map((category) => category.name) || []}
+        value={searchParams.get(FILTER_KEYS.category) || ""}
         name={FILTER_KEYS.category}
+        data={content?.categories.map((category) => category.name) || []}
       />
       <AutoComplete
         placeholder="شهر"
-        data={content?.cities.map((city) => city.name) || []}
+        value={searchParams.get(FILTER_KEYS.city) || ""}
         name={FILTER_KEYS.city}
+        data={content?.cities.map((city) => city.name) || []}
       />
       <Button variant={"primary"} size={"lg"}>
         جستجو

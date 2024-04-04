@@ -13,13 +13,13 @@ interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
-  ({ wrapperclassName, error, className, data, ...props }, ref) => {
-    const [value, setValue] = useState("")
+  ({ value, wrapperclassName, error, className, data, ...props }, ref) => {
+    const [inputValue, setInputValue] = useState("")
     const [isFocus, setIsFocus] = useState(false)
 
     return (
       <>
-        <div className={cn("w-full relative", wrapperclassName)} ref={ref}>
+        <div className={cn("w-full relative", wrapperclassName)}>
           <div className="flex items-center relative">
             <input
               className={cn(
@@ -29,8 +29,8 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                 className
               )}
               ref={ref}
-              onChange={(e) => setValue(e.target.value)}
-              value={value}
+              onChange={(e) => setInputValue(e.target.value)}
+              value={value || inputValue}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
               {...props}
@@ -47,14 +47,14 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
             } z-50`}
           >
             {data.length ? (
-              data.find((item) => item.includes(value)) ? (
+              data.find((item) => item.includes(inputValue)) ? (
                 data.map((item) => {
-                  if (item.includes(value))
+                  if (item.includes(inputValue))
                     return (
                       <li
                         key={uuid()}
                         className="w-full py-1.5 px-3 rounded cursor-pointer transition-colors hover:bg-light/50"
-                        onMouseDown={() => setValue(item)}
+                        onMouseDown={() => setInputValue(item)}
                       >
                         {item}
                       </li>
