@@ -27,6 +27,15 @@ export const jobAdsFilterFetcher = async () => {
     data = data.filter(jobAd => jobAd.company.knowledgeBased)
   }
 
+  const search = params.get(FILTER_KEYS.search)
+  if (search) {
+    data = data.filter(jobAd => {
+      if (jobAd.title.includes(search)) return jobAd
+      if (jobAd.category.name.includes(search)) return jobAd
+      if (jobAd.tags.map(tag => tag.tags.name).join(" ").includes(search)) return jobAd
+    })
+  }
+
   const salary = params.get(FILTER_KEYS.salary)
   if (salary) {
     const arraySalary = salary.split("-")
@@ -49,7 +58,7 @@ export const jobAdsFilterFetcher = async () => {
 
   const category = params.get(FILTER_KEYS.category)
   if (category) {
-    data = data.filter(jobAd => jobAd.category_id === category)
+    data = data.filter(jobAd => [jobAd.category_id, jobAd.category.name].includes(category))
   }
 
   const tag = params.get(FILTER_KEYS.tag)
@@ -64,7 +73,7 @@ export const jobAdsFilterFetcher = async () => {
 
   const city = params.get(FILTER_KEYS.city)
   if (city) {
-    data = data.filter(jobAd => jobAd.company.city_id === city)
+    data = data.filter(jobAd => [jobAd.company.city_id, jobAd.company.city.name].includes(city))
   }
 
   const cooperationType = params.get(FILTER_KEYS.cooperationType)

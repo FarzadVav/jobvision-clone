@@ -51,6 +51,7 @@ export const COOPERATION_TYPES: CooperationTypes[] = [
 ]
 
 export const FILTER_KEYS = {
+  search: "search",
   remote: "remote",
   knowledgeBased: "knowledgeBased",
   type: "type",
