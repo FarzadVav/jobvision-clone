@@ -91,10 +91,10 @@ model JobAds {
 }
 
 model TagsOnJobAds {
-  tag_id    String @default(uuid())
-  tags      Tags   @relation(fields: [tag_id], references: [id], onDelete: Cascade)
-  job_ad_id String @default(uuid())
-  job_ads   JobAds @relation(fields: [job_ad_id], references: [id], onDelete: Cascade)
+  tag_id         String @default(uuid())
+  current_tag    Tags   @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  job_ad_id      String @default(uuid())
+  current_job_ad JobAds @relation(fields: [job_ad_id], references: [id], onDelete: Cascade)
 
   @@id([tag_id, job_ad_id])
 }

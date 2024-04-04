@@ -7,7 +7,7 @@ export const GET = async () => {
   const jobAds = await prisma.jobAds.findMany({
     include: {
       category: true,
-      tags: { include: { tags: true } },
+      tags: { include: { current_tag: true } },
       cooperation_type: true,
       company: {
         include: {

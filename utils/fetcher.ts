@@ -32,7 +32,7 @@ export const jobAdsFilterFetcher = async () => {
     data = data.filter(jobAd => {
       if (jobAd.title.includes(search)) return jobAd
       if (jobAd.category.name.includes(search)) return jobAd
-      if (jobAd.tags.map(tag => tag.tags.name).join(" ").includes(search)) return jobAd
+      if (jobAd.tags.map(tag => tag.current_tag.name).join(" ").includes(search)) return jobAd
     })
   }
 

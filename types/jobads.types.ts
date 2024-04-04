@@ -6,7 +6,7 @@ type JobAdsT = JobAds & {
   category: Categories
   cooperation_type: CooperationTypes
   company: CompaniesT
-  tags: (TagsOnJobAds & { tags: Tags })[]
+  tags: (TagsOnJobAds & { current_tag: Tags })[]
   age: number[]
   salary: string[]
   benefits: string[]
