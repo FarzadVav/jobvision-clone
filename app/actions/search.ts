@@ -7,12 +7,12 @@ const search = async (formData: FormData) => {
   const category = formData.get("category") as string
   const city = formData.get("city") as string
 
-  let url = "/jobs" + `?search=${search}`
+  const params = new URLSearchParams()
+  if (search) params.set("search", search)
+  if (category) params.set("category", category)
+  if (city) params.set("city", city)
 
-  if (category) url += `&category=${category}`
-  if (city) url += `&city=${city}`
-
-  redirect(url)
+  redirect("/jobs" + "?" + params.toString())
 }
 
 export default search

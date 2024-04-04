@@ -3,6 +3,7 @@ import { IconArrowLeft, IconFile, IconFlame, IconSearch } from "@tabler/icons-re
 import IranAnimation from "@/components/IranAnimation"
 import Title from "@/components/Title"
 import Button from "@/components/Button"
+import SearchForm from "@/components/SearchForm"
 
 const Page = () => {
   return (
@@ -55,12 +56,16 @@ const Page = () => {
               </Button>
             </div>
           </div>
-          <div className={"min-w-[475px] hidden justify-center items-center lg:flex"}>
+          <div className={"min-w-[450px] hidden justify-center items-center lg:flex"}>
             <IranAnimation />
           </div>
         </div>
       </main>
       {/* Hero section */}
+
+      <div className="container mt-12">
+        <SearchForm />
+      </div>
     </>
   )
 }
