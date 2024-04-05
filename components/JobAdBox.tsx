@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Image from "next/image"
 import { IconStarFilled } from "@tabler/icons-react"
 
@@ -15,6 +15,7 @@ type JobAdBoxProps = {
 }
 
 const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
+  const router = useRouter()
   const pathname = usePathname()
   const { selectedJobAd } = useJobAds((s) => s)
 
@@ -35,6 +36,15 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
     }
   }
 
+  const selectJobAdHandler = () => {
+    useJobAds.setState({ selectedJobAd: jobAd })
+    if (window.innerWidth >= 1024) {
+      !pathname.includes("jobs") && router.push("/jobs")
+    } else {
+      router.push("/single-job")
+    }
+  }
+
   return (
     <article
       className={cn(
@@ -44,7 +54,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       )}
       onClick={() => {
         prevCategoriesHandler()
-        useJobAds.setState({ selectedJobAd: jobAd })
+        selectJobAdHandler()
       }}
       data-id={jobAd.id}
       data-category={jobAd.category_id}
