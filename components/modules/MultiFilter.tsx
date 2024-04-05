@@ -21,13 +21,11 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
 
   const mutateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
-
     // if filter exist, will be remove
     if (params.has(key, value)) {
       params.delete(key, value)
       return router.push(pathname + "?" + params.toString())
     }
-
     // add filter
     params.set(key, value)
     router.push(pathname + "?" + params.toString())

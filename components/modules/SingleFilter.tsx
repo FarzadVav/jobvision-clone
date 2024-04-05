@@ -17,12 +17,10 @@ const SingleFilter = ({ route, name }: SingleFilterProps) => {
 
   const mutateFilter = (filter: string) => {
     const params = new URLSearchParams(searchParams.toString())
-
     // if filter exist, will be remove
     if (pathname.includes(filter)) {
       return router.push(pathname.replace(filter, "") + "?" + params.toString())
     }
-
     // add filter
     router.push(pathname + filter + "?" + params.toString())
   }

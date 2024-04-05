@@ -4,6 +4,7 @@ import IranAnimation from "@/components/IranAnimation"
 import Title from "@/components/Title"
 import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
+import BreakLine from "@/components/BreakLine"
 
 const Page = () => {
   return (
@@ -62,9 +63,21 @@ const Page = () => {
         </div>
       </main>
       {/* Hero section */}
-
       <div className="container mt-12">
         <SearchForm />
+      </div>
+
+      <div className="container mt-12">
+        <Title>
+          <h2>تازه‌ترین آگهی‌های شغلی</h2>
+        </Title>
+        <BreakLine
+          className="mt-6"
+          variant={"primary"}
+          description="پیشنهاد شده بر اساس رفتار و عملکرد شما"
+        >
+          مشاغل پیشنهادی
+        </BreakLine>
       </div>
     </>
   )

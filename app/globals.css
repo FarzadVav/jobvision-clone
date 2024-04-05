@@ -142,6 +142,10 @@ a {
   .icon-lg {
     @apply h-6 w-6;
   }
+
+  .icon-xl {
+    @apply h-7 w-7;
+  }
 }
 
 /* Animations */
