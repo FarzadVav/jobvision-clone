@@ -10,7 +10,20 @@ export const jobAdsFetcher = async () => {
   const res = await fetch("/api/jobads")
   const data = await res.json() as JobAdsT[]
 
-  return data
+  // suggested jobAds
+  const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
+  let suggesttedJobAds: JobAdsT[] = []
+  let otherJobAds: JobAdsT[] = []
+  data.forEach(jobAd => {
+    if (prevCategories.includes(jobAd.category.id)) {
+      suggesttedJobAds.push(jobAd)
+    }
+    else {
+      otherJobAds.push(jobAd)
+    }
+  })
+
+  return [...suggesttedJobAds, ...otherJobAds]
 }
 
 export const jobAdsFilterFetcher = async () => {

@@ -5,9 +5,9 @@ import Image from "next/image"
 import { IconStarFilled } from "@tabler/icons-react"
 
 import JobAdsT from "@/types/jobads.types"
-import Button from "./Button"
-import { cn } from "@/utils/lib"
 import useJobAds from "@/hooks/store/useJobAds"
+import { cn } from "@/utils/lib"
+import Button from "./Button"
 
 type JobAdBoxProps = {
   jobAd: JobAdsT
@@ -37,7 +37,11 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
 
   return (
     <article
-      className={cn("bg-white w-full group", className)}
+      className={cn(
+        "bg-white ring-1 ring-light h-52 max-h-52 w-full flex flex-col p-4 rounded-md relative cursor-pointer group",
+        selectedJobAd?.id === jobAd.id ? "ring-primary/50" : "",
+        className
+      )}
       onClick={() => {
         prevCategoriesHandler()
         useJobAds.setState({ selectedJobAd: jobAd })
@@ -45,73 +49,61 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       data-id={jobAd.id}
       data-category={jobAd.category_id}
     >
-      <div
-        className={`text-dark ring-1 ring-light w-full h-full flex flex-col justify-between p-3 rounded-md cursor-pointer transition-shadow ${
-          selectedJobAd?.id === jobAd.id ? "ring-primary/50 ring-2" : "hover:ring-2"
-        }`}
-      >
-        <div className="flex">
+      {jobAd.is_urgent ? (
+        <div className="bg-danger w-0.5 h-3/4 absolute top-1/2 right-0 -translate-y-1/2"></div>
+      ) : null}
+      <div className="flex">
+        <div>
           <Image
-            className="text-sm object-fill object-center rounded-md"
+            className="border border-solid border-light text-sm object-fill object-center rounded-md"
             height={80}
             width={80}
             src={""}
             alt={`لوگوی شرکت ${jobAd.company.name}`}
           />
-          <div className="flex flex-col pr-3">
-            <span className="dana-bold inline-block max-h-[4.5rem] overflow-hidden">
-              {jobAd.title}
-            </span>
-            <div className="flex items-center mt-2.5">
-              <span className="text-xs">{jobAd.company.name}</span>
-              <span className="border-r border-solid border-light text-xs pr-2 mr-2">
-                {jobAd.cooperation_type.name}
-              </span>
-              {jobAd.is_remote ? (
-                <span className="border-r border-solid border-light text-xs pr-2 mr-2">
-                  دورکاری
-                </span>
-              ) : null}
-            </div>
-            <div className="flex items-center mt-2.5">
-              <span className="text-xs">
-                {jobAd.company.province.name}، {jobAd.company.city.name}
-              </span>
-              <span className="text-success border-r border-solid border-light text-xs pr-2 mr-2">
-                {jobAd.salary[0]} {jobAd.salary[1] ? `تا ${jobAd.salary[1]}` : null} میلیون
-              </span>
-            </div>
+          <div className="text-success brightness-75 w-full flex justify-center items-center mt-2.5">
+            <IconStarFilled className="icon-xs" />
+            <span className="text-xs h-3 inline-block mr-1.5">{jobAd.company.score}</span>
           </div>
         </div>
-        <div className="border-t border-dashed border-light flex items-center pt-3 mt-5">
-          <span className="h-8 text-xs leading-8">
-            {new Date(jobAd.created_at)
-              .toLocaleDateString("fa-ir")
-              .split("/")
-              .reverse()
-              .join(" / ")}
+        <div className="pr-3">
+          <span className="dana-bold max-h-[3rem] inline-block overflow-hidden">
+            {jobAd.title.slice(0, 70)}
+            {jobAd.title.length > 70 ? "..." : null}
           </span>
-          <div
-            className={`text-sm flex items-center mr-auto ${
-              pathname.includes("/jobs")
-                ? ""
-                : "transition-opacity group-hover:opacity-100 lg:opacity-0"
-            }`}
-          >
-            <IconStarFilled className="icon-sm text-warning" />
-            <span className="text-dark text-xs h-3 inline-block mr-1.5">{jobAd.company.score}</span>
-          </div>
-          {jobAd.is_urgent ? (
-            <span className="bg-danger/10 text-danger text-xs px-3 py-1 mr-3 rounded-full">
-              فوری
+          <div className="flex items-center">
+            <span className="text-xs">{jobAd.company.name}</span>
+            <span className="border-r border-solid border-light text-xs pr-2 mr-2">
+              {jobAd.cooperation_type.name}
             </span>
-          ) : null}
-          {pathname.includes("/jobs") ? null : (
-            <Button className="mr-3" variant={"success"} size={"sm"}>
-              ارسال رزومه
-            </Button>
-          )}
+            {jobAd.is_remote ? (
+              <span className="border-r border-solid border-light text-xs pr-2 mr-2">دورکاری</span>
+            ) : null}
+          </div>
+          <div className="flex items-center mt-2.5">
+            <span className="text-xs">
+              {jobAd.company.province.name}، {jobAd.company.city.name}
+            </span>
+            <span className="text-success border-r border-solid border-light text-xs pr-2 mr-2">
+              {jobAd.salary[0]} {jobAd.salary[1] ? `تا ${jobAd.salary[1]}` : null} میلیون
+            </span>
+          </div>
         </div>
+      </div>
+      <div className="border-t border-dashed border-light flex items-center pt-3 mt-auto">
+        <span className="h-8 text-xs leading-8">
+          {new Date(jobAd.created_at).toLocaleDateString("fa-ir").split("/").reverse().join(" / ")}
+        </span>
+        {jobAd.is_urgent ? (
+          <span className="bg-danger/10 text-danger text-xs px-3 py-1 mr-auto rounded-full">
+            فوری
+          </span>
+        ) : null}
+        {pathname.includes("/jobs") ? null : (
+          <Button className={jobAd.is_urgent ? "mr-3" : "mr-auto"} variant={"success"} size={"sm"}>
+            ارسال رزومه
+          </Button>
+        )}
       </div>
     </article>
   )

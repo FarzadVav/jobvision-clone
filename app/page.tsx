@@ -80,6 +80,7 @@ const Page = () => {
           مشاغل پیشنهادی
         </BreakLine>
         <SuggestedJobAds />
+        <div className="mt-12">div</div>
       </div>
     </>
   )
