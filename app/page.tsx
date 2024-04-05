@@ -4,8 +4,8 @@ import IranAnimation from "@/components/IranAnimation"
 import Title from "@/components/Title"
 import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
-import BreakLine from "@/components/BreakLine"
 import SuggestedJobAds from "@/components/modules/SuggestedJobAds"
+import CompaniesCarousel from "@/components/CompaniesCarousel"
 
 const Page = () => {
   return (
@@ -66,6 +66,10 @@ const Page = () => {
       {/* Hero section */}
       <div className="container mt-12">
         <SearchForm />
+      </div>
+
+      <div className="container mt-12">
+        <CompaniesCarousel />
       </div>
 
       <div className="container mt-12">

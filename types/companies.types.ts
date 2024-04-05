@@ -6,7 +6,7 @@ type CompaniesT = Companies & {
   employees: string[]
   province: Provinces
   city: Cities
-  job_ads: JobAdsT
+  job_ads: JobAdsT[]
 }
 
 export default CompaniesT
