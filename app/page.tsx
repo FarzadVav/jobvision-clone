@@ -5,6 +5,7 @@ import Title from "@/components/Title"
 import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
 import BreakLine from "@/components/BreakLine"
+import SuggestedJobAds from "@/components/modules/SuggestedJobAds"
 
 const Page = () => {
   return (
@@ -78,6 +79,7 @@ const Page = () => {
         >
           مشاغل پیشنهادی
         </BreakLine>
+        <SuggestedJobAds />
       </div>
     </>
   )

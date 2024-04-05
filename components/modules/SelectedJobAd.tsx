@@ -23,7 +23,7 @@ import Alert from "../Alert"
 
 const SelectedJobAd = () => {
   const { selectedJobAd } = useJobAds((s) => s)
-  const { data: jobAds } = useSWR(selectedJobAd ? `/jobs/${selectedJobAd.id}` : null, jobAdsFetcher)
+  const { data: jobAds } = useSWR(selectedJobAd ? "/api/jobads" : null, jobAdsFetcher)
 
   return (
     <div className="list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto">

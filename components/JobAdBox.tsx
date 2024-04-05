@@ -37,7 +37,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
 
   return (
     <article
-      className={cn(className, "bg-white w-full group")}
+      className={cn("bg-white w-full group", className)}
       onClick={() => {
         prevCategoriesHandler()
         useJobAds.setState({ selectedJobAd: jobAd })
