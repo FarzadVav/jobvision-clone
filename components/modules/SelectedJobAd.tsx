@@ -16,7 +16,7 @@ import {
 import { jobAdsFetcher } from "@/utils/fetcher"
 import useJobAds from "@/hooks/store/useJobAds"
 import Button from "../Button"
-import Tabs from "../Tabs"
+import Tabs from "./Tabs"
 import Title from "../Title"
 import JobAdBox from "../JobAdBox"
 import Alert from "../Alert"

@@ -9,14 +9,15 @@ import {
   IconUsersGroup,
 } from "@tabler/icons-react"
 
-import IranAnimation from "@/components/IranAnimation"
+import IranAnimation from "@/components/modules/IranAnimation"
 import Title from "@/components/Title"
 import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
 import SuggestedJobAds from "@/components/modules/SuggestedJobAds"
 import CompaniesCarousel from "@/components/CompaniesCarousel"
 import Image from "next/image"
-import HonorBox from "@/components/HonorBox"
+import HonorBox from "@/components/modules/HonorBox"
+import CtaBox from "@/components/modules/CtaBox"
 
 const Page = () => {
   return (
@@ -120,6 +121,21 @@ const Page = () => {
           <HonorBox icon={<IconBuildingCommunity />} count={59_900} text={"سازمان همراه شما"} />
           <HonorBox icon={<IconBriefcase />} count={38_000} text={"موقعیت‌ شغلی فعال"} />
           <HonorBox icon={<IconFileCheck />} count={132_000} text={"استخدامی موفق"} />
+        </div>
+
+        <div className="flex flex-col gap-4 mt-12 md:mt-16 lg:flex-row">
+          <CtaBox
+            src="/images/cv.svg"
+            title="رزومه ساز جاب ویژن"
+            text="لورم ایپسوم متنی برای همه و ساخت رزومه ای استاندارد به دو زبان فارسی و انگلیسی بسازید."
+            btn="ساخت رزومه"
+          />
+          <CtaBox
+            src="/images/salary.svg"
+            title="ماشین حساب حقوق و دستمزد"
+            text="از حقوق دریافتی افراد در مشاغل مختلف آگاه شوید و تخمین دقیق تری از حقوق منصفانه خود داشته باشید."
+            btn="حقوق خود را محاسبه کنید"
+          />
         </div>
 
         <div className="mt-24">div</div>
