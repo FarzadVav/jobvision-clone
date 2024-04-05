@@ -72,13 +72,6 @@ const Page = () => {
         <Title>
           <h2>تازه‌ترین آگهی‌های شغلی</h2>
         </Title>
-        <BreakLine
-          className="mt-6"
-          variant={"primary"}
-          description="پیشنهاد شده بر اساس رفتار و عملکرد شما"
-        >
-          مشاغل پیشنهادی
-        </BreakLine>
         <SuggestedJobAds />
         <div className="mt-12">div</div>
       </div>
