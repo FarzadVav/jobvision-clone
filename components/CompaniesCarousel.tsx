@@ -12,9 +12,9 @@ const CompaniesCarousel = async () => {
   const companies = await getCompanies()
 
   return (
-    <div className="w-full">
+    <div className="list-scrollbar w-full flex items-center gap-3 pb-3 overflow-x-auto">
       {companies.map((company) => (
-        <CompanyBox key={uuid()} company={company} />
+        <CompanyBox key={uuid()} className="min-w-56" company={company} />
       ))}
     </div>
   )
