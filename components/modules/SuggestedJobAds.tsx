@@ -1,14 +1,13 @@
 "use client"
 
+import Link from "next/link"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
+import { IconArrowLeft } from "@tabler/icons-react"
 
 import { contentFetcher, jobAdsFetcher } from "@/utils/fetcher"
 import JobAdBox from "../JobAdBox"
 import BreakLine from "../BreakLine"
-import Link from "next/link"
-import Button from "../Button"
-import { IconArrowLeft } from "@tabler/icons-react"
 
 const SuggestedJobAds = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
