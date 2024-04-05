@@ -1,10 +1,8 @@
 import { v4 as uuid } from "uuid";
-import { PrismaClient } from "@prisma/client"
 
+import { prisma } from "@/utils/client"
 import ContentT from "@/types/content.types";
 import { FILTER_KEYS } from "@/utils/initialData";
-
-const prisma = new PrismaClient()
 
 export const GET = async () => {
   const categories = await prisma.categories.findMany({ include: { tags: true } })

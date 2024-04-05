@@ -3,12 +3,11 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { z } from "zod"
-import { PrismaClient } from "@prisma/client"
 
 import { registerStateT } from "@/app/register/page"
 import { comparePassword, getToken, hashPassword } from "@/utils/auth"
+import { prisma } from "@/utils/client"
 
-const prisma = new PrismaClient()
 
 const register = async (prevState: registerStateT, formData: FormData) => {
   const email = formData.get("email") as string

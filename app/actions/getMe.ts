@@ -1,11 +1,9 @@
 "use server"
 
 import { cookies } from "next/headers"
-import { PrismaClient } from "@prisma/client"
 
 import { verifyToken } from "@/utils/auth"
-
-const prisma = new PrismaClient()
+import { prisma } from "@/utils/client"
 
 const getMe = async () => {
   const token = cookies().get("token")?.value || ""

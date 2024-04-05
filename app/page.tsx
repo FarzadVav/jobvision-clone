@@ -6,6 +6,7 @@ import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
 import SuggestedJobAds from "@/components/modules/SuggestedJobAds"
 import CompaniesCarousel from "@/components/CompaniesCarousel"
+import Image from "next/image"
 
 const Page = () => {
   return (
@@ -68,17 +69,49 @@ const Page = () => {
         <SearchForm />
       </div>
 
+      {/* Popular companies */}
       <div className="container mt-12">
         <CompaniesCarousel />
       </div>
+      {/* Popular companies */}
 
+      {/* Suggested job-ads */}
       <div className="container mt-12">
         <Title>
           <h2>تازه‌ترین آگهی‌های شغلی</h2>
         </Title>
         <SuggestedJobAds />
-        <div className="mt-12">div</div>
       </div>
+      {/* Suggested job-ads */}
+
+      {/* employment baner */}
+      <div
+        className="bg-light/50 container flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
+					md:flex-row md:justify-evenly md:mt-16 md:px-0 md:py-9"
+      >
+        <div className="flex flex-col justify-center items-center md:items-start md:w-1/2">
+          <Title>
+            <h3>استخدام‌های سراسری و دولتی</h3>
+          </Title>
+          <p className="mt-3 text-justify md:text-right">
+            در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و منتشر
+            می‌شوند، به سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری
+            دیگر بی‌نیاز شوید.
+          </p>
+          <Button className="mt-5" variant={"dark"}>
+            مشاهده فرصت‌های شغلی
+          </Button>
+        </div>
+        <Image
+          src="/images/employment.svg"
+          alt="استخدام‌های سراسری و دولتی"
+          height={225}
+          width={225}
+        />
+      </div>
+      {/* employment baner */}
+
+      <div className="mt-24">div</div>
     </>
   )
 }

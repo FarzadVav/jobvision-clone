@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/utils/client"
 
 export const dynamic = "force-dynamic"
-const prisma = new PrismaClient()
 
 export const GET = async (req: Request, { params }: { params: { id: string } }) => {
   const jobAds = await prisma.jobAds.findUnique({

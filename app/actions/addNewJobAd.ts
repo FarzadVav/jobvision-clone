@@ -1,11 +1,8 @@
 "use server"
 
-import { PrismaClient } from "@prisma/client"
-
 import { newJobAdFormStateT } from "../employer/new-jobad/page"
+import { prisma } from "@/utils/client"
 import getMe from "./getMe"
-
-const prisma = new PrismaClient()
 
 const addNewJobAd = async (formData: FormData) => {
   const title = formData.get("title") as string

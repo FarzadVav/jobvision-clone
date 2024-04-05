@@ -1,9 +1,7 @@
 "use server"
 
 import { CATEGORIES, TAGS, PROVINCES, CITIES, COOPERATION_TYPES } from "@/utils/initialData"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
+import { prisma } from "@/utils/client"
 
 const addInitialDatasToDB = async () => {
   try {
