@@ -5,20 +5,21 @@ import { useRef } from "react"
 import useSWR from "swr"
 
 import { contentFetcher } from "@/utils/fetcher"
+import { cn } from "@/utils/lib"
 import { FILTER_KEYS } from "@/utils/initialData"
 import Input from "./Form/Input"
 import Button from "./Button"
 import AutoComplete from "./Form/AutoComplete"
 import search from "@/app/actions/search"
 
-const SearchForm = () => {
+const SearchForm = ({ className }: { className?: string }) => {
   const searchParams = useSearchParams()
   const { data: content } = useSWR("/api/content", contentFetcher)
   const formRef = useRef<HTMLFormElement>(null)
 
   return (
     <form
-      className="flex items-center gap-3"
+      className={cn("flex items-center gap-3", className)}
       ref={formRef}
       action={async (formData: FormData) => {
         await search(formData)

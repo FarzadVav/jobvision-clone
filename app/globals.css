@@ -124,6 +124,14 @@ a {
   .selected-jobAd-ability span:last-child {
     @apply w-8/12 mr-2 sm:w-10/12;
   }
+
+  .honor-box {
+    @apply w-1/2 flex flex-col items-center md:w-max;
+  }
+
+  .honor-box svg {
+    @apply w-10 h-10 text-primary sm:w-12 sm:h-12;
+  }
 }
 
 @layer components {
