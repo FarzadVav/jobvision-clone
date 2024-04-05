@@ -27,7 +27,7 @@ const SearchForm = () => {
     >
       <Input
         placeholder="عنوان شغلی یا شرکت ..."
-        value={searchParams.get(FILTER_KEYS.search) || ""}
+        defaultValue={searchParams.get(FILTER_KEYS.search) || ""}
         name={FILTER_KEYS.search}
       />
       <AutoComplete
