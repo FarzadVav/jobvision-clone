@@ -6,6 +6,9 @@ import { v4 as uuid } from "uuid"
 import { contentFetcher, jobAdsFetcher } from "@/utils/fetcher"
 import JobAdBox from "../JobAdBox"
 import BreakLine from "../BreakLine"
+import Link from "next/link"
+import Button from "../Button"
+import { IconArrowLeft } from "@tabler/icons-react"
 
 const SuggestedJobAds = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
@@ -40,7 +43,7 @@ const SuggestedJobAds = () => {
       <div className="h-[26.75rem] w-full flex flex-wrap gap-3 mt-6">
         {jobAds
           ? jobAds
-              .slice(0, 6)
+              .slice(0, 5)
               .map((jobAd) => (
                 <JobAdBox
                   className="w-[calc(33.333333%-(0.75rem-0.75rem/3))]"
@@ -49,6 +52,33 @@ const SuggestedJobAds = () => {
                 />
               ))
           : null}
+        <div className="h-52 max-h-52 w-[calc(33.333333%-(0.75rem-0.75rem/3))]">
+          {/* <h3 className="dana-bold">بین آگهی ها جستجو کن</h3> */}
+          <ul className="w-full flex flex-wrap items-center group">
+            {content?.tags.slice(0, 20).map((tag) => (
+              <li className="p-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
+                <Link
+                  className="bg-light text-xs py-1 px-2.5 rounded-full"
+                  href={`/jobs?tag=${tag.id}`}
+                >
+                  {tag.name}
+                </Link>
+              </li>
+            ))}
+            <li className="p-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
+              <span className="bg-light text-xs py-1 px-2.5 rounded-full">...</span>
+            </li>
+            <li className="p-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
+              <Link
+                className="bg-primary text-white text-xs flex items-center py-1 px-2.5 rounded-full"
+                href={"/jobs"}
+              >
+                مشاهده همه
+                <IconArrowLeft className="icon-xs mr-2" />
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   )

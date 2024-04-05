@@ -77,11 +77,11 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           </div>
         </div>
         <div className="pr-3">
-          <span className="dana-bold max-h-[3rem] inline-block overflow-hidden">
+          <span className="dana-bold max-h-[3rem] inline-block">
             {jobAd.title.slice(0, 70)}
             {jobAd.title.length > 70 ? "..." : null}
           </span>
-          <div className="flex items-center">
+          <div className="flex items-center mt-2">
             <span className="text-xs">{jobAd.company.name}</span>
             <span className="border-r border-solid border-light text-xs pr-2 mr-2">
               {jobAd.cooperation_type.name}
@@ -90,7 +90,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
               <span className="border-r border-solid border-light text-xs pr-2 mr-2">دورکاری</span>
             ) : null}
           </div>
-          <div className="flex items-center mt-2.5">
+          <div className="flex items-center mt-2">
             <span className="text-xs">
               {jobAd.company.province.name}، {jobAd.company.city.name}
             </span>
