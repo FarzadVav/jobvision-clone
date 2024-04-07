@@ -75,6 +75,12 @@ a {
   text-decoration: none;
 }
 
+@layer base {
+  p {
+    @apply leading-relaxed;
+  }
+}
+
 @layer utilities {
   .dana-base {
     font-family: "dana";

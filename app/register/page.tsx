@@ -24,7 +24,7 @@ const Page = () => {
         <span
           className={`${
             state.message ? "text-danger" : "text-dark"
-          } block text-sm text-center leading-relaxed px-3 lg:px-9 mt-3`}
+          } block text-sm text-center px-3 lg:px-9 mt-3`}
         >
           {state.message || "به تیم بزرگ جاب‌ویژن خوش اومدی"}
         </span>

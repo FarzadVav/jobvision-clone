@@ -12,19 +12,19 @@ const FooterAccordion = ({
   text,
 }: AccordionTypes) => {
   return (
-    <li className="bg-dark text-white brightness-110 w-full rounded-md px-6 py-1 mt-2 first:mt-0 cursor-pointer">
+    <li className="bg-white/5 text-white w-full rounded-md px-6 py-1 mt-2 first:mt-0 cursor-pointer">
       <div className="h-12 flex items-center" onClick={toggleHandler}>
         <span>{length}</span>
         <span className="truncate mr-6">{title}</span>
       </div>
       <div
-        className={`border-solid border-[#ffffff10] ${
+        className={`border-solid border-white/10 ${
           toggle ? "border-t" : ""
         } overflow-hidden transition-all cursor-text`}
         ref={accordionRef}
       >
         <p className="py-3">
-          <span className="underline decoration-white/15 ml-1.5 sm:hidden">{title}</span>
+          <span className="underline decoration-white/10 ml-1.5 sm:hidden">{title}</span>
           <span>{text}</span>
         </p>
       </div>

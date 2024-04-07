@@ -465,9 +465,7 @@ const IranAnimation = () => {
                   "bg-white border-t-2 border-l border-solid border-dark/25 w-4 h-4 rotate-45 absolute -top-[calc(0.5rem+2px)] z-0"
                 }
               ></div>
-              <span className={"text-xl leading-relaxed z-10"}>
-                یک رزومه برای شرکت دیجیکالا در تهران ارسال شد
-              </span>
+              <p className={"text-xl z-10"}>یک رزومه برای شرکت دیجیکالا در تهران ارسال شد</p>
             </div>
           </foreignObject>
         ) : null}

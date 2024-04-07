@@ -58,11 +58,7 @@ const Page = () => {
                   <span className="mr-3 mt-0.5">رقابت و استخدام</span>
                 </li>
               </ul>
-              <p
-                className={
-                  "text-sm leading-loose mt-3 lg:text-base lg:leading-loose lg:text-justify"
-                }
-              >
+              <p className="text-sm mt-3 lg:text-justify">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
                 شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع کاربردی می باشد.
               </p>

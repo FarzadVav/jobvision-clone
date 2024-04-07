@@ -110,7 +110,7 @@ const Header = async () => {
                   }
                 >
                   <Image src="/images/chart.svg" height={350} width={350} alt="نمودار بازارکار" />
-                  <p className={"text-dark text-sm text-center leading-relaxed mt-3"}>
+                  <p className={"text-dark text-sm text-center mt-3"}>
                     در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و
                     منتشر می‌شوند. به صفحه
                     <br />
