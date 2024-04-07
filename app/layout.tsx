@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import { Toaster } from "react-hot-toast"
 
-import Header from "@/components/Header"
-import "./globals.css"
 import addInitialDatasToDB from "./actions/addInitialDatasToDB"
+import Header from "@/components/modules/Header"
+import Footer from "@/components/modules/Footer"
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Jobvision Clone",
@@ -18,6 +19,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body>
         <Header />
         {children}
+        <Footer />
         <Toaster />
       </body>
     </html>

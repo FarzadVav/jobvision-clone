@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { v4 as uuid } from "uuid"
 import {
   IconArrowLeft,
@@ -6,6 +7,7 @@ import {
   IconFile,
   IconFileCheck,
   IconFlame,
+  IconHandClick,
   IconSearch,
   IconUsersGroup,
 } from "@tabler/icons-react"
@@ -16,7 +18,6 @@ import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
 import SuggestedJobAds from "@/components/modules/SuggestedJobAds"
 import CompaniesCarousel from "@/components/CompaniesCarousel"
-import Image from "next/image"
 import HonorBox from "@/components/modules/HonorBox"
 import CtaBox from "@/components/modules/CtaBox"
 import { ACCORDIONS } from "@/utils/initialData"
@@ -143,21 +144,28 @@ const Page = () => {
 
         <Title className={"justify-center mt-12"}>
           <h6>
-            چرا باید <span className={`text-primary`}>جاب‌ویژن</span> را انتخاب کنید
+            چرا باید <span className="text-primary">جاب‌ویژن</span> را انتخاب کنید
           </h6>
         </Title>
-        <ul
-          className={`w-full flex flex-col justify-center items-center pr-1 mt-8 relative sm:pl-0 sm:pr-16`}
-        >
-          <div
-            className={`bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block`}
-          ></div>
+        <ul className="w-full flex flex-col justify-center items-center pr-1 mt-8 relative sm:pl-0 sm:pr-16">
+          <div className="bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block"></div>
           {ACCORDIONS.map((accordion, index) => (
             <Accordion key={uuid()} length={index + 1} {...accordion} />
           ))}
         </ul>
+      </div>
 
-        <div className="mt-24">div</div>
+      <div className="bg-gradient-to-t from-light to-white w-full hidden flex-col items-center py-9 mt-12 sm:flex">
+        <Title className="justify-center" size={"lg"}>
+          <h6>زندگی شغلی رویایی خود را بسازید</h6>
+        </Title>
+        <p className="text-lg text-center my-6">
+          از آخرین فرصت‌های شغلی معتبرترین شرکت‌های ایران باخبر شده و در آنها استخدام شوید.
+        </p>
+        <Button variant={"primary"} size={"lg"}>
+          ثبت نام کنید
+          <IconHandClick className="icon-lg" />
+        </Button>
       </div>
     </>
   )

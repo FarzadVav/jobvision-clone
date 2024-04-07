@@ -23,14 +23,14 @@ import {
 
 import { contentFetcher } from "@/utils/fetcher"
 import addNewJobAd from "@/app/actions/addNewJobAd"
-import Input from "@/components/Form/Input"
-import TextArea from "@/components/Form/TextArea"
-import SelectBox from "@/components/Form/SelectBox"
-import AutoComplete from "@/components/Form/AutoComplete"
-import MultiSelect from "@/components/Form/MultiSelect"
-import ComboBox from "@/components/Form/ComboBox"
+import Input from "@/components/form/Input"
+import TextArea from "@/components/form/TextArea"
+import SelectBox from "@/components/form/SelectBox"
+import AutoComplete from "@/components/form/AutoComplete"
+import MultiSelect from "@/components/form/MultiSelect"
+import ComboBox from "@/components/form/ComboBox"
 import Button from "@/components/Button"
-import Label from "@/components/Form/Label"
+import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 
 export type newJobAdFormStateT = {

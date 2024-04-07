@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react"
 
 import ContentT from "@/types/content.types"
-import Button from "./Button"
+import Button from "../Button"
 import getMe from "@/app/actions/getMe"
 
 const getMegaMenu = async () => {

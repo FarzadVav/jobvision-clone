@@ -5,7 +5,7 @@ import { useFormState } from "react-dom"
 
 import register from "@/app/actions/register"
 import Button from "@/components/Button"
-import Input from "@/components/Form/Input"
+import Input from "@/components/form/Input"
 import Title from "@/components/Title"
 
 export type registerStateT = {

@@ -18,11 +18,11 @@ import {
 import { contentFetcher } from "@/utils/fetcher"
 import addDetails from "@/app/actions/addDetails"
 import Button from "@/components/Button"
-import Input from "@/components/Form/Input"
-import TextArea from "@/components/Form/TextArea"
+import Input from "@/components/form/Input"
+import TextArea from "@/components/form/TextArea"
 import toast from "react-hot-toast"
-import SelectBox from "@/components/Form/SelectBox"
-import Label from "@/components/Form/Label"
+import SelectBox from "@/components/form/SelectBox"
+import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 
 export type detailsFormStateT = {
