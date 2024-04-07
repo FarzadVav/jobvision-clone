@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid"
 import {
   IconArrowLeft,
   IconBriefcase,
@@ -18,12 +19,14 @@ import CompaniesCarousel from "@/components/CompaniesCarousel"
 import Image from "next/image"
 import HonorBox from "@/components/modules/HonorBox"
 import CtaBox from "@/components/modules/CtaBox"
+import { ACCORDIONS } from "@/utils/initialData"
+import Accordion from "@/components/accordions/Accordion"
 
 const Page = () => {
   return (
     <>
       <div className="container">
-        <main className={"w-full flex flex-col justify-center items-center"}>
+        <main className={"w-full flex flex-col justify-center items-center mt-12"}>
           <div className={"w-full flex justify-between items-center"}>
             <div
               className={
@@ -137,6 +140,22 @@ const Page = () => {
             btn="حقوق خود را محاسبه کنید"
           />
         </div>
+
+        <Title className={"justify-center mt-12"}>
+          <h6>
+            چرا باید <span className={`text-primary`}>جاب‌ویژن</span> را انتخاب کنید
+          </h6>
+        </Title>
+        <ul
+          className={`w-full flex flex-col justify-center items-center pr-1 mt-8 relative sm:pl-0 sm:pr-16`}
+        >
+          <div
+            className={`bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block`}
+          ></div>
+          {ACCORDIONS.map((accordion, index) => (
+            <Accordion key={uuid()} length={index + 1} {...accordion} />
+          ))}
+        </ul>
 
         <div className="mt-24">div</div>
       </div>
