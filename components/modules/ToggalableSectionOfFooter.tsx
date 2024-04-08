@@ -44,42 +44,32 @@ const ToggalableSectionOfFooter = () => {
           و لینکدین نیز به شما داده شده است.
         </p>
         <Title size={"sm"} className="mt-6">
-          لینک های مرتبط
-        </Title>
-        <div className="flex flex-col items-center mt-3 sm:flex-row">
-          <Link href={""} className="max-sm:w-full">
-            <Button className="underline decoration-white w-full">استخدام بیمه</Button>
-          </Link>
-          <Link href={""} className="max-sm:w-full">
-            <Button className="underline decoration-white w-full">استخدام کارگزاری</Button>
-          </Link>
-          <Link href={""} className="max-sm:w-full">
-            <Button className="underline decoration-white w-full">استخدام خودرو</Button>
-          </Link>
-        </div>
-        <Title size={"sm"} className="mt-6">
           آخرین مطالب بلاگ
         </Title>
-        <div className="flex flex-col items-center mt-3 sm:flex-row">
-          <Link href={""} className="max-sm:w-full">
-            <Button className="underline decoration-white w-full">راهنمای جامع استخدام</Button>
-          </Link>
-          <Link href={""} className="max-sm:w-full">
-            <Button className="underline decoration-white w-full">
+        <ul className="flex flex-col items-center mt-3 sm:flex-row">
+          <li className="max-sm:w-full">
+            <Button className="bg-white/5 w-full">
+              راهنمای جامع استخدام
+            </Button>
+          </li>
+          <li className="max-sm:w-full sm:mr-3">
+            <Button className="bg-white/5 w-full">
               راهنمای جامع رزومه نویسی برای کارجویان
             </Button>
-          </Link>
-          <Link href={""} className="max-sm:w-full">
-            <Button className="underline decoration-white w-full">
+          </li>
+          <li className="max-sm:w-full sm:mr-3">
+            <Button className="bg-white/5 w-full">
               گزارش افزایش حقوق 1402 کارگران
             </Button>
-          </Link>
-        </div>
+          </li>
+        </ul>
       </div>
-      <Button className="mt-3 mx-auto" onClick={() => setShowSection((prev) => !prev)}>
-        {showSection ? "مشاهده موارد کمتر" : "مشاهده موارد بیشتر"}
-        <IconChevronDown className={`icon ${showSection ? "-scale-y-100" : ""}`} />
-      </Button>
+      <div className="border-b border-solid border-white/5 flex justify-center pb-6 mt-5 mb-11">
+        <Button className="bg-red-2000" onClick={() => setShowSection((prev) => !prev)}>
+          {showSection ? "مشاهده موارد کمتر" : "مشاهده موارد بیشتر"}
+          <IconChevronDown className={`icon ${showSection ? "-scale-y-100" : ""}`} />
+        </Button>
+      </div>
     </>
   )
 }
