@@ -51,7 +51,7 @@ const SelectedJobAd = () => {
                 {selectedJobAd.company.name}
               </Link>
               <span className="border-r border-solid border-light pr-3 mr-3">
-                {selectedJobAd.company.province?.name}، {selectedJobAd.company.city.name}
+                {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
               </span>
               {selectedJobAd.is_remote ? (
                 <span className="border-r border-solid border-light pr-3 mr-3">امکان دورکاری</span>

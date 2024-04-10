@@ -92,7 +92,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           </div>
           <div className="flex items-center mt-2">
             <span className="text-xs">
-              {jobAd.company.province.name}، {jobAd.company.city.name}
+              {jobAd.company.city?.province.name}، {jobAd.company.city?.name}
             </span>
             <span className="text-success border-r border-solid border-light text-xs pr-2 mr-2">
               {jobAd.salary[0]} {jobAd.salary[1] ? `تا ${jobAd.salary[1]}` : null} میلیون

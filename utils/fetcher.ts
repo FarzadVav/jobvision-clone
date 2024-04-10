@@ -86,12 +86,12 @@ export const jobAdsFilterFetcher = async () => {
 
   const province = params.get(FILTER_KEYS.province)
   if (province) {
-    data = data.filter(jobAd => jobAd.company.province_id === province)
+    data = data.filter(jobAd => jobAd.company.city?.province_id === province)
   }
 
   const city = params.get(FILTER_KEYS.city)
   if (city) {
-    data = data.filter(jobAd => [jobAd.company.city_id, jobAd.company.city.name].includes(city))
+    data = data.filter(jobAd => [jobAd.company.city_id, jobAd.company.city?.name].includes(city))
   }
 
   const cooperationType = params.get(FILTER_KEYS.cooperationType)

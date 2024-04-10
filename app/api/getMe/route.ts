@@ -11,7 +11,10 @@ export const GET = async () => {
 
   if (!tokenPayLoad) return Response.json({ message: "دسترسی منقضی شده" }, { status: 403 })
 
-  const company = await prisma.companies.findUnique({ where: { email: tokenPayLoad.email }, include: { city: true } })
+  const company = await prisma.companies.findUnique({
+    where: { email: tokenPayLoad.email },
+    include: { city: { include: { province: true } } }
+  })
   if (company) {
     return Response.json(company)
   }

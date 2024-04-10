@@ -10,8 +10,7 @@ export const GET = async () => {
       cooperation_type: true,
       company: {
         include: {
-          province: true,
-          city: true,
+          city: { include: { province: true } },
           job_ads: true
         }
       }
