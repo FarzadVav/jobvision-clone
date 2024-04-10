@@ -23,10 +23,9 @@ model Tags {
 }
 
 model Provinces {
-  id        String      @id @default(uuid())
-  name      String      @unique
-  cities    Cities[]
-  companies Companies[]
+  id     String   @id @default(uuid())
+  name   String   @unique
+  cities Cities[]
 }
 
 model Cities {
@@ -44,23 +43,21 @@ model CooperationTypes {
 }
 
 model Companies {
-  id             String     @id @default(uuid())
-  email          String     @unique
+  id             String   @id @default(uuid())
+  email          String   @unique
   password       String
   logo           String?
   name           String?
-  about          String?    @db.Text
-  activity       String?    @db.VarChar(64)
-  knowledgeBased Boolean?   @default(false)
-  employees      Json       @default("[]")
-  score          Int?       @default(5)
+  about          String?  @db.Text
+  activity       String?  @db.VarChar(64)
+  knowledgeBased Boolean  @default(false)
+  employees      Json     @default("[0, 0]")
+  score          Int      @default(5)
   year           Int?
-  province_id    String?
-  province       Provinces? @relation(fields: [province_id], references: [id], onDelete: Cascade)
   city_id        String?
-  city           Cities?    @relation(fields: [city_id], references: [id], onDelete: Cascade)
+  city           Cities?  @relation(fields: [city_id], references: [id], onDelete: Cascade)
   job_ads        JobAds[]
-  created_at     DateTime   @default(now())
+  created_at     DateTime @default(now())
 }
 
 model JobAds {
@@ -70,7 +67,7 @@ model JobAds {
   work_times           String           @db.Text
   business_trips       String           @db.Text
   age                  Json             @default("[]")
-  salary               Json             @default("[]")
+  salary               Json             @default("[0, 0]")
   benefits             Json             @default("[]")
   abilities            Json             @default("[]")
   education            Json             @default("[]")

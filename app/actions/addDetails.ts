@@ -17,22 +17,26 @@ const addDetails = async (formData: FormData) => {
 
   const formState: detailsFormStateT = {
     fields: {
-      name: name.trim().length >= 3 ? null : "نام شرکت کوتاه است",
-      year: year.trim().length === 4 ? null : "سال تاسیس باید 4 رقمی باشد",
-      minEmployee: parseInt(minEmployee.trim()) > 1 ? null : "تعداد کارکنان شرکت باید حداقل 2 نفر باشند",
-      maxEmployee: parseInt(maxEmployee.trim()) < 1000
-        ? parseInt(maxEmployee.trim()) > parseInt(minEmployee.trim())
-          ? null
-          : "حداکثر تعداد کارکنان باید کمتر از حداقل آن باشد"
-        : "تعداد کارکنان شرکت باید حداکثر هزار نفر باشند",
-      city: city ? null : "لطفا یک شهر انتخاب کنید",
-      about: about.trim().length >= 3 ? null : "متن درباره شرکت کوتاه است",
-      activity: activity.trim().length >= 3
-        ? activity.trim().length <= 64
-          ? null
-          : "متن حوزه فعالیت نمی‌تواند طولانی باشد"
-        : "متن حوزه فعالیت کوتاه است",
-      file: file.size > 0 ? null : "لطفا یک عکس با فرمت (png یا jpg یا jpeg) انتخاب کنید",
+      year: year.length
+        ? year.trim().length === 4 ? null : "سال تاسیس باید 4 رقمی باشد"
+        : null,
+      minEmployee: maxEmployee.length
+        ? +minEmployee.trim() > 1 ? null : "تعداد کارکنان شرکت باید حداقل 2 نفر باشند"
+        : null,
+      maxEmployee: minEmployee.length
+        ? +maxEmployee.trim() < 1000
+          ? +maxEmployee.trim() > +minEmployee.trim()
+            ? null
+            : "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد"
+          : "تعداد کارکنان شرکت نمی‌تواند بیشتر از هزار نفر باشند"
+        : null,
+      activity: activity.length
+        ? activity.trim().length >= 3
+          ? activity.trim().length <= 64
+            ? null
+            : "متن حوزه فعالیت نمی‌تواند طولانی باشد"
+          : "متن حوزه فعالیت کوتاه است"
+        : null,
     }
   }
 
@@ -50,13 +54,12 @@ const addDetails = async (formData: FormData) => {
         where: { email: user.email },
         data: {
           name,
-          logo: file.name,
+          logo: file.size > 0 ? file.name : null,
           year: parseInt(year),
           about,
           activity,
-          city_id: JSON.parse(city).id,
-          province_id: JSON.parse(city).province_id,
-          employees: [minEmployee, maxEmployee],
+          city_id: city || null,
+          employees: [+minEmployee || 0, +maxEmployee || 0],
           knowledgeBased: knowledgeBased === "on"
         }
       })

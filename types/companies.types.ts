@@ -4,8 +4,7 @@ import JobAdsT from "./jobads.types"
 
 type CompaniesT = Companies & {
   employees: string[]
-  province: Provinces
-  city: Cities
+  city: (Cities & { province: Provinces }) | null
   job_ads: JobAdsT[]
 }
 

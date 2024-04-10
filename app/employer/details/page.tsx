@@ -2,9 +2,7 @@
 
 import { useRef, useState } from "react"
 import useSWR from "swr"
-import { v4 as uuid } from "uuid"
 import {
-  IconBan,
   IconCalendarEvent,
   IconInfoCircle,
   IconListSearch,
@@ -15,7 +13,7 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react"
 
-import { contentFetcher } from "@/utils/fetcher"
+import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
 import addDetails from "@/app/actions/addDetails"
 import Button from "@/components/Button"
 import Input from "@/components/form/Input"
@@ -29,19 +27,16 @@ export type detailsFormStateT = {
   isSuccess?: boolean
   message?: null | string
   fields: {
-    name: null | string
     year: null | string
     minEmployee: null | string
     maxEmployee: null | string
-    city: null | string
-    about: null | string
     activity: null | string
-    file: null | string
   }
 }
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
+  const { data: company } = useSWR("/api/getMe", getMeFetcher)
   const [formState, setFormState] = useState<detailsFormStateT>({ fields: {} } as detailsFormStateT)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -60,16 +55,16 @@ const Page = () => {
     >
       <div className="w-full flex items-center">
         <div className="w-1/2">
-          <Label htmlFor="logo">
+          <Label htmlFor="name">
             <IconPencilMinus className="icon ml-3" />
             نام شرکت
           </Label>
           <Input
-            id="logo"
-            error={formState.fields.name}
+            id="name"
             type="text"
             placeholder="مثل جاب‌ویژن"
             name="name"
+            defaultValue={company?.name || ""}
           />
         </div>
         <div className="w-1/2 mr-3">
@@ -83,11 +78,12 @@ const Page = () => {
             type="number"
             placeholder="سال 1384"
             name="year"
+            defaultValue={company?.year || ""}
           />
         </div>
       </div>
 
-      <div className="w-full flex items-center mt-6">
+      <div className="w-full flex mt-6">
         <div className="w-1/2">
           <Label htmlFor="minEmployee">
             <IconUserMinus className="icon ml-3" />
@@ -99,6 +95,7 @@ const Page = () => {
             type="number"
             placeholder="از 10 نفر"
             name="minEmployee"
+            defaultValue={company?.employees[0] || ""}
           />
         </div>
         <div className="w-1/2 mr-3">
@@ -112,6 +109,7 @@ const Page = () => {
             type="number"
             placeholder="تا 15 نفر"
             name="maxEmployee"
+            defaultValue={company?.employees[1] || ""}
           />
         </div>
       </div>
@@ -120,13 +118,17 @@ const Page = () => {
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
-      <SelectBox id="city" error={formState.fields.city} name="city">
-        <option value="">یک شهر انتخاب کنید</option>
-        {content?.cities.map((city) => (
-          <option key={city.id} value={JSON.stringify(city)}>
-            {city.name}
-          </option>
-        ))}
+      <SelectBox id="city" name="city" defaultValue={company?.city_id || ""}>
+        <option value={company?.city_id || ""}>
+          {company?.city?.name || "یک شهر انتخاب کنید"}
+        </option>
+        {content?.cities
+          .filter((city) => city.id !== company?.city_id)
+          .map((city) => (
+            <option key={city.id} value={city.id}>
+              {city.name}
+            </option>
+          ))}
       </SelectBox>
 
       <Label className="mt-6" htmlFor="about">
@@ -135,9 +137,9 @@ const Page = () => {
       </Label>
       <TextArea
         id="about"
-        error={formState.fields.about}
         placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
         name="about"
+        defaultValue={company?.about || ""}
       />
 
       <Label className="mt-6" htmlFor="activity">
@@ -149,6 +151,7 @@ const Page = () => {
         error={formState.fields.activity}
         placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
         name="activity"
+        defaultValue={company?.activity || ""}
       />
 
       <Label className="mt-6" htmlFor="file">
@@ -157,7 +160,6 @@ const Page = () => {
       </Label>
       <Input
         id="file"
-        error={formState.fields.file}
         type="file"
         placeholder="فرمت های png"
         accept=".png, .jpg, .jpeg"
@@ -166,7 +168,13 @@ const Page = () => {
 
       <Label className="mt-6" htmlFor="knowledgeBased">
         شرکت دانش بنیان
-        <input id="knowledgeBased" className="mr-3 mb-0.5" type="checkbox" name="knowledgeBased" />
+        <input
+          id="knowledgeBased"
+          className="mr-3 mb-0.5"
+          type="checkbox"
+          name="knowledgeBased"
+          defaultChecked={!!company?.knowledgeBased}
+        />
       </Label>
 
       {formState.message ? (
