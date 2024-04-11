@@ -20,10 +20,10 @@ const addDetails = async (formData: FormData) => {
       year: year.length
         ? year.trim().length === 4 ? null : "سال تاسیس باید 4 رقمی باشد"
         : null,
-      minEmployee: maxEmployee.length
+      minEmployee: (minEmployee.length || maxEmployee.length)
         ? +minEmployee.trim() > 1 ? null : "تعداد کارکنان شرکت باید حداقل 2 نفر باشند"
         : null,
-      maxEmployee: minEmployee.length
+      maxEmployee: (minEmployee.length || maxEmployee.length)
         ? +maxEmployee.trim() < 1000
           ? +maxEmployee.trim() > +minEmployee.trim()
             ? null

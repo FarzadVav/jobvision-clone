@@ -118,7 +118,7 @@ const Page = () => {
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
-      <SelectBox id="city" name="city" defaultValue={company?.city_id || ""}>
+      <SelectBox id="city" name="city">
         <option value={company?.city_id || ""}>
           {company?.city?.name || "یک شهر انتخاب کنید"}
         </option>

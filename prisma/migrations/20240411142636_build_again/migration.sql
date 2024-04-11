@@ -53,12 +53,11 @@ CREATE TABLE `Companies` (
     `logo` VARCHAR(191) NULL,
     `name` VARCHAR(191) NULL,
     `about` TEXT NULL,
-    `activity` TEXT NULL,
-    `knowledgeBased` BOOLEAN NULL DEFAULT false,
-    `employees` JSON NOT NULL,
-    `score` INTEGER NULL DEFAULT 5,
+    `activity` VARCHAR(64) NULL,
+    `score` INTEGER NOT NULL DEFAULT 5,
     `year` INTEGER NULL,
-    `province_id` VARCHAR(191) NULL,
+    `knowledgeBased` BOOLEAN NOT NULL DEFAULT false,
+    `employees` JSON NOT NULL,
     `city_id` VARCHAR(191) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -73,6 +72,10 @@ CREATE TABLE `JobAds` (
     `description` TEXT NOT NULL,
     `work_times` TEXT NOT NULL,
     `business_trips` TEXT NOT NULL,
+    `gender` BOOLEAN NOT NULL DEFAULT true,
+    `end_military_service` BOOLEAN NOT NULL DEFAULT false,
+    `is_urgent` BOOLEAN NOT NULL DEFAULT false,
+    `is_remote` BOOLEAN NOT NULL DEFAULT false,
     `age` JSON NOT NULL,
     `salary` JSON NOT NULL,
     `benefits` JSON NOT NULL,
@@ -80,10 +83,6 @@ CREATE TABLE `JobAds` (
     `education` JSON NOT NULL,
     `languages` JSON NOT NULL,
     `techs` JSON NOT NULL,
-    `gender` BOOLEAN NULL,
-    `end_military_service` BOOLEAN NULL,
-    `is_urgent` BOOLEAN NOT NULL,
-    `is_remote` BOOLEAN NOT NULL,
     `category_id` VARCHAR(191) NOT NULL,
     `cooperation_type_id` VARCHAR(191) NOT NULL,
     `company_id` VARCHAR(191) NOT NULL,
@@ -105,9 +104,6 @@ ALTER TABLE `Tags` ADD CONSTRAINT `Tags_category_id_fkey` FOREIGN KEY (`category
 
 -- AddForeignKey
 ALTER TABLE `Cities` ADD CONSTRAINT `Cities_province_id_fkey` FOREIGN KEY (`province_id`) REFERENCES `Provinces`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `Companies` ADD CONSTRAINT `Companies_province_id_fkey` FOREIGN KEY (`province_id`) REFERENCES `Provinces`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Companies` ADD CONSTRAINT `Companies_city_id_fkey` FOREIGN KEY (`city_id`) REFERENCES `Cities`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

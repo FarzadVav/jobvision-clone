@@ -50,10 +50,10 @@ model Companies {
   name           String?
   about          String?  @db.Text
   activity       String?  @db.VarChar(64)
-  knowledgeBased Boolean  @default(false)
-  employees      Json     @default("[0, 0]")
   score          Int      @default(5)
   year           Int?
+  knowledgeBased Boolean  @default(false)
+  employees      Json     @default("[0, 0]")
   city_id        String?
   city           Cities?  @relation(fields: [city_id], references: [id], onDelete: Cascade)
   job_ads        JobAds[]
@@ -66,17 +66,17 @@ model JobAds {
   description          String           @db.Text
   work_times           String           @db.Text
   business_trips       String           @db.Text
-  age                  Json             @default("[]")
-  salary               Json             @default("[0, 0]")
-  benefits             Json             @default("[]")
-  abilities            Json             @default("[]")
-  education            Json             @default("[]")
-  languages            Json             @default("[]")
-  techs                Json             @default("[]")
-  gender               Boolean?
-  end_military_service Boolean?
-  is_urgent            Boolean
-  is_remote            Boolean
+  gender               Boolean          @default(true)
+  end_military_service Boolean          @default(false)
+  is_urgent            Boolean          @default(false)
+  is_remote            Boolean          @default(false)
+  age                  Json
+  salary               Json
+  benefits             Json
+  abilities            Json
+  education            Json
+  languages            Json
+  techs                Json
   category_id          String
   category             Categories       @relation(fields: [category_id], references: [id], onDelete: Cascade)
   cooperation_type_id  String

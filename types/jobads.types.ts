@@ -3,10 +3,6 @@ import { Categories, CooperationTypes, JobAds, Tags, TagsOnJobAds } from "@prism
 import CompaniesT from "./companies.types"
 
 type JobAdsT = JobAds & {
-  category: Categories
-  cooperation_type: CooperationTypes
-  company: CompaniesT
-  tags: (TagsOnJobAds & { current_tag: Tags })[]
   age: number[]
   salary: string[]
   benefits: string[]
@@ -14,6 +10,10 @@ type JobAdsT = JobAds & {
   education: string[]
   languages: string[]
   techs: string[]
+  category: Categories
+  cooperation_type: CooperationTypes
+  company: CompaniesT
+  tags: (TagsOnJobAds & { current_tag: Tags })[]
 }
 
 export default JobAdsT
