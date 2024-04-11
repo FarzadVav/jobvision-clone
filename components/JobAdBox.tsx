@@ -1,11 +1,10 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import { IconStarFilled } from "@tabler/icons-react"
 
 import JobAdsT from "@/types/jobads.types"
-import useJobAds from "@/hooks/store/useJobAds"
 import { cn } from "@/utils/lib"
 import Button from "./Button"
 
@@ -17,7 +16,7 @@ type JobAdBoxProps = {
 const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   const router = useRouter()
   const pathname = usePathname()
-  const { selectedJobAd } = useJobAds((s) => s)
+  const searchParams = useSearchParams()
 
   const prevCategoriesHandler = () => {
     const prevCategories: string[] = JSON.parse(localStorage.getItem("prevCategories") || "[]")
@@ -37,19 +36,23 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   }
 
   const selectJobAdHandler = () => {
-    useJobAds.setState({ selectedJobAd: jobAd })
+    const params = new URLSearchParams(searchParams.toString())
+
     if (window.innerWidth >= 1024) {
       !pathname.includes("jobs") && router.push("/jobs")
     } else {
       router.push("/single-job")
     }
+
+    params.set("id", jobAd.id)
+    router.push(pathname + "?" + params.toString())
   }
 
   return (
     <article
       className={cn(
         "bg-white ring-1 ring-light h-52 max-h-52 w-full flex flex-col p-4 rounded-md relative cursor-pointer group",
-        selectedJobAd?.id === jobAd.id ? "ring-primary/50" : "",
+        searchParams.toString().includes(jobAd.id) ? "ring-primary/50" : "",
         className
       )}
       onClick={() => {

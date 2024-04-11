@@ -2,9 +2,12 @@ import { prisma } from "@/utils/client"
 
 export const dynamic = "force-dynamic"
 
-export const GET = async ({ params }: { params: { id: string } }) => {
+export const GET = async (req: Request, { params }: { params: { id: string } }) => {
   const jobAds = await prisma.jobAds.findUnique({
-    where: { id: params.id }, include: {
+    where: { id: params.id },
+    include: {
+      category: true,
+      tags: { include: { current_tag: true } },
       cooperation_type: true,
       company: {
         include: {

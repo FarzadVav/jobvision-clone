@@ -1,5 +1,6 @@
 "use client"
 
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import useSWR from "swr"
@@ -13,8 +14,7 @@ import {
   IconUser,
 } from "@tabler/icons-react"
 
-import { jobAdsFetcher } from "@/utils/fetcher"
-import useJobAds from "@/hooks/store/useJobAds"
+import { jobAdsFetcher, selectedJobAdFetcher } from "@/utils/fetcher"
 import Button from "../Button"
 import Tabs from "./Tabs"
 import Title from "../Title"
@@ -22,8 +22,12 @@ import JobAdBox from "../JobAdBox"
 import Alert from "../Alert"
 
 const SelectedJobAd = () => {
-  const { selectedJobAd } = useJobAds((s) => s)
-  const { data: jobAds } = useSWR(selectedJobAd ? "/api/jobads" : null, jobAdsFetcher)
+  const searchParams = useSearchParams()
+  const { data: selectedJobAd } = useSWR(
+    searchParams.has("id") ? `/api/jobads/${searchParams.get("id")}` : null,
+    selectedJobAdFetcher
+  )
+  const { data: jobAds } = useSWR(searchParams.has("id") ? "/api/jobads" : null, jobAdsFetcher)
 
   return (
     <div className="list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto">

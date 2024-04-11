@@ -110,7 +110,7 @@ export const jobAdsFilterFetcher = async () => {
   return data
 }
 
-export const singleJobAdFetcher = async () => {
+export const selectedJobAdFetcher = async () => {
   const params = new URLSearchParams(location.search)
   const id = params.get("id")
 
