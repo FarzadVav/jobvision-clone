@@ -190,7 +190,6 @@ const Page = () => {
         جنسیت
       </Label>
       <SelectBox id="gender" name="gender">
-        <option value="">فرقی ندارد</option>
         <option value="male">مرد</option>
         <option value="female">زن</option>
       </SelectBox>
