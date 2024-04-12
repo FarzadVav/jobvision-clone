@@ -158,7 +158,7 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>شرح شغل و وظایف</span>
                     </Title>
-                    <p className="w-full mt-1.5">{selectedJobAd?.description}</p>
+                    <p className="w-full text-justify mt-1.5">{selectedJobAd?.description}</p>
 
                     <Title className="mt-6" size={"sm"}>
                       <span>شرایط احراز شغل</span>
@@ -279,7 +279,7 @@ const SelectedJobAd = () => {
                     <Title size={"sm"}>
                       <span>درباره شرکت {selectedJobAd.company.name || "ناشناس"}</span>
                     </Title>
-                    <p className="w-full mt-1.5">
+                    <p className="w-full text-justify mt-1.5">
                       {selectedJobAd.company.about || "توضیحی وارد نشده"}
                     </p>
 

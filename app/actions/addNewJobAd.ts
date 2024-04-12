@@ -29,20 +29,28 @@ const addNewJobAd = async (formData: FormData) => {
 
   const formState: newJobAdFormStateT = {
     fields: {
-      title: title.trim().length >= 3 ? null : "عنوان آگهی کوتاه است",
+      title: title.trim().length >= 3
+        ? title.trim().length <= 128 ? null : "عنوان آگهی نمی‌تواند طولانی باشد"
+        : "عنوان آگهی کوتاه است",
       description: description.trim().length >= 3 ? null : "توضیحات آگهی کوتاه است",
-      workTimes: workTimes.trim().length >= 3 ? null : "شرح ساعت کاری کوتاه است",
-      businessTrips: businessTrips.trim().length >= 3 ? null : "شرح سفر های کاری کوتاه است",
-      minAge: parseInt(minAge.trim()) >= 18 ? null : "سن استخدام باید حداقل 18 باشد",
-      maxAge: parseInt(maxAge.trim()) <= 69
-        ? parseInt(maxAge.trim()) > parseInt(minAge.trim())
+      workTimes: workTimes.trim().length >= 3
+        ? workTimes.trim().length <= 128 ? null : "شرح ساعت کاری نمی‌تواند طولانی باشد"
+        : "شرح ساعت کاری کوتاه است",
+      businessTrips: businessTrips.trim().length >= 3
+        ? businessTrips.trim().length <= 128 ? null : "شرح سفر های کاری نمی‌تواند طولانی باشد"
+        : "شرح سفر های کاری کوتاه است",
+      minAge: +minAge.trim() >= 18
+        ? +minAge.trim() <= 60 ? null : "حداقل سن کارجو نمی‌تواند بیشتر از 50 سال باشد"
+        : "سن کارجو باید حداقل 18 باشد",
+      maxAge: +maxAge.trim() <= 70
+        ? +maxAge.trim() > +minAge.trim()
           ? null
-          : "حداقل سن کارجو نمی‌تواند بیشتر از حداکثر آن باشد"
-        : "سن کارجو نمی‌تواند بیشتر از 69 باشد",
-      minSalary: parseInt(minSalary.trim()) >= 5 ? null : "مبلغ استخدام باید حداقل 5 میلیون باشد",
+          : "حداکثر سن کارجو نمی‌تواند کمتر از حداقل آن باشد"
+        : "سن کارجو نمی‌تواند بیشتر از 70 باشد",
+      minSalary: +minSalary.trim() >= 5 ? null : "مبلغ استخدام باید حداقل 5 میلیون باشد",
       maxSalary: showMaxSalary === "on"
-        ? parseInt(maxSalary.trim()) > parseInt(minSalary.trim())
-          ? parseInt(maxSalary.trim()) - parseInt(minSalary.trim()) <= 5
+        ? +maxSalary.trim() > +minSalary.trim()
+          ? +maxSalary.trim() - +minSalary.trim() <= 5
             ? null
             : "اختلاف قیمت نمی‌تواند بیشتر از 5 میلیون باشد"
           : "حداقل مبلغ استخدام نمی‌تواند بیشتر از حداکثر آن باشد"
