@@ -5,3 +5,11 @@ export const salaryCalculationForView = (salary: [number, number?]) => {
 
   return currentSalary
 }
+
+export const releaseDateCalculate = (date: Date) => {
+  const now = new Date()
+  const differenceInTime = date.getTime() - now.getTime()
+  const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24))
+
+  return differenceInDays > 0 ? + `${differenceInDays} روز گذشته` : "امروز"
+}
