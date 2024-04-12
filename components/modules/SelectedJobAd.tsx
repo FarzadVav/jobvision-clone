@@ -20,6 +20,7 @@ import Tabs from "./Tabs"
 import Title from "../Title"
 import JobAdBox from "../JobAdBox"
 import Alert from "../Alert"
+import { salaryCalculationForView } from "@/utils/jobAd"
 
 const SelectedJobAd = () => {
   const searchParams = useSearchParams()
@@ -52,11 +53,13 @@ const SelectedJobAd = () => {
                 className="text-primary underline decoration-transparent transition hover:decoration-primary"
                 href={""}
               >
-                {selectedJobAd.company.name}
+                {selectedJobAd.company.name || "شرکت ناشناس"}
               </Link>
-              <span className="border-r border-solid border-light pr-3 mr-3">
-                {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
-              </span>
+              {selectedJobAd.company.city ? (
+                <span className="border-r border-solid border-light pr-3 mr-3">
+                  {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
+                </span>
+              ) : null}
               {selectedJobAd.is_remote ? (
                 <span className="border-r border-solid border-light pr-3 mr-3">امکان دورکاری</span>
               ) : null}
@@ -65,10 +68,7 @@ const SelectedJobAd = () => {
               ) : null}
             </div>
             <div className="w-full flex items-center mt-4">
-              <span className="text-success">
-                {selectedJobAd.salary[0]}{" "}
-                {selectedJobAd.salary[1] ? `تا ${selectedJobAd.salary[1]}` : null} میلیون
-              </span>
+              <span className="text-success">{salaryCalculationForView(selectedJobAd.salary)}</span>
               <Button className="mr-auto" size={"sm"}>
                 <IconShare className="icon" />
               </Button>
@@ -82,14 +82,15 @@ const SelectedJobAd = () => {
             <div className="flex items-center" title="تعداد کارکنان شرکت">
               <IconUser className="icon" />
               <p className="mr-3">
-                {selectedJobAd.company.employees[0] || 0} تا{" "}
-                {selectedJobAd.company.employees[1] || 0} نفر
+                {selectedJobAd.company.employees[0]} تا {selectedJobAd.company.employees[1]} نفر
               </p>
             </div>
-            <div className="flex items-center mr-6" title="حوزه فعالیت">
-              <IconHelp className="icon" />
-              <p className="mr-3">{selectedJobAd.company.activity}</p>
-            </div>
+            {selectedJobAd.company.activity ? (
+              <div className="flex items-center mr-6" title="حوزه فعالیت">
+                <IconHelp className="icon" />
+                <p className="mr-3">{selectedJobAd.company.activity}</p>
+              </div>
+            ) : null}
           </div>
 
           <Tabs
@@ -279,28 +280,34 @@ const SelectedJobAd = () => {
                 content: (
                   <>
                     <Title size={"sm"}>
-                      <span>درباره {selectedJobAd.company.name}</span>
+                      <span>درباره شرکت {selectedJobAd.company.name || "ناشناس"}</span>
                     </Title>
-                    <p className="w-full mt-1.5">{selectedJobAd.company.about}</p>
+                    <p className="w-full mt-1.5">
+                      {selectedJobAd.company.about || "توضیحی وارد نشده"}
+                    </p>
 
                     <Title className="mt-6" size={"sm"}>
-                      <span>{selectedJobAd.company.name} در یک نگاه</span>
+                      <span>در یک نگاه کلی</span>
                     </Title>
-                    <div className="w-full flex flex-wrap gap-y-3 pr-3 mt-1.5">
+                    <div className="w-full flex flex-wrap gap-y-3 mt-1.5">
                       <div className="w-1/2">
                         <span className="dana-bold block">سال تاسیس</span>
-                        <span className="block text-sm mt-1">{selectedJobAd.company.year}</span>
+                        <span className="block text-sm mt-1">
+                          {selectedJobAd.company.year || "تازه کار"}
+                        </span>
                       </div>
                       <div className="w-1/2">
                         <span className="dana-bold block">اندازه سازمان</span>
                         <span className="block text-sm mt-1">
-                          {selectedJobAd.company.employees[0] || 0} تا{" "}
-                          {selectedJobAd.company.employees[1] || 0} نفر
+                          {selectedJobAd.company.employees[0]} تا{" "}
+                          {selectedJobAd.company.employees[1]} نفر
                         </span>
                       </div>
                       <div className="w-1/2">
                         <span className="dana-bold block">حوزه فعالیت</span>
-                        <span className="block text-sm mt-1">{selectedJobAd.company.activity}</span>
+                        <span className="block text-sm mt-1">
+                          {selectedJobAd.company.activity || "مشخص نشده"}
+                        </span>
                       </div>
                       <div className="w-1/2">
                         <span className="dana-bold block">امتیاز شرکت</span>

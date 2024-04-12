@@ -22,7 +22,7 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
       <Image
         className="border border-solid border-light object-fill object-center rounded-md"
         src={""}
-        alt={`لوگوی شرکت ${company.name}`}
+        alt={`لوگوی شرکت ${company.name || "ناشناس"}`}
         height={80}
         width={80}
       />

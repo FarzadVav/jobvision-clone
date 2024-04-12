@@ -7,6 +7,7 @@ import { IconStarFilled } from "@tabler/icons-react"
 import JobAdsT from "@/types/jobads.types"
 import { cn } from "@/utils/lib"
 import Button from "./Button"
+import { salaryCalculationForView } from "@/utils/jobAd"
 
 type JobAdBoxProps = {
   jobAd: JobAdsT
@@ -72,10 +73,10 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             height={80}
             width={80}
             src={""}
-            alt={`لوگوی شرکت ${jobAd.company.name}`}
+            alt={`لوگوی شرکت ${jobAd.company.name || "ناشناس"}`}
           />
-          <div className="text-success brightness-75 w-full flex justify-center items-center mt-2.5">
-            <IconStarFilled className="icon-xs" />
+          <div className="w-full flex justify-center items-center mt-2.5">
+            <IconStarFilled className="icon-xs text-warning" />
             <span className="text-xs h-3 inline-block mr-1.5">{jobAd.company.score}</span>
           </div>
         </div>
@@ -85,7 +86,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             {jobAd.title.length > 70 ? "..." : null}
           </span>
           <div className="flex items-center mt-2">
-            <span className="text-xs">{jobAd.company.name}</span>
+            <span className="text-xs">{jobAd.company.name || "شرکت ناشناس"}</span>
             <span className="border-r border-solid border-light text-xs pr-2 mr-2">
               {jobAd.cooperation_type.name}
             </span>
@@ -94,18 +95,22 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             ) : null}
           </div>
           <div className="flex items-center mt-2">
-            <span className="text-xs">
-              {jobAd.company.city?.province.name}، {jobAd.company.city?.name}
-            </span>
-            <span className="text-success border-r border-solid border-light text-xs pr-2 mr-2">
-              {jobAd.salary[0]} {jobAd.salary[1] ? `تا ${jobAd.salary[1]}` : null} میلیون
-            </span>
+            {jobAd.company.city ? (
+              <span className="border-l border-solid border-light text-xs pl-2 ml-2">
+                {jobAd.company.city?.province.name}، {jobAd.company.city?.name}
+              </span>
+            ) : null}
+            <span className="text-success text-xs">{salaryCalculationForView(jobAd.salary)}</span>
           </div>
         </div>
       </div>
       <div className="border-t border-dashed border-light flex items-center pt-3 mt-auto">
         <span className="h-8 text-xs leading-8">
-          {new Date(jobAd.created_at).toLocaleDateString("fa-ir").split("/").reverse().join(" / ")}
+          {new Date(jobAd.created_at || "")
+            .toLocaleDateString("fa-ir")
+            .split("/")
+            .reverse()
+            .join(" / ")}
         </span>
         {jobAd.is_urgent ? (
           <span className="bg-danger/10 text-danger text-xs px-3 py-1 mr-auto rounded-full">

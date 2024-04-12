@@ -43,21 +43,21 @@ model CooperationTypes {
 }
 
 model Companies {
-  id             String   @id @default(uuid())
-  email          String   @unique
+  id             String    @id @default(uuid())
+  email          String    @unique
   password       String
   logo           String?
   name           String?
-  about          String?  @db.Text
-  activity       String?  @db.VarChar(64)
-  score          Int      @default(5)
+  about          String?   @db.Text
+  activity       String?   @db.VarChar(64)
+  score          Int       @default(5)
   year           Int?
-  knowledgeBased Boolean  @default(false)
-  employees      Json     @default("[0, 0]")
+  knowledgeBased Boolean?  @default(false)
+  employees      Json?     @default("[2, 10]")
   city_id        String?
-  city           Cities?  @relation(fields: [city_id], references: [id], onDelete: Cascade)
+  city           Cities?   @relation(fields: [city_id], references: [id], onDelete: Cascade)
   job_ads        JobAds[]
-  created_at     DateTime @default(now())
+  created_at     DateTime? @default(now())
 }
 
 model JobAds {
@@ -66,17 +66,17 @@ model JobAds {
   description          String           @db.Text
   work_times           String           @db.Text
   business_trips       String           @db.Text
-  gender               Boolean          @default(true)
-  end_military_service Boolean          @default(false)
-  is_urgent            Boolean          @default(false)
-  is_remote            Boolean          @default(false)
+  gender               Boolean?         @default(true)
+  end_military_service Boolean?         @default(false)
+  is_urgent            Boolean?         @default(false)
+  is_remote            Boolean?         @default(false)
   age                  Json
   salary               Json
-  benefits             Json
-  abilities            Json
-  education            Json
-  languages            Json
-  techs                Json
+  benefits             Json?            @default("[]")
+  abilities            Json?            @default("[]")
+  education            Json?            @default("[]")
+  languages            Json?            @default("[]")
+  techs                Json?            @default("[]")
   category_id          String
   category             Categories       @relation(fields: [category_id], references: [id], onDelete: Cascade)
   cooperation_type_id  String
@@ -84,7 +84,7 @@ model JobAds {
   company_id           String
   company              Companies        @relation(fields: [company_id], references: [id], onDelete: Cascade)
   tags                 TagsOnJobAds[]
-  created_at           DateTime         @default(now())
+  created_at           DateTime?        @default(now())
 }
 
 model TagsOnJobAds {

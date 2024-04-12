@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <div className="h-[calc(100vh-4.5rem)] flex items-center">
       <div className="border border-solid border-light w-96 mx-auto rounded-lg overflow-hidden">
-        <Title className="mt-3 lg:mt-6" size={"sm"}>
+        <Title className="justify-center mt-3 lg:mt-6" size={"sm"}>
           <h1 className="text-center">ورود / ثبت نام</h1>
         </Title>
         <span

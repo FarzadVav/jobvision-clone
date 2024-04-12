@@ -20,16 +20,12 @@ const addDetails = async (formData: FormData) => {
       year: year.length
         ? year.trim().length === 4 ? null : "سال تاسیس باید 4 رقمی باشد"
         : null,
-      minEmployee: (minEmployee.length || maxEmployee.length)
-        ? +minEmployee.trim() > 1 ? null : "تعداد کارکنان شرکت باید حداقل 2 نفر باشند"
-        : null,
-      maxEmployee: (minEmployee.length || maxEmployee.length)
-        ? +maxEmployee.trim() < 1000
-          ? +maxEmployee.trim() > +minEmployee.trim()
-            ? null
-            : "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد"
-          : "تعداد کارکنان شرکت نمی‌تواند بیشتر از هزار نفر باشند"
-        : null,
+      minEmployee: +minEmployee.trim() > 1 ? null : "تعداد کارکنان شرکت باید حداقل 2 نفر باشند",
+      maxEmployee: +maxEmployee.trim() < 1000
+        ? +maxEmployee.trim() > +minEmployee.trim()
+          ? null
+          : "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد"
+        : "تعداد کارکنان شرکت نمی‌تواند بیشتر از هزار نفر باشند",
       activity: activity.length
         ? activity.trim().length >= 3
           ? activity.trim().length <= 64
@@ -59,7 +55,7 @@ const addDetails = async (formData: FormData) => {
           about,
           activity,
           city_id: city || null,
-          employees: [+minEmployee || 0, +maxEmployee || 0],
+          employees: [+minEmployee || 2, +maxEmployee || 10],
           knowledgeBased: knowledgeBased === "on"
         }
       })

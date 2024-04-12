@@ -4,7 +4,7 @@ import CompaniesT from "./companies.types"
 
 type JobAdsT = JobAds & {
   age: number[]
-  salary: string[]
+  salary: [number, number?]
   benefits: string[]
   abilities: string[]
   education: string[]
