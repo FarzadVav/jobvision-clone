@@ -21,7 +21,7 @@ const RemoveFiltersButton = () => {
   }, [pathname, searchParams])
 
   return filtersLength ? (
-    <Link href={"/jobs" + searchParams.has("id") ? `?id=${searchParams.get("id")}` : ""}>
+    <Link href={"/jobs" + (searchParams.has("id") ? `?id=${searchParams.get("id")}` : "")}>
       <Button className="dana-bold text-danger -ml-3" onClick={() => {}}>
         {filtersLength} فیلتر
         <IconTrashXFilled className="icon" />
