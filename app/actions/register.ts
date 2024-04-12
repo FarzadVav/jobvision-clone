@@ -6,7 +6,7 @@ import { z } from "zod"
 
 import { registerStateT } from "@/app/register/page"
 import { comparePassword, getToken, hashPassword } from "@/utils/auth"
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 
 
 const register = async (prevState: registerStateT, formData: FormData) => {

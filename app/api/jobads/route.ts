@@ -1,4 +1,4 @@
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 
 export const revalidate = 60
 

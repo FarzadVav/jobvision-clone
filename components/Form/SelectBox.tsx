@@ -3,7 +3,7 @@
 import { forwardRef, useState } from "react"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 
-import { cn } from "../../utils/lib"
+import { cn } from "../../utils/lib/tw"
 
 interface SelectBoxProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   wrapperClassName?: string

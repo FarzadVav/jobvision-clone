@@ -1,7 +1,7 @@
 "use server"
 
 import { CATEGORIES, TAGS, PROVINCES, CITIES, COOPERATION_TYPES } from "@/utils/initialData"
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 
 const addInitialDatasToDB = async () => {
   try {

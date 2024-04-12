@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 
 import { verifyToken } from "@/utils/auth"
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 
 export const dynamic = "force-dynamic"
 

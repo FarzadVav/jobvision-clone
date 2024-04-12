@@ -1,7 +1,7 @@
 "use server"
 
 import { newJobAdFormStateT } from "../employer/new-jobad/page"
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
 
 const addNewJobAd = async (formData: FormData) => {

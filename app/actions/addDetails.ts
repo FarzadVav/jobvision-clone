@@ -1,7 +1,7 @@
 "use server"
 
 import { detailsFormStateT } from "../employer/details/page"
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
 
 const addDetails = async (formData: FormData) => {

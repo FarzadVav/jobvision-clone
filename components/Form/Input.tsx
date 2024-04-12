@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import { IconAsterisk } from "@tabler/icons-react"
 
-import { cn } from "../../utils/lib"
+import { cn } from "../../utils/lib/tw"
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string | null

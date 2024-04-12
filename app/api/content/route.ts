@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 import ContentT from "@/types/content.types";
 import { FILTER_KEYS } from "@/utils/initialData";
 

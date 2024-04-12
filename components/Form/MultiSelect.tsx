@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useState } from "react"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 import { v4 as uuid } from "uuid"
 
-import { cn } from "../../utils/lib"
+import { cn } from "../../utils/lib/tw"
 
 interface MultiSelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   wrapperclassName?: string

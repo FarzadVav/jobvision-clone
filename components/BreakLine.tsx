@@ -1,7 +1,7 @@
 import { ReactNode, forwardRef } from "react"
 import { VariantProps, cva } from "class-variance-authority"
 
-import { cn } from "@/utils/lib"
+import { cn } from "@/utils/lib/tw"
 
 const breakLineVariants = cva("dana-bold w-full", {
   variants: {

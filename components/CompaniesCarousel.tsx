@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid"
 
 import CompaniesT from "@/types/companies.types"
-import { cn } from "@/utils/lib"
+import { cn } from "@/utils/lib/tw"
 import CompanyBox from "./CompanyBox"
 
 const getCompanies = async () => {

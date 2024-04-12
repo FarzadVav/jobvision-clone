@@ -1,4 +1,4 @@
-import { prisma } from "@/utils/client"
+import { prisma } from "@/utils/lib/client"
 
 export const GET = async () => {
   const companies = await prisma.companies.findMany({ include: { job_ads: true, city: { include: { province: true } } } })
