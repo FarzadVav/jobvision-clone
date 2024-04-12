@@ -1,6 +1,6 @@
 "use server"
 
-import { detailsFormStateT } from "../employer/details/page"
+import { detailsFormStateT } from "../employer/profile/page"
 import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
 
@@ -17,6 +17,11 @@ const addDetails = async (formData: FormData) => {
 
   const formState: detailsFormStateT = {
     fields: {
+      name: name.length
+        ? name.trim().length <= 128
+          ? null
+          : "نام شرکت نمی‌تواند طولانی باشد"
+        : null,
       year: year.length
         ? year.trim().length === 4 ? null : "سال تاسیس باید 4 رقمی باشد"
         : null,
@@ -27,11 +32,9 @@ const addDetails = async (formData: FormData) => {
           : "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد"
         : "تعداد کارکنان شرکت نمی‌تواند بیشتر از هزار نفر باشند",
       activity: activity.length
-        ? activity.trim().length >= 3
-          ? activity.trim().length <= 64
-            ? null
-            : "متن حوزه فعالیت نمی‌تواند طولانی باشد"
-          : "متن حوزه فعالیت کوتاه است"
+        ? activity.trim().length <= 64
+          ? null
+          : "متن حوزه فعالیت نمی‌تواند طولانی باشد"
         : null,
     }
   }

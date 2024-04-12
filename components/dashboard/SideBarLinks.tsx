@@ -8,7 +8,7 @@ import Button from "../Button"
 
 const links = [
   { href: "/employer", value: "داشبورد" },
-  { href: "/employer/details", value: "اطلاعات شرکت" },
+  { href: "/employer/profile", value: "اطلاعات شرکت" },
   { href: "/employer/new-jobad", value: "آگهی جدید" },
 ]
 

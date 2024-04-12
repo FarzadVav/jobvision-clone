@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useState } from "react"
 import useSWR from "swr"
 import {
   IconCalendarEvent,
@@ -27,6 +27,7 @@ export type detailsFormStateT = {
   isSuccess?: boolean
   message?: null | string
   fields: {
+    name: null | string
     year: null | string
     minEmployee: null | string
     maxEmployee: null | string
@@ -38,22 +39,19 @@ const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
   const { data: company } = useSWR("/api/getMe", getMeFetcher)
   const [formState, setFormState] = useState<detailsFormStateT>({ fields: {} } as detailsFormStateT)
-  const formRef = useRef<HTMLFormElement>(null)
 
   return (
     <form
       className="w-full"
-      ref={formRef}
       action={async (formData: FormData) => {
         const newState = await addDetails(formData)
         setFormState(newState || ({ fields: {} } as detailsFormStateT))
         if (newState?.isSuccess) {
           toast.success("اطلاعات شما با موفقیت ثبت شد")
-          formRef.current?.reset()
         }
       }}
     >
-      <div className="w-full flex items-center">
+      <div className="w-full flex">
         <div className="w-1/2">
           <Label htmlFor="name">
             <IconPencilMinus className="icon ml-3" />
@@ -61,6 +59,7 @@ const Page = () => {
           </Label>
           <Input
             id="name"
+            error={formState.fields.name}
             type="text"
             placeholder="مثل جاب‌ویژن"
             name="name"
@@ -146,9 +145,10 @@ const Page = () => {
         <IconListSearch className="icon ml-3" />
         حوزه فعالیت
       </Label>
-      <TextArea
+      <Input
         id="activity"
         error={formState.fields.activity}
+        type="text"
         placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
         name="activity"
         defaultValue={company?.activity || ""}
