@@ -7,7 +7,7 @@ import { IconStarFilled } from "@tabler/icons-react"
 import JobAdsT from "@/types/jobads.types"
 import { cn } from "@/utils/lib/tw"
 import Button from "./Button"
-import { releaseDateCalculate, salaryCalculationForView } from "@/utils/jobAd"
+import { releaseDateCalculation, salaryCalculationForView } from "@/utils/jobAd"
 
 type JobAdBoxProps = {
   jobAd: JobAdsT
@@ -106,7 +106,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       </div>
       <div className="border-t border-dashed border-light flex items-center pt-3 mt-auto">
         <span className="h-8 text-xs leading-8">
-          {releaseDateCalculate(new Date(jobAd.created_at || ""))}
+          {releaseDateCalculation(new Date(jobAd.created_at || ""))}
         </span>
         {jobAd.is_urgent ? (
           <span className="bg-danger/10 text-danger text-xs px-3 py-1 mr-auto rounded-full">

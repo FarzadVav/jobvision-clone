@@ -6,7 +6,7 @@ export const salaryCalculationForView = (salary: [number, number?]) => {
   return currentSalary
 }
 
-export const releaseDateCalculate = (date: Date) => {
+export const releaseDateCalculation = (date: Date) => {
   const now = new Date()
   const differenceInTime = date.getTime() - now.getTime()
   const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24))

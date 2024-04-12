@@ -20,7 +20,7 @@ import Tabs from "./Tabs"
 import Title from "../Title"
 import JobAdBox from "../JobAdBox"
 import Alert from "../Alert"
-import { releaseDateCalculate, salaryCalculationForView } from "@/utils/jobAd"
+import { releaseDateCalculation, salaryCalculationForView } from "@/utils/jobAd"
 
 const SelectedJobAd = () => {
   const searchParams = useSearchParams()
@@ -75,7 +75,7 @@ const SelectedJobAd = () => {
               <Button className="ml-3" size={"sm"}>
                 <IconHeart className="icon" />
               </Button>
-              {releaseDateCalculate(new Date(selectedJobAd.created_at || ""))}
+              {releaseDateCalculation(new Date(selectedJobAd.created_at || ""))}
             </div>
           </div>
 
