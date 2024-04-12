@@ -18,6 +18,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const isSelected = searchParams.toString().includes(jobAd.id)
 
   const prevCategoriesHandler = () => {
     const prevCategories: string[] = JSON.parse(localStorage.getItem("prevCategories") || "[]")
@@ -52,8 +53,9 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   return (
     <article
       className={cn(
-        "bg-white ring-1 ring-light h-52 max-h-52 w-full flex flex-col p-4 rounded-md relative cursor-pointer group",
-        searchParams.toString().includes(jobAd.id) ? "ring-primary/50" : "",
+        "bg-white ring-1 ring-light h-52 max-h-52 w-full text-xs flex flex-col p-3 rounded-md relative cursor-pointer group",
+        isSelected ? "ring-primary/50" : "",
+        jobAd.is_urgent ? "pr-5" : "",
         className
       )}
       onClick={() => {
@@ -64,9 +66,13 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       data-category={jobAd.category_id}
     >
       {jobAd.is_urgent ? (
-        <div className="bg-danger w-0.5 h-3/4 absolute top-1/2 right-0 -translate-y-1/2"></div>
+        <div
+          className={`${
+            isSelected ? "bg-primary" : "bg-danger"
+          } w-[3px] h-3/4 absolute top-1/2 right-0 -translate-y-1/2`}
+        ></div>
       ) : null}
-      <div className="flex">
+      <div className="w-full flex">
         <div>
           <Image
             className="border border-solid border-light text-sm object-fill object-center rounded-md"
@@ -77,41 +83,35 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           />
           <div className="w-full flex justify-center items-center mt-2.5">
             <IconStarFilled className="icon-xs text-warning" />
-            <span className="text-xs h-3 inline-block mr-1.5">{jobAd.company.score}</span>
+            <span className="h-3 inline-block mr-1.5">{jobAd.company.score}</span>
           </div>
         </div>
-        <div className="pr-3">
-          <span className="dana-bold max-h-[3rem] inline-block">
+        <div className="mr-3">
+          <span className="dana-bold inline-block text-base">
             {jobAd.title.slice(0, 70)}
             {jobAd.title.length > 70 ? "..." : null}
           </span>
           <div className="flex items-center mt-2">
-            <span className="text-xs">{jobAd.company.name || "شرکت ناشناس"}</span>
-            <span className="border-r border-solid border-light text-xs pr-2 mr-2">
-              {jobAd.cooperation_type.name}
-            </span>
-            {jobAd.is_remote ? (
-              <span className="border-r border-solid border-light text-xs pr-2 mr-2">دورکاری</span>
-            ) : null}
+            <span>{jobAd.company.name || "شرکت ناشناس"}</span>
+            <span className="bordered-text">{jobAd.cooperation_type.name}</span>
+            {jobAd.is_remote ? <span className="bordered-text">دورکاری</span> : null}
           </div>
           <div className="flex items-center mt-2">
             {jobAd.company.city ? (
-              <span className="border-l border-solid border-light text-xs pl-2 ml-2">
+              <span className="left-bordered-text">
                 {jobAd.company.city?.province.name}، {jobAd.company.city?.name}
               </span>
             ) : null}
-            <span className="text-success text-xs">{salaryCalculationForView(jobAd.salary)}</span>
+            <span className="text-success">{salaryCalculationForView(jobAd.salary)}</span>
           </div>
         </div>
       </div>
       <div className="border-t border-dashed border-light flex items-center pt-3 mt-auto">
-        <span className="h-8 text-xs leading-8">
+        <span className="h-8 flex items-center">
           {releaseDateCalculation(new Date(jobAd.created_at || ""))}
         </span>
         {jobAd.is_urgent ? (
-          <span className="bg-danger/10 text-danger text-xs px-3 py-1 mr-auto rounded-full">
-            فوری
-          </span>
+          <span className="bg-danger/10 text-danger px-3 py-1 mr-auto rounded-full">فوری</span>
         ) : null}
         {pathname.includes("/jobs") ? null : (
           <Button className={jobAd.is_urgent ? "mr-3" : "mr-auto"} variant={"success"} size={"sm"}>

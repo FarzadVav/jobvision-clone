@@ -119,6 +119,14 @@ a {
     background: transparent;
   }
 
+  .bordered-text {
+    @apply border-r border-solid border-light pr-2.5 mr-2.5;
+  }
+
+  .left-bordered-text {
+    @apply border-l border-solid border-light pl-2.5 ml-2.5;
+  }
+
   .selected-jobAd-ability {
     @apply w-full flex items-center;
   }

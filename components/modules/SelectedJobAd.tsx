@@ -36,15 +36,11 @@ const SelectedJobAd = () => {
         <>
           <div className="w-full">
             <div className="w-full flex justify-between">
-              <h2 className="dana-bold text-2xl flex items-center">
-                {selectedJobAd.title}
-                {selectedJobAd.is_urgent ? (
-                  <span className="dana-base bg-danger/10 text-danger text-xs px-3 py-1 mr-3 rounded-full">
-                    فوری
-                  </span>
-                ) : null}
+              <h2 className="dana-bold text-2xl leading-relaxed">
+                {selectedJobAd.title.slice(0, 100)}
+                {selectedJobAd.title.length > 100 ? "..." : null}
               </h2>
-              <Button className={"mr-4"} variant={"success"}>
+              <Button className={"mr-3"} variant={"success"}>
                 ارسال رزومه
               </Button>
             </div>
@@ -56,15 +52,15 @@ const SelectedJobAd = () => {
                 {selectedJobAd.company.name || "شرکت ناشناس"}
               </Link>
               {selectedJobAd.company.city ? (
-                <span className="border-r border-solid border-light pr-3 mr-3">
+                <span className="bordered-text">
                   {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
                 </span>
               ) : null}
               {selectedJobAd.is_remote ? (
-                <span className="border-r border-solid border-light pr-3 mr-3">امکان دورکاری</span>
+                <span className="bordered-text">امکان دورکاری</span>
               ) : null}
               {selectedJobAd.company.knowledgeBased ? (
-                <span className="border-r border-solid border-light pr-3 mr-3">دانش بنیان</span>
+                <span className="bordered-text">دانش بنیان</span>
               ) : null}
             </div>
             <div className="w-full flex items-center mt-4">
@@ -79,7 +75,7 @@ const SelectedJobAd = () => {
             </div>
           </div>
 
-          <div className="bg-light/50 w-full flex items-center px-5 py-2 mt-6 mb-3 rounded">
+          <div className="bg-light/50 w-full flex items-center px-5 py-2 mt-6 mb-3 rounded-md">
             <div className="flex items-center" title="تعداد کارکنان شرکت">
               <IconUser className="icon" />
               <p className="mr-3">
