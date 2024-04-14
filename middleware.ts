@@ -3,12 +3,18 @@ import type { NextRequest } from 'next/server'
 
 export const middleware = async (request: NextRequest) => {
   const url = request.url
+  const cookie = request.cookies.get('token')
 
-  if (url.includes("/employer") && !request.cookies.has('token')) {
+  const { status } = await fetch(process.env.BASE_URL + "/api/getMe", {
+    headers: { Authorization: cookie?.value || "" }
+  })
+  const isValid = status === 200
+
+  if (url.includes("/employer") && !isValid) {
     return NextResponse.redirect(new URL('/register', request.url))
   }
 
-  if (url.includes("/register") && request.cookies.has('token')) {
+  if (url.includes("/register") && isValid) {
     return NextResponse.redirect(new URL('/employer', request.url))
   }
 }

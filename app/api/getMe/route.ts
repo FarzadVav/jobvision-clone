@@ -5,8 +5,8 @@ import { prisma } from "@/utils/lib/client"
 
 export const dynamic = "force-dynamic"
 
-export const GET = async () => {
-  const token = cookies().get("token")?.value || ""
+export const GET = async (request: Request) => {
+  const token = cookies().get("token")?.value || request.headers.get("Authorization") || ""
   const tokenPayLoad = verifyToken(token)
 
   if (!tokenPayLoad) return Response.json({ message: "دسترسی منقضی شده" }, { status: 403 })
