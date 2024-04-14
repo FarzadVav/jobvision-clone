@@ -6,7 +6,7 @@ import getMe from "../actions/getMe"
 import Title from "@/components/Title"
 import SideBarLinks from "@/components/dashboard/SideBarLinks"
 import Button from "@/components/Button"
-import { IconDots, IconInfoCircle, IconLogout } from "@tabler/icons-react"
+import { IconBell, IconDots, IconLogout } from "@tabler/icons-react"
 
 const layout: React.FC<PropsWithChildren> = async ({ children }) => {
   const user = await getMe()
@@ -24,8 +24,8 @@ const layout: React.FC<PropsWithChildren> = async ({ children }) => {
           <Button aria-label="details" title="جزئیات">
             <IconDots className="icon" />
           </Button>
-          <Button aria-label="rules" title="اطلاعات و قوانین">
-            <IconInfoCircle className="icon" />
+          <Button aria-label="notifications" title="اعلان ها">
+            <IconBell className="icon" />
           </Button>
           <Button className="mr-auto" variant={"danger"}>
             خروج

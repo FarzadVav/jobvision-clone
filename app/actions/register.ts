@@ -20,33 +20,30 @@ const register = async (prevState: registerStateT, formData: FormData) => {
     return prevState = { message: "رمز عبور امن تری وارد کنید" }
   }
 
-  const user = await prisma.companies.findUnique({ where: { email } })
-  if (user) {
-    if (comparePassword(password, user.password)) {
-      cookies().set(
-        "token",
-        getToken({ email, password: user.password }) as string,
-        { path: "/", httpOnly: true, maxAge: 2_592_000 }
-      )
-      redirect("/")
+  try {
+    const user = await prisma.companies.findUnique({ where: { email } })
+    if (user && !comparePassword(password, user.password)) {
+      return prevState = { message: "رمز عبور به درستی وارد نشده است!" }
     }
-    else return prevState = { message: "رمز عبور به درستی وارد نشده است!" }
+
+    const currentPassword = user?.password || hashPassword(password) as string
+    const token = getToken({ email, password: currentPassword }) as string
+
+    cookies().set("token", token, { path: "/", httpOnly: true, maxAge: 2_592_000 })
+
+    if (!user) {
+      await prisma.companies.create({
+        data: {
+          email,
+          password: currentPassword
+        }
+      })
+    }
+  } catch (error) {
+    console.log("Unknown error on [registering] --->", error)
   }
-  else {
-    const hashedPassword = hashPassword(password) as string
-    await prisma.companies.create({
-      data: {
-        email,
-        password: hashedPassword
-      }
-    })
-    cookies().set(
-      "token",
-      getToken({ email, password: hashedPassword }) as string,
-      { path: "/", httpOnly: true, maxAge: 2_592_000 }
-    )
-    redirect("/")
-  }
+
+  redirect("/employer")
 }
 
 export default register

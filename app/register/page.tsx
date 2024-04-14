@@ -23,10 +23,10 @@ const Page = () => {
         </Title>
         <span
           className={`${
-            state.message ? "text-danger" : "text-dark"
+            state?.message ? "text-danger" : "text-dark"
           } block text-sm text-center px-3 lg:px-9 mt-3`}
         >
-          {state.message || "به تیم بزرگ جاب‌ویژن خوش اومدی"}
+          {state?.message || "به تیم بزرگ جاب‌ویژن خوش اومدی"}
         </span>
         <form className="w-full px-3 my-3 lg:px-6" action={formAction}>
           <Input type="email" placeholder="example@gmail.com" name="email" dir="ltr" />
