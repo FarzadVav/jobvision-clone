@@ -2,15 +2,18 @@
 
 import { cookies } from "next/headers"
 
-import { verifyToken } from "@/utils/auth"
-import { prisma } from "@/utils/lib/client"
+import CompaniesT from "@/types/companies.types"
 
 const getMe = async () => {
   const token = cookies().get("token")?.value || ""
-  const tokenPayLoad = verifyToken(token)
+  const res = await fetch(process.env.BASE_URL + "/api/getMe", {
+    headers: { Authorization: token }
+  })
+  const user = await res.json()
 
-  if (!tokenPayLoad) return null
-  return await prisma.companies.findUnique({ where: { email: tokenPayLoad.email } })
+  if (res.status === 200) return user as CompaniesT
+
+  return null
 }
 
 export default getMe
