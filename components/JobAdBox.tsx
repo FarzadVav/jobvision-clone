@@ -47,7 +47,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
     }
 
     params.set("id", jobAd.id)
-    router.push(pathname + "?" + params.toString())
+    router.push("/jobs" + "?" + params.toString())
   }
 
   return (
