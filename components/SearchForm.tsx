@@ -33,13 +33,13 @@ const SearchForm = ({ className }: { className?: string }) => {
       />
       <AutoComplete
         placeholder="گروه شغلی"
-        value={searchParams.get(FILTER_KEYS.category) || ""}
+        defaultValue={searchParams.get(FILTER_KEYS.category) || ""}
         name={FILTER_KEYS.category}
         data={content?.categories.map((category) => category.name) || []}
       />
       <AutoComplete
         placeholder="شهر"
-        value={searchParams.get(FILTER_KEYS.city) || ""}
+        defaultValue={searchParams.get(FILTER_KEYS.city) || ""}
         name={FILTER_KEYS.city}
         data={content?.cities.map((city) => city.name) || []}
       />

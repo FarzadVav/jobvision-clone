@@ -13,8 +13,8 @@ interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
-  ({ value, wrapperclassName, error, className, data, ...props }, ref) => {
-    const [inputValue, setInputValue] = useState("")
+  ({ value, wrapperclassName, error, defaultValue, className, data, ...props }, ref) => {
+    const [inputValue, setInputValue] = useState((defaultValue || "").toString())
     const [isFocus, setIsFocus] = useState(false)
 
     return (
