@@ -55,7 +55,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       className={cn(
         "bg-white ring-1 ring-light h-52 max-h-52 w-full text-xs flex flex-col p-3 rounded-md relative cursor-pointer group",
         isSelected ? "ring-primary/50" : "",
-        jobAd.is_urgent ? "pr-5" : "",
+        jobAd.is_urgent ? "pr-[calc(0.75rem+3px)]" : "",
         className
       )}
       onClick={() => {
