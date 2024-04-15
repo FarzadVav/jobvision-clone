@@ -127,24 +127,49 @@ a {
     @apply border-l border-solid border-light pl-2.5 ml-2.5;
   }
 
-  .selected-jobAd-ability {
-    @apply w-full flex items-center;
-  }
-
-  .selected-jobAd-ability span {
-    @apply list-scrollbar bg-light/25 flex items-center w-4/12 px-3 py-1.5 rounded overflow-x-auto sm:w-2/12;
-  }
-
-  .selected-jobAd-ability span:last-child {
-    @apply w-8/12 mr-2 sm:w-10/12;
-  }
-
   .honor-box {
     @apply w-1/2 flex flex-col items-center md:w-max;
   }
 
   .honor-box svg {
     @apply w-10 h-10 text-primary sm:w-12 sm:h-12;
+  }
+
+  .selected-jobad_wrap-list {
+    @apply w-full flex flex-wrap gap-3;
+  }
+
+  .selected-jobad_wrap-list .item {
+    @apply w-full sm:w-[calc(50%-0.75rem)];
+  }
+
+  .selected-jobad_wrap-list .item .title {
+    @apply dana-bold block;
+  }
+
+  .selected-jobad_wrap-list .item .text {
+    @apply text-sm mt-1;
+  }
+
+  .selected-jobAd_ability {
+    @apply w-full h-11 flex items-center;
+  }
+
+  .selected-jobAd_ability .key,
+  .selected-jobAd_ability .value {
+    @apply bg-light/25 h-full flex items-center py-1.5 px-3 rounded;
+  }
+
+  .selected-jobAd_ability .key {
+    @apply w-4/12 sm:w-2/12;
+  }
+
+  .selected-jobAd_ability .value {
+    @apply list-scrollbar w-8/12 mr-2 overflow-x-auto sm:w-10/12;
+  }
+
+  .selected-jobAd_ability .value .list-items {
+    @apply bg-light h-full min-w-max text-sm flex items-center px-3 ml-1.5 rounded last:ml-0;
   }
 }
 

@@ -99,38 +99,36 @@ const SelectedJobAd = () => {
                     <Title size={"sm"}>
                       <span>مشخصات موقعیت شغلی</span>
                     </Title>
-                    <div className="w-full flex flex-wrap gap-y-3 pr-3 mt-1.5">
-                      <div className="w-full sm:w-1/2">
-                        <span className="dana-bold block">روز و ساعت کاری</span>
-                        <span className="block text-sm mt-1">{selectedJobAd.work_times}</span>
+                    <div className="selected-jobad_wrap-list mt-1.5">
+                      <div className="item">
+                        <span className="title">روز و ساعت کاری</span>
+                        <p className="text">{selectedJobAd.work_times}</p>
                       </div>
-                      <div className="w-full sm:w-1/2">
-                        <span className="dana-bold block">نوع همکاری</span>
-                        <span className="block text-sm mt-1">
-                          {selectedJobAd.cooperation_type.name}
-                        </span>
+                      <div className="item">
+                        <span className="title">نوع همکاری</span>
+                        <p className="text">{selectedJobAd.cooperation_type.name}</p>
                       </div>
-                      <div className="w-full sm:w-1/2">
-                        <span className="dana-bold block">سفر های کاری</span>
-                        <span className="block text-sm mt-1">{selectedJobAd.business_trips}</span>
+                      <div className="item">
+                        <span className="title">سفر های کاری</span>
+                        <p className="text">{selectedJobAd.business_trips}</p>
                       </div>
-                      <div className="w-full sm:w-1/2">
-                        <span className="dana-bold block">مزایا و تسهیلات</span>
-                        <div className="text-sm mt-1">
+                      <div className="item">
+                        <span className="title">مزایا و تسهیلات</span>
+                        <div className="w-full flex flex-wrap items-center gap-1.5">
                           {selectedJobAd.benefits.length
                             ? selectedJobAd.benefits.map((benefit, i) => {
                                 if (i < selectedJobAd?.benefits.length - 1) {
                                   return (
-                                    <div key={uuid()} className="inline-block ml-2">
+                                    <p key={uuid()} className="text flex items-center">
                                       {benefit}
-                                      <span className="inline-block mr-2 opacity-25">/</span>
-                                    </div>
+                                      <span className="mr-2 opacity-25">/</span>
+                                    </p>
                                   )
                                 } else {
                                   return (
-                                    <span key={uuid()} className="inline-block">
+                                    <p key={uuid()} className="text">
                                       {benefit}
-                                    </span>
+                                    </p>
                                   )
                                 }
                               })
@@ -142,7 +140,7 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>شاخص های کلیدی از نظر کارفرما</span>
                     </Title>
-                    <ul className="w-full flex flex-wrap gap-2 mt-1.5">
+                    <ul className="w-full flex flex-wrap gap-2 mt-3">
                       {selectedJobAd.abilities.length
                         ? selectedJobAd.abilities.map((ability) => (
                             <li
@@ -163,75 +161,66 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>شرایط احراز شغل</span>
                     </Title>
-                    <ul className="w-full flex flex-col mt-3">
-                      <li className="selected-jobAd-ability">
-                        <span>سن</span>
-                        <span>
+                    <ul className="w-full mt-3">
+                      <li className="selected-jobAd_ability">
+                        <div className="key">سن</div>
+                        <div className="value">
                           {selectedJobAd.age[0]} تا {selectedJobAd.age[1]}
-                        </span>
+                        </div>
                       </li>
-                      <li className="selected-jobAd-ability mt-2">
-                        <span>جنسیت</span>
-                        <span>
+                      <li className="selected-jobAd_ability mt-2">
+                        <div className="key">جنسیت</div>
+                        <div className="value">
                           {typeof selectedJobAd.gender === null
                             ? "فرقی ندارد"
                             : selectedJobAd.gender
                             ? "مرد"
                             : "زن"}
-                        </span>
+                        </div>
                       </li>
-                      <li className="selected-jobAd-ability mt-2">
-                        <span>سربازی</span>
-                        <span>
+                      <li className="selected-jobAd_ability mt-2">
+                        <div className="key">سربازی</div>
+                        <div className="value">
                           {selectedJobAd.end_military_service
                             ? "پایان خدمت یا معاف از سربازی"
                             : "مهم نیست"}
-                        </span>
+                        </div>
                       </li>
-                      <li className="selected-jobAd-ability mt-2">
-                        <span>تحصیلات</span>
-                        <span>
+                      <li className="selected-jobAd_ability mt-2">
+                        <div className="key">تحصیلات</div>
+                        <div className="value">
                           {selectedJobAd.education.length
                             ? selectedJobAd.education.map((education) => (
-                                <div
-                                  key={uuid()}
-                                  className="bg-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0"
-                                >
+                                <span key={uuid()} className="list-items">
                                   {education}
-                                </div>
+                                </span>
                               ))
                             : "فرقی ندارد"}
-                        </span>
+                        </div>
                       </li>
-                      <li className="selected-jobAd-ability mt-2">
-                        <span>زبان ها</span>
-                        <span>
+                      <li className="selected-jobAd_ability mt-2">
+                        <div className="key">زبان ها</div>
+                        <div className="value">
                           {selectedJobAd.languages.length
                             ? selectedJobAd.languages.map((language) => (
-                                <div
-                                  key={uuid()}
-                                  className="bg-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0"
-                                >
+                                <span key={uuid()} className="list-items">
                                   {language}
-                                </div>
+                                </span>
                               ))
                             : "فرقی ندارد"}
-                        </span>
+                        </div>
                       </li>
-                      <li className="selected-jobAd-ability mt-2">
-                        <span>تکنولوژی ها</span>
-                        <span>
+                      <li className="selected-jobAd_ability mt-2">
+                        <div className="key">تکنولوژی ها</div>
+                        <div className="value">
                           {selectedJobAd.techs.length
                             ? selectedJobAd.techs.map((tech) => (
-                                <div
-                                  key={uuid()}
-                                  className="bg-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0"
-                                >
+                                <span key={uuid()} className="list-items">
                                   {tech}
-                                </div>
+                                </span>
                               ))
                             : "فرقی ندارد"}
-                        </span>
+                        </div>
                       </li>
                     </ul>
 
@@ -246,7 +235,7 @@ const SelectedJobAd = () => {
                       <span>فرصت‌های شغلی مشابه</span>
                     </Title>
 
-                    <div className="w-full mt-1.5">
+                    <div className="w-full mt-3">
                       {jobAds?.length ? (
                         jobAds.filter(
                           (jobAd) =>
@@ -286,29 +275,29 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>در یک نگاه کلی</span>
                     </Title>
-                    <div className="w-full flex flex-wrap gap-y-3 mt-1.5">
-                      <div className="w-1/2">
-                        <span className="dana-bold block">سال تاسیس</span>
-                        <span className="block text-sm mt-1">
+                    <div className="selected-jobad_wrap-list mt-1.5">
+                      <div className="item">
+                        <span className="title">سال تاسیس</span>
+                        <p className="text">
                           {selectedJobAd.company.year || "تازه کار"}
-                        </span>
+                        </p>
                       </div>
-                      <div className="w-1/2">
-                        <span className="dana-bold block">اندازه سازمان</span>
-                        <span className="block text-sm mt-1">
+                      <div className="item">
+                        <span className="title">اندازه سازمان</span>
+                        <p className="text">
                           {selectedJobAd.company.employees[0]} تا{" "}
                           {selectedJobAd.company.employees[1]} نفر
-                        </span>
+                        </p>
                       </div>
-                      <div className="w-1/2">
-                        <span className="dana-bold block">حوزه فعالیت</span>
-                        <span className="block text-sm mt-1">
+                      <div className="item">
+                        <span className="title">حوزه فعالیت</span>
+                        <p className="text">
                           {selectedJobAd.company.activity || "مشخص نشده"}
-                        </span>
+                        </p>
                       </div>
-                      <div className="w-1/2">
-                        <span className="dana-bold block">امتیاز شرکت</span>
-                        <span className="flex gap-0.5 text-sm mt-1">
+                      <div className="item">
+                        <span className="title">امتیاز شرکت</span>
+                        <div className="flex gap-0.5 text-sm mt-1">
                           {Array(Math.floor(selectedJobAd.company.score || 0))
                             .fill("")
                             .map(() => (
@@ -319,7 +308,7 @@ const SelectedJobAd = () => {
                             .map(() => (
                               <IconStarFilled key={uuid()} className="icon-sm text-light" />
                             ))}
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </>
