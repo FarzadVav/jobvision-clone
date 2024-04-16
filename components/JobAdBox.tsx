@@ -78,7 +78,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             className="border border-solid border-light text-sm object-fill object-center rounded-md"
             height={80}
             width={80}
-            src={""}
+            src={jobAd.company.logo || ""}
             alt={`لوگوی شرکت ${jobAd.company.name || "ناشناس"}`}
           />
           <div className="w-full flex justify-center items-center mt-2.5">
