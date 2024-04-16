@@ -1,6 +1,6 @@
 "use server"
 
-import { unlink, writeFileSync } from "fs"
+import { unlink, writeFile } from "fs"
 import path from "path"
 import { v1 as uuid } from "uuid"
 
@@ -52,28 +52,10 @@ const changeProfile = async (formData: FormData) => {
 
   try {
     const user = await getMe()
-
-    if (user?.logo) {
-      unlink(path.join(process.cwd(), "public/", user?.logo || ""), err => {
-        console.error("error on unlink a file in [changeProfile.ts]", err)
-      })
-    }
-
-    let fileName = ""
-    if (file.size > 0) {
-      const buffer = Buffer.from(await file.arrayBuffer())
-      fileName = uuid() + "-" + file.name
-      writeFileSync(
-        path.join(process.cwd(), "public/uploads/" + fileName),
-        buffer
-      )
-    }
-
     await prisma.companies.update({
       where: { email: user?.email },
       data: {
         name,
-        logo: file.size > 0 ? `/uploads/${fileName}` : null,
         year: parseInt(year),
         about,
         activity,
@@ -82,6 +64,29 @@ const changeProfile = async (formData: FormData) => {
         knowledgeBased: knowledgeBased === "on"
       }
     })
+
+    if (file.size > 0) {
+      const buffer = Buffer.from(await file.arrayBuffer())
+      const fileName = uuid() + "_" + file.name
+      writeFile(
+        path.join(process.cwd(), "public/uploads/" + fileName),
+        buffer,
+        async (err) => {
+          if (!err) {
+            await prisma.companies.update({
+              where: { email: user?.email },
+              data: { logo: `/uploads/${fileName}` }
+            })
+
+            if (user?.logo) {
+              unlink(path.join(process.cwd(), "public/", user?.logo || ""), err => {
+                console.error("error on unlink a file in [changeProfile.ts]", err)
+              })
+            }
+          }
+        }
+      )
+    }
 
     formState.isSuccess = true
     formState.message = null
