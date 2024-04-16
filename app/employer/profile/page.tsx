@@ -14,7 +14,7 @@ import {
 } from "@tabler/icons-react"
 
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
-import addDetails from "@/app/actions/addDetails"
+import changeProfile from "@/app/actions/changeProfile"
 import Button from "@/components/Button"
 import Input from "@/components/form/Input"
 import TextArea from "@/components/form/TextArea"
@@ -44,7 +44,7 @@ const Page = () => {
     <form
       className="w-full"
       action={async (formData: FormData) => {
-        const newState = await addDetails(formData)
+        const newState = await changeProfile(formData)
         setFormState(newState || ({ fields: {} } as detailsFormStateT))
         if (newState?.isSuccess) {
           toast.success("اطلاعات شما با موفقیت ثبت شد")

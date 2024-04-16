@@ -1,10 +1,14 @@
 "use server"
 
+import { unlink, writeFileSync } from "fs"
+import path from "path"
+import { v1 as uuid } from "uuid"
+
 import { detailsFormStateT } from "../employer/profile/page"
 import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
 
-const addDetails = async (formData: FormData) => {
+const changeProfile = async (formData: FormData) => {
   const name = formData.get("name") as string
   const year = formData.get("year") as string
   const minEmployee = formData.get("minEmployee") as string
@@ -48,25 +52,40 @@ const addDetails = async (formData: FormData) => {
 
   try {
     const user = await getMe()
-    if (user) {
-      await prisma.companies.update({
-        where: { email: user.email },
-        data: {
-          name,
-          logo: file.size > 0 ? file.name : null,
-          year: parseInt(year),
-          about,
-          activity,
-          city_id: city || null,
-          employees: [+minEmployee || 2, +maxEmployee || 10],
-          knowledgeBased: knowledgeBased === "on"
-        }
-      })
 
-      formState.isSuccess = true
-      formState.message = null
-      return formState
+    if (user?.logo) {
+      unlink(path.join(process.cwd(), "public/", user?.logo || ""), err => {
+        console.error("error on unlink a file in [changeProfile.ts]", err)
+      })
     }
+
+    let fileName = ""
+    if (file.size > 0) {
+      const buffer = Buffer.from(await file.arrayBuffer())
+      fileName = uuid() + "-" + file.name
+      writeFileSync(
+        path.join(process.cwd(), "public/uploads/" + fileName),
+        buffer
+      )
+    }
+
+    await prisma.companies.update({
+      where: { email: user?.email },
+      data: {
+        name,
+        logo: file.size > 0 ? `/uploads/${fileName}` : null,
+        year: parseInt(year),
+        about,
+        activity,
+        city_id: city || null,
+        employees: [+minEmployee || 2, +maxEmployee || 10],
+        knowledgeBased: knowledgeBased === "on"
+      }
+    })
+
+    formState.isSuccess = true
+    formState.message = null
+    return formState
   } catch (error) {
     console.log("Unknown server error on update [companies] --->", error)
     formState.isSuccess = false
@@ -75,4 +94,4 @@ const addDetails = async (formData: FormData) => {
   }
 }
 
-export default addDetails
+export default changeProfile

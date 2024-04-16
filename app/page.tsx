@@ -43,7 +43,7 @@ const Page = () => {
                   شغل رویایی خودت رو پیدا کن و استخدام شو!
                 </h1>
               </Title>
-              <ul className="w-full flex items-center mt-3">
+              <ul className="w-full flex items-center mt-5">
                 <li className="bg-primary/10 text-primary border border-solid border-primary/25 flex items-center text-sm px-3 py-1 rounded">
                   <IconSearch className="icon-sm" />
                   <span className="mr-3 mt-0.5">فیلتر سرچ پیشرفته</span>
@@ -58,7 +58,7 @@ const Page = () => {
                   <span className="mr-3 mt-0.5">رقابت و استخدام</span>
                 </li>
               </ul>
-              <p className="text-sm mt-3 lg:text-justify">
+              <p className="mt-4 lg:text-justify">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
                 شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع کاربردی می باشد.
               </p>
