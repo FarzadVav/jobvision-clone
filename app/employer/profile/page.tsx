@@ -23,29 +23,23 @@ import SelectBox from "@/components/form/SelectBox"
 import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 
-export type detailsFormStateT = {
+export type ProfileFormT = {
   isSuccess?: boolean
-  message?: null | string
-  fields: {
-    name: null | string
-    year: null | string
-    minEmployee: null | string
-    maxEmployee: null | string
-    activity: null | string
-  }
+  message?: string | undefined
+  fields: {[key: string]: string}
 }
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
   const { data: company } = useSWR("/api/getMe", getMeFetcher)
-  const [formState, setFormState] = useState<detailsFormStateT>({ fields: {} } as detailsFormStateT)
+  const [formState, setFormState] = useState<ProfileFormT>({ fields: {} })
 
   return (
     <form
       className="w-full"
       action={async (formData: FormData) => {
         const newState = await changeProfile(formData)
-        setFormState(newState || ({ fields: {} } as detailsFormStateT))
+        setFormState(newState || { fields: {} })
         if (newState?.isSuccess) {
           toast.success("اطلاعات شما با موفقیت ثبت شد")
         }
@@ -90,7 +84,7 @@ const Page = () => {
           </Label>
           <Input
             id="minEmployee"
-            error={formState.fields.minEmployee}
+            error={formState.fields.minEmployee?.toString()}
             type="number"
             placeholder="از 10 نفر"
             name="minEmployee"
@@ -104,7 +98,7 @@ const Page = () => {
           </Label>
           <Input
             id="maxEmployee"
-            error={formState.fields.maxEmployee}
+            error={formState.fields.maxEmployee?.toString()}
             type="number"
             placeholder="تا 15 نفر"
             name="maxEmployee"
