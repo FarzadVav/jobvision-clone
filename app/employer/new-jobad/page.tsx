@@ -33,30 +33,15 @@ import Button from "@/components/Button"
 import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 
-export type newJobAdFormStateT = {
+export type newJobAdFormT = {
   isSuccess?: boolean
   message?: null | string
-  fields: {
-    title: null | string
-    description: null | string
-    workTimes: null | string
-    businessTrips: null | string
-    minAge: null | string
-    maxAge: null | string
-    minSalary: null | string
-    maxSalary?: null | string
-    gender?: null | string
-    category: null | string
-    cooperationType: null | string
-    tags: null | string
-  }
+  fields: { [key: string]: string }
 }
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const [formState, setFormState] = useState<newJobAdFormStateT>({
-    fields: {},
-  } as newJobAdFormStateT)
+  const [formState, setFormState] = useState<newJobAdFormT>({ fields: {} })
   const [showMaxSalary, setShowMaxSalary] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -66,7 +51,7 @@ const Page = () => {
       ref={formRef}
       action={async (formData: FormData) => {
         const newState = await addNewJobAd(formData)
-        setFormState(newState || ({ fields: {} } as newJobAdFormStateT))
+        setFormState(newState || { fields: {} })
         if (newState?.isSuccess) {
           toast.success("آگهی جدید با موفقیت ثبت شد")
           formRef.current?.reset()

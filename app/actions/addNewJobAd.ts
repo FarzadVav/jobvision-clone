@@ -1,6 +1,7 @@
 "use server"
 
-import { newJobAdFormStateT } from "../employer/new-jobad/page"
+import { getErrors, newJobAdSchema } from "@/utils/lib/zod-schemas"
+import { newJobAdFormT } from "../employer/new-jobad/page"
 import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
 
@@ -27,46 +28,30 @@ const addNewJobAd = async (formData: FormData) => {
   const isUrgent = formData.get("is_urgent") as ("on" | null)
   const isRemote = formData.get("is_remote") as ("on" | null)
 
-  const formState: newJobAdFormStateT = {
-    fields: {
-      title: title.trim().length >= 3
-        ? title.trim().length <= 128 ? null : "عنوان آگهی نمی‌تواند طولانی باشد"
-        : "عنوان آگهی کوتاه است",
-      description: description.trim().length >= 3 ? null : "توضیحات آگهی کوتاه است",
-      workTimes: workTimes.trim().length >= 3
-        ? workTimes.trim().length <= 128 ? null : "شرح ساعت کاری نمی‌تواند طولانی باشد"
-        : "شرح ساعت کاری کوتاه است",
-      businessTrips: businessTrips.trim().length >= 3
-        ? businessTrips.trim().length <= 128 ? null : "شرح سفر های کاری نمی‌تواند طولانی باشد"
-        : "شرح سفر های کاری کوتاه است",
-      minAge: +minAge.trim() >= 18
-        ? +minAge.trim() <= 60 ? null : "حداقل سن کارجو نمی‌تواند بیشتر از 50 سال باشد"
-        : "سن کارجو باید حداقل 18 باشد",
-      maxAge: +maxAge.trim() <= 70
-        ? +maxAge.trim() > +minAge.trim()
-          ? null
-          : "حداکثر سن کارجو نمی‌تواند کمتر از حداقل آن باشد"
-        : "سن کارجو نمی‌تواند بیشتر از 70 باشد",
-      minSalary: +minSalary.trim() >= 5 ? null : "مبلغ استخدام باید حداقل 5 میلیون باشد",
-      maxSalary: showMaxSalary === "on"
-        ? +maxSalary.trim() > +minSalary.trim()
-          ? +maxSalary.trim() - +minSalary.trim() <= 5
-            ? null
-            : "اختلاف قیمت نمی‌تواند بیشتر از 5 میلیون باشد"
-          : "حداقل مبلغ استخدام نمی‌تواند بیشتر از حداکثر آن باشد"
-        : null,
-      category: category.trim().length ? null : "لطفا یک دسته بندی را انتخاب کنید",
-      cooperationType: cooperationType.trim().length ? null : "لطفا نوع قرارداد را انتخاب کنید",
-      tags: JSON.parse(tags).length ? null : "لطفا چند تگ شغلی انتخاب کنید",
-    }
+  const fields = {
+    title,
+    description,
+    workTimes,
+    businessTrips,
+    age: {
+      minAge: +minAge,
+      maxAge: +maxAge,
+    },
+    salary: {
+      minSalary: +minSalary,
+      maxSalary: +maxSalary,
+      showMaxSalary: showMaxSalary === "on",
+    },
+    gender,
+    category,
+    cooperationType,
+    tags: JSON.parse(tags),
   }
-
-  let formIsValid: boolean = true
-  Object.entries(formState.fields).map(item => {
-    if (item[1]) return formIsValid = false
-  })
-
-  if (!formIsValid) return formState
+  const checkFields = newJobAdSchema.safeParse(fields)
+  const newJobAdState: newJobAdFormT = {
+    fields: checkFields.success ? {} : getErrors(checkFields.error)
+  }
+  if (!checkFields.success) return newJobAdState
 
   try {
     const user = await getMe()
@@ -101,15 +86,15 @@ const addNewJobAd = async (formData: FormData) => {
         }
       })
 
-      formState.isSuccess = true
-      formState.message = null
-      return formState
+      newJobAdState.isSuccess = true
+      newJobAdState.message = null
+      return newJobAdState
     }
   } catch (error) {
     console.log("Unknown server error on create new [jobAds] --->", error)
-    formState.isSuccess = false
-    formState.message = "هنگام ایجاد آگهی خطایی رخ داده است، لطفا بعدا تلاش کنید."
-    return formState
+    newJobAdState.isSuccess = false
+    newJobAdState.message = "هنگام ایجاد آگهی خطایی رخ داده است، لطفا بعدا تلاش کنید."
+    return newJobAdState
   }
 }
 

@@ -4,10 +4,10 @@ import { unlink, writeFile } from "fs"
 import path from "path"
 import { v1 as uuid } from "uuid"
 
-import { prisma } from "@/utils/lib/client"
-import getMe from "./getMe"
 import { getErrors, profileSchema } from "@/utils/lib/zod-schemas"
 import { ProfileFormT } from "../employer/profile/page"
+import { prisma } from "@/utils/lib/client"
+import getMe from "./getMe"
 
 const changeProfile = async (formData: FormData) => {
   const name = formData.get("name") as string | null
