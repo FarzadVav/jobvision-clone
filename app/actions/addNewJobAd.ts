@@ -10,10 +10,10 @@ const addNewJobAd = async (formData: FormData) => {
   const description = formData.get("description") as string
   const workTimes = formData.get("workTimes") as string
   const businessTrips = formData.get("businessTrips") as string
-  const minAge = formData.get("minAge") as string
-  const maxAge = formData.get("maxAge") as string
-  const minSalary = formData.get("minSalary") as string
-  const maxSalary = formData.get("maxSalary") as string
+  const minAge = parseInt(formData.get("minAge") as string) || undefined
+  const maxAge = parseInt(formData.get("maxAge") as string) || undefined
+  const minSalary = parseInt(formData.get("minSalary") as string) || undefined
+  const maxSalary = parseInt(formData.get("maxSalary") as string) || undefined
   const showMaxSalary = formData.get("show-maxSalary") as ("on" | null)
   const gender = formData.get("gender") as ("male" | "female" | "")
   const category = formData.get("category") as string
@@ -34,12 +34,12 @@ const addNewJobAd = async (formData: FormData) => {
     workTimes,
     businessTrips,
     age: {
-      minAge: +minAge,
-      maxAge: +maxAge,
+      minAge,
+      maxAge,
     },
     salary: {
-      minSalary: +minSalary,
-      maxSalary: +maxSalary,
+      minSalary,
+      maxSalary,
       showMaxSalary: showMaxSalary === "on",
     },
     gender,
@@ -66,8 +66,10 @@ const addNewJobAd = async (formData: FormData) => {
           description,
           work_times: workTimes,
           business_trips: businessTrips,
-          age: [+minAge, +maxAge],
-          salary: showMaxSalary === "on" ? [+minSalary, +maxSalary] : [+minSalary],
+          age: [minAge, maxAge] as number[],
+          salary: showMaxSalary === "on"
+            ? ([minSalary, maxSalary] as number[])
+            : ([minSalary] as number[]),
           gender: gender === "male",
           benefits: JSON.parse(benefits),
           abilities: JSON.parse(abilities),
