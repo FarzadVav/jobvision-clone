@@ -1,9 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
+import { IconArrowLeft, IconStarFilled } from "@tabler/icons-react"
 
 import CompaniesT from "@/types/companies.types"
 import { cn } from "@/utils/lib/tw"
-import { IconArrowLeft, IconStarFilled } from "@tabler/icons-react"
 import Button from "./Button"
 
 type CompanyBoxProps = {

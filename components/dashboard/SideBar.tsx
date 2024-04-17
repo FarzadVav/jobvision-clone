@@ -10,6 +10,7 @@ import { IconBell, IconDots, IconLogout } from "@tabler/icons-react"
 import Button from "../Button"
 import Title from "../Title"
 import { getMeFetcher } from "@/utils/fetcher"
+import logOut from "@/app/actions/logOut"
 
 const links = [
   { href: "/employer", value: "داشبورد" },
@@ -58,7 +59,7 @@ const SideBar = () => {
         <Button aria-label="notifications" title="اعلان ها">
           <IconBell className="icon" />
         </Button>
-        <Button className="mr-auto" variant={"danger"}>
+        <Button className="mr-auto" variant={"danger"} onClick={() => logOut()}>
           خروج
           <IconLogout className="icon" />
         </Button>
