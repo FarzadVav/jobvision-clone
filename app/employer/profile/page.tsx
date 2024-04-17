@@ -156,7 +156,7 @@ const Page = () => {
 
       <Label className="mt-6" htmlFor="file">
         <IconPhoto className="icon ml-3" />
-        عکس لوگو
+        عکس {company?.logo ? "لوگوی جدید" : "لوگو"}
       </Label>
       <Input
         id="file"
