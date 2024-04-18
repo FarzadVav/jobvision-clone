@@ -12,15 +12,27 @@ export const getErrors = (zodErrors: ZodError) => {
 
 // employer profile
 export const profileSchema = z.object({
-  name: z.string().max(64, { message: "نام شرکت نمی‌تواند طولانی باشد" }).optional(),
-  year: z.string().length(4, { message: "سال تاسیس باید 4 رقمی باشد" }).optional(),
-  minEmployee: z.number().min(2, { message: "تعداد کارکنان شرکت باید حداقل 2 نفر باشند" }).optional(),
-  maxEmployee: z.number().min(3, { message: "حداکثر تعداد کارکنان شرکت باید بیشتر از 3 نفر باشد" }).optional(),
-  activity: z.string().max(64, { message: "متن حوزه فعالیت نمی‌تواند طولانی باشد" }).optional(),
-}).refine(data => (data.maxEmployee || 3) > (data.minEmployee || 3), {
-  message: "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد",
-  path: ["maxEmployee"]
+  name: z.string()
+    .min(3, { message: "نام شرکت کوتاه است" })
+    .max(64, { message: "نام شرکت نمی‌تواند طولانی باشد" }),
+  year: z.string().length(4, { message: "سال تاسیس باید 4 رقمی باشد" }),
+  employee: z.object({
+    minEmployee: z.number().min(2, { message: "تعداد کارکنان شرکت باید حداقل 2 نفر باشند" }),
+    maxEmployee: z.number(),
+  }).refine(({ maxEmployee, minEmployee }) => (maxEmployee > minEmployee), {
+    message: "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد",
+    path: ["maxEmployee"]
+  }),
+  city: z.string().min(1, { message: "لطفا شهری که شرکت در آن واقع شده را انتخاب کنید" }),
+  about: z.string().min(3, { message: "متن معرفی شرکت کوتاه است" }),
+  activity: z.string()
+    .min(3, { message: "متن حوزه فعالیت کوتاه است" })
+    .max(64, { message: "متن حوزه فعالیت نمی‌تواند طولانی باشد" }),
+  fileSize: z.number()
+    .min(1, { message: "لطفا یک عکس انتخاب کنید" })
+    .max(1024 * 1024 * 3, { message: "حجم عکس نباید بیشتر از 3 مگابایت باشد" })
 })
+export type ProfileSchemaT = z.infer<typeof profileSchema>
 
 // new jobAd
 export const newJobAdSchema = z.object({
@@ -77,3 +89,4 @@ export const newJobAdSchema = z.object({
   cooperationType: z.string().min(1, { message: "لطفا نوع قرارداد را انتخاب کنید" }),
   tags: z.string().array().min(1, { message: "لطفا حداقل یک تگ شغلی انتخاب کنید" }),
 })
+export type NewJobAdSchemaT = z.infer<typeof newJobAdSchema>

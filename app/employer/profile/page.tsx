@@ -13,6 +13,7 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react"
 
+import FormStateT from "@/types/formState.types"
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
 import changeProfile from "@/app/actions/changeProfile"
 import Button from "@/components/Button"
@@ -23,16 +24,10 @@ import SelectBox from "@/components/form/SelectBox"
 import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 
-export type ProfileFormT = {
-  isSuccess?: boolean
-  message?: string | undefined
-  fields: {[key: string]: string}
-}
-
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
   const { data: company } = useSWR("/api/getMe", getMeFetcher)
-  const [formState, setFormState] = useState<ProfileFormT>({ fields: {} })
+  const [formState, setFormState] = useState<FormStateT>({ fields: {} })
 
   return (
     <form
@@ -53,11 +48,11 @@ const Page = () => {
           </Label>
           <Input
             id="name"
-            error={formState.fields.name}
             type="text"
-            placeholder="مثل جاب‌ویژن"
             name="name"
             defaultValue={company?.name || ""}
+            placeholder="مثل جاب‌ویژن"
+            error={formState.fields.name}
           />
         </div>
         <div className="w-1/2 mr-3">
@@ -67,11 +62,11 @@ const Page = () => {
           </Label>
           <Input
             id="year"
-            error={formState.fields.year}
             type="number"
-            placeholder="سال 1384"
             name="year"
             defaultValue={company?.year || ""}
+            placeholder="سال 1384"
+            error={formState.fields.year}
           />
         </div>
       </div>
@@ -84,11 +79,11 @@ const Page = () => {
           </Label>
           <Input
             id="minEmployee"
-            error={formState.fields.minEmployee?.toString()}
             type="number"
-            placeholder="از 10 نفر"
             name="minEmployee"
             defaultValue={company?.employees[0] || ""}
+            placeholder="از 10 نفر"
+            error={formState.fields.minEmployee?.toString()}
           />
         </div>
         <div className="w-1/2 mr-3">
@@ -98,11 +93,11 @@ const Page = () => {
           </Label>
           <Input
             id="maxEmployee"
-            error={formState.fields.maxEmployee?.toString()}
             type="number"
-            placeholder="تا 15 نفر"
             name="maxEmployee"
             defaultValue={company?.employees[1] || ""}
+            placeholder="تا 15 نفر"
+            error={formState.fields.maxEmployee?.toString()}
           />
         </div>
       </div>
@@ -111,7 +106,7 @@ const Page = () => {
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
-      <SelectBox id="city" name="city">
+      <SelectBox id="city" name="city" error={formState.fields.city}>
         <option value={company?.city_id || ""}>
           {company?.city?.name || "یک شهر انتخاب کنید"}
         </option>
@@ -133,6 +128,7 @@ const Page = () => {
         placeholder="مثلا ما برای بهبود نیروی استخدامی شرکت ها کمک می‌کنیم..."
         name="about"
         defaultValue={company?.about || ""}
+        error={formState.fields.about}
       />
 
       <Label className="mt-6" htmlFor="activity">
@@ -141,11 +137,11 @@ const Page = () => {
       </Label>
       <Input
         id="activity"
-        error={formState.fields.activity}
         type="text"
-        placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
         name="activity"
         defaultValue={company?.activity || ""}
+        placeholder="مثلا ما سیستم اتصال کارفرمایان به نیروی کار رو توسعه می‌دهیم..."
+        error={formState.fields.activity}
       />
 
       <Label className="mt-6" htmlFor="file">
@@ -155,9 +151,9 @@ const Page = () => {
       <Input
         id="file"
         type="file"
-        placeholder="فرمت های png"
-        accept=".png, .jpg, .jpeg"
         name="file"
+        accept=".png, .jpg, .jpeg"
+        error={formState.fields.fileSize}
       />
 
       <Label className="mt-6" htmlFor="knowledgeBased">

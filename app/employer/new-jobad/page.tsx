@@ -21,6 +21,7 @@ import {
   IconWorld,
 } from "@tabler/icons-react"
 
+import FormStateT from "@/types/formState.types"
 import { contentFetcher } from "@/utils/fetcher"
 import addNewJobAd from "@/app/actions/addNewJobAd"
 import Input from "@/components/form/Input"
@@ -33,15 +34,9 @@ import Button from "@/components/Button"
 import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 
-export type newJobAdFormT = {
-  isSuccess?: boolean
-  message?: null | string
-  fields: { [key: string]: string }
-}
-
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const [formState, setFormState] = useState<newJobAdFormT>({ fields: {} })
+  const [formState, setFormState] = useState<FormStateT>({ fields: {} })
   const [showMaxSalary, setShowMaxSalary] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 

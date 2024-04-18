@@ -1,19 +1,19 @@
 "use server"
 
-import { getErrors, newJobAdSchema } from "@/utils/lib/zod-schemas"
-import { newJobAdFormT } from "../employer/new-jobad/page"
+import { NewJobAdSchemaT, getErrors, newJobAdSchema } from "@/utils/lib/zod-schemas"
 import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
+import FormStateT from "@/types/formState.types"
 
 const addNewJobAd = async (formData: FormData) => {
   const title = formData.get("title") as string
   const description = formData.get("description") as string
   const workTimes = formData.get("workTimes") as string
   const businessTrips = formData.get("businessTrips") as string
-  const minAge = parseInt(formData.get("minAge") as string) || undefined
-  const maxAge = parseInt(formData.get("maxAge") as string) || undefined
-  const minSalary = parseInt(formData.get("minSalary") as string) || undefined
-  const maxSalary = parseInt(formData.get("maxSalary") as string) || undefined
+  const minAge = formData.get("minAge") as string
+  const maxAge = formData.get("maxAge") as string
+  const minSalary = formData.get("minSalary") as string
+  const maxSalary = formData.get("maxSalary") as string
   const showMaxSalary = formData.get("show-maxSalary") as ("on" | null)
   const gender = formData.get("gender") as ("male" | "female" | "")
   const category = formData.get("category") as string
@@ -28,30 +28,29 @@ const addNewJobAd = async (formData: FormData) => {
   const isUrgent = formData.get("is_urgent") as ("on" | null)
   const isRemote = formData.get("is_remote") as ("on" | null)
 
-  const fields = {
+  const fields: NewJobAdSchemaT = {
     title,
     description,
     workTimes,
     businessTrips,
     age: {
-      minAge,
-      maxAge,
+      minAge: +minAge,
+      maxAge: +maxAge,
     },
     salary: {
-      minSalary,
-      maxSalary,
+      minSalary: +minSalary,
+      maxSalary: +maxSalary,
       showMaxSalary: showMaxSalary === "on",
     },
-    gender,
     category,
     cooperationType,
     tags: JSON.parse(tags),
   }
   const checkFields = newJobAdSchema.safeParse(fields)
-  const newJobAdState: newJobAdFormT = {
+  const formState: FormStateT = {
     fields: checkFields.success ? {} : getErrors(checkFields.error)
   }
-  if (!checkFields.success) return newJobAdState
+  if (!checkFields.success) return formState
 
   try {
     const user = await getMe()
@@ -66,10 +65,8 @@ const addNewJobAd = async (formData: FormData) => {
           description,
           work_times: workTimes,
           business_trips: businessTrips,
-          age: [minAge, maxAge] as number[],
-          salary: showMaxSalary === "on"
-            ? ([minSalary, maxSalary] as number[])
-            : ([minSalary] as number[]),
+          age: [+minAge, +maxAge],
+          salary: showMaxSalary === "on" ? [+minSalary, +maxSalary] : [+minSalary],
           gender: gender === "male",
           benefits: JSON.parse(benefits),
           abilities: JSON.parse(abilities),
@@ -88,15 +85,15 @@ const addNewJobAd = async (formData: FormData) => {
         }
       })
 
-      newJobAdState.isSuccess = true
-      newJobAdState.message = null
-      return newJobAdState
+      formState.isSuccess = true
+      formState.message = null
+      return formState
     }
   } catch (error) {
     console.log("Unknown server error on create new [jobAds] --->", error)
-    newJobAdState.isSuccess = false
-    newJobAdState.message = "هنگام ایجاد آگهی خطایی رخ داده است، لطفا بعدا تلاش کنید."
-    return newJobAdState
+    formState.isSuccess = false
+    formState.message = "هنگام ایجاد آگهی خطایی رخ داده است، لطفا بعدا تلاش کنید."
+    return formState
   }
 }
 

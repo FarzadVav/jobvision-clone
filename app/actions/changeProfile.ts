@@ -4,35 +4,40 @@ import { unlink, writeFile } from "fs"
 import path from "path"
 import { v1 as uuid } from "uuid"
 
-import { getErrors, profileSchema } from "@/utils/lib/zod-schemas"
-import { ProfileFormT } from "../employer/profile/page"
+import { ProfileSchemaT, getErrors, profileSchema } from "@/utils/lib/zod-schemas"
 import { prisma } from "@/utils/lib/client"
 import getMe from "./getMe"
+import FormStateT from "@/types/formState.types"
 
 const changeProfile = async (formData: FormData) => {
-  const name = formData.get("name") as string | null
-  const year = formData.get("year") as string | null
-  const minEmployee = parseInt(formData.get("minEmployee") as string) || undefined
-  const maxEmployee = parseInt(formData.get("maxEmployee") as string) || undefined
-  const city = formData.get("city") as string | null
-  const about = formData.get("about") as string | null
-  const activity = formData.get("activity") as string | null
+  const name = formData.get("name") as string
+  const year = formData.get("year") as string
+  const minEmployee = formData.get("minEmployee") as string
+  const maxEmployee = formData.get("maxEmployee") as string
+  const city = formData.get("city") as string
+  const about = formData.get("about") as string
+  const activity = formData.get("activity") as string
   const file = formData.get("file") as File
-  const knowledgeBased = formData.get("knowledgeBased") as "on" | null
+  const knowledgeBased = formData.get("knowledgeBased") as "on"
 
-  const fields = {
+  const fields: ProfileSchemaT = {
     name,
     year,
-    minEmployee,
-    maxEmployee,
-    activity
+    employee: {
+      minEmployee: +minEmployee,
+      maxEmployee: +maxEmployee,
+    },
+    city,
+    about,
+    activity,
+    fileSize: file.size
   }
   const checkFields = profileSchema.safeParse(fields)
 
-  const profileState: ProfileFormT = {
+  const formState: FormStateT = {
     fields: checkFields.success ? {} : getErrors(checkFields.error)
   }
-  if (!checkFields.success) return profileState
+  if (!checkFields.success) return formState
 
   try {
     const user = await getMe()
@@ -40,11 +45,11 @@ const changeProfile = async (formData: FormData) => {
       where: { email: user?.email },
       data: {
         name,
-        year: year ? parseInt(year) : null,
+        year: parseInt(year),
         about,
         activity,
-        city_id: city || null,
-        employees: [minEmployee || 2, maxEmployee || 10],
+        city_id: city,
+        employees: [+minEmployee, +maxEmployee],
         knowledgeBased: knowledgeBased === "on"
       }
     })
@@ -72,14 +77,14 @@ const changeProfile = async (formData: FormData) => {
       )
     }
 
-    profileState.isSuccess = true
-    profileState.message = undefined
-    return profileState
+    formState.isSuccess = true
+    formState.message = undefined
+    return formState
   } catch (error) {
     console.log("Unknown server error on update [companies] --->", error)
-    profileState.isSuccess = false
-    profileState.message = "هنگام ثبت اطلاعات شما خطایی رخ داده است، لطفا بعدا تلاش کنید."
-    return profileState
+    formState.isSuccess = false
+    formState.message = "هنگام ثبت اطلاعات شما خطایی رخ داده است، لطفا بعدا تلاش کنید."
+    return formState
   }
 }
 
