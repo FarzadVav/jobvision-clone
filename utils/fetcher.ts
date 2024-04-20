@@ -3,13 +3,17 @@ import JobAdsT from "@/types/jobads.types";
 import { FILTER_KEYS } from "./initialData";
 import CompaniesT from "@/types/companies.types";
 
+export const getMeFetcher = () => fetch("/api/getMe")
+  .then((res) => res.json())
+  .then((data) => data as Omit<CompaniesT, "job_ads">)
+
 export const contentFetcher = () => fetch("/api/content")
   .then((res) => res.json())
   .then((data) => data as ContentT)
 
-export const getMeFetcher = () => fetch("/api/getMe")
-  .then((res) => res.json())
-  .then((data) => data as Omit<CompaniesT, "job_ads">)
+export const companiesFetcher = () => fetch("/api/companies")
+  .then(res => res.json())
+  .then(data => data as CompaniesT[])
 
 export const jobAdsFetcher = async () => {
   const res = await fetch("/api/jobads")
@@ -58,11 +62,11 @@ export const jobAdsFilterFetcher = async () => {
   if (salary) {
     const arraySalary = salary.split("-")
     data = data.filter(jobAd => {
-      const jobAdSalary = Array.from(jobAd.salary as [] || [])
+      const jobAdSalary = Array.from(jobAd.salary || []) as [number, number?]
       if (
-        +jobAdSalary[0] >= +arraySalary[0]
-        && +jobAdSalary[0] < +arraySalary[1]
-        && (+jobAdSalary[1] || 0) <= +arraySalary[1]
+        jobAdSalary[0] >= +arraySalary[0]
+        && jobAdSalary[0] < +arraySalary[1]
+        && (jobAdSalary[1] || 0) <= +arraySalary[1]
       ) {
         return jobAd
       }

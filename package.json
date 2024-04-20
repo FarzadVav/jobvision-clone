@@ -23,6 +23,7 @@
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-spinners": "^0.13.8",
+    "swiper": "^11.1.1",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.1",
     "uuid": "^9.0.1",

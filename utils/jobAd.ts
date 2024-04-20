@@ -8,8 +8,10 @@ export const salaryCalculationForView = (salary: [number, number?]) => {
 
 export const releaseDateCalculation = (date: Date) => {
   const now = new Date()
-  const differenceInTime = date.getTime() - now.getTime()
+  const differenceInTime = now.getTime() - date.getTime()
   const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24))
 
-  return differenceInDays > 0 ? + `${differenceInDays} روز گذشته` : "امروز"
+  console.log("days --->", differenceInDays)
+
+  return differenceInDays > 0 ? `${differenceInDays} روز گذشته` : "امروز"
 }

@@ -15,7 +15,7 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
   return (
     <div
       className={cn(
-        "bg-white text-dark border border-solid border-light w-56 p-3 rounded-md",
+        "bg-white text-dark border border-solid border-light w-56 h-[17rem] flex flex-col p-3 rounded-md",
         className
       )}
     >
@@ -35,7 +35,7 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
         <IconStarFilled className="icon-xs text-warning" />
         <span className="text-xs h-3 inline-block mr-1.5">{company.score}</span>
       </div>
-      <Link className="w-max text-sm flex items-center mt-2" href={""}>
+      <Link className="w-max text-sm flex items-center mt-1.5" href={""}>
         {company.job_ads.length ? (
           <Button className="px-0" variant={"link"} size={"sm"}>
             {company.job_ads.length} آگهی شغلی
@@ -45,7 +45,7 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
           "بدون آگهی شغلی"
         )}
       </Link>
-      <Button className="w-full mt-3" variant={"fill"}>
+      <Button className="w-full mt-auto" variant={"fill"}>
         دنبال کردن
       </Button>
     </div>
