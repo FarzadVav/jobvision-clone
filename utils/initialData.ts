@@ -66,12 +66,12 @@ export const FILTER_KEYS = {
 
 export const SALARY_FILTERS: [number, number][] = [
   [0, 5],
-  [5, 10],
-  [10, 15],
-  [15, 25],
-  [25, 35],
-  [35, 60],
-  [60, 100]
+  [0, 10],
+  [10, 20],
+  [20, 30],
+  [30, 40],
+  [40, 60],
+  [60, 100],
 ]
 
 export const ACCORDIONS: { title: string; text: string }[] = [

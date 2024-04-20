@@ -62,7 +62,7 @@ export const jobAdsFilterFetcher = async () => {
   if (salary) {
     const arraySalary = salary.split("-")
     data = data.filter(jobAd => {
-      const jobAdSalary = Array.from(jobAd.salary || []) as [number, number?]
+      const jobAdSalary = jobAd.salary as [number, number?]
       if (
         jobAdSalary[0] >= +arraySalary[0]
         && jobAdSalary[0] < +arraySalary[1]
