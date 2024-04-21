@@ -150,12 +150,12 @@ a {
     background: transparent;
   }
 
-  .bordered-text {
-    @apply border-r border-solid border-light pr-2.5 mr-2.5;
+  .hero-section_box {
+    @apply border border-solid flex justify-center items-center text-sm px-3 py-1 rounded;
   }
 
-  .left-bordered-text {
-    @apply border-l border-solid border-light pl-2.5 ml-2.5;
+  .hero-section_box span {
+    @apply mr-3 mt-0.5;
   }
 
   .honor-box {
@@ -164,6 +164,14 @@ a {
 
   .honor-box svg {
     @apply w-10 h-10 text-primary sm:w-12 sm:h-12;
+  }
+
+  .bordered-text {
+    @apply border-r border-solid border-light pr-2.5 mr-2.5;
+  }
+
+  .left-bordered-text {
+    @apply border-l border-solid border-light pl-2.5 ml-2.5;
   }
 
   .selected-jobad_wrap-list {

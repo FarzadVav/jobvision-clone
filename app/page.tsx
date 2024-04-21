@@ -26,58 +26,56 @@ import Accordion from "@/components/accordions/Accordion"
 const Page = () => {
   return (
     <>
-      <div className="container">
-        <main className={"w-full flex flex-col justify-center items-center mt-12"}>
-          <div className={"w-full flex justify-between items-center"}>
-            <div
-              className={
-                "w-full flex flex-col justify-center items-center text-center lg:text-right lg:items-start xl:pl-24"
-              }
-            >
-              <Title size={"md"}>
-                <h1>
-                  بین
-                  <span className={"dana-bold text-primary underline mx-2 sm:mx-3"}>37,540</span>
-                  آگهی مختلف,
-                  <br />
-                  شغل رویایی خودت رو پیدا کن و استخدام شو!
-                </h1>
-              </Title>
-              <ul className="w-full flex items-center mt-5">
-                <li className="bg-primary/10 text-primary border border-solid border-primary/25 flex items-center text-sm px-3 py-1 rounded">
-                  <IconSearch className="icon-sm" />
-                  <span className="mr-3 mt-0.5">فیلتر سرچ پیشرفته</span>
-                </li>
-                <li className="bg-sky-50 text-sky-500 border border-solid border-sky-200 flex items-center text-sm px-3 py-1 mr-3 rounded">
-                  <IconFile className="icon-sm" />
-                  <span className="mr-3 mt-0.5">ارسال رزومه</span>
-                </li>
-                <li className="text-2xl mx-3 mt-1">&</li>
-                <li className="bg-success/10 text-success border border-solid border-success/25 flex items-center text-sm px-3 py-1 rounded">
-                  <IconFlame className="icon-sm" />
-                  <span className="mr-3 mt-0.5">رقابت و استخدام</span>
-                </li>
-              </ul>
-              <p className="mt-4 lg:text-justify">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع کاربردی می باشد.
-              </p>
-              <div className={"hidden items-center mt-9 lg:flex"}>
-                <Button size={"lg"} variant={"primary"}>
-                  شروع رایگان
-                  <IconArrowLeft className="icon-lg" />
-                </Button>
-                <Button className="mr-3" size={"lg"} variant={"link"}>
-                  ساخت رزومه
-                </Button>
-              </div>
-            </div>
-            <div className={"min-w-[450px] hidden justify-center items-center lg:flex"}>
-              <IranAnimation />
+      <div className="container mt-12">
+        <div className={"w-full flex"}>
+          <div
+            className={
+              "w-full flex flex-col justify-center items-center text-center lg:text-right lg:items-start xl:pl-24"
+            }
+          >
+            <Title className="max-sm:text-2xl max-sm:leading-relaxed max-lg:justify-center" size={"md"}>
+              <h1>
+                بین
+                <span className={"dana-bold text-primary underline mx-2 sm:mx-3"}>37,540</span>
+                آگهی مختلف,
+                <br />
+                شغل رویایی خودت رو پیدا کن و استخدام شو!
+              </h1>
+            </Title>
+            <ul className="w-full flex items-center gap-3 mt-5 max-sm:hidden max-lg:justify-center">
+              <li className="hero-section_box bg-primary/10 text-primary border-primary/25">
+                <IconSearch className="icon-sm" />
+                <span>فیلتر سرچ پیشرفته</span>
+              </li>
+              <li className="hero-section_box bg-sky-50 text-sky-500 border-sky-200">
+                <IconFile className="icon-sm" />
+                <span>ارسال رزومه</span>
+              </li>
+              <li className="text-2xl mt-1 max-sm:hidden">&</li>
+              <li className="hero-section_box bg-success/10 text-success border-success/25">
+                <IconFlame className="icon-sm" />
+                <span>رقابت و استخدام</span>
+              </li>
+            </ul>
+            <p className="mt-4 lg:text-justify">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان شرایط
+              فعلی تکنولوژی مورد نیاز و کاربردهای متنوع کاربردی می باشد.
+            </p>
+            <div className={"hidden items-center mt-9 lg:flex"}>
+              <Button size={"lg"} variant={"primary"}>
+                شروع رایگان
+                <IconArrowLeft className="icon-lg" />
+              </Button>
+              <Button className="mr-3" size={"lg"} variant={"link"}>
+                ساخت رزومه
+              </Button>
             </div>
           </div>
-        </main>
-        <SearchForm className="mt-12" />
+          <div className={"min-w-[450px] hidden justify-center items-center lg:flex"}>
+            <IranAnimation />
+          </div>
+        </div>
+        <SearchForm className="mt-6 sm:mt-9 lg:mt-12" />
 
         <CompaniesCarousel className="mt-12" />
 

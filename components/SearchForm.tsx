@@ -19,7 +19,7 @@ const SearchForm = ({ className }: { className?: string }) => {
 
   return (
     <form
-      className={cn("flex items-center gap-3", className)}
+      className={cn("flex items-center gap-3 max-lg:flex-col", className)}
       ref={formRef}
       action={async (formData: FormData) => {
         await search(formData)
@@ -31,21 +31,25 @@ const SearchForm = ({ className }: { className?: string }) => {
         defaultValue={searchParams.get(FILTER_KEYS.search) || ""}
         name={FILTER_KEYS.search}
       />
-      <AutoComplete
-        placeholder="گروه شغلی"
-        defaultValue={searchParams.get(FILTER_KEYS.category) || ""}
-        name={FILTER_KEYS.category}
-        data={content?.categories.map((category) => category.name) || []}
-      />
-      <AutoComplete
-        placeholder="شهر"
-        defaultValue={searchParams.get(FILTER_KEYS.city) || ""}
-        name={FILTER_KEYS.city}
-        data={content?.cities.map((city) => city.name) || []}
-      />
-      <Button variant={"primary"} size={"lg"}>
-        جستجو
-      </Button>
+      <div className="w-full flex items-center gap-3 max-sm:flex-col">
+        <AutoComplete
+          placeholder="گروه شغلی"
+          defaultValue={searchParams.get(FILTER_KEYS.category) || ""}
+          name={FILTER_KEYS.category}
+          data={content?.categories.map((category) => category.name) || []}
+          autoComplete="off"
+        />
+        <AutoComplete
+          placeholder="شهر"
+          defaultValue={searchParams.get(FILTER_KEYS.city) || ""}
+          name={FILTER_KEYS.city}
+          data={content?.cities.map((city) => city.name) || []}
+          autoComplete="off"
+        />
+        <Button className="max-sm:w-full" variant={"primary"} size={"lg"}>
+          جستجو
+        </Button>
+      </div>
     </form>
   )
 }

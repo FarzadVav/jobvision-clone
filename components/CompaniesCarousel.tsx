@@ -20,14 +20,15 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
         className={cn("w-full rounded-md", className)}
         navigation
         spaceBetween={12}
+        slidesPerView={"auto"}
         breakpoints={{
-          540: {
-            slidesPerView: 3,
-          },
-          768: {
-            slidesPerView: 3,
+          640: {
+            slidesPerView: 2,
           },
           1024: {
+            slidesPerView: 4,
+          },
+          1280: {
             slidesPerView: 5,
           },
         }}
@@ -38,7 +39,7 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
         modules={[Autoplay, Navigation]}
       >
         {companies?.map((company) => (
-          <SwiperSlide key={uuid()} className="h-[17rem] pb-6">
+          <SwiperSlide key={uuid()} className="h-[17rem] pb-6 max-sm:!w-2/3">
             <CompanyBox key={uuid()} className="min-w-full" company={company} />
           </SwiperSlide>
         ))}

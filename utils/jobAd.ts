@@ -11,7 +11,5 @@ export const releaseDateCalculation = (date: Date) => {
   const differenceInTime = now.getTime() - date.getTime()
   const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24))
 
-  console.log("days --->", differenceInDays)
-
   return differenceInDays > 0 ? `${differenceInDays} روز گذشته` : "امروز"
 }
