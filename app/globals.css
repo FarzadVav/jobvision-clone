@@ -159,7 +159,7 @@ a {
   }
 
   .honor-box {
-    @apply w-1/2 flex flex-col items-center md:w-max;
+    @apply w-1/2 flex flex-col items-center lg:w-1/4;
   }
 
   .honor-box svg {

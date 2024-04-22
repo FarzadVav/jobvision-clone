@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { IconChevronDown } from "@tabler/icons-react"
 
@@ -46,18 +45,18 @@ const ToggalableSectionOfFooter = () => {
         <Title size={"sm"} className="mt-6">
           آخرین مطالب بلاگ
         </Title>
-        <ul className="flex flex-col items-center mt-3 sm:flex-row">
+        <ul className="flex flex-col items-center gap3 mt-3 sm:flex-row">
           <li className="max-sm:w-full">
             <Button className="bg-white/5 w-full">
               راهنمای جامع استخدام
             </Button>
           </li>
-          <li className="max-sm:w-full sm:mr-3">
+          <li className="max-sm:w-full">
             <Button className="bg-white/5 w-full">
               راهنمای جامع رزومه نویسی برای کارجویان
             </Button>
           </li>
-          <li className="max-sm:w-full sm:mr-3">
+          <li className="max-sm:w-full">
             <Button className="bg-white/5 w-full">
               گزارش افزایش حقوق 1402 کارگران
             </Button>

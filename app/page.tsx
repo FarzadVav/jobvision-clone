@@ -26,14 +26,14 @@ import Accordion from "@/components/accordions/Accordion"
 const Page = () => {
   return (
     <>
-      <div className="container mt-12">
+      <div className="container my-12">
         <div className={"w-full flex"}>
           <div
             className={
               "w-full flex flex-col justify-center items-center text-center lg:text-right lg:items-start xl:pl-24"
             }
           >
-            <Title className="max-sm:text-2xl max-sm:leading-relaxed max-lg:justify-center" size={"md"}>
+            <Title className="max-sm:text-2xl max-sm:leading-relaxed max-lg:justify-center">
               <h1>
                 بین
                 <span className={"dana-bold text-primary underline mx-2 sm:mx-3"}>37,540</span>
@@ -89,15 +89,15 @@ const Page = () => {
 					md:flex-row md:justify-evenly md:px-0 md:py-9"
         >
           <div className="flex flex-col justify-center items-center md:items-start md:w-1/2">
-            <Title>
+            <Title className="max-md:justify-center max-md:mt-6">
               <h3>استخدام‌های سراسری و دولتی</h3>
             </Title>
-            <p className="mt-3 text-justify md:text-right">
+            <p className="mt-3 text-center md:text-right">
               در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و منتشر
               می‌شوند، به سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز
               شوید.
             </p>
-            <Button className="mt-5" variant={"dark"}>
+            <Button className="mt-4" variant={"dark"}>
               مشاهده فرصت‌های شغلی
             </Button>
           </div>
@@ -109,12 +109,12 @@ const Page = () => {
           />
         </div>
 
-        <Title className={"justify-center mt-12"}>
+        <Title className={"justify-center mt-16"} size={"lg"}>
           <h4>
             <span className="text-primary ml-1">جاب‌ویژن</span> دستیار استخدامی شما
           </h4>
         </Title>
-        <div className="mt-10 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 md:mt-12 lg:gap-24 xl:gap-28">
+        <div className="flex flex-wrap items-center gap-y-9 sm:gap-y-12 md:mt-14">
           <HonorBox icon={<IconUsersGroup />} count={2_000_000} text={"کارجوهای همراه ما"} />
           <HonorBox icon={<IconBuildingCommunity />} count={59_900} text={"سازمان همراه شما"} />
           <HonorBox icon={<IconBriefcase />} count={38_000} text={"موقعیت‌ شغلی فعال"} />
@@ -136,12 +136,12 @@ const Page = () => {
           />
         </div>
 
-        <Title className={"justify-center mt-12"}>
+        <Title className={"justify-center mt-16"} size={"lg"}>
           <h6>
-            چرا باید <span className="text-primary">جاب‌ویژن</span> را انتخاب کنید
+            چرا باید <span className="text-primary mx-1.5">جاب‌ویژن</span> را انتخاب کنید
           </h6>
         </Title>
-        <ul className="w-full flex flex-col justify-center items-center pr-1 mt-8 relative sm:pl-0 sm:pr-16">
+        <ul className="w-full flex flex-col justify-center items-center pr-1 mt-12 relative sm:pr-16">
           <div className="bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block"></div>
           {ACCORDIONS.map((accordion, index) => (
             <Accordion key={uuid()} length={index + 1} {...accordion} />
@@ -149,7 +149,7 @@ const Page = () => {
         </ul>
       </div>
 
-      <div className="bg-gradient-to-t from-light to-white w-full hidden flex-col items-center py-9 mt-12 sm:flex">
+      <div className="bg-gradient-to-t from-light to-white w-full hidden flex-col items-center py-9 sm:flex">
         <Title className="justify-center" size={"lg"}>
           <h6>زندگی شغلی رویایی خود را بسازید</h6>
         </Title>

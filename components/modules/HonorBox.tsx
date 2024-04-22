@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import Title from "../Title"
 
 type HonorBoxProps = {
   icon: ReactNode
@@ -11,7 +12,10 @@ const HonorBox = ({ icon, count, text }: HonorBoxProps) => {
     <div className="honor-box">
       {icon}
       <span className="dana-bold sm:text-[1.2rem] mt-2.5 sm:mt-4">{count.toLocaleString()} +</span>
-      <span className="dana-bold text-[1.1rem] sm:text-xl mt-1 sm:mt-2.5">{text}</span>
+      <Title className="justify-center mt-1.5" font={"danaBold"} size={"sm"}>
+        {text}
+      </Title>
+      {/* <span className="dana-bold text-[1.1rem] sm:text-xl mt-1 sm:mt-2.5">{text}</span> */}
     </div>
   )
 }
