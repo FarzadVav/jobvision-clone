@@ -17,7 +17,7 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
   return (
     <>
       <Swiper
-        className={cn("w-full rounded-md", className)}
+        className={cn("w-full h-[17rem] rounded-md", className)}
         navigation
         spaceBetween={12}
         slidesPerView={"auto"}

@@ -10,14 +10,21 @@ export const CATEGORIES: Categories[] = [
 export const TAGS: Tags[] = [
   { id: uuid(), name: "فرانت اند", category_id: CATEGORIES[0].id },
   { id: uuid(), name: "بک اند", category_id: CATEGORIES[0].id },
+  { id: uuid(), name: "فول استک", category_id: CATEGORIES[0].id },
+  { id: uuid(), name: "هوش مصنوعی", category_id: CATEGORIES[0].id },
+  { id: uuid(), name: "کارشناس DevOps", category_id: CATEGORIES[0].id },
   { id: uuid(), name: "موبایل android", category_id: CATEGORIES[0].id },
   { id: uuid(), name: "موبایل ios", category_id: CATEGORIES[0].id },
 
   { id: uuid(), name: "طراح رابط کاربری", category_id: CATEGORIES[1].id },
+  { id: uuid(), name: "طراح لوگو", category_id: CATEGORIES[1].id },
+  { id: uuid(), name: "طراح سه بعدی", category_id: CATEGORIES[1].id },
   { id: uuid(), name: "فتوشاپ", category_id: CATEGORIES[1].id },
   { id: uuid(), name: "طراح مانگا", category_id: CATEGORIES[1].id },
 
   { id: uuid(), name: "دیجیتال مارکتر", category_id: CATEGORIES[2].id },
+  { id: uuid(), name: "وب مستر", category_id: CATEGORIES[2].id },
+  { id: uuid(), name: "سئو", category_id: CATEGORIES[2].id },
   { id: uuid(), name: "فیسبوک ads", category_id: CATEGORIES[2].id },
   { id: uuid(), name: "بازاریاب", category_id: CATEGORIES[2].id },
 ]

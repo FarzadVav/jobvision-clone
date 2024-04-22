@@ -26,25 +26,29 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
         height={80}
         width={80}
       />
-      <Link className="dana-bold inline-block mt-3" href={""}>
-        <Button className="text-dark px-0 hover:decoration-dark" variant={"link"}>
-          {company.name || "شرکت ناشناس"}
-        </Button>
+      <Link
+        className="dana-bold underline decoration-transparent inline-block mt-4 transition-all hover:decoration-dark"
+        href={""}
+      >
+        {company.name || "شرکت ناشناس"}
       </Link>
-      <div className="flex items-center">
+      <div className="flex items-center mt-2">
         <IconStarFilled className="icon-xs text-warning" />
         <span className="text-xs h-3 inline-block mr-1.5">{company.score}</span>
       </div>
-      <Link className="w-max text-sm flex items-center mt-1.5" href={""}>
+      <div className="text-sm mt-3">
         {company.job_ads.length ? (
-          <Button className="px-0" variant={"link"} size={"sm"}>
+          <Link
+            className="text-primary underline flex items-center gap-2 decoration-transparent transition-all hover:decoration-primary"
+            href={""}
+          >
             {company.job_ads.length} آگهی شغلی
             <IconArrowLeft className="icon-sm" />
-          </Button>
+          </Link>
         ) : (
           "بدون آگهی شغلی"
         )}
-      </Link>
+      </div>
       <Button className="w-full mt-auto" variant={"fill"}>
         دنبال کردن
       </Button>
