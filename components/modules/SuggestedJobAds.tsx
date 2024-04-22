@@ -39,41 +39,41 @@ const SuggestedJobAds = () => {
       >
         {prevCategories.length ? "مشاغل پیشنهادی" : "لیست مشاغل"}
       </BreakLine>
-      <div className="h-[26.75rem] w-full flex flex-wrap gap-3 mt-6">
+      <div className="h-[calc(13rem*5+0.75rem*4)] w-full flex flex-wrap gap-3 mt-6 md:h-[calc(13rem*3+0.75rem*2)] lg:h-[calc(13rem*2+0.75rem)]">
         {jobAds
           ? jobAds
               .slice(0, 5)
               .map((jobAd) => (
                 <JobAdBox
-                  className="w-[calc(33.333333%-(0.75rem-0.75rem/3))]"
+                  className="w-full md:w-[calc(50%-(0.75rem-0.75rem/2))] lg:w-[calc(33.333333%-(0.75rem-0.75rem/3))]"
                   key={uuid()}
                   jobAd={jobAd}
                 />
               ))
           : null}
-        <div className="h-52 max-h-52 w-[calc(33.333333%-(0.75rem-0.75rem/3))]">
+        <div className="h-52 max-h-52 w-[calc(50%-(0.75rem-0.75rem/2))] lg:w-[calc(33.333333%-(0.75rem-0.75rem/3))] max-md:hidden">
           {/* <h3 className="dana-bold">بین آگهی ها جستجو کن</h3> */}
           <ul className="w-full flex flex-wrap items-center group">
             {content?.tags.slice(0, 20).map((tag) => (
-              <li className="p-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
+              <li className="py-1.5 px-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
                 <Link
-                  className="bg-light text-xs py-1 px-2.5 rounded-full"
+                  className="bg-light text-sm py-1 px-2.5 rounded-full"
                   href={`/jobs?tag=${tag.id}`}
                 >
                   {tag.name}
                 </Link>
               </li>
             ))}
-            <li className="p-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
-              <span className="bg-light text-xs py-1 px-2.5 rounded-full">...</span>
+            <li className="py-1.5 px-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
+              <span className="bg-light text-sm py-1 px-2.5 rounded-full">...</span>
             </li>
-            <li className="p-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
+            <li className="py-1.5 px-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
               <Link
-                className="bg-primary text-white text-xs flex items-center py-1 px-2.5 rounded-full"
+                className="bg-primary text-white text-sm flex items-center py-1 px-2.5 rounded-full"
                 href={"/jobs"}
               >
                 مشاهده همه
-                <IconArrowLeft className="icon-xs mr-2" />
+                <IconArrowLeft className="icon-sm mr-2" />
               </Link>
             </li>
           </ul>

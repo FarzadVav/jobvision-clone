@@ -55,7 +55,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       className={cn(
         "bg-white ring-1 ring-light h-52 max-h-52 w-full text-xs flex flex-col p-3 rounded-md relative cursor-pointer group",
         isSelected ? "ring-primary/50" : "",
-        jobAd.is_urgent ? "pr-[calc(0.75rem+3px)]" : "",
+        !jobAd.is_urgent ? "pr-[calc(0.75rem+3px)]" : "",
         className
       )}
       onClick={() => {
@@ -65,7 +65,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       data-id={jobAd.id}
       data-category={jobAd.category_id}
     >
-      {jobAd.is_urgent ? (
+      {!jobAd.is_urgent ? (
         <div
           className={`${
             isSelected ? "bg-primary" : "bg-danger"
@@ -75,7 +75,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       <div className="w-full flex">
         <div>
           <Image
-            className="border border-solid border-light text-sm object-fill object-center rounded-md"
+            className="border border-solid border-light min-w-20 min-h-20 text-sm object-cover object-center rounded-md"
             height={80}
             width={80}
             src={jobAd.company.logo || ""}
