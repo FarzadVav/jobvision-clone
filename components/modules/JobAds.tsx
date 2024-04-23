@@ -19,7 +19,7 @@ const JobAds = () => {
   }, [pathname, searchParams])
 
   return (
-    <aside className="bg-white h-max w-1/3 p-3 rounded-md">
+    <aside className="bg-white h-max w-full p-3 rounded-md lg:w-2/5 xl:w-1/3">
       {useMemo(() => {
         return data
           ? data.map((jobAd) => (

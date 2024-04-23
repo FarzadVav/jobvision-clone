@@ -43,32 +43,28 @@ const SuggestedJobAds = () => {
         {jobAds?.map((jobAd) => {
           if (jobAd) {
             return (
-              <JobAdBox
-                className="w-full md:suggested-jobAd_size-1 xl:suggested-jobAd_size-2"
-                key={uuid()}
-                jobAd={jobAd}
-              />
+              <JobAdBox className="md:jobAd_size-1 xl:jobAd_size-2" key={uuid()} jobAd={jobAd} />
             )
           } else {
             return (
               <div
                 key={uuid()}
-                className="suggested-jobAd_size-1 bg-light rounded-md max-md:hidden xl:suggested-jobAd_size-2"
+                className="jobAd_size-1 bg-light rounded-md max-md:hidden xl:jobAd_size-2"
               />
             )
           }
         })}
-        <div className="suggested-jobAd_size-1 h-52 max-h-52 xl:suggested-jobAd_size-2 max-md:hidden">
+        <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2 max-md:hidden">
           <ul className="w-full flex flex-wrap items-center group">
             {content?.tags.slice(0, 18).map((tag) => (
-              <li key={uuid()} className="suggested-link">
+              <li key={uuid()} className="link">
                 <Link href={`/jobs?tag=${tag.id}`}>{tag.name}</Link>
               </li>
             ))}
-            <li className="suggested-link">
+            <li className="link">
               <span>...</span>
             </li>
-            <li className="suggested-link">
+            <li className="link">
               <Link className="bg-primary text-white flex items-center" href={"/jobs"}>
                 مشاهده همه
                 <IconArrowLeft className="icon-sm mr-2" />

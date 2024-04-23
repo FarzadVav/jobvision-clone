@@ -242,14 +242,20 @@ const SelectedJobAd = () => {
                             jobAd.category.name === selectedJobAd.category.name &&
                             jobAd.id !== selectedJobAd.id
                         ).length ? (
-                          <div className="w-full grid grid-cols-1 gap-3 sm:grid-cols-2">
+                          <div className="w-full flex flex-wrap gap-3">
                             {jobAds.map((jobAd2, i) => {
                               if (
                                 i < 6 &&
                                 jobAd2.category.name === selectedJobAd.category.name &&
                                 jobAd2.id !== selectedJobAd.id
                               ) {
-                                return <JobAdBox key={uuid()} jobAd={jobAd2} />
+                                return (
+                                  <JobAdBox
+                                    className="xl:jobAd_size-1"
+                                    key={uuid()}
+                                    jobAd={jobAd2}
+                                  />
+                                )
                               }
                             })}
                           </div>
@@ -278,9 +284,7 @@ const SelectedJobAd = () => {
                     <div className="selected-jobad_wrap-list mt-1.5">
                       <div className="item">
                         <span className="title">سال تاسیس</span>
-                        <p className="text">
-                          {selectedJobAd.company.year || "تازه کار"}
-                        </p>
+                        <p className="text">{selectedJobAd.company.year || "تازه کار"}</p>
                       </div>
                       <div className="item">
                         <span className="title">اندازه سازمان</span>
@@ -291,9 +295,7 @@ const SelectedJobAd = () => {
                       </div>
                       <div className="item">
                         <span className="title">حوزه فعالیت</span>
-                        <p className="text">
-                          {selectedJobAd.company.activity || "مشخص نشده"}
-                        </p>
+                        <p className="text">{selectedJobAd.company.activity || "مشخص نشده"}</p>
                       </div>
                       <div className="item">
                         <span className="title">امتیاز شرکت</span>
@@ -323,13 +325,15 @@ const SelectedJobAd = () => {
                         (job) =>
                           job.company.id === selectedJobAd.company.id && job.id !== selectedJobAd.id
                       ).length ? (
-                        <div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
+                        <div className="w-full flex flex-wrap gap-3">
                           {jobAds.map((job) => {
                             if (
                               job.company.id === selectedJobAd.company.id &&
                               job.id !== selectedJobAd.id
                             ) {
-                              return <JobAdBox key={uuid()} jobAd={job} />
+                              return (
+                                <JobAdBox className="xl:jobAd_size-1" key={uuid()} jobAd={job} />
+                              )
                             }
                           })}
                         </div>

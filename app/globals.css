@@ -158,11 +158,11 @@ a {
     @apply mr-3 mt-0.5;
   }
 
-  .suggested-jobAd_size-1 {
+  .jobAd_size-1 {
     @apply w-[calc(50%-(0.75rem-0.75rem/2))];
   }
 
-  .suggested-jobAd_size-2 {
+  .jobAd_size-2 {
     @apply w-[calc(33.333333%-(0.75rem-0.75rem/3))];
   }
 
@@ -207,24 +207,24 @@ a {
   }
 
   .selected-jobAd_ability {
-    @apply w-full h-11 flex items-center;
+    @apply w-full h-9 flex items-center xl:h-11;
   }
 
   .selected-jobAd_ability .key,
   .selected-jobAd_ability .value {
-    @apply bg-light/25 h-full flex items-center py-1.5 px-3 rounded;
+    @apply bg-light/50 h-full text-sm flex items-center px-3 rounded xl:text-base;
   }
 
   .selected-jobAd_ability .key {
-    @apply w-4/12 sm:w-2/12;
+    @apply w-4/12 sm:w-1/5;
   }
 
   .selected-jobAd_ability .value {
-    @apply list-scrollbar w-8/12 mr-2 overflow-x-auto sm:w-10/12;
+    @apply list-scrollbar w-8/12 mr-2 overflow-x-auto sm:w-4/5;
   }
 
   .selected-jobAd_ability .value .list-items {
-    @apply bg-light h-full min-w-max text-sm flex items-center px-3 ml-1.5 rounded last:ml-0;
+    @apply bg-dark text-white min-w-max text-xs flex items-center py-1 px-3 ml-1.5 rounded last:ml-0 xl:text-sm;
   }
 }
 
