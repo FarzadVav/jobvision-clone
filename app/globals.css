@@ -158,6 +158,22 @@ a {
     @apply mr-3 mt-0.5;
   }
 
+  .suggested-jobAd_size-1 {
+    @apply w-[calc(50%-(0.75rem-0.75rem/2))];
+  }
+
+  .suggested-jobAd_size-2 {
+    @apply w-[calc(33.333333%-(0.75rem-0.75rem/3))];
+  }
+
+  .suggested-link {
+    @apply py-1 px-0.5 transition-opacity hover:!opacity-100 group-hover:opacity-50 lg:py-1.5 lg:px-1;
+  }
+
+  .suggested-link > * {
+    @apply bg-light text-xs py-1 px-2.5 rounded-full lg:text-sm;
+  }
+
   .honor-box {
     @apply w-1/2 flex flex-col items-center lg:w-1/4;
   }

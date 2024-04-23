@@ -35,6 +35,20 @@ export const jobAdsFetcher = async () => {
   return [...suggesttedJobAds, ...otherJobAds]
 }
 
+export const suggesttedJobAdsFetcher = async () => {
+  const jobAds: (JobAdsT | undefined)[] = await jobAdsFetcher()
+
+  // add blank jobAd for show skeleton in ui
+  const skeletonCount = 5 - jobAds.length
+  if (skeletonCount > 0) {
+    for (let i = 0; i < skeletonCount; i++) {
+      jobAds.push(undefined)
+    }
+  }
+
+  return jobAds.slice(0, 5)
+}
+
 export const jobAdsFilterFetcher = async () => {
   let data = await jobAdsFetcher()
 

@@ -29,7 +29,6 @@ export const profileSchema = z.object({
     .min(3, { message: "متن حوزه فعالیت کوتاه است" })
     .max(64, { message: "متن حوزه فعالیت نمی‌تواند طولانی باشد" }),
   fileSize: z.number()
-    .min(1, { message: "لطفا یک عکس انتخاب کنید" })
     .max(1024 * 1024 * 3, { message: "حجم عکس نباید بیشتر از 3 مگابایت باشد" })
 })
 export type ProfileSchemaT = z.infer<typeof profileSchema>

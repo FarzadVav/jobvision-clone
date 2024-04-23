@@ -53,7 +53,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   return (
     <article
       className={cn(
-        "bg-white ring-1 ring-light h-52 max-h-52 w-full text-xs flex flex-col p-3 rounded-md relative cursor-pointer group",
+        "bg-white ring-1 ring-light h-52 max-h-52 w-full flex flex-col p-3 rounded-md relative cursor-pointer group",
         isSelected ? "ring-primary/50" : "",
         !jobAd.is_urgent ? "pr-[calc(0.75rem+3px)]" : "",
         className
@@ -86,7 +86,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             <span className="h-3 inline-block mr-1.5">{jobAd.company.score}</span>
           </div>
         </div>
-        <div className="mr-3">
+        <div className="mr-3 text-sm">
           <span className="dana-bold inline-block text-base">
             {jobAd.title.slice(0, 70)}
             {jobAd.title.length > 70 ? "..." : null}

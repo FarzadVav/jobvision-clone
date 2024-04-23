@@ -5,13 +5,13 @@ import useSWR from "swr"
 import { v4 as uuid } from "uuid"
 import { IconArrowLeft } from "@tabler/icons-react"
 
-import { contentFetcher, jobAdsFetcher } from "@/utils/fetcher"
+import { contentFetcher, suggesttedJobAdsFetcher } from "@/utils/fetcher"
 import JobAdBox from "../JobAdBox"
 import BreakLine from "../BreakLine"
 
 const SuggestedJobAds = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const { data: jobAds } = useSWR("/api/jobads", jobAdsFetcher)
+  const { data: jobAds } = useSWR("/api/suggestted-jobads", suggesttedJobAdsFetcher)
   const prevCategories = JSON.parse(localStorage.getItem("prevCategories") || "[]") as string[]
 
   return (
@@ -39,39 +39,37 @@ const SuggestedJobAds = () => {
       >
         {prevCategories.length ? "مشاغل پیشنهادی" : "لیست مشاغل"}
       </BreakLine>
-      <div className="h-[calc(13rem*5+0.75rem*4)] w-full flex flex-wrap gap-3 mt-6 md:h-[calc(13rem*3+0.75rem*2)] lg:h-[calc(13rem*2+0.75rem)]">
-        {jobAds
-          ? jobAds
-              .slice(0, 5)
-              .map((jobAd) => (
-                <JobAdBox
-                  className="w-full md:w-[calc(50%-(0.75rem-0.75rem/2))] lg:w-[calc(33.333333%-(0.75rem-0.75rem/3))]"
-                  key={uuid()}
-                  jobAd={jobAd}
-                />
-              ))
-          : null}
-        <div className="h-52 max-h-52 w-[calc(50%-(0.75rem-0.75rem/2))] lg:w-[calc(33.333333%-(0.75rem-0.75rem/3))] max-md:hidden">
-          {/* <h3 className="dana-bold">بین آگهی ها جستجو کن</h3> */}
+      <div className="w-full flex flex-wrap gap-3 mt-6 md:h-[calc(13rem*3+0.75rem*2)] xl:h-[calc(13rem*2+0.75rem)]">
+        {jobAds?.map((jobAd) => {
+          if (jobAd) {
+            return (
+              <JobAdBox
+                className="w-full md:suggested-jobAd_size-1 xl:suggested-jobAd_size-2"
+                key={uuid()}
+                jobAd={jobAd}
+              />
+            )
+          } else {
+            return (
+              <div
+                key={uuid()}
+                className="suggested-jobAd_size-1 bg-light rounded-md max-md:hidden xl:suggested-jobAd_size-2"
+              />
+            )
+          }
+        })}
+        <div className="suggested-jobAd_size-1 h-52 max-h-52 xl:suggested-jobAd_size-2 max-md:hidden">
           <ul className="w-full flex flex-wrap items-center group">
-            {content?.tags.slice(0, 20).map((tag) => (
-              <li className="py-1.5 px-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
-                <Link
-                  className="bg-light text-sm py-1 px-2.5 rounded-full"
-                  href={`/jobs?tag=${tag.id}`}
-                >
-                  {tag.name}
-                </Link>
+            {content?.tags.slice(0, 18).map((tag) => (
+              <li key={uuid()} className="suggested-link">
+                <Link href={`/jobs?tag=${tag.id}`}>{tag.name}</Link>
               </li>
             ))}
-            <li className="py-1.5 px-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
-              <span className="bg-light text-sm py-1 px-2.5 rounded-full">...</span>
+            <li className="suggested-link">
+              <span>...</span>
             </li>
-            <li className="py-1.5 px-1 transition-opacity group-hover:opacity-50 hover:!opacity-100">
-              <Link
-                className="bg-primary text-white text-sm flex items-center py-1 px-2.5 rounded-full"
-                href={"/jobs"}
-              >
+            <li className="suggested-link">
+              <Link className="bg-primary text-white flex items-center" href={"/jobs"}>
                 مشاهده همه
                 <IconArrowLeft className="icon-sm mr-2" />
               </Link>
