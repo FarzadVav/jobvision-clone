@@ -137,7 +137,7 @@ a {
   }
 
   .list-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--light));
+    background: hsl(var(--dark) / 0.25);
     border-radius: 2px;
   }
 
@@ -190,20 +190,32 @@ a {
     @apply border-l border-solid border-light pl-2.5 ml-2.5;
   }
 
-  .selected-jobad_wrap-list {
-    @apply w-full flex flex-wrap gap-3;
+  .jobAd_company-logo {
+    @apply border border-solid border-light min-w-20 min-h-20 text-sm object-cover object-center rounded-md;
   }
 
-  .selected-jobad_wrap-list .item {
-    @apply w-full sm:w-[calc(50%-0.75rem)];
+  .selected-jobad_details {
+    @apply w-full flex flex-wrap gap-4;
   }
 
-  .selected-jobad_wrap-list .item .title {
-    @apply dana-bold block;
+  .selected-jobad_details .item {
+    @apply w-full flex flex-wrap gap-1.5 sm:w-[calc(50%-(1rem-1rem/2))] sm:flex-col max-sm:justify-between max-sm:items-center max-sm:gap-x-3;
   }
 
-  .selected-jobad_wrap-list .item .text {
-    @apply text-sm mt-1;
+  .selected-jobad_details .item .key {
+    @apply dana-bold;
+  }
+
+  .selected-jobad_details .item .value {
+    @apply flex flex-wrap gap-x-3 gap-y-1 sm:text-sm;
+  }
+
+  .benefit {
+    @apply flex items-center;
+  }
+
+  .benefit > span {
+    @apply mr-2 opacity-25;
   }
 
   .selected-jobAd_ability {
@@ -223,8 +235,12 @@ a {
     @apply list-scrollbar w-8/12 mr-2 overflow-x-auto sm:w-4/5;
   }
 
+  .selected-jobAd_ability .value > * {
+    @apply min-w-max;
+  }
+
   .selected-jobAd_ability .value .list-items {
-    @apply bg-dark text-white min-w-max text-xs flex items-center py-1 px-3 ml-1.5 rounded last:ml-0 xl:text-sm;
+    @apply bg-dark text-white text-xs flex items-center py-1 px-3 ml-1.5 rounded last:ml-0 xl:text-sm;
   }
 }
 

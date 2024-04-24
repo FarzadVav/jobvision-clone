@@ -13,7 +13,7 @@ const Tabs = ({ tabs }: { tabs: TabsTypes }) => {
 
   return (
     <div className="w-full">
-      <ul className="border-b border-solid border-light w-full h-12 flex items-center overflow-x-auto">
+      <ul className="no-scrollbar border-b border-solid border-light w-full h-12 flex items-center overflow-x-auto">
         {tabs.map((tab) => (
           <li
             key={uuid()}

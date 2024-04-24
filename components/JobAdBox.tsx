@@ -74,7 +74,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
       <div className="w-full flex">
         <div>
           <Image
-            className="border border-solid border-light min-w-20 min-h-20 text-sm object-cover object-center rounded-md"
+            className="jobAd_company-logo"
             height={80}
             width={80}
             src={jobAd.company.logo || ""}

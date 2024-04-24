@@ -35,59 +35,138 @@ const SelectedJobAd = () => {
       {selectedJobAd ? (
         <>
           <div className="w-full">
-            <div className="w-full flex justify-between">
-              <h2 className="dana-bold text-2xl leading-relaxed">
-                {selectedJobAd.title.slice(0, 100)}
-                {selectedJobAd.title.length > 100 ? "..." : null}
-              </h2>
-              <Button className={"mr-3"} variant={"success"}>
-                ارسال رزومه
-              </Button>
-            </div>
-            <div className="flex items-center mt-4">
-              <Link
-                className="text-primary underline decoration-transparent transition hover:decoration-primary"
-                href={""}
-              >
-                {selectedJobAd.company.name || "شرکت ناشناس"}
-              </Link>
-              {selectedJobAd.company.city ? (
-                <span className="bordered-text">
-                  {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
-                </span>
-              ) : null}
-              {selectedJobAd.is_remote ? (
-                <span className="bordered-text">امکان دورکاری</span>
-              ) : null}
-              {selectedJobAd.company.knowledgeBased ? (
-                <span className="bordered-text">دانش بنیان</span>
-              ) : null}
-            </div>
-            <div className="w-full flex items-center mt-4">
-              <span className="text-success">{salaryCalculationForView(selectedJobAd.salary)}</span>
-              <Button className="mr-auto" size={"sm"}>
-                <IconShare className="icon" />
-              </Button>
-              <Button className="ml-3" size={"sm"}>
-                <IconHeart className="icon" />
-              </Button>
-              {releaseDateCalculation(new Date(selectedJobAd.created_at || ""))}
-            </div>
-          </div>
-
-          <div className="bg-light/50 w-full flex items-center px-5 py-2 mt-6 mb-3 rounded-md">
-            <div className="flex items-center" title="تعداد کارکنان شرکت">
-              <IconUser className="icon" />
-              <p className="mr-3">
-                {selectedJobAd.company.employees[0]} تا {selectedJobAd.company.employees[1]} نفر
-              </p>
-            </div>
-            {selectedJobAd.company.activity ? (
-              <div className="flex items-center mr-6" title="حوزه فعالیت">
-                <IconHelp className="icon" />
-                <p className="mr-3">{selectedJobAd.company.activity}</p>
+            {/* mobile size styles */}
+            <div className="w-full lg:hidden">
+              <div className="border-b border-solid border-light w-full flex pb-6 mb-6">
+                <Image
+                  className="jobAd_company-logo"
+                  src={selectedJobAd.company.logo || ""}
+                  height={80}
+                  width={80}
+                  alt={`لوگوی شرکت ${selectedJobAd.company.name}`}
+                />
+                <div className="mr-3">
+                  <Title font={"danaBold"}>
+                    <h1>{selectedJobAd.title}</h1>
+                  </Title>
+                  <Link
+                    className="text-primary underline decoration-transparent transition-all hover:decoration-primary"
+                    href={""}
+                  >
+                    {selectedJobAd.company.name || "شرکت ناشناس"}
+                  </Link>
+                </div>
               </div>
-            ) : null}
+              <div className="border-b border-solid border-light selected-jobad_details pb-6 mb-6">
+                <div className="item">
+                  <span className="key">حقوق</span>
+                  <span className="value">{salaryCalculationForView(selectedJobAd.salary)}</span>
+                </div>
+                <div className="item">
+                  <span className="key">محل کار</span>
+                  <span className="value">
+                    {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
+                  </span>
+                </div>
+                <div className="item">
+                  <span className="key">روز و ساعت کاری</span>
+                  <span className="value">{selectedJobAd.work_times}</span>
+                </div>
+                <div className="item">
+                  <span className="key">نوع همکاری</span>
+                  <span className="value">{selectedJobAd.cooperation_type.name}</span>
+                </div>
+                <div className="item">
+                  <span className="key">مزایا و تهسیلات</span>
+                  <span className="value">
+                    {selectedJobAd.benefits.length
+                      ? selectedJobAd.benefits.map((benefit, i) => {
+                          if (i < selectedJobAd?.benefits.length - 1) {
+                            return (
+                              <p key={uuid()} className="benefit">
+                                {benefit}
+                                <span>/</span>
+                              </p>
+                            )
+                          } else {
+                            return (
+                              <p key={uuid()} className="text">
+                                {benefit}
+                              </p>
+                            )
+                          }
+                        })
+                      : "ندارد"}
+                  </span>
+                </div>
+                <div className="item">
+                  <span className="key">سفر های کاری</span>
+                  <span className="value">{selectedJobAd.business_trips || "ندارد"}</span>
+                </div>
+              </div>
+            </div>
+            {/* mobile size styles */}
+
+            {/* more than 1024px style */}
+            <div className="w-full max-lg:hidden">
+              <div className="w-full flex justify-between">
+                <Title font={"danaBold"}>
+                  <h2>
+                    {selectedJobAd.title.slice(0, 100)}
+                    {selectedJobAd.title.length > 100 ? "..." : null}
+                  </h2>
+                </Title>
+                <Button className={"mr-3"} variant={"success"}>
+                  ارسال رزومه
+                </Button>
+              </div>
+              <div className="flex items-center mt-4">
+                <Link
+                  className="text-primary underline decoration-transparent transition hover:decoration-primary"
+                  href={""}
+                >
+                  {selectedJobAd.company.name || "شرکت ناشناس"}
+                </Link>
+                {selectedJobAd.company.city ? (
+                  <span className="bordered-text">
+                    {selectedJobAd.company.city?.province.name}، {selectedJobAd.company.city?.name}
+                  </span>
+                ) : null}
+                {selectedJobAd.is_remote ? (
+                  <span className="bordered-text">امکان دورکاری</span>
+                ) : null}
+                {selectedJobAd.company.knowledgeBased ? (
+                  <span className="bordered-text">دانش بنیان</span>
+                ) : null}
+              </div>
+              <div className="w-full flex items-center mt-4">
+                <span className="text-success">
+                  {salaryCalculationForView(selectedJobAd.salary)}
+                </span>
+                <Button className="mr-auto" size={"sm"}>
+                  <IconShare className="icon" />
+                </Button>
+                <Button className="ml-3" size={"sm"}>
+                  <IconHeart className="icon" />
+                </Button>
+                {releaseDateCalculation(new Date(selectedJobAd.created_at || ""))}
+              </div>
+              <div className="bg-light/50 w-full flex flex-wrap items-center gap-y-1.5 gap-x-6 py-2 px-5 mt-6 mb-3 rounded-md">
+                <div className="min-w-max flex items-center" title="تعداد کارکنان شرکت">
+                  <IconUser className="icon" />
+                  <p className="mr-3">
+                    {selectedJobAd.company.employees[0]} تا {selectedJobAd.company.employees[1]} نفر
+                  </p>
+                </div>
+                {selectedJobAd.company.activity ? (
+                  <div className="min-w-max flex items-center" title="حوزه فعالیت">
+                    <IconHelp className="icon" />
+                    <p className="mr-3">{selectedJobAd.company.activity}</p>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+            {/* more than 1024px style */}
           </div>
 
           <Tabs
@@ -96,48 +175,50 @@ const SelectedJobAd = () => {
                 name: "درباره شغل",
                 content: (
                   <>
-                    <Title size={"sm"}>
-                      <span>مشخصات موقعیت شغلی</span>
-                    </Title>
-                    <div className="selected-jobad_wrap-list mt-1.5">
-                      <div className="item">
-                        <span className="title">روز و ساعت کاری</span>
-                        <p className="text">{selectedJobAd.work_times}</p>
-                      </div>
-                      <div className="item">
-                        <span className="title">نوع همکاری</span>
-                        <p className="text">{selectedJobAd.cooperation_type.name}</p>
-                      </div>
-                      <div className="item">
-                        <span className="title">سفر های کاری</span>
-                        <p className="text">{selectedJobAd.business_trips}</p>
-                      </div>
-                      <div className="item">
-                        <span className="title">مزایا و تسهیلات</span>
-                        <div className="w-full flex flex-wrap items-center gap-1.5">
-                          {selectedJobAd.benefits.length
-                            ? selectedJobAd.benefits.map((benefit, i) => {
-                                if (i < selectedJobAd?.benefits.length - 1) {
-                                  return (
-                                    <p key={uuid()} className="text flex items-center">
-                                      {benefit}
-                                      <span className="mr-2 opacity-25">/</span>
-                                    </p>
-                                  )
-                                } else {
-                                  return (
-                                    <p key={uuid()} className="text">
-                                      {benefit}
-                                    </p>
-                                  )
-                                }
-                              })
-                            : "ندارد"}
+                    <div className="w-full max-lg:hidden">
+                      <Title size={"sm"}>
+                        <span>مشخصات موقعیت شغلی</span>
+                      </Title>
+                      <div className="selected-jobad_details mt-2">
+                        <div className="item">
+                          <span className="key">روز و ساعت کاری</span>
+                          <p className="value">{selectedJobAd.work_times}</p>
+                        </div>
+                        <div className="item">
+                          <span className="key">نوع همکاری</span>
+                          <p className="value">{selectedJobAd.cooperation_type.name}</p>
+                        </div>
+                        <div className="item">
+                          <span className="key">سفر های کاری</span>
+                          <p className="value">{selectedJobAd.business_trips}</p>
+                        </div>
+                        <div className="item">
+                          <span className="key">مزایا و تسهیلات</span>
+                          <div className="value">
+                            {selectedJobAd.benefits.length
+                              ? selectedJobAd.benefits.map((benefit, i) => {
+                                  if (i < selectedJobAd?.benefits.length - 1) {
+                                    return (
+                                      <p key={uuid()} className="benefit">
+                                        {benefit}
+                                        <span>/</span>
+                                      </p>
+                                    )
+                                  } else {
+                                    return (
+                                      <p key={uuid()} className="text">
+                                        {benefit}
+                                      </p>
+                                    )
+                                  }
+                                })
+                              : "ندارد"}
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <Title className="mt-6" size={"sm"}>
+                    <Title className="lg:mt-6" size={"sm"}>
                       <span>شاخص های کلیدی از نظر کارفرما</span>
                     </Title>
                     <ul className="w-full flex flex-wrap gap-2 mt-3">
@@ -165,25 +246,31 @@ const SelectedJobAd = () => {
                       <li className="selected-jobAd_ability">
                         <div className="key">سن</div>
                         <div className="value">
-                          {selectedJobAd.age[0]} تا {selectedJobAd.age[1]}
+                          <span>
+                            {selectedJobAd.age[0]} تا {selectedJobAd.age[1]}
+                          </span>
                         </div>
                       </li>
                       <li className="selected-jobAd_ability mt-2">
                         <div className="key">جنسیت</div>
                         <div className="value">
-                          {typeof selectedJobAd.gender === null
-                            ? "فرقی ندارد"
-                            : selectedJobAd.gender
-                            ? "مرد"
-                            : "زن"}
+                          <span>
+                            {typeof selectedJobAd.gender === null
+                              ? "فرقی ندارد"
+                              : selectedJobAd.gender
+                              ? "مرد"
+                              : "زن"}
+                          </span>
                         </div>
                       </li>
                       <li className="selected-jobAd_ability mt-2">
                         <div className="key">سربازی</div>
                         <div className="value">
-                          {selectedJobAd.end_military_service
-                            ? "پایان خدمت یا معاف از سربازی"
-                            : "مهم نیست"}
+                          <span>
+                            {selectedJobAd.end_military_service
+                              ? "پایان خدمت یا معاف از سربازی"
+                              : "مهم نیست"}
+                          </span>
                         </div>
                       </li>
                       <li className="selected-jobAd_ability mt-2">
@@ -281,24 +368,24 @@ const SelectedJobAd = () => {
                     <Title className="mt-6" size={"sm"}>
                       <span>در یک نگاه کلی</span>
                     </Title>
-                    <div className="selected-jobad_wrap-list mt-1.5">
+                    <div className="selected-jobad_details mt-2">
                       <div className="item">
-                        <span className="title">سال تاسیس</span>
-                        <p className="text">{selectedJobAd.company.year || "تازه کار"}</p>
+                        <span className="key">سال تاسیس</span>
+                        <p className="value">{selectedJobAd.company.year || "تازه کار"}</p>
                       </div>
                       <div className="item">
-                        <span className="title">اندازه سازمان</span>
-                        <p className="text">
+                        <span className="key">اندازه سازمان</span>
+                        <p className="value">
                           {selectedJobAd.company.employees[0]} تا{" "}
                           {selectedJobAd.company.employees[1]} نفر
                         </p>
                       </div>
                       <div className="item">
-                        <span className="title">حوزه فعالیت</span>
-                        <p className="text">{selectedJobAd.company.activity || "مشخص نشده"}</p>
+                        <span className="key">حوزه فعالیت</span>
+                        <p className="value">{selectedJobAd.company.activity || "مشخص نشده"}</p>
                       </div>
                       <div className="item">
-                        <span className="title">امتیاز شرکت</span>
+                        <span className="key">امتیاز شرکت</span>
                         <div className="flex gap-0.5 text-sm mt-1">
                           {Array(Math.floor(selectedJobAd.company.score || 0))
                             .fill("")
