@@ -80,12 +80,12 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             src={jobAd.company.logo || ""}
             alt={`لوگوی شرکت ${jobAd.company.name || "ناشناس"}`}
           />
-          <div className="w-full flex justify-center items-center mt-2.5">
+          <div className="w-full flex justify-center items-center mt-3">
             <IconStarFilled className="icon-xs text-warning" />
-            <span className="h-3 inline-block mr-1.5">{jobAd.company.score}</span>
+            <span className="h-3 inline-block text-xs mr-1.5">{jobAd.company.score}</span>
           </div>
         </div>
-        <div className="mr-3 text-sm">
+        <div className="mr-3 text-xs sm:text-sm">
           <span className="dana-bold inline-block text-base">
             {jobAd.title.slice(0, 70)}
             {jobAd.title.length > 70 ? "..." : null}
@@ -105,7 +105,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           </div>
         </div>
       </div>
-      <div className="border-t border-dashed border-light flex items-center pt-3 mt-auto">
+      <div className="border-t border-dashed border-light text-xs flex items-center pt-3 mt-auto">
         <span className="h-8 flex items-center">
           {releaseDateCalculation(new Date(jobAd.created_at || ""))}
         </span>

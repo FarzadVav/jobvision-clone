@@ -6,7 +6,7 @@ import { cn } from "@/utils/lib/tw"
 const titleVariants = cva("w-full flex items-center", {
   variants: {
     size: {
-      sm: "text-base sm:text-lg lg:text-xl",
+      sm: "text-lg lg:text-xl",
       md: "text-lg sm:text-xl lg:text-2xl xl:text-3xl",
       lg: "text-xl sm:text-2xl md:text-3xl lg:text-4xl",
     },

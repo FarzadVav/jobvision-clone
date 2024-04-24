@@ -191,7 +191,7 @@ a {
   }
 
   .jobAd_company-logo {
-    @apply border border-solid border-light min-w-20 min-h-20 text-sm object-cover object-center rounded-md;
+    @apply border border-solid border-light min-w-16 min-h-16 max-w-16 max-h-16 text-sm object-cover object-center rounded-md sm:min-w-20 sm:max-w-24 sm:min-h-20 sm:max-h-24;
   }
 
   .selected-jobad_details {
