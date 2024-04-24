@@ -57,14 +57,14 @@ const SuggestedJobAds = () => {
         <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2 max-md:hidden">
           <ul className="w-full flex flex-wrap items-center group">
             {content?.tags.slice(0, 18).map((tag) => (
-              <li key={uuid()} className="link">
+              <li key={uuid()} className="suggested-link">
                 <Link href={`/jobs?tag=${tag.id}`}>{tag.name}</Link>
               </li>
             ))}
-            <li className="link">
+            <li className="suggested-link">
               <span>...</span>
             </li>
-            <li className="link">
+            <li className="suggested-link">
               <Link className="bg-primary text-white flex items-center" href={"/jobs"}>
                 مشاهده همه
                 <IconArrowLeft className="icon-sm mr-2" />
