@@ -1,7 +1,7 @@
 import SelectedJobAd from "@/components/modules/SelectedJobAd"
 
-const page = () => {
+const Page = () => {
   return <SelectedJobAd />
 }
 
-export default page
+export default Page
