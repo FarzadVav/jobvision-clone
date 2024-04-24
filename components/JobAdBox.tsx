@@ -39,15 +39,14 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
 
   const selectJobAdHandler = () => {
     const params = new URLSearchParams(searchParams.toString())
+    let currentUrl = "/jobs"
 
-    if (window.innerWidth >= 1024) {
-      !pathname.includes("jobs") && router.push("/jobs")
-    } else {
-      router.push("/single-job")
+    if (window.innerWidth < 1024) {
+      currentUrl = "/single"
     }
 
     params.set("id", jobAd.id)
-    router.push("/jobs" + "?" + params.toString())
+    router.push(currentUrl + "?" + params.toString())
   }
 
   return (
