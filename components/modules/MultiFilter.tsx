@@ -1,11 +1,11 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { MouseEvent, useEffect, useRef, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
+import { IconChevronDown } from "@tabler/icons-react"
 
 import Button from "../Button"
-import { IconChevronDown } from "@tabler/icons-react"
 
 type MultiFilterProps = {
   query: string
@@ -22,6 +22,13 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
     position: "RIGHT",
   })
 
+  useEffect(() => {
+    const fn = () => setShowList((prev) => ({ show: false, position: prev.position }))
+
+    window.addEventListener("click", fn)
+    return () => window.removeEventListener("click", fn)
+  })
+
   const mutateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
     // if filter exist, will be remove
@@ -35,6 +42,8 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
   }
 
   const clickHandler = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    event.stopPropagation()
+
     const positionStatus =
       Math.floor(window.innerWidth - (event.currentTarget?.getBoundingClientRect().left || 0)) >
       window.innerWidth / 2
@@ -57,7 +66,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
       <ul
         className={`bg-white border border-solid border-light shadow-lg w-72 p-1.5 rounded-md absolute top-[3rem] transition-all ${
           showList.position === "LEFT" ? "left-0" : "right-0"
-        } ${showList.show ? "z-50" : "-translate-y-6 opacity-0 invisible"}`}
+        } ${showList.show ? "" : "-translate-y-6 opacity-0 invisible"}`}
       >
         {filters.map((filter) => (
           <li
