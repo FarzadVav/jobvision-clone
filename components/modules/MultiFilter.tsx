@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { MouseEvent, useEffect, useRef, useState } from "react"
 import { v4 as uuid } from "uuid"
 
 import Button from "../Button"
@@ -17,7 +17,10 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [showList, setShowList] = useState(false)
+  const [showList, setShowList] = useState<{ show: boolean; position: "LEFT" | "RIGHT" }>({
+    show: false,
+    position: "RIGHT",
+  })
 
   const mutateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -31,20 +34,31 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
     router.push(pathname + "?" + params.toString())
   }
 
+  const clickHandler = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    const positionStatus =
+      Math.floor(window.innerWidth - (event.currentTarget?.getBoundingClientRect().left || 0)) >
+      window.innerWidth / 2
+    setShowList((prev) => ({
+      show: !prev.show,
+      position: positionStatus ? "LEFT" : "RIGHT",
+    }))
+  }
+
   return (
     <Button
-      className="rounded-full relative z-10"
+      className={`rounded-full relative z-10 ${showList.show ? "" : "overflow-hidden"}`}
       variant={searchParams.has(query) ? "primary" : "outline"}
-      onClick={() => setShowList((prev) => !prev)}
+      onClick={clickHandler}
     >
       {name}
-      <IconChevronDown className={`icon transition-transform ${showList ? "-scale-y-100" : ""}`} />
+      <IconChevronDown
+        className={`icon transition-transform ${showList.show ? "-scale-y-100" : ""}`}
+      />
       <ul
-        className={`bg-white border border-solid border-light shadow-lg w-72 p-1.5 rounded-md absolute top-[3.25rem] transition-all ${
-          showList ? "" : "-translate-y-6 opacity-0 invisible"
-        }`}
+        className={`bg-white border border-solid border-light shadow-lg w-72 p-1.5 rounded-md absolute top-[3rem] transition-all ${
+          showList.position === "LEFT" ? "left-0" : "right-0"
+        } ${showList.show ? "z-50" : "-translate-y-6 opacity-0 invisible"}`}
       >
-        <div className="bg-white border-t border-l border-solid border-light w-3 h-3 rounded-sm rotate-45 absolute -top-1.5 left-1/2 -translate-x-1/2"></div>
         {filters.map((filter) => (
           <li
             key={uuid()}
