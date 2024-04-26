@@ -9,6 +9,7 @@ interface SelectBoxProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   wrapperClassName?: string
   error?: string | null
 }
+
 const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
   ({ wrapperClassName, error, className, ...props }, ref) => {
     const [isFocus, setIsFocus] = useState(false)
@@ -18,7 +19,7 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
         <div className={cn("w-full flex items-center relative", wrapperClassName)}>
           <select
             className={cn(
-              `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 cursor-pointer appearance-none focus:outline-0 ${
+              `bg-transparent ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 cursor-pointer appearance-none focus:outline-0 ${
                 error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
               }`,
               className
@@ -44,6 +45,7 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
     )
   }
 )
+
 SelectBox.displayName = "SelectBox"
 
 export default SelectBox

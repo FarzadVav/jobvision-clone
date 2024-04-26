@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react"
+import { KeyboardEvent, forwardRef, useState } from "react"
 import toast from "react-hot-toast"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconPlus, IconTrash } from "@tabler/icons-react"
@@ -15,6 +15,20 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
     const [value, setValue] = useState("")
     const [list, setList] = useState<string[]>([])
 
+    const addItem = () => {
+      if (!value.length) return
+      if (list.includes(value)) return toast.error("این آیتم از قبل اضافه شده است")
+      setList((prev) => [...prev, value])
+      setValue("")
+    }
+
+    const keyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter") {
+        event.preventDefault()
+        addItem()
+      }
+    }
+
     return (
       <>
         <div className={cn("w-full", wrapperclassName)}>
@@ -30,16 +44,12 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
               ref={ref}
               value={value}
               onChange={(event) => setValue(event.target.value)}
+              onKeyDown={keyDownHandler}
               {...props}
             />
             <div
               className="h-11 w-12 flex justify-center items-center absolute left-0 top-0 cursor-pointer active:scale-90"
-              onClick={() => {
-                if (!value.length) return
-                if (list.includes(value)) return toast.error("این آیتم از قبل اضافه شده است")
-                setList((prev) => [...prev, value])
-                setValue("")
-              }}
+              onClick={addItem}
             >
               <IconPlus className="icon" />
             </div>
