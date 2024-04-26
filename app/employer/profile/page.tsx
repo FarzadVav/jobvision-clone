@@ -20,7 +20,6 @@ import Button from "@/components/Button"
 import Input from "@/components/form/Input"
 import TextArea from "@/components/form/TextArea"
 import toast from "react-hot-toast"
-import SelectBox from "@/components/form/SelectBox"
 import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
 import AutoComplete from "@/components/form/AutoComplete"
@@ -41,9 +40,9 @@ const Page = () => {
         }
       }}
     >
-      <div className="w-full flex">
-        <div className="w-1/2">
-          <Label htmlFor="name">
+      <div className="twin-input-wrapper">
+        <div>
+          <Label className="mb-3" htmlFor="name">
             <IconPencilMinus className="icon ml-3" />
             نام شرکت
           </Label>
@@ -56,8 +55,8 @@ const Page = () => {
             error={formState.fields.name}
           />
         </div>
-        <div className="w-1/2 mr-3">
-          <Label htmlFor="year">
+        <div>
+          <Label className="mb-3" htmlFor="year">
             <IconCalendarEvent className="icon ml-3" />
             سال تاسیس
           </Label>
@@ -72,9 +71,9 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="w-full flex mt-6">
-        <div className="w-1/2">
-          <Label htmlFor="minEmployee">
+      <div className="twin-input-wrapper mt-6">
+        <div>
+          <Label className="mb-3" htmlFor="minEmployee">
             <IconUserMinus className="icon ml-3" />
             حداقل تعداد کارکنان
           </Label>
@@ -87,8 +86,8 @@ const Page = () => {
             error={formState.fields.minEmployee?.toString()}
           />
         </div>
-        <div className="w-1/2 mr-3">
-          <Label htmlFor="maxEmployee">
+        <div>
+          <Label className="mb-3" htmlFor="maxEmployee">
             <IconUserPlus className="icon ml-3" />
             حداکثر آنها
           </Label>
@@ -103,7 +102,7 @@ const Page = () => {
         </div>
       </div>
 
-      <Label className="mt-6" htmlFor="city">
+      <Label className="mt-6 mb-3" htmlFor="city">
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
@@ -116,7 +115,7 @@ const Page = () => {
         error={formState.fields.city}
       />
 
-      <Label className="mt-6" htmlFor="about">
+      <Label className="mt-6 mb-3" htmlFor="about">
         <IconInfoCircle className="icon ml-3" />
         درباره شرکت
       </Label>
@@ -128,7 +127,7 @@ const Page = () => {
         error={formState.fields.about}
       />
 
-      <Label className="mt-6" htmlFor="activity">
+      <Label className="mt-6 mb-3" htmlFor="activity">
         <IconListSearch className="icon ml-3" />
         حوزه فعالیت
       </Label>
@@ -141,7 +140,7 @@ const Page = () => {
         error={formState.fields.activity}
       />
 
-      <Label className="mt-6" htmlFor="file">
+      <Label className="mt-6 mb-3" htmlFor="file">
         <IconPhoto className="icon ml-3" />
         عکس {company?.logo ? "لوگوی جدید" : "لوگو"}
       </Label>
@@ -153,7 +152,7 @@ const Page = () => {
         error={formState.fields.fileSize}
       />
 
-      <Label className="mt-6" htmlFor="knowledgeBased">
+      <Label className="mt-6 mb-3" htmlFor="knowledgeBased">
         شرکت دانش بنیان
         <input
           id="knowledgeBased"
@@ -168,7 +167,7 @@ const Page = () => {
         <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
       ) : null}
 
-      <Button className="mt-6" variant={"primary"} size={"lg"}>
+      <Button className="mt-6 max-sm:w-full" variant={"primary"} size={"lg"}>
         ثبت اطلاعات
       </Button>
     </form>

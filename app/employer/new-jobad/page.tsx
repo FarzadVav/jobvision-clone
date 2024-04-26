@@ -53,8 +53,8 @@ const Page = () => {
         }
       }}
     >
-      <Label htmlFor="title">
-        <IconPencilMinus className="icon ml-3" />
+      <Label className="mb-3" htmlFor="title">
+        <IconPencilMinus className="icon" />
         عنوان آگهی
       </Label>
       <Input
@@ -65,8 +65,8 @@ const Page = () => {
         name="title"
       />
 
-      <Label className="mt-6" htmlFor="description">
-        <IconAlignRight className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="description">
+        <IconAlignRight className="icon" />
         توضیحات لازم
       </Label>
       <TextArea
@@ -76,10 +76,10 @@ const Page = () => {
         name="description"
       />
 
-      <div className="w-full flex mt-6">
-        <div className="w-1/2">
-          <Label htmlFor="workTimes">
-            <IconClockHour3 className="icon ml-3" />
+      <div className="twin-input-wrapper mt-6">
+        <div>
+          <Label className="mb-3" htmlFor="workTimes">
+            <IconClockHour3 className="icon" />
             شرح ساعت کاری
           </Label>
           <Input
@@ -90,9 +90,9 @@ const Page = () => {
             name="workTimes"
           />
         </div>
-        <div className="w-1/2 mr-3">
-          <Label htmlFor="businessTrips">
-            <IconPlane className="icon ml-3 -rotate-90" />
+        <div>
+          <Label className="mb-3" htmlFor="businessTrips">
+            <IconPlane className="icon -rotate-90" />
             شرح سفر های کاری
           </Label>
           <Input
@@ -105,12 +105,12 @@ const Page = () => {
         </div>
       </div>
 
-      <Label className="mt-6" htmlFor="minAge">
-        <IconUserUp className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="minAge">
+        <IconUserUp className="icon" />
         میزان بازه سنی
       </Label>
-      <div className="w-full flex">
-        <div className="w-1/2">
+      <div className="twin-input-wrapper">
+        <div>
           <Input
             id="minAge"
             error={formState.fields.minAge}
@@ -119,7 +119,7 @@ const Page = () => {
             name="minAge"
           />
         </div>
-        <div className="w-1/2 mr-3">
+        <div className="max-sm:!mt-3">
           <Input
             id="maxAge"
             error={formState.fields.maxAge}
@@ -130,12 +130,12 @@ const Page = () => {
         </div>
       </div>
 
-      <Label className="mt-6" htmlFor="minSalary">
-        <IconCash className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="minSalary">
+        <IconCash className="icon" />
         میزان حقوق
       </Label>
-      <div className="w-full flex">
-        <div className={showMaxSalary ? "w-1/2" : "w-full"}>
+      <div className="twin-input-wrapper">
+        <div className={showMaxSalary ? "" : "!w-full"}>
           <Input
             id="minSalary"
             error={formState.fields.minSalary}
@@ -144,7 +144,7 @@ const Page = () => {
             name="minSalary"
           />
         </div>
-        <div className={`w-1/2 ${showMaxSalary ? "block" : "hidden"} mr-3`}>
+        <div className={showMaxSalary ? "max-sm:!mt-3" : "hidden"}>
           <Input
             id="maxSalary"
             error={formState.fields.maxSalary}
@@ -154,7 +154,7 @@ const Page = () => {
           />
         </div>
       </div>
-      <Label className="mt-3" htmlFor="show-maxSalary">
+      <label className="inline-block mt-3 cursor-pointer" htmlFor="show-maxSalary">
         ایجاد بازه قیمت
         <input
           id="show-maxSalary"
@@ -163,10 +163,10 @@ const Page = () => {
           type="checkbox"
           onChange={(e) => setShowMaxSalary(e.target.checked)}
         />
-      </Label>
+      </label>
 
-      <Label className="mt-6" htmlFor="gender">
-        <IconGenderBigender className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="gender">
+        <IconGenderBigender className="icon" />
         جنسیت
       </Label>
       <SelectBox id="gender" name="gender">
@@ -174,8 +174,8 @@ const Page = () => {
         <option value="female">زن</option>
       </SelectBox>
 
-      <Label className="mt-6" htmlFor="category">
-        <IconBriefcase className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="category">
+        <IconBriefcase className="icon" />
         دسته بندی شغلی
       </Label>
       <AutoComplete
@@ -186,8 +186,8 @@ const Page = () => {
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
 
-      <Label className="mt-6" htmlFor="cooperationType">
-        <IconFileDescription className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="cooperationType">
+        <IconFileDescription className="icon" />
         نوع قرارداد
       </Label>
       <AutoComplete
@@ -198,8 +198,8 @@ const Page = () => {
         placeholder="یک مورد را سرچ و انتخاب کنید"
       />
 
-      <Label className="mt-6" htmlFor="tags">
-        <IconTags className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="tags">
+        <IconTags className="icon" />
         تگ های شغلی
       </Label>
       <MultiSelect
@@ -210,53 +210,48 @@ const Page = () => {
         placeholder="چند مورد را سرچ و انتخاب کنید"
       />
 
-      <Label className="mt-6" htmlFor="benefits">
-        <IconSparkles className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="benefits">
+        <IconSparkles className="icon" />
         مزیت های این شغل
       </Label>
       <ComboBox id="benefits" name="benefits" placeholder="چند مورد را اضافه کنید" />
 
-      <Label className="mt-6" htmlFor="abilities">
-        <IconAlignBoxLeftMiddle className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="abilities">
+        <IconAlignBoxLeftMiddle className="icon" />
         شاخص های کلیدی فرد
       </Label>
       <ComboBox id="abilities" name="abilities" placeholder="چند مورد را اضافه کنید" />
 
-      <Label className="mt-6" htmlFor="education">
-        <IconSchool className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="education">
+        <IconSchool className="icon" />
         مدارک تحصیلی
       </Label>
       <ComboBox id="education" name="education" placeholder="چند مورد را اضافه کنید" />
 
-      <Label className="mt-6" htmlFor="languages">
-        <IconWorld className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="languages">
+        <IconWorld className="icon" />
         زبان های بین المللی
       </Label>
       <ComboBox id="languages" name="languages" placeholder="چند مورد را اضافه کنید" />
 
-      <Label className="mt-6" htmlFor="techs">
-        <IconComponents className="icon ml-3" />
+      <Label className="mt-6 mb-3" htmlFor="techs">
+        <IconComponents className="icon" />
         تکنولوژی ها
       </Label>
       <ComboBox id="techs" name="techs" placeholder="چند مورد را اضافه کنید" />
 
-      <div className="w-full flex items-center mt-6">
+      <div className="w-full flex flex-wrap items-center gap-x-6 gap-y-3 mt-6">
         <Label htmlFor="end_military_service">
           کارت پایان خدمت
-          <input
-            id="end_military_service"
-            className="mr-3 mb-0.5"
-            name="end_military_service"
-            type="checkbox"
-          />
+          <input id="end_military_service" name="end_military_service" type="checkbox" />
         </Label>
-        <Label className="mx-3" htmlFor="is_remote">
+        <Label htmlFor="is_remote">
           امکان دورکاری
-          <input id="is_remote" className="mr-3 mb-0.5" name="is_remote" type="checkbox" />
+          <input id="is_remote" name="is_remote" type="checkbox" />
         </Label>
         <Label htmlFor="is_urgent">
           آگهی فوری
-          <input id="is_urgent" className="mr-3 mb-0.5" name="is_urgent" type="checkbox" />
+          <input id="is_urgent" name="is_urgent" type="checkbox" />
         </Label>
       </div>
 
@@ -264,7 +259,7 @@ const Page = () => {
         <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
       ) : null}
 
-      <Button className="mt-6" variant={"primary"} size={"lg"}>
+      <Button className="mt-6 max-sm:w-full" variant={"primary"} size={"lg"}>
         ایجاد آگهی
       </Button>
     </form>

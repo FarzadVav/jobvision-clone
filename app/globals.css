@@ -241,6 +241,18 @@ a {
   .selected-jobAd_ability .value .list-items {
     @apply bg-dark text-white text-xs flex items-center py-1 px-3 ml-1.5 rounded last:ml-0 xl:text-sm;
   }
+
+  .twin-input-wrapper {
+    @apply w-full sm:flex;
+  }
+
+  .twin-input-wrapper > *:first-child {
+    @apply w-full sm:w-1/2;
+  }
+
+  .twin-input-wrapper > *:last-child {
+    @apply w-full sm:w-1/2 sm:mr-3 max-sm:mt-6;
+  }
 }
 
 @layer components {
