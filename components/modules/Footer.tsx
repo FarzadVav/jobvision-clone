@@ -1,3 +1,6 @@
+"use client"
+
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { ReactNode } from "react"
@@ -15,6 +18,8 @@ import Title from "../Title"
 import ToggalableSectionOfFooter from "./ToggalableSectionOfFooter"
 import LinksAccordion from "../accordions/LinksAccordion"
 import Button from "../Button"
+
+const WITHOUT_FOOTER_ROUTES = ["employer"]
 
 const FOOTER_SOCIALS: { link: string; svg: ReactNode; title: string }[] = [
   {
@@ -40,6 +45,10 @@ const FOOTER_SOCIALS: { link: string; svg: ReactNode; title: string }[] = [
 ]
 
 const Footer = () => {
+  const pathname = usePathname()
+
+  if (WITHOUT_FOOTER_ROUTES.some((route) => pathname.includes(route))) return null
+
   return (
     <div className="text-white bg-dark z-40 pt-12">
       <div className="container">

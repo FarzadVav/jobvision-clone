@@ -9,7 +9,6 @@ import {
   IconAd,
   IconBell,
   IconDots,
-  IconHome,
   IconLayoutDashboard,
   IconLogout,
   IconUserEdit,
