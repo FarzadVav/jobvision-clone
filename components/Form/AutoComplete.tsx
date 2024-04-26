@@ -1,6 +1,6 @@
 "use client"
 
-import { forwardRef, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 
@@ -14,8 +14,12 @@ interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
   ({ value, wrapperclassName, error, defaultValue, className, data, ...props }, ref) => {
-    const [inputValue, setInputValue] = useState((defaultValue || "").toString())
+    const [inputValue, setInputValue] = useState("")
     const [isFocus, setIsFocus] = useState(false)
+
+    useEffect(() => {
+      setInputValue(defaultValue?.toString() || "")
+    }, [defaultValue])
 
     return (
       <>
@@ -42,7 +46,7 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
             </div>
           </div>
           <ul
-            className={`bg-white border border-solid border-light w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all ${
+            className={`list-scrollbar bg-white border border-solid border-light shadow-lg max-h-[50vh] w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all overflow-y-auto ${
               isFocus ? "" : "opacity-0 invisible -translate-y-3"
             } z-50`}
           >

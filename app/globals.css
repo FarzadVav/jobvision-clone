@@ -132,13 +132,12 @@ a {
 
 @layer components {
   .list-scrollbar::-webkit-scrollbar {
-    width: 2px;
-    height: 2px;
+    width: 3px;
+    height: 3px;
   }
 
   .list-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--dark) / 0.25);
-    border-radius: 2px;
+    background: hsl(var(--dark) / 0.5);
   }
 
   .no-scrollbar::-webkit-scrollbar {

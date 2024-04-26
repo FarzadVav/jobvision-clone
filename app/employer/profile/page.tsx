@@ -23,6 +23,7 @@ import toast from "react-hot-toast"
 import SelectBox from "@/components/form/SelectBox"
 import Label from "@/components/form/Label"
 import Alert from "@/components/Alert"
+import AutoComplete from "@/components/form/AutoComplete"
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
@@ -106,18 +107,14 @@ const Page = () => {
         <IconMapPin className="icon ml-3" />
         شهر شما
       </Label>
-      <SelectBox id="city" name="city" error={formState.fields.city}>
-        <option value={company?.city_id || ""}>
-          {company?.city?.name || "یک شهر انتخاب کنید"}
-        </option>
-        {content?.cities
-          .filter((city) => city.id !== company?.city_id)
-          .map((city) => (
-            <option key={city.id} value={city.id}>
-              {city.name}
-            </option>
-          ))}
-      </SelectBox>
+      <AutoComplete
+        id="city"
+        name="city"
+        placeholder="یک شهر انتخاب کنید"
+        defaultValue={company?.city?.name}
+        data={content?.cities.map((city) => city.name) || []}
+        error={formState.fields.city}
+      />
 
       <Label className="mt-6" htmlFor="about">
         <IconInfoCircle className="icon ml-3" />
