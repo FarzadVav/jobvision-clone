@@ -56,7 +56,7 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
             </div>
           </div>
           <ul
-            className={`bg-white border border-solid border-light w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all ${
+            className={`list-scrollbar bg-white border border-solid border-light shadow-lg max-h-[50vh] w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all overflow-y-auto ${
               isFocus ? "" : "opacity-0 invisible -translate-y-3"
             } z-50`}
           >
