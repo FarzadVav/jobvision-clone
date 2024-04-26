@@ -31,8 +31,8 @@ const SideBar = () => {
         height={100}
         width={100}
       />
-      <Title className="justify-center mt-3" size={"sm"}>
-        <h1 className="text-center">{company?.name}</h1>
+      <Title className="justify-center min-h-7 mt-3" size={"sm"}>
+        <h1 className="text-center truncate">{company?.name}</h1>
       </Title>
       <ul className="w-full mt-3">
         {links.map((link) => (
