@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { v4 as uuid } from "uuid"
 import { IconChevronDown } from "@tabler/icons-react"
@@ -5,7 +6,6 @@ import { IconChevronDown } from "@tabler/icons-react"
 import Title from "../Title"
 import Button from "../Button"
 import { FOOTER_BLOGS } from "@/utils/initialData"
-import Link from "next/link"
 
 const ToggalableSectionOfFooter = () => {
   const [showSection, setShowSection] = useState<boolean>(false)

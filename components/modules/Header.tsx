@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid"
 import {
   IconChevronDown,
   IconChevronLeft,
-  IconLogout,
+  IconLogin,
   IconMenuDeep,
   IconUser,
 } from "@tabler/icons-react"
@@ -220,7 +220,7 @@ const Header = async () => {
         ) : (
           <Link className="h-full" href={"/register"}>
             <Button className="text-white h-full">
-              <IconLogout className="icon" />
+              <IconLogin className="icon" />
             </Button>
           </Link>
         )}

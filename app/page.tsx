@@ -114,7 +114,7 @@ const Page = () => {
             <span className="text-primary ml-1">جاب‌ویژن</span> دستیار استخدامی شما
           </h4>
         </Title>
-        <div className="flex flex-wrap items-center gap-y-9 sm:gap-y-12 md:mt-14">
+        <div className="flex flex-wrap items-center gap-y-9 mt-9 sm:gap-y-12 md:mt-14">
           <HonorBox icon={<IconUsersGroup />} count={2_000_000} text={"کارجوهای همراه ما"} />
           <HonorBox icon={<IconBuildingCommunity />} count={59_900} text={"سازمان همراه شما"} />
           <HonorBox icon={<IconBriefcase />} count={38_000} text={"موقعیت‌ شغلی فعال"} />

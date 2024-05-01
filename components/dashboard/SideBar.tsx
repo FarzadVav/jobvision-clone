@@ -9,6 +9,7 @@ import {
   IconAd,
   IconBell,
   IconDots,
+  IconFileCheck,
   IconLayoutDashboard,
   IconLogout,
   IconUserEdit,
@@ -18,6 +19,8 @@ import Button from "../Button"
 import Title from "../Title"
 import { getMeFetcher } from "@/utils/fetcher"
 import logOut from "@/app/actions/logOut"
+import { useState } from "react"
+import MobileMenu from "../MobileMenu"
 
 const links = [
   { href: "/employer", value: "داشبورد", icon: <IconLayoutDashboard className="icon" /> },
@@ -27,6 +30,7 @@ const links = [
 
 const SideBar = () => {
   const pathname = usePathname()
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const { data: company } = useSWR("/api/getMe", getMeFetcher)
 
   return (
@@ -91,12 +95,35 @@ const SideBar = () => {
             </li>
           ))}
           <li className="mr-auto">
-            <Button aria-label="details" title="جزئیات">
+            <Button
+              aria-label="details"
+              title="جزئیات"
+              onClick={() => setShowMobileMenu((prev) => !prev)}
+            >
               <IconDots className="icon" />
             </Button>
           </li>
         </ul>
       </menu>
+
+      <MobileMenu state={showMobileMenu} closingHandler={() => setShowMobileMenu(false)}>
+        <div className="w-full flex gap-3">
+          <Button className="flex-1" aria-label="notification" variant={"fill"}>
+            <IconBell className="icon" />
+          </Button>
+          <Button className="flex-1" aria-label="verified" variant={"success"}>
+            <IconFileCheck className="icon" />
+          </Button>
+          <Button
+            className="flex-1"
+            aria-label="logout"
+            variant={"danger"}
+            onClick={() => logOut()}
+          >
+            <IconLogout className="icon" />
+          </Button>
+        </div>
+      </MobileMenu>
     </>
   )
 }

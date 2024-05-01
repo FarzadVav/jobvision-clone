@@ -24,7 +24,7 @@ const Page = () => {
   const [formState, setFormState] = useState<registerFormT>({ fields: {} } as registerFormT)
 
   return (
-    <div className="h-[calc(100vh-4.5rem)] flex items-center">
+    <div className="container h-[calc(100vh-4.5rem)] flex items-center">
       <div className="border border-solid border-light w-96 mx-auto rounded-lg overflow-hidden">
         <Title className="justify-center mt-3 lg:mt-6" size={"sm"}>
           <h1 className="text-center">ورود / ثبت نام</h1>
