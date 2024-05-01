@@ -123,6 +123,21 @@ export const FOOTER_ACCORDIONS: { title: string; text: string }[] = [
   },
 ]
 
+export const FOOTER_BLOGS: { name: string; link: string }[] = [
+  {
+    name: "راهنمای جامع استخدام",
+    link: ""
+  },
+  {
+    name: "راهنمای جامع رزومه نویسی برای کارجویان",
+    link: ""
+  },
+  {
+    name: "گزارش افزایش حقوق 1402 کارگران",
+    link: ""
+  },
+]
+
 export const FOOTER_LINKS: { title: string; links: { title: string; link: string }[] }[] = [
   {
     title: 'کارجویان',

@@ -86,41 +86,6 @@ const Footer = () => {
 
         <ToggalableSectionOfFooter />
 
-        <div className="w-full hidden justify-between sm:flex">
-          {FOOTER_LINKS.map((link) => (
-            <div key={uuid()} className="flex flex-col">
-              <span className="dana-bold">{link.title}</span>
-              <ul className="flex flex-col mt-1.5">
-                {link.links.map((sublink) => (
-                  <li key={uuid()} className="w-full mt-1.5">
-                    <Link
-                      className="underline decoration-transparent transition hover:decoration-white"
-                      href={sublink.link}
-                    >
-                      {sublink.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div className="flex">
-            <Image
-              className="bg-white object-cover object-center rounded-md p-5 mt-6 transition-transform hover:-translate-y-1 lg:mt-0"
-              src="/images/enamad.webp"
-              alt="لوگوی ای نماد"
-              height={176}
-              width={176}
-            />
-            <Image
-              className="bg-white object-cover object-center rounded-md p-5 mt-6 mr-3 transition-transform hover:-translate-y-1 lg:mt-0"
-              src="/images/samandehi.webp"
-              alt="لوگوی سامان‌دهی"
-              height={176}
-              width={176}
-            />
-          </div>
-        </div>
         {FOOTER_LINKS.length ? (
           <ul className="w-full flex-col justify-center items-center mt-6 sm:hidden">
             {FOOTER_LINKS.map((link) => (
@@ -145,6 +110,44 @@ const Footer = () => {
             ))}
           </ul>
         ) : null}
+
+        <div className="w-full flex max-lg:flex-col">
+          <div className="flex-1 hidden justify-between sm:flex">
+            {FOOTER_LINKS.map((link) => (
+              <div key={uuid()}>
+                <span className="dana-bold">{link.title}</span>
+                <ul className="flex flex-col mt-1.5">
+                  {link.links.map((sublink) => (
+                    <li key={uuid()} className="w-full mt-1.5">
+                      <Link
+                        className="underline decoration-transparent transition hover:decoration-white"
+                        href={sublink.link}
+                      >
+                        {sublink.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="flex-1 flex justify-center lg:justify-end">
+            <Image
+              className="bg-white object-cover object-center rounded-md p-5 mt-6 transition-transform hover:-translate-y-1 max-sm:w-1/2 lg:mt-0"
+              src="/images/enamad.webp"
+              alt="لوگوی ای نماد"
+              height={176}
+              width={176}
+            />
+            <Image
+              className="bg-white object-cover object-center rounded-md p-5 mt-6 mr-3 transition-transform hover:-translate-y-1 max-sm:w-1/2 lg:mt-0"
+              src="/images/samandehi.webp"
+              alt="لوگوی سامان‌دهی"
+              height={176}
+              width={176}
+            />
+          </div>
+        </div>
 
         <p className="border-white/5 border-t border-solid w-full text-justify pt-9 mt-12">
           جاب‌ویژن بعنوان اولین ارائه دهنده بسته جامع خدمات کاریابی و استخدام، تجربه برگزاری موفق

@@ -1,10 +1,11 @@
-"use client"
-
 import { useEffect, useRef, useState } from "react"
+import { v4 as uuid } from "uuid"
 import { IconChevronDown } from "@tabler/icons-react"
 
 import Title from "../Title"
 import Button from "../Button"
+import { FOOTER_BLOGS } from "@/utils/initialData"
+import Link from "next/link"
 
 const ToggalableSectionOfFooter = () => {
   const [showSection, setShowSection] = useState<boolean>(false)
@@ -45,22 +46,14 @@ const ToggalableSectionOfFooter = () => {
         <Title size={"sm"} className="mt-6">
           آخرین مطالب بلاگ
         </Title>
-        <ul className="flex flex-col items-center gap3 mt-3 sm:flex-row">
-          <li className="max-sm:w-full">
-            <Button className="bg-white/5 w-full">
-              راهنمای جامع استخدام
-            </Button>
-          </li>
-          <li className="max-sm:w-full">
-            <Button className="bg-white/5 w-full">
-              راهنمای جامع رزومه نویسی برای کارجویان
-            </Button>
-          </li>
-          <li className="max-sm:w-full">
-            <Button className="bg-white/5 w-full">
-              گزارش افزایش حقوق 1402 کارگران
-            </Button>
-          </li>
+        <ul className="flex items-center gap-3 mt-3 max-sm:flex-col">
+          {FOOTER_BLOGS.map((blog) => (
+            <li key={uuid()} className="max-sm:w-full">
+              <Link href={blog.link} className="w-full">
+                <Button className="bg-white/5 w-full">{blog.name}</Button>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="border-b border-solid border-white/5 flex justify-center pb-6 mt-5 mb-11">
