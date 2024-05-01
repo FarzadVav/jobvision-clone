@@ -8,6 +8,7 @@ import { IconArrowLeft } from "@tabler/icons-react"
 import { contentFetcher, suggesttedJobAdsFetcher } from "@/utils/fetcher"
 import JobAdBox from "../JobAdBox"
 import BreakLine from "../BreakLine"
+import JobAdBoxPreview from "../JobAdBoxPreview"
 
 const SuggestedJobAds = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
@@ -47,9 +48,9 @@ const SuggestedJobAds = () => {
             )
           } else {
             return (
-              <div
+              <JobAdBoxPreview
                 key={uuid()}
-                className="jobAd_size-1 bg-light rounded-md max-md:hidden xl:jobAd_size-2"
+                className="jobAd_size-1 max-md:hidden xl:jobAd_size-2"
               />
             )
           }
