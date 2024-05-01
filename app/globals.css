@@ -149,6 +149,18 @@ a {
     background: transparent;
   }
 
+  .light-border {
+    @apply border-solid border-white/10;
+  }
+
+  .header_mobile-menu_slide {
+    @apply w-full h-full flex flex-col gap-1 absolute overflow-y-auto transition-transform;
+  }
+
+  .header_mobile-menu_back {
+    @apply light-border bg-primary border-b w-full pb-3 mb-3 sticky top-0;
+  }
+
   .hero-section_box {
     @apply border border-solid flex justify-center items-center text-sm px-3 py-1 rounded;
   }

@@ -35,7 +35,6 @@ const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
         <div
           className={cn(
             mobileMenuVariants({ breakPoint }),
-            "w-screen h-screen max-h-dvh fixed top-0 left-0 z-50 transition-colors",
             className,
             state ? "bg-dark/25" : "invisible bg-transparent"
           )}
@@ -50,7 +49,7 @@ const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
             )}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="bg-white/10 w-1/3 h-1 rounded-full absolute top-3 left-1/2 -translate-y-0.5 -translate-x-1/2"></div>
+            <div className="bg-white/10 w-1/3 h-1 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>
             {children}
           </menu>
         </div>
