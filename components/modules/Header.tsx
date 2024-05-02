@@ -14,8 +14,8 @@ import {
   IconUser,
 } from "@tabler/icons-react"
 
-import Button from "../Button"
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
+import Button from "../Button"
 import MobileMenu from "../MobileMenu"
 
 const Header = () => {
@@ -47,7 +47,7 @@ const Header = () => {
               >
                 <div
                   className={
-                    "bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative cursor-default"
+                    "container bg-white h-full mx-auto rounded-b-xl flex flex-col p-0 relative cursor-default"
                   }
                 >
                   <ul className={"border-t border-solid border-light w-full h-16 flex"}>
@@ -59,44 +59,46 @@ const Header = () => {
                         <button className="dana-bold border-l border-solid border-light h-1/2 px-6">
                           {item.name}
                         </button>
-                        <ul
+                        <div
                           className={
-                            "bg-white border-t border-solid border-light columns-5 py-3 px-6 rounded-b-xl absolute top-16 bottom-0 left-0 right-0 cursor-default overflow-y-auto opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
+                            "list-scrollbar bg-white border-t border-solid border-light w-full py-3 px-6 rounded-b-xl absolute top-16 bottom-0 left-0 overflow-y-auto cursor-default opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
                           }
                         >
-                          {item.menu.map((menuItem) => (
-                            <li key={uuid()}>
-                              <Link
-                                className="dana-bold hover:text-primary"
-                                href={`/jobs?${item.query}=${menuItem.link.id}`}
-                              >
-                                {menuItem.link.name}
-                              </Link>
-                              <ul className={"w-full h-full max-h-max inline-block py-2 pr-1"}>
-                                {menuItem.subMenu.map((subMenuItem) => (
-                                  <li
-                                    key={uuid()}
-                                    className={"flex items-center mt-2 first:mt-0 group/sub"}
-                                  >
-                                    <IconChevronLeft
-                                      className={
-                                        "icon-sm text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100"
-                                      }
-                                    />
-                                    <Link
-                                      className={
-                                        "text-dark inline-block text-sm text-right hover:text-primary"
-                                      }
-                                      href={`/jobs?${menuItem.query}=${subMenuItem.id}`}
+                          <ul className="w-max h-full flex flex-wrap flex-col gap-3">
+                            {item.menu.map((menuItem) => (
+                              <li key={uuid()}>
+                                <Link
+                                  className="dana-bold hover:text-primary"
+                                  href={`/jobs?${item.query}=${menuItem.link.id}`}
+                                >
+                                  {menuItem.link.name}
+                                </Link>
+                                <ul className={"w-full h-full max-h-max inline-block py-2 pr-1"}>
+                                  {menuItem.subMenu.map((subMenuItem) => (
+                                    <li
+                                      key={uuid()}
+                                      className={"flex items-center mt-2 first:mt-0 group/sub"}
                                     >
-                                      {subMenuItem.name}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                          ))}
-                        </ul>
+                                      <IconChevronLeft
+                                        className={
+                                          "icon-sm text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100"
+                                        }
+                                      />
+                                      <Link
+                                        className={
+                                          "text-dark inline-block text-sm text-right hover:text-primary"
+                                        }
+                                        href={`/jobs?${menuItem.query}=${subMenuItem.id}`}
+                                      >
+                                        {subMenuItem.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </li>
                     ))}
                     <Link className="h-full" href={"/jobs"}>
