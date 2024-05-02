@@ -15,14 +15,12 @@ const JobAds = () => {
   const { data: jobAds, isLoading } = useSWR("/jobs", jobAdsFilterFetcher)
   const { mutate } = useSWRConfig()
 
-  console.log("isLoading --->", isLoading)
-
   useEffect(() => {
     mutate("/jobs")
   }, [pathname, searchParams])
 
   return (
-    <aside className="bg-white h-max w-full p-3 rounded-md lg:w-2/5 xl:w-1/3">
+    <aside className="bg-white h-max w-full rounded-md lg:p-3 lg:w-2/5 xl:w-1/3">
       {isLoading
         ? [...Array(3)].map(() => (
             <JobAdBoxPreview key={uuid()} className="mt-3 first-of-type:mt-0" />
