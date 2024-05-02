@@ -12,6 +12,7 @@ import {
   IconLogin,
   IconMenuDeep,
   IconUser,
+  IconX,
 } from "@tabler/icons-react"
 
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
@@ -209,11 +210,20 @@ const Header = () => {
         </nav>
         {/* mobile nav */}
         <nav className={"container h-[4.5rem] flex justify-between items-center lg:hidden"}>
-          <Button className="text-white h-full" onClick={() => setShowMobileMenu(true)}>
-            <IconMenuDeep className="icon" />
+          <Button
+            className="text-white h-full"
+            aria-label="mobile menu toggle"
+            onClick={() => setShowMobileMenu(true)}
+          >
+            <IconMenuDeep
+              className={`icon absolute transition-opacity ${showMobileMenu ? "opacity-0" : ""}`}
+            />
+            <IconX
+              className={`icon absolute transition-opacity ${showMobileMenu ? "" : "opacity-0"}`}
+            />
           </Button>
           <Link className="h-full" href={"/"}>
-            <Button className="h-full">
+            <Button className="h-full" aria-label="jobvision logo">
               <Image src="/images/logo-white.svg" height={33.5} width={76} alt="لوگوی جاب ویژن" />
             </Button>
           </Link>
@@ -235,7 +245,6 @@ const Header = () => {
       </header>
 
       <MobileMenu
-        className="text-white"
         state={showMobileMenu}
         closingHandler={() => {
           setShowMobileMenu(false)

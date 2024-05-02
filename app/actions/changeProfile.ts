@@ -41,6 +41,8 @@ const changeProfile = async (formData: FormData) => {
 
   try {
     const user = await getMe()
+    const currentCity = await prisma.cities.findUnique({ where: { name: city } })
+
     await prisma.companies.update({
       where: { email: user?.email },
       data: {
@@ -48,7 +50,7 @@ const changeProfile = async (formData: FormData) => {
         year: parseInt(year),
         about,
         activity,
-        city_id: city,
+        city_id: currentCity?.id,
         employees: [+minEmployee, +maxEmployee],
         knowledgeBased: knowledgeBased === "on"
       }

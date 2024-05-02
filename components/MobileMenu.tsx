@@ -5,7 +5,7 @@ import { VariantProps, cva } from "class-variance-authority"
 import { cn } from "@/utils/lib/tw"
 
 const mobileMenuVariants = cva(
-  "w-screen h-screen max-h-dvh fixed top-0 left-0 z-50 transition-colors",
+  "animate-fade animate-duration-300 bg-dark/25 w-screen h-screen max-h-dvh fixed top-0 left-0 z-50",
   {
     variants: {
       breakPoint: {
@@ -30,22 +30,19 @@ export interface MobileMenuProps
 
 const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
   ({ className, breakPoint, state, closingHandler, children, ...props }, ref) => {
+    if (!state) return null
+
     return createPortal(
       <>
         <div
-          className={cn(
-            mobileMenuVariants({ breakPoint }),
-            className,
-            state ? "bg-dark/25" : "invisible bg-transparent"
-          )}
+          className={cn(mobileMenuVariants({ breakPoint }), className)}
           ref={ref}
           onClick={closingHandler}
           {...props}
         >
           <menu
             className={cn(
-              "bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0 transition-all",
-              state ? "" : "translate-y-full"
+              "animate-flip-up animate-duration-300 light-border border-t bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0"
             )}
             onClick={(event) => event.stopPropagation()}
           >

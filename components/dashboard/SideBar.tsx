@@ -108,10 +108,10 @@ const SideBar = () => {
 
       <MobileMenu state={showMobileMenu} closingHandler={() => setShowMobileMenu(false)}>
         <div className="w-full flex gap-3">
-          <Button className="flex-1" aria-label="notification" variant={"fill"}>
+          <Button className="text-dark flex-1" aria-label="notification" variant={"fill"}>
             <IconBell className="icon" />
           </Button>
-          <Button className="flex-1" aria-label="verified" variant={"success"}>
+          <Button className="text-dark flex-1" aria-label="verified" variant={"fill"}>
             <IconFileCheck className="icon" />
           </Button>
           <Button
