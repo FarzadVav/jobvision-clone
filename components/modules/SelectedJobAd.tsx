@@ -31,7 +31,7 @@ const SelectedJobAd = () => {
   const { data: jobAds } = useSWR(searchParams.has("id") ? "/api/jobads" : null, jobAdsFetcher)
 
   return (
-    <div className="list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto">
+    <div className="bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto">
       {selectedJobAd ? (
         <>
           <div className="w-full">

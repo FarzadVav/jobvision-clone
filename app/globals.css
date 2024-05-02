@@ -34,17 +34,9 @@
   --warning: 44 90% 54%;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: none;
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--dark));
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--dark)) transparent;
 }
 
 body {
@@ -131,22 +123,8 @@ a {
 }
 
 @layer components {
-  .list-scrollbar::-webkit-scrollbar {
-    width: 2px;
-    height: 2px;
-  }
-
-  .list-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--dark) / 0.5);
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-
-  .no-scrollbar::-webkit-scrollbar-thumb {
-    background: transparent;
+  .no-scrollbar {
+    scrollbar-width: none;
   }
 
   .light-border {
@@ -243,7 +221,7 @@ a {
   }
 
   .selected-jobAd_ability .value {
-    @apply list-scrollbar w-8/12 mr-2 overflow-x-auto sm:w-4/5;
+    @apply w-8/12 mr-2 overflow-x-auto sm:w-4/5;
   }
 
   .selected-jobAd_ability .value > * {

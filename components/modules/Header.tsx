@@ -61,7 +61,7 @@ const Header = () => {
                         </button>
                         <div
                           className={
-                            "list-scrollbar bg-white border-t border-solid border-light w-full py-3 px-6 rounded-b-xl absolute top-16 bottom-0 left-0 overflow-y-auto cursor-default opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
+                            "bg-white border-t border-solid border-light w-full py-3 px-6 rounded-b-xl absolute top-16 bottom-0 left-0 overflow-y-auto cursor-default opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50"
                           }
                         >
                           <ul className="w-max h-full flex flex-wrap flex-col gap-3">
