@@ -9,7 +9,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       {children}
-      <div className="bg-white border-b border-solid border-light w-full py-6">
+      <div className="bg-white border-b border-solid border-light w-full pt-6 pb-3">
         <div className="container">
           <SearchForm />
           <Filters />

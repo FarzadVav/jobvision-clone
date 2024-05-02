@@ -14,8 +14,15 @@ const Filters = async () => {
   const data = await getCooperationTypeFilter()
 
   return (
-    <div className="w-full flex flex-wrap items-center gap-3 mt-6 sm:mt-3">
+    <div className="w-full flex items-center gap-3 pt-6 pb-3 sm:flex-wrap sm:pt-3 max-sm:overflow-x-auto">
       <RemoveFiltersButton />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
+      <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
       <SingleFilter route={"/" + FILTER_KEYS.remote} name="دورکاری" />
       <SingleFilter route={"/" + FILTER_KEYS.knowledgeBased} name="دانش بنیان" />
       <MultiFilter query={FILTER_KEYS.type} name="نوع همکاری" filters={data} />

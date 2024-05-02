@@ -44,12 +44,12 @@ const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
         >
           <menu
             className={cn(
-              "bg-primary w-screen p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0 transition-all",
+              "bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0 transition-all",
               state ? "" : "translate-y-full"
             )}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="bg-white/10 w-1/3 h-1 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>
+            <div className="bg-white/10 w-1/4 h-1 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>
             {children}
           </menu>
         </div>
