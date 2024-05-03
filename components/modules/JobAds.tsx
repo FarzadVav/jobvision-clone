@@ -6,8 +6,8 @@ import useSWR, { useSWRConfig } from "swr"
 import { v4 as uuid } from "uuid"
 
 import { jobAdsFilterFetcher } from "@/utils/fetcher"
+import Skeleton from "../Skeleton"
 import JobAdBox from "../JobAdBox"
-import JobAdBoxPreview from "../JobAdBoxPreview"
 
 const JobAds = () => {
   const pathname = usePathname()
@@ -23,7 +23,7 @@ const JobAds = () => {
     <aside className="bg-white h-max w-full rounded-md lg:p-3 lg:w-2/5 xl:w-1/3">
       {isLoading
         ? [...Array(3)].map(() => (
-            <JobAdBoxPreview key={uuid()} className="mt-3 first-of-type:mt-0" />
+            <Skeleton key={uuid()} className="h-52 mt-3 first-of-type:mt-0" />
           ))
         : null}
       {useMemo(() => {
