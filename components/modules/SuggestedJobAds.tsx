@@ -11,8 +11,11 @@ import BreakLine from "../BreakLine"
 import Skeleton from "../Skeleton"
 
 const SuggestedJobAds = () => {
-  const { data: content } = useSWR("/api/content", contentFetcher)
-  const { data: jobAds } = useSWR("/api/suggestted-jobads", suggesttedJobAdsFetcher)
+  const { data: content, isLoading: contentisLoading } = useSWR("/api/content", contentFetcher)
+  const { data: jobAds, isLoading: jobAdsisLoading } = useSWR(
+    "/api/suggestted-jobads",
+    suggesttedJobAdsFetcher
+  )
   const prevCategories = JSON.parse(localStorage.getItem("prevCategories") || "[]") as string[]
 
   return (
@@ -40,7 +43,43 @@ const SuggestedJobAds = () => {
       >
         {prevCategories.length ? "مشاغل پیشنهادی" : "لیست مشاغل"}
       </BreakLine>
-      <div className="w-full flex flex-wrap gap-3 mt-6 md:h-[calc(13rem*3+0.75rem*2)] xl:h-[calc(13rem*2+0.75rem)]">
+      <div className="w-full flex flex-wrap gap-3 mt-6">
+        {jobAdsisLoading ? (
+          <>
+            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
+          </>
+        ) : null}
+        {contentisLoading ? (
+          <div className="w-full h-52 flex flex-wrap items-center gap-3 md:jobAd_size-1 xl:jobAd_size-2">
+            <Skeleton className="w-5/12 h-3" />
+            <Skeleton className="w-1/12 h-3" />
+            <Skeleton className="w-3/12 h-3" />
+            <Skeleton className="w-1/12 h-3" />
+            <Skeleton className="w-2/12 h-3" />
+            <Skeleton className="w-4/12 h-3" />
+            <Skeleton className="w-5/12 h-3" />
+            <Skeleton className="w-3/12 h-3" />
+            <Skeleton className="w-2/12 h-3" />
+            <Skeleton className="w-1/12 h-3" />
+            <Skeleton className="w-3/12 h-3" />
+            <Skeleton className="w-7/12 h-3" />
+            <Skeleton className="w-4/12 h-3" />
+            <Skeleton className="w-3/12 h-3" />
+            <Skeleton className="w-7/12 h-3" />
+            <Skeleton className="w-4/12 h-3" />
+            <Skeleton className="w-2/12 h-3" />
+            <Skeleton className="w-7/12 h-3" />
+            <Skeleton className="w-4/12 h-3" />
+            <Skeleton className="w-1/12 h-3" />
+            <Skeleton className="w-2/12 h-3" />
+            <Skeleton className="w-1/12 h-3" />
+          </div>
+        ) : null}
+
         {jobAds?.map((jobAd) => {
           if (jobAd) {
             return (
@@ -52,24 +91,26 @@ const SuggestedJobAds = () => {
             )
           }
         })}
-        <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2 max-md:hidden">
-          <ul className="w-full flex flex-wrap items-center group">
-            {content?.tags.slice(0, 18).map((tag) => (
-              <li key={uuid()} className="suggested-link">
-                <Link href={`/jobs?tag=${tag.id}`}>{tag.name}</Link>
+        {content ? (
+          <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2 max-md:hidden">
+            <ul className="w-full flex flex-wrap items-center group">
+              {content?.tags.slice(0, 18).map((tag) => (
+                <li key={uuid()} className="suggested-link">
+                  <Link href={`/jobs?tag=${tag.id}`}>{tag.name}</Link>
+                </li>
+              ))}
+              <li className="suggested-link">
+                <span>...</span>
               </li>
-            ))}
-            <li className="suggested-link">
-              <span>...</span>
-            </li>
-            <li className="suggested-link">
-              <Link className="bg-primary text-white flex items-center" href={"/jobs"}>
-                مشاهده همه
-                <IconArrowLeft className="icon-sm mr-2" />
-              </Link>
-            </li>
-          </ul>
-        </div>
+              <li className="suggested-link">
+                <Link className="bg-primary text-white flex items-center" href={"/jobs"}>
+                  مشاهده همه
+                  <IconArrowLeft className="icon-sm mr-2" />
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
       </div>
     </>
   )

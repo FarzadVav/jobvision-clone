@@ -10,9 +10,10 @@ import "swiper/css/navigation"
 import { companiesFetcher } from "@/utils/fetcher"
 import { cn } from "@/utils/lib/tw"
 import CompanyBox from "./CompanyBox"
+import Skeleton from "./Skeleton"
 
 const CompaniesCarousel = ({ className }: { className?: string }) => {
-  const { data: companies } = useSWR("/api/companies", companiesFetcher)
+  const { data: companies, isLoading } = useSWR("/api/companies", companiesFetcher)
 
   return (
     <>
@@ -38,6 +39,28 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
         }}
         modules={[Autoplay, Navigation]}
       >
+        {isLoading ? (
+          <>
+            <SwiperSlide className="h-[17rem] pb-6 max-sm:!w-2/3">
+              <Skeleton className="w-full h-full" />
+            </SwiperSlide>
+            <SwiperSlide className="h-[17rem] pb-6 max-sm:!w-2/3">
+              <Skeleton className="w-full h-full" />
+            </SwiperSlide>
+            <SwiperSlide className="h-[17rem] pb-6 max-sm:!w-2/3">
+              <Skeleton className="w-full h-full" />
+            </SwiperSlide>
+            <SwiperSlide className="h-[17rem] pb-6 max-sm:!w-2/3">
+              <Skeleton className="w-full h-full" />
+            </SwiperSlide>
+            <SwiperSlide className="h-[17rem] pb-6 max-sm:!w-2/3">
+              <Skeleton className="w-full h-full" />
+            </SwiperSlide>
+            <SwiperSlide className="h-[17rem] pb-6 max-sm:!w-2/3">
+              <Skeleton className="w-full h-full" />
+            </SwiperSlide>
+          </>
+        ) : null}
         {companies?.map((company) => (
           <SwiperSlide key={uuid()} className="h-[17rem] pb-6 max-sm:!w-2/3">
             <CompanyBox key={uuid()} className="min-w-full" company={company} />
