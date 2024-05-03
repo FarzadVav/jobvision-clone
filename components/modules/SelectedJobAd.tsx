@@ -21,14 +21,100 @@ import Title from "../Title"
 import JobAdBox from "../JobAdBox"
 import Alert from "../Alert"
 import { releaseDateCalculation, salaryCalculationForView } from "@/utils/jobAd"
+import Skeleton from "../Skeleton"
 
 const SelectedJobAd = () => {
   const searchParams = useSearchParams()
-  const { data: selectedJobAd } = useSWR(
+  const { data: selectedJobAd, isLoading } = useSWR(
     searchParams.has("id") ? `/api/jobads/${searchParams.get("id")}` : null,
     selectedJobAdFetcher
   )
-  const { data: jobAds } = useSWR(searchParams.has("id") ? "/api/jobads" : null, jobAdsFetcher)
+  const { data: jobAds, isLoading: jobAdsLoading } = useSWR(
+    searchParams.has("id") ? "/api/jobads" : null,
+    jobAdsFetcher
+  )
+
+  if (isLoading)
+    return (
+      <div className="w-full h-full px-3 py-4">
+        <div className="w-full flex gap-3 lg:justify-between lg:items-center">
+          <Skeleton className="w-20 h-20 lg:w-1/2 lg:h-9" />
+          <Skeleton className="w-1/2 h-9 lg:w-1/6" />
+        </div>
+        <Skeleton className="h-0.5 mt-6 lg:hidden" />
+
+        <div className="w-full max-lg:hidden">
+          <div className="flex items-center gap-3 mt-6">
+            <Skeleton className="w-2/12 h-6" />
+            <Skeleton className="w-2/12 h-6" />
+          </div>
+          <div className="w-full flex justify-between items-center gap-3 mt-3">
+            <Skeleton className="w-1/3 h-6" />
+            <Skeleton className="w-1/4 h-6" />
+          </div>
+          <Skeleton className="h-12 mt-6" />
+        </div>
+
+        <div className="w-full flex flex-wrap lg:hidden">
+          <div className="w-full sm:w-1/2 mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
+            <Skeleton className="w-1/4 h-6" />
+            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          </div>
+          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
+            <Skeleton className="w-1/4 h-6" />
+            <Skeleton className="w-1/2 sm:w-1/6 h-3 mt-3" />
+          </div>
+          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
+            <Skeleton className="w-1/3 sm:w-1/4 h-6" />
+            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          </div>
+          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
+            <Skeleton className="w-1/4 h-6" />
+            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          </div>
+          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
+            <Skeleton className="w-1/4 h-6" />
+            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          </div>
+          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
+            <Skeleton className="w-1/4 h-6" />
+            <Skeleton className="w-1/2 sm:w-1/6 h-3 mt-3" />
+          </div>
+          <Skeleton className="h-0.5 mt-6" />
+        </div>
+
+        <div className="flex items-center gap-3 mt-6">
+          <Skeleton className="w-1/3 sm:w-2/12 h-9" />
+          <Skeleton className="w-1/3 sm:w-2/12 h-9" />
+          <Skeleton className="w-1/3 sm:w-2/12 h-9" />
+        </div>
+        <Skeleton className="w-1/2 h-6 mt-6" />
+        <Skeleton className="w-1/3 h-6 mt-3" />
+        <Skeleton className="w-1/3 h-6 mt-3" />
+        <Skeleton className="w-1/2 h-6 mt-3" />
+        <Skeleton className="w-1/4 h-6 mt-3" />
+        <Skeleton className="w-1/3 h-6 mt-3" />
+        <Skeleton className="h-3 mt-6" />
+        <Skeleton className="h-3 mt-3" />
+        <Skeleton className="w-10/12 h-3 mt-3" />
+        <Skeleton className="h-3 mt-3" />
+        <Skeleton className="w-11/12 h-3 mt-3" />
+        <Skeleton className="h-3 mt-3" />
+        <div className="flex items-center gap-3 mt-6">
+          <Skeleton className="w-1/2 h-9" />
+          <Skeleton className="w-1/2 h-9" />
+        </div>
+        <div className="flex items-center gap-3 mt-3">
+          <Skeleton className="w-1/2 h-9" />
+          <Skeleton className="w-1/2 h-9" />
+        </div>
+        <div className="flex items-center gap-3 mt-3">
+          <Skeleton className="w-1/2 h-9" />
+          <Skeleton className="w-1/2 h-9" />
+        </div>
+        <Skeleton className="w-1/3 h-6 mt-6" />
+      </div>
+    )
 
   return (
     <div className="bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto">
@@ -321,6 +407,15 @@ const SelectedJobAd = () => {
                     <Title className="mt-3 mb-3" size={"sm"}>
                       <span>فرصت‌های شغلی مشابه</span>
                     </Title>
+
+                    {jobAdsLoading ? (
+                      <>
+                        <div className="flex items-center gap-3 mt-3">
+                          <Skeleton className="w-1/2 h-52" />
+                          <Skeleton className="w-1/2 h-52" />
+                        </div>
+                      </>
+                    ) : null}
 
                     <div className="w-full mt-3">
                       {jobAds?.length ? (
