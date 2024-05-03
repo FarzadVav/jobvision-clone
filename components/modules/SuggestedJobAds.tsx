@@ -48,7 +48,7 @@ const SuggestedJobAds = () => {
             )
           } else {
             return (
-              <Skeleton key={uuid()} className="jobAd_size-1 h-52 max-md:hidden xl:jobAd_size-2" />
+              <Skeleton key={uuid()} className="jobAd_size-1 h-52 xl:jobAd_size-2 max-md:hidden" />
             )
           }
         })}

@@ -41,9 +41,7 @@ const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
           {...props}
         >
           <menu
-            className={cn(
-              "animate-flip-up animate-duration-300 light-border border-t bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0"
-            )}
+            className="animate-flip-up animate-duration-300 light-border border-t bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="bg-white/10 w-1/4 h-1 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>

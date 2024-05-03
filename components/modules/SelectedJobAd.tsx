@@ -41,7 +41,7 @@ const SelectedJobAd = () => {
           <Skeleton className="w-20 h-20 lg:w-1/2 lg:h-9" />
           <Skeleton className="w-1/2 h-9 lg:w-1/6" />
         </div>
-        <Skeleton className="h-0.5 mt-6 lg:hidden" />
+        <Skeleton className="w-full h-0.5 mt-6 lg:hidden" />
 
         <div className="w-full max-lg:hidden">
           <div className="flex items-center gap-3 mt-6">
@@ -52,7 +52,7 @@ const SelectedJobAd = () => {
             <Skeleton className="w-1/3 h-6" />
             <Skeleton className="w-1/4 h-6" />
           </div>
-          <Skeleton className="h-12 mt-6" />
+          <Skeleton className="w-full h-12 mt-6" />
         </div>
 
         <div className="w-full flex flex-wrap lg:hidden">
@@ -80,7 +80,7 @@ const SelectedJobAd = () => {
             <Skeleton className="w-1/4 h-6" />
             <Skeleton className="w-1/2 sm:w-1/6 h-3 mt-3" />
           </div>
-          <Skeleton className="h-0.5 mt-6" />
+          <Skeleton className="w-full h-0.5 mt-6" />
         </div>
 
         <div className="flex items-center gap-3 mt-6">
@@ -94,12 +94,12 @@ const SelectedJobAd = () => {
         <Skeleton className="w-1/2 h-6 mt-3" />
         <Skeleton className="w-1/4 h-6 mt-3" />
         <Skeleton className="w-1/3 h-6 mt-3" />
-        <Skeleton className="h-3 mt-6" />
-        <Skeleton className="h-3 mt-3" />
+        <Skeleton className="w-full h-3 mt-6" />
+        <Skeleton className="w-full h-3 mt-3" />
         <Skeleton className="w-10/12 h-3 mt-3" />
-        <Skeleton className="h-3 mt-3" />
+        <Skeleton className="w-full h-3 mt-3" />
         <Skeleton className="w-11/12 h-3 mt-3" />
-        <Skeleton className="h-3 mt-3" />
+        <Skeleton className="w-full h-3 mt-3" />
         <div className="flex items-center gap-3 mt-6">
           <Skeleton className="w-1/2 h-9" />
           <Skeleton className="w-1/2 h-9" />

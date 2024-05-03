@@ -246,6 +246,7 @@ const Header = () => {
 
       <MobileMenu
         state={showMobileMenu}
+        breakPoint={"lg"}
         closingHandler={() => {
           setShowMobileMenu(false)
           setMobileMegaMenu(null)
