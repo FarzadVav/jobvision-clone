@@ -29,10 +29,10 @@ const Page = () => {
       <div className="my-pages container">
         <div className="w-full flex">
           <div className="w-full flex flex-col justify-center items-center text-center lg:text-right lg:items-start xl:pl-24">
-            <Title className="max-sm:text-2xl max-sm:leading-relaxed max-lg:justify-center">
+            <Title className="!leading-normal max-sm:text-2xl max-lg:justify-center">
               <h1>
                 بین
-                <span className="dana-bold text-primary underline mx-2 sm:mx-3">37,540</span>
+                <span className="text-primary underline mx-2 sm:mx-3">37,540</span>
                 آگهی مختلف,
                 <br />
                 شغل رویایی خودت رو پیدا کن و استخدام شو!
@@ -81,11 +81,11 @@ const Page = () => {
         <SuggestedJobAds />
 
         <div className="mt-section bg-light/50 flex items-center py-9 rounded-md md:justify-evenly max-md:flex-col-reverse max-lg:px-5">
-          <div className="lg:w-1/2">
-            <Title className="max-md:justify-center max-md:mt-6">
+          <div className="max-md:mt-6 lg:w-1/2">
+            <Title className="max-md:justify-center" size={"sm"}>
               <h3>استخدام‌های سراسری و دولتی</h3>
             </Title>
-            <p className="mt-3 text-center md:text-right">
+            <p className="text-center mt-3 md:text-right">
               در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و منتشر
               می‌شوند، به سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز
               شوید.
@@ -102,12 +102,12 @@ const Page = () => {
           />
         </div>
 
-        <Title className={"mt-section justify-center"} size={"lg"}>
+        <Title className={"my-section justify-center max-sm:my-9"} size={"lg"}>
           <h4>
             <span className="text-primary ml-1">جاب‌ویژن</span> دستیار استخدامی شما
           </h4>
         </Title>
-        <div className="mt-section flex flex-wrap items-center gap-y-6">
+        <div className="flex flex-wrap items-center gap-y-6">
           <HonorBox icon={<IconUsersGroup />} count={2_000_000} text={"کارجوهای همراه ما"} />
           <HonorBox icon={<IconBuildingCommunity />} count={59_900} text={"سازمان همراه شما"} />
           <HonorBox icon={<IconBriefcase />} count={38_000} text={"موقعیت‌ شغلی فعال"} />

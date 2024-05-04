@@ -6,9 +6,11 @@ import { cn } from "@/utils/lib/tw"
 const titleVariants = cva("w-full flex items-center", {
   variants: {
     size: {
-      sm: "text-lg lg:text-xl",
-      md: "text-lg sm:text-xl lg:text-2xl xl:text-3xl",
-      lg: "text-xl sm:text-2xl md:text-3xl lg:text-4xl",
+      xs: "sm:text-lg lg:text-xl",
+      sm: "text-lg sm:text-xl lg:text-2xl",
+      md: "text-xl sm:text-2xl lg:text-3xl",
+      lg: "text-2xl sm:text-3xl lg:text-4xl",
+      xl: "text-3xl sm:text-4xl lg:text-5xl",
     },
     font: {
       morabba: "morabba",
