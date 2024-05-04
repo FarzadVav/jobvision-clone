@@ -11,7 +11,7 @@ const HonorBox = ({ icon, count, text }: HonorBoxProps) => {
   return (
     <div className="honor-box">
       {icon}
-      <span className="dana-bold sm:text-[1.2rem] mt-2.5 sm:mt-4">{count.toLocaleString()} +</span>
+      <span className="dana-bold mt-3">{count.toLocaleString()} +</span>
       <Title className="justify-center mt-1.5" font={"danaBold"} size={"sm"}>
         {text}
       </Title>

@@ -408,16 +408,18 @@ const SelectedJobAd = () => {
                       <span>فرصت‌های شغلی مشابه</span>
                     </Title>
 
-                    {jobAdsLoading ? (
-                      <>
-                        <div className="flex items-center gap-3 mt-3">
-                          <Skeleton className="w-1/2 h-52" />
-                          <Skeleton className="w-1/2 h-52" />
-                        </div>
-                      </>
-                    ) : null}
-
                     <div className="w-full mt-3">
+                      {jobAdsLoading ? (
+                        <>
+                          <div className="w-full flex flex-wrap gap-3 mt-3">
+                            <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                            <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                            <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                            <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                          </div>
+                        </>
+                      ) : null}
+
                       {jobAds?.length ? (
                         jobAds.filter(
                           (jobAd) =>
@@ -427,7 +429,7 @@ const SelectedJobAd = () => {
                           <div className="w-full flex flex-wrap gap-3">
                             {jobAds.map((jobAd2, i) => {
                               if (
-                                i < 6 &&
+                                i < 4 &&
                                 jobAd2.category.name === selectedJobAd.category.name &&
                                 jobAd2.id !== selectedJobAd.id
                               ) {
@@ -502,6 +504,16 @@ const SelectedJobAd = () => {
                 name: "سایر آگهی های این شرکت",
                 content: (
                   <>
+                    {jobAdsLoading ? (
+                      <>
+                        <div className="w-full flex flex-wrap gap-3">
+                          <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                          <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                          <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                          <Skeleton className="w-full h-52 xl:jobAd_size-1" />
+                        </div>
+                      </>
+                    ) : null}
                     {jobAds?.length ? (
                       jobAds.filter(
                         (job) =>
@@ -514,7 +526,7 @@ const SelectedJobAd = () => {
                               job.id !== selectedJobAd.id
                             ) {
                               return (
-                                <JobAdBox className="xl:jobAd_size-1" key={uuid()} jobAd={job} />
+                                <JobAdBox key={uuid()} className="xl:jobAd_size-1" jobAd={job} />
                               )
                             }
                           })}

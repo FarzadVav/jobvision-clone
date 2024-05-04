@@ -26,7 +26,7 @@ import Accordion from "@/components/accordions/Accordion"
 const Page = () => {
   return (
     <>
-      <div className="container my-12">
+      <div className="my-pages container">
         <div className={"w-full flex"}>
           <div
             className={
@@ -75,17 +75,17 @@ const Page = () => {
             <IranAnimation />
           </div>
         </div>
-        <SearchForm className="mt-6 sm:mt-9 lg:mt-12" />
+        <SearchForm className="mt-section" />
 
         <CompaniesCarousel className="mt-12" />
 
-        <Title className="mt-12">
+        <Title className="mt-section">
           <h2>تازه‌ترین آگهی‌های شغلی</h2>
         </Title>
         <SuggestedJobAds />
 
         <div
-          className="bg-light/50 flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
+          className="mt-section bg-light/50 flex flex-col-reverse justify-center items-center p-5 pb-9 rounded-md
 					md:flex-row md:justify-evenly md:px-0 md:py-9"
         >
           <div className="flex flex-col justify-center items-center md:items-start md:w-1/2">
@@ -109,19 +109,19 @@ const Page = () => {
           />
         </div>
 
-        <Title className={"justify-center mt-16"} size={"lg"}>
+        <Title className={"mt-section justify-center"} size={"lg"}>
           <h4>
             <span className="text-primary ml-1">جاب‌ویژن</span> دستیار استخدامی شما
           </h4>
         </Title>
-        <div className="flex flex-wrap items-center gap-y-9 mt-9 sm:gap-y-12 md:mt-14">
+        <div className="mt-section flex flex-wrap items-center gap-y-9 sm:gap-y-12">
           <HonorBox icon={<IconUsersGroup />} count={2_000_000} text={"کارجوهای همراه ما"} />
           <HonorBox icon={<IconBuildingCommunity />} count={59_900} text={"سازمان همراه شما"} />
           <HonorBox icon={<IconBriefcase />} count={38_000} text={"موقعیت‌ شغلی فعال"} />
           <HonorBox icon={<IconFileCheck />} count={132_000} text={"استخدامی موفق"} />
         </div>
 
-        <div className="flex flex-col gap-4 mt-12 md:mt-16 lg:flex-row">
+        <div className="mt-section flex flex-col gap-4 lg:flex-row">
           <CtaBox
             src="/images/cv.svg"
             title="رزومه ساز جاب ویژن"
@@ -136,12 +136,12 @@ const Page = () => {
           />
         </div>
 
-        <Title className={"justify-center mt-16"} size={"lg"}>
+        <Title className={"mt-section justify-center"} size={"lg"}>
           <h6>
             چرا باید <span className="text-primary mx-1.5">جاب‌ویژن</span> را انتخاب کنید
           </h6>
         </Title>
-        <ul className="w-full flex flex-col justify-center items-center pr-1 mt-12 relative sm:pr-16">
+        <ul className="mt-section w-full flex flex-col justify-center items-center pr-1 relative sm:pr-16">
           <div className="bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block"></div>
           {ACCORDIONS.map((accordion, index) => (
             <Accordion key={uuid()} length={index + 1} {...accordion} />

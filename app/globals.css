@@ -123,6 +123,22 @@ a {
 }
 
 @layer components {
+  .my-pages {
+    @apply my-9 lg:my-12;
+  }
+
+  .mt-section {
+    @apply mt-6 sm:mt-9 lg:mt-12;
+  }
+
+  .mb-section {
+    @apply mb-6 sm:mb-9 lg:mb-12;
+  }
+
+  .my-section {
+    @apply my-6 sm:my-9 lg:my-12;
+  }
+
   .no-scrollbar {
     scrollbar-width: none;
   }
@@ -164,11 +180,11 @@ a {
   }
 
   .honor-box {
-    @apply w-1/2 flex flex-col items-center lg:w-1/4;
+    @apply w-1/2 flex flex-col items-center md:w-1/4;
   }
 
   .honor-box svg {
-    @apply w-10 h-10 text-primary sm:w-12 sm:h-12;
+    @apply text-primary w-10 h-10 sm:w-12 sm:h-12;
   }
 
   .bordered-text {
