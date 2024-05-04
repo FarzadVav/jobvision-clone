@@ -259,6 +259,10 @@ a {
   .twin-input-wrapper > *:last-child {
     @apply w-full sm:w-1/2 sm:mr-3 max-sm:mt-6;
   }
+
+  .footer_logo {
+    @apply bg-white object-cover object-center rounded-md p-5 transition-transform hover:-translate-y-1 max-sm:w-1/2;
+  }
 }
 
 @layer components {

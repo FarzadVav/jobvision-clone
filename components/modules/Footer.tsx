@@ -50,7 +50,7 @@ const Footer = () => {
   if (WITHOUT_FOOTER_ROUTES.some((route) => pathname.includes(route))) return null
 
   return (
-    <div className="text-white bg-dark z-40 pt-12">
+    <div className="text-white bg-dark pt-6">
       <div className="container">
         <Title size={"sm"}>
           <h6 className="">سوالات متداول</h6>
@@ -131,16 +131,16 @@ const Footer = () => {
               </div>
             ))}
           </div>
-          <div className="flex-1 flex justify-center lg:justify-end">
+          <div className="flex-1 flex justify-center lg:justify-end max-lg:mt-6">
             <Image
-              className="bg-white object-cover object-center rounded-md p-5 mt-6 transition-transform hover:-translate-y-1 max-sm:w-1/2 lg:mt-0"
+              className="footer_logo"
               src="/images/enamad.webp"
               alt="لوگوی ای نماد"
               height={176}
               width={176}
             />
             <Image
-              className="bg-white object-cover object-center rounded-md p-5 mt-6 mr-3 transition-transform hover:-translate-y-1 max-sm:w-1/2 lg:mt-0"
+              className="footer_logo mr-3"
               src="/images/samandehi.webp"
               alt="لوگوی سامان‌دهی"
               height={176}
