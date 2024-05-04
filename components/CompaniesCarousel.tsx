@@ -61,9 +61,9 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
             </SwiperSlide>
           </>
         ) : null}
-        {companies?.map((company) => (
+        {companies?.slice(0, 10).map((company) => (
           <SwiperSlide key={uuid()} className="h-[17rem] pb-6 max-sm:!w-2/3">
-            <CompanyBox key={uuid()} className="min-w-full" company={company} />
+            <CompanyBox key={uuid()} className="w-full" company={company} />
           </SwiperSlide>
         ))}
       </Swiper>

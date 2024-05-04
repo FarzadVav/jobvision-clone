@@ -27,22 +27,18 @@ const Page = () => {
   return (
     <>
       <div className="my-pages container">
-        <div className={"w-full flex"}>
-          <div
-            className={
-              "w-full flex flex-col justify-center items-center text-center lg:text-right lg:items-start xl:pl-24"
-            }
-          >
+        <div className="w-full flex">
+          <div className="w-full flex flex-col justify-center items-center text-center lg:text-right lg:items-start xl:pl-24">
             <Title className="max-sm:text-2xl max-sm:leading-relaxed max-lg:justify-center">
               <h1>
                 بین
-                <span className={"dana-bold text-primary underline mx-2 sm:mx-3"}>37,540</span>
+                <span className="dana-bold text-primary underline mx-2 sm:mx-3">37,540</span>
                 آگهی مختلف,
                 <br />
                 شغل رویایی خودت رو پیدا کن و استخدام شو!
               </h1>
             </Title>
-            <ul className="w-full flex items-center gap-3 mt-5 max-sm:hidden max-lg:justify-center">
+            <ul className="w-full flex gap-3 mt-5 max-sm:hidden max-lg:justify-center">
               <li className="hero-section_box bg-primary/10 text-primary border-primary/25">
                 <IconSearch className="icon-sm" />
                 <span>فیلتر سرچ پیشرفته</span>
@@ -51,7 +47,7 @@ const Page = () => {
                 <IconFile className="icon-sm" />
                 <span>ارسال رزومه</span>
               </li>
-              <li className="text-2xl mt-1 max-sm:hidden">&</li>
+              <li className="text-2xl pt-0.5">&</li>
               <li className="hero-section_box bg-success/10 text-success border-success/25">
                 <IconFlame className="icon-sm" />
                 <span>رقابت و استخدام</span>
@@ -61,7 +57,7 @@ const Page = () => {
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان شرایط
               فعلی تکنولوژی مورد نیاز و کاربردهای متنوع کاربردی می باشد.
             </p>
-            <div className={"hidden items-center mt-9 lg:flex"}>
+            <div className="hidden items-center mt-9 lg:flex">
               <Button size={"lg"} variant={"primary"}>
                 شروع رایگان
                 <IconArrowLeft className="icon-lg" />
@@ -84,11 +80,8 @@ const Page = () => {
         </Title>
         <SuggestedJobAds />
 
-        <div
-          className="mt-section bg-light/50 flex flex-col-reverse justify-center items-center p-5 pb-9 rounded-md
-					md:flex-row md:justify-evenly md:px-0 md:py-9"
-        >
-          <div className="flex flex-col justify-center items-center md:items-start md:w-1/2">
+        <div className="mt-section bg-light/50 flex items-center py-9 rounded-md md:justify-evenly max-md:flex-col-reverse max-lg:px-5">
+          <div className="lg:w-1/2">
             <Title className="max-md:justify-center max-md:mt-6">
               <h3>استخدام‌های سراسری و دولتی</h3>
             </Title>
@@ -97,7 +90,7 @@ const Page = () => {
               می‌شوند، به سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز
               شوید.
             </p>
-            <Button className="mt-4" variant={"dark"}>
+            <Button className="mt-4 max-md:mx-auto" variant={"dark"}>
               مشاهده فرصت‌های شغلی
             </Button>
           </div>
@@ -114,14 +107,14 @@ const Page = () => {
             <span className="text-primary ml-1">جاب‌ویژن</span> دستیار استخدامی شما
           </h4>
         </Title>
-        <div className="mt-section flex flex-wrap items-center gap-y-9 sm:gap-y-12">
+        <div className="mt-section flex flex-wrap items-center gap-y-6">
           <HonorBox icon={<IconUsersGroup />} count={2_000_000} text={"کارجوهای همراه ما"} />
           <HonorBox icon={<IconBuildingCommunity />} count={59_900} text={"سازمان همراه شما"} />
           <HonorBox icon={<IconBriefcase />} count={38_000} text={"موقعیت‌ شغلی فعال"} />
           <HonorBox icon={<IconFileCheck />} count={132_000} text={"استخدامی موفق"} />
         </div>
 
-        <div className="mt-section flex flex-col gap-4 lg:flex-row">
+        <div className="mt-section flex gap-3 max-lg:flex-col">
           <CtaBox
             src="/images/cv.svg"
             title="رزومه ساز جاب ویژن"
@@ -143,8 +136,8 @@ const Page = () => {
         </Title>
         <ul className="mt-section w-full flex flex-col justify-center items-center pr-1 relative sm:pr-16">
           <div className="bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block"></div>
-          {ACCORDIONS.map((accordion, index) => (
-            <Accordion key={uuid()} length={index + 1} {...accordion} />
+          {ACCORDIONS.map((accordion, i) => (
+            <Accordion key={uuid()} length={i + 1} {...accordion} />
           ))}
         </ul>
       </div>

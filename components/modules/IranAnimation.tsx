@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react"
 
 const IranAnimation = () => {
   const [svgPath, setSvgPath] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
-
   const messageBoxRef = useRef<HTMLDivElement>(null)
   const gRef = useRef<SVGGElement>(null)
 
@@ -53,13 +52,14 @@ const IranAnimation = () => {
           }
         `}
       </style>
+
       <svg
         className="w-full h-full overflow-visible z-10"
         viewBox="0 0 800 710"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g ref={gRef} id="Group 5">
+        <g ref={gRef}>
           <circle id="dott-215" cx="10" cy="10" r="10" fill="#E7EAED" />
           <circle id="dott-285" cx="10" cy="70" r="10" fill="#E7EAED" />
           <circle id="dott-216" cx="40" cy="10" r="10" fill="#E7EAED" />
