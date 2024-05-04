@@ -92,8 +92,8 @@ const Footer = () => {
               <LinksAccordion
                 key={uuid()}
                 title={link.title}
-                text={
-                  <ul className="w-full flex flex-col justify-center items-center py-3">
+                content={
+                  <ul className="w-full py-3">
                     {link.links.map((sublink) => (
                       <li key={uuid()} className="w-full mt-3 first:mt-0">
                         <Link
