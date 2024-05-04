@@ -5,15 +5,15 @@ import { IconCaretDownFilled } from "@tabler/icons-react"
 
 import AccordionTypes from "@/types/accordion.types"
 import AccordionWithToggle from "@/hocs/AccordionWithToggle"
+import Title from "../Title"
 
 const Accordion = ({
   toggle,
   accordionRef,
-  setToggle,
   toggleHandler,
   length,
   title,
-  text,
+  content,
 }: AccordionTypes) => {
   const accordionParrentRef = useRef<HTMLLIElement>(null)
 
@@ -24,7 +24,7 @@ const Accordion = ({
           window.innerHeight / 1.75 &&
         length === 1
       ) {
-        setToggle(true)
+        toggleHandler(true)
       }
     }
 
@@ -35,40 +35,41 @@ const Accordion = ({
   return (
     <>
       <li
-        className={`bg-white w-full h-12 flex justify-between items-center my-2 relative ${
-          length !== 1 ? "cursor-pointer" : ""
-        }
-        group sm:my-6 sm:h-16 first-of-type:mt-0`}
+        className={`bg-white w-full flex justify-between items-center py-1.5 mt-6 relative ${
+          length !== 1 ? "cursor-pointer" : "cursor-not-allowed"
+        } group first-of-type:mt-0 sm:py-3`}
         ref={accordionParrentRef}
         onClick={() => length !== 1 && toggleHandler()}
       >
         <div
-          className={`bg-white border border-solid border-transparent w-12 h-16 hidden
-          justify-center items-center absolute -right-16 top-0 bottom-0 group-hover:text-primary
-          text-2xl sm:flex ${toggle ? "text-primary" : ""}`}
+          className={`${
+            toggle ? "text-primary" : ""
+          } bg-white w-12 h-full text-xl hidden justify-center items-center absolute -right-16 top-0 transition-colors group-hover:text-primary sm:flex`}
         >
           {length}
         </div>
-        <span
-          className={`dana-bold w-[calc(100%-2rem)] truncate !text-sm !leading-loose group-hover:text-primary
-              ${toggle ? "text-primary" : ""} sm:!text-base md:!text-xl sm:!leading-normal`}
+        <Title
+          className={`${
+            toggle ? "text-primary" : ""
+          } w-[calc(100%-2.5rem)] h-max !leading-loose transition-colors group-hover:text-primary`}
+          font={"danaBold"}
+          size={"xs"}
         >
           {title}
-        </span>
+        </Title>
         <IconCaretDownFilled
-          className={`transition group-hover:text-primary ${toggle ? "text-primary" : ""} absolute
-          left-0 w-4 h-4 ${toggle ? "-scale-y-100" : ""} md:w-7 md:h-7`}
+          className={`icon ${toggle ? "text-primary" : ""} transition-colors absolute left-0 ${
+            toggle ? "-scale-y-100" : ""
+          } group-hover:text-primary md:icon-lg`}
         />
       </li>
       <p
-        className={`cursor-text text-xs transition-all ${
+        className={`transition-all ${
           toggle ? "opacity-100 visible" : "opacity-0 invisible"
-        }
-        text-justify !leading-relaxed sm:text-base`}
+        } text-justify`}
         ref={accordionRef}
       >
-        <span className={`dana-bold cursor-text text-xs text-justify sm:text-base`}>{title}</span> :{" "}
-        {text}
+        <span className="inline-block mt-3">{content}</span>
       </p>
     </>
   )

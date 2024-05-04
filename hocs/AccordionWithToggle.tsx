@@ -4,31 +4,27 @@ import { FC, useEffect, useRef, useState } from "react"
 
 import AccordionTypes from "@/types/accordion.types"
 
-const AccordionWithToggle = (Component: FC<any>) => {
+const AccordionWithToggle = (Component: FC<AccordionTypes>) => {
   const NewComponent = (
-    props: Omit<AccordionTypes, "toggle" | "setToggle" | "accordionRef" | "toggleHandler">
+    props: Omit<AccordionTypes, "toggle" | "toggleHandler" | "accordionRef">
   ) => {
     const [toggle, setToggle] = useState<boolean>(false)
-
     const accordionRef = useRef<HTMLParagraphElement>(null)
 
     useEffect(() => {
-      if (toggle) {
-        accordionRef.current
-          ? (accordionRef.current.style.maxHeight = `${accordionRef.current?.scrollHeight}px`)
-          : null
-      } else {
-        accordionRef.current ? (accordionRef.current.style.maxHeight = "0") : null
-      }
+      if (!accordionRef.current) return
+
+      toggle
+        ? (accordionRef.current.style.maxHeight = `${accordionRef.current?.scrollHeight}px`)
+        : (accordionRef.current.style.maxHeight = "0")
     }, [toggle])
 
     return (
       <Component
-        {...props}
         toggle={toggle}
-        setToggle={setToggle}
+        toggleHandler={(state) => setToggle((prev) => state ?? !prev)}
         accordionRef={accordionRef}
-        toggleHandler={() => setToggle((prev) => !prev)}
+        {...props}
       />
     )
   }

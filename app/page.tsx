@@ -135,7 +135,7 @@ const Page = () => {
           </h6>
         </Title>
         <ul className="mt-section w-full flex flex-col justify-center items-center pr-1 relative sm:pr-16">
-          <div className="bg-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block"></div>
+          <div className="bg-light h-full w-[1px] absolute hidden top-0 right-6 translate-x-[1px] sm:block"></div>
           {ACCORDIONS.map((accordion, i) => (
             <Accordion key={uuid()} length={i + 1} {...accordion} />
           ))}
