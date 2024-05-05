@@ -34,7 +34,7 @@ const Header = () => {
               <Image src="/images/logo.svg" height={20.63} width={100} alt="لوگوی جاب ویژن" />
             </Button>
           </Link>
-          <button className="h-full px-4 group">
+          <div className="border-b-2 border-solid border-transparent h-[calc(100%-2px)] flex items-center px-4 mt-[1px] group cursor-pointer transition-colors hover:border-primary">
             فرصت های شغلی
             {/* Mega menu */}
             <div className="bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 opacity-0 invisible scale-y-95 origin-top transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:scale-y-100">
@@ -115,7 +115,7 @@ const Header = () => {
               </div>
             </div>
             {/* Mega menu */}
-          </button>
+          </div>
           <Link className="h-full" href={"/"}>
             <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
               محصولات
@@ -133,7 +133,7 @@ const Header = () => {
           </Link>
           <Link className="h-full max-xl:hidden" href={"/"}>
             <Button className="h-full" variant={"link"}>
-              دانلود گزارش حقوق ۱۴۰۳
+              گزارش حقوق ۱۴۰۳
             </Button>
           </Link>
           <div className="flex items-center mr-auto">

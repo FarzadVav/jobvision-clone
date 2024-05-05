@@ -18,14 +18,14 @@ const LinksAccordion = ({
         <span>{title}</span>
         <IconChevronDown className={`icon transition-transform ${toggle ? "-scale-y-100" : ""}`} />
       </div>
-      <p
+      <div
         className={`border-solid border-t border-transparent ${
           toggle ? "border-white/10" : ""
         } transition-all overflow-hidden`}
         ref={accordionRef}
       >
         {content}
-      </p>
+      </div>
     </li>
   )
 }

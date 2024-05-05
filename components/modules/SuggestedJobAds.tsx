@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
 import { IconArrowLeft } from "@tabler/icons-react"
@@ -11,12 +12,16 @@ import BreakLine from "../BreakLine"
 import Skeleton from "../Skeleton"
 
 const SuggestedJobAds = () => {
+  const [prevCategories, setPrevCategories] = useState<string[]>([])
   const { data: content, isLoading: contentisLoading } = useSWR("/api/content", contentFetcher)
   const { data: jobAds, isLoading: jobAdsisLoading } = useSWR(
     "/api/suggestted-jobads",
     suggesttedJobAdsFetcher
   )
-  const prevCategories = JSON.parse(localStorage.getItem("prevCategories") || "[]") as string[]
+
+  useEffect(() => {
+    setPrevCategories(JSON.parse(localStorage.getItem("prevCategories") || "[]"))
+  }, [])
 
   return (
     <>
