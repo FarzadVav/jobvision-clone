@@ -8,7 +8,7 @@ import { PulseLoader } from "react-spinners"
 import { cn } from "../utils/lib/tw"
 
 const buttonVariants = cva(
-  "min-w-max flex justify-center items-center gap-2 rounded cursor-pointer transition active:scale-95",
+  "min-w-max flex justify-center items-center gap-2 rounded cursor-pointer transition active:scale-95 disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
