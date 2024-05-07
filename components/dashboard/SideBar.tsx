@@ -106,7 +106,7 @@ const SideBar = () => {
         </ul>
       </menu>
 
-      <MobileMenu state={showMobileMenu} closingHandler={() => setShowMobileMenu(false)}>
+      <MobileMenu breakPoint={"lg"} state={showMobileMenu} closingHandler={() => setShowMobileMenu(false)}>
         <div className="w-full flex gap-3">
           <Button className="text-dark flex-1" aria-label="notification" variant={"fill"}>
             <IconBell className="icon" />
