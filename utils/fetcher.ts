@@ -5,7 +5,7 @@ import CompaniesT from "@/types/companies.types";
 
 export const getMeFetcher = () => fetch("/api/getMe")
   .then((res) => res.json())
-  .then((data) => data as Omit<CompaniesT, "job_ads">)
+  .then((data) => data as Omit<CompaniesT, "job_ads"> | null)
 
 export const contentFetcher = () => fetch("/api/content")
   .then((res) => res.json())

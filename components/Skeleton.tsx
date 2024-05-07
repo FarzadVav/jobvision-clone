@@ -1,4 +1,5 @@
 import { cn } from "@/utils/lib/tw"
+import { FC, PropsWithChildren } from "react"
 
 type SkeletonProps = {
   className?: string
@@ -6,12 +7,11 @@ type SkeletonProps = {
   height?: number
 }
 
-const Skeleton = ({ className, width, height }: SkeletonProps) => {
+const Skeleton = ({ children, className, width, height }: PropsWithChildren<SkeletonProps>) => {
   return (
-    <div
-      style={{ width, height }}
-      className={cn("animate-pulse bg-light rounded-md", className)}
-    />
+    <div style={{ width, height }} className={cn("animate-pulse bg-light rounded-md", className)}>
+      {children}
+    </div>
   )
 }
 

@@ -17,12 +17,13 @@ import {
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
 import Button from "../Button"
 import MobileMenu from "../MobileMenu"
+import Skeleton from "../Skeleton"
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null)
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const { data: user } = useSWR("/api/getMe", getMeFetcher)
+  const { data: user, isLoading } = useSWR("/api/getMe", getMeFetcher)
 
   return (
     <>
@@ -137,7 +138,11 @@ const Header = () => {
             </Button>
           </Link>
           <div className="flex items-center mr-auto">
-            {user ? (
+            {isLoading ? (
+              <Skeleton>
+                <Button className="w-32"></Button>
+              </Skeleton>
+            ) : user ? (
               <Link href={"/employer"}>
                 <Button variant={"fill"}>
                   پنل مدیریت

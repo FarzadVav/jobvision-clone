@@ -9,7 +9,7 @@ export const GET = async (request: Request) => {
   const token = cookies().get("token")?.value || request.headers.get("Authorization") || ""
   const tokenPayLoad = verifyToken(token)
 
-  if (!tokenPayLoad) return Response.json({ message: "دسترسی منقضی شده" }, { status: 403 })
+  if (!tokenPayLoad) return Response.json(null, { status: 403 })
 
   const company = await prisma.companies.findUnique({
     where: { email: tokenPayLoad.email },
@@ -19,5 +19,5 @@ export const GET = async (request: Request) => {
     return Response.json(company)
   }
 
-  return Response.json({ message: "کاربرد پیدا نشد" }, { status: 404 })
+  return Response.json(null, { status: 404 })
 }
