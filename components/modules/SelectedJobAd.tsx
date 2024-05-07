@@ -37,82 +37,123 @@ const SelectedJobAd = () => {
   if (isLoading)
     return (
       <div className="w-full h-full px-3 py-4">
-        <div className="w-full flex gap-3 lg:justify-between lg:items-center">
-          <Skeleton className="w-20 h-20 lg:w-1/2 lg:h-9" />
-          <Skeleton className="w-1/2 h-9 lg:w-1/6" />
-        </div>
-        <Skeleton className="w-full h-0.5 mt-6 lg:hidden" />
-
         <div className="w-full max-lg:hidden">
-          <div className="flex items-center gap-3 mt-6">
-            <Skeleton className="w-2/12 h-6" />
-            <Skeleton className="w-2/12 h-6" />
+          <div className="center">
+            <Skeleton className="h-6 w-1/2" />
+            <Skeleton className="h-6 w-1/4 mr-auto" />
           </div>
-          <div className="w-full flex justify-between items-center gap-3 mt-3">
-            <Skeleton className="w-1/3 h-6" />
-            <Skeleton className="w-1/4 h-6" />
+          <Skeleton className="h-6 w-1/3 mt-6" />
+          <div className="center mt-6">
+            <Skeleton className="h-6 w-1/3" />
+            <Skeleton className="h-6 w-1/4 mr-auto" />
           </div>
-          <Skeleton className="w-full h-12 mt-6" />
+          <Skeleton className="h-9 w-full mt-9" />
         </div>
 
-        <div className="w-full flex flex-wrap lg:hidden">
-          <div className="w-full sm:w-1/2 mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
-            <Skeleton className="w-1/4 h-6" />
-            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+        <div className="w-full lg:hidden">
+          <div className="row items-start gap-3">
+            <Skeleton className="h-20 w-20" />
+            <div className="w-2/3">
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-3 w-1/3 mt-3" />
+            </div>
           </div>
-          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
-            <Skeleton className="w-1/4 h-6" />
-            <Skeleton className="w-1/2 sm:w-1/6 h-3 mt-3" />
+          <div className="center gap-3 mt-6">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
           </div>
-          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
-            <Skeleton className="w-1/3 sm:w-1/4 h-6" />
-            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          <div className="center gap-3 mt-3">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
           </div>
-          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
-            <Skeleton className="w-1/4 h-6" />
-            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          <div className="center gap-3 mt-3">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
           </div>
-          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
-            <Skeleton className="w-1/4 h-6" />
-            <Skeleton className="w-1/3 sm:w-1/6 h-3 mt-3" />
+          <div className="center gap-3 mt-3">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
           </div>
-          <div className="w-full sm:w-1/2 mt-3 sm:mt-6 max-sm:flex max-sm:justify-between max-sm:items-center">
-            <Skeleton className="w-1/4 h-6" />
-            <Skeleton className="w-1/2 sm:w-1/6 h-3 mt-3" />
+          <div className="center gap-3 mt-3">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
           </div>
-          <Skeleton className="w-full h-0.5 mt-6" />
+          <div className="center gap-3 mt-3">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
+          </div>
+          <div className="center gap-3 mt-3 sm:hidden">
+            <Skeleton className="h-9 w-1/2" />
+            <Skeleton className="h-9 w-1/2" />
+          </div>
         </div>
 
-        <div className="flex items-center gap-3 mt-6">
-          <Skeleton className="w-1/3 sm:w-2/12 h-9" />
-          <Skeleton className="w-1/3 sm:w-2/12 h-9" />
-          <Skeleton className="w-1/3 sm:w-2/12 h-9" />
+        <div className="row gap-3 mt-6">
+          <Skeleton className="h-9 w-1/3 xl:w-1/6" />
+          <Skeleton className="h-9 w-1/3 xl:w-1/6" />
+          <Skeleton className="h-9 w-1/3 xl:w-1/6" />
         </div>
-        <Skeleton className="w-1/2 h-6 mt-6" />
-        <Skeleton className="w-1/3 h-6 mt-3" />
-        <Skeleton className="w-1/3 h-6 mt-3" />
-        <Skeleton className="w-1/2 h-6 mt-3" />
-        <Skeleton className="w-1/4 h-6 mt-3" />
-        <Skeleton className="w-1/3 h-6 mt-3" />
-        <Skeleton className="w-full h-3 mt-6" />
-        <Skeleton className="w-full h-3 mt-3" />
-        <Skeleton className="w-10/12 h-3 mt-3" />
-        <Skeleton className="w-full h-3 mt-3" />
-        <Skeleton className="w-11/12 h-3 mt-3" />
-        <Skeleton className="w-full h-3 mt-3" />
-        <div className="flex items-center gap-3 mt-6">
-          <Skeleton className="w-1/2 h-9" />
-          <Skeleton className="w-1/2 h-9" />
+
+        <div className="w-full mt-6 max-lg:hidden">
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full mt-3" />
+          <Skeleton className="h-6 w-full mt-3" />
+          <Skeleton className="h-6 w-full mt-3" />
+          <Skeleton className="h-6 w-full mt-3" />
         </div>
-        <div className="flex items-center gap-3 mt-3">
-          <Skeleton className="w-1/2 h-9" />
-          <Skeleton className="w-1/2 h-9" />
+
+        <Skeleton className="h-6 w-full mt-6" />
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-6 w-1/5" />
+          <Skeleton className="h-6 w-1/5" />
+          <Skeleton className="h-6 w-1/5" />
+          <Skeleton className="h-6 w-1/5" />
+          <Skeleton className="h-6 w-1/5" />
         </div>
-        <div className="flex items-center gap-3 mt-3">
-          <Skeleton className="w-1/2 h-9" />
-          <Skeleton className="w-1/2 h-9" />
+
+        <Skeleton className="h-6 w-full mt-6" />
+        <Skeleton className="h-3 w-full mt-3" />
+        <Skeleton className="h-3 w-full mt-3" />
+        <Skeleton className="h-3 w-full mt-3" />
+        <Skeleton className="h-3 w-full mt-3" />
+        <Skeleton className="h-3 w-full mt-3 md:hidden" />
+        <Skeleton className="h-3 w-full mt-3 md:hidden" />
+        <Skeleton className="h-3 w-full mt-3 sm:hidden" />
+        <Skeleton className="h-3 w-full mt-3 sm:hidden" />
+        <Skeleton className="h-3 w-full mt-3 sm:hidden" />
+
+        <Skeleton className="h-6 w-1/3 mt-6" />
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
         </div>
-        <Skeleton className="w-1/3 h-6 mt-6" />
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
+        </div>
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
+        </div>
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
+        </div>
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
+        </div>
+        <div className="center gap-3 mt-3">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
+        </div>
+        <div className="center gap-3 mt-3 max-lg:hidden">
+          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-2/3" />
+        </div>
+
+        <Skeleton className="h-9 w-full mt-6" />
+        <Skeleton className="h-6 w-full mt-6" />
       </div>
     )
 

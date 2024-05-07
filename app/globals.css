@@ -123,6 +123,22 @@ a {
 }
 
 @layer components {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .light-border {
+    @apply border-solid border-white/10;
+  }
+
+  .row {
+    @apply w-full flex items-center
+  }
+
+  .center {
+    @apply w-full flex justify-center items-center
+  }
+
   .my-pages {
     @apply my-9 lg:my-12;
   }
@@ -137,14 +153,6 @@ a {
 
   .my-section {
     @apply my-6 sm:my-9 lg:my-12;
-  }
-
-  .no-scrollbar {
-    scrollbar-width: none;
-  }
-
-  .light-border {
-    @apply border-solid border-white/10;
   }
 
   .header_mobile-menu_slide {
@@ -204,7 +212,7 @@ a {
   }
 
   .selected-jobad_details .item {
-    @apply w-full flex flex-wrap gap-1.5 sm:w-[calc(50%-(1rem-1rem/2))] sm:flex-col max-sm:justify-between max-sm:items-center max-sm:gap-x-3;
+    @apply w-full flex flex-wrap gap-1.5 sm:w-[calc(50%-1rem)] sm:flex-col max-sm:justify-between max-sm:items-center max-sm:gap-x-3;
   }
 
   .selected-jobad_details .item .key {
