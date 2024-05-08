@@ -10,6 +10,7 @@ import {
   IconBell,
   IconDots,
   IconFileCheck,
+  IconInfoCircle,
   IconLayoutDashboard,
   IconLogout,
   IconUserEdit,
@@ -21,6 +22,7 @@ import { getMeFetcher } from "@/utils/fetcher"
 import logOut from "@/app/actions/logOut"
 import { useState } from "react"
 import MobileMenu from "../MobileMenu"
+import Modal from "../Modal"
 
 const links = [
   { href: "/employer", value: "داشبورد", icon: <IconLayoutDashboard className="icon" /> },
@@ -31,6 +33,7 @@ const links = [
 const SideBar = () => {
   const pathname = usePathname()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showLogOutModal, setShowLogOutModal] = useState(false)
   const { data: company } = useSWR("/api/getMe", getMeFetcher)
 
   return (
@@ -71,7 +74,7 @@ const SideBar = () => {
           <Button aria-label="notifications" title="اعلان ها">
             <IconBell className="icon" />
           </Button>
-          <Button className="mr-auto" variant={"danger"} onClick={() => logOut()}>
+          <Button className="mr-auto" variant={"danger"} onClick={() => setShowLogOutModal(true)}>
             خروج
             <IconLogout className="icon" />
           </Button>
@@ -106,7 +109,11 @@ const SideBar = () => {
         </ul>
       </menu>
 
-      <MobileMenu breakPoint={"lg"} state={showMobileMenu} closingHandler={() => setShowMobileMenu(false)}>
+      <MobileMenu
+        breakPoint={"lg"}
+        state={showMobileMenu}
+        closingHandler={() => setShowMobileMenu(false)}
+      >
         <div className="w-full flex gap-3">
           <Button className="text-dark flex-1" aria-label="notification" variant={"fill"}>
             <IconBell className="icon" />
@@ -118,12 +125,25 @@ const SideBar = () => {
             className="flex-1"
             aria-label="logout"
             variant={"danger"}
-            onClick={() => logOut()}
+            onClick={() => {
+              setShowMobileMenu(false)
+              setShowLogOutModal(true)
+            }}
           >
             <IconLogout className="icon" />
           </Button>
         </div>
       </MobileMenu>
+
+      <Modal
+        icon={<IconInfoCircle className="icon-xl" />}
+        state={showLogOutModal}
+        topic="آیا برای خروج از حسابتات اطمینان دارید؟"
+        message="ممکن است در فرایند استخدام مشکلی به وجود بیاید و شما از ارسال رزومه کارجویان بی خبر باشید و به نتیجه دلخواه خودتان نرسید."
+        buttonVariant={"danger"}
+        acceptAction={() => logOut()}
+        closingHandler={() => setShowLogOutModal(false)}
+      />
     </>
   )
 }

@@ -1,5 +1,6 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
@@ -20,10 +21,11 @@ import MobileMenu from "../MobileMenu"
 import Skeleton from "../Skeleton"
 
 const Header = () => {
+  const pathname = usePathname()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null)
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const { data: user, isLoading } = useSWR("/api/getMe", getMeFetcher)
+  const { data: user, isLoading } = useSWR("/api/getMe" + pathname, getMeFetcher)
 
   return (
     <>

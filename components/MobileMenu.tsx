@@ -5,7 +5,7 @@ import { VariantProps, cva } from "class-variance-authority"
 import { cn } from "@/utils/lib/tw"
 
 const mobileMenuVariants = cva(
-  "animate-fade animate-duration-300 bg-dark/25 w-screen h-screen max-h-dvh fixed top-0 left-0 z-50",
+  "animate-fade animate-duration-300 bg-dark/25 w-screen h-screen max-h-dvh fixed top-0 left-0 z-50 cursor-zoom-out",
   {
     variants: {
       breakPoint: {
@@ -41,7 +41,7 @@ const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
           {...props}
         >
           <menu
-            className="animate-flip-up animate-duration-300 light-border border-t bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0"
+            className="animate-flip-up animate-duration-300 light-border border-t bg-primary text-white w-screen max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0 cursor-default"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="bg-white/10 w-1/4 h-1 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>
