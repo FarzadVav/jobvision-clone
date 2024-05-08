@@ -136,7 +136,7 @@ const SideBar = () => {
       </MobileMenu>
 
       <Modal
-        icon={<IconInfoCircle className="icon-xl" />}
+        icon={<IconInfoCircle className="icon-xl xl:icon-2xl" />}
         state={showLogOutModal}
         topic="آیا برای خروج از حسابتات اطمینان دارید؟"
         message="ممکن است در فرایند استخدام مشکلی به وجود بیاید و شما از ارسال رزومه کارجویان بی خبر باشید و به نتیجه دلخواه خودتان نرسید."

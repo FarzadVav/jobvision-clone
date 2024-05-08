@@ -293,6 +293,10 @@ a {
   .icon-xl {
     @apply h-7 w-7;
   }
+
+  .icon-2xl {
+    @apply h-8 w-8;
+  }
 }
 
 /* Animations */
