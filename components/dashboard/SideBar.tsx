@@ -11,7 +11,6 @@ import {
   IconBell,
   IconDots,
   IconFileCheck,
-  IconInfoCircle,
   IconLayoutDashboard,
   IconLogout,
   IconUserEdit,
@@ -24,6 +23,7 @@ import logOut from "@/app/actions/logOut"
 import { useState } from "react"
 import MobileMenu from "../MobileMenu"
 import Modal from "../Modal"
+import Skeleton from "../Skeleton"
 
 const links = [
   { href: "/employer", value: "داشبورد", icon: <IconLayoutDashboard className="icon" /> },
@@ -35,20 +35,28 @@ const SideBar = () => {
   const pathname = usePathname()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showLogOutModal, setShowLogOutModal] = useState(false)
-  const { data: company } = useSWR("/api/getMe", getMeFetcher)
+  const { data: company, isLoading } = useSWR("/api/getMe", getMeFetcher)
 
   return (
     <>
       <aside className="bg-primary text-white h-max w-[30%] hidden flex-col items-center p-3 rounded-lg sticky top-[5.25rem] lg:flex lg:p-6 xl:w-1/4">
-        <Image
-          className="bg-white w-28 h-28 rounded-full object-cover object-center"
-          src={company?.logo || ""}
-          alt=""
-          height={118}
-          width={118}
-        />
-        <Title className="justify-center min-h-7 mt-6" size={"sm"}>
-          <h1 className="text-center truncate">{company?.name}</h1>
+        {isLoading ? (
+          <Skeleton className="w-28 h-28 rounded-full" />
+        ) : (
+          <Image
+            className="bg-white w-28 h-28 rounded-full object-cover object-center"
+            src={company?.logo || ""}
+            alt=""
+            height={118}
+            width={118}
+          />
+        )}
+        <Title className="h-8 justify-center mt-6" size={"sm"}>
+          {isLoading ? (
+            <Skeleton className="w-1/2 h-full" />
+          ) : (
+            <h1 className="text-center truncate">{company?.name}</h1>
+          )}
         </Title>
         <ul className="w-full mt-3">
           {links.map((link) => (
