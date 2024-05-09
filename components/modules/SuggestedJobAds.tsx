@@ -15,7 +15,7 @@ const SuggestedJobAds = () => {
   const [prevCategories, setPrevCategories] = useState<string[]>([])
   const { data: content, isLoading: contentisLoading } = useSWR("/api/content", contentFetcher)
   const { data: jobAds, isLoading: jobAdsisLoading } = useSWR(
-    "/api/suggestted-jobads",
+    "/api/suggested-jobads",
     suggesttedJobAdsFetcher
   )
 

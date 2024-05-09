@@ -7,6 +7,7 @@ import useSWR from "swr"
 import { v4 as uuid } from "uuid"
 import {
   IconAd,
+  IconAlertTriangle,
   IconBell,
   IconDots,
   IconFileCheck,
@@ -40,13 +41,13 @@ const SideBar = () => {
     <>
       <aside className="bg-primary text-white h-max w-[30%] hidden flex-col items-center p-3 rounded-lg sticky top-[5.25rem] lg:flex lg:p-6 xl:w-1/4">
         <Image
-          className="bg-white rounded-full"
+          className="bg-white w-28 h-28 rounded-full object-cover object-center"
           src={company?.logo || ""}
           alt=""
-          height={100}
-          width={100}
+          height={118}
+          width={118}
         />
-        <Title className="justify-center min-h-7 mt-3" size={"sm"}>
+        <Title className="justify-center min-h-7 mt-6" size={"sm"}>
           <h1 className="text-center truncate">{company?.name}</h1>
         </Title>
         <ul className="w-full mt-3">
@@ -136,7 +137,7 @@ const SideBar = () => {
       </MobileMenu>
 
       <Modal
-        icon={<IconInfoCircle className="icon-xl xl:icon-2xl" />}
+        icon={<IconAlertTriangle className="icon-xl xl:icon-2xl" />}
         state={showLogOutModal}
         topic="آیا برای خروج از حسابتات اطمینان دارید؟"
         message="ممکن است در فرایند استخدام مشکلی به وجود بیاید و شما از ارسال رزومه کارجویان بی خبر باشید و به نتیجه دلخواه خودتان نرسید."

@@ -75,10 +75,10 @@ const Page = () => {
 
         <CompaniesCarousel className="mt-12" />
 
-        {/* <Title className="mt-section">
+        <Title className="mt-section">
           <h2>تازه‌ترین آگهی‌های شغلی</h2>
         </Title>
-        <SuggestedJobAds /> */}
+        <SuggestedJobAds />
 
         <div className="mt-section bg-light/50 flex items-center py-9 rounded-md md:justify-evenly max-md:flex-col-reverse max-lg:px-5">
           <div className="max-md:mt-6 lg:w-1/2">
