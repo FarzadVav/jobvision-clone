@@ -57,7 +57,7 @@ const Header = () => {
             فرصت های شغلی
             {/* Mega menu */}
             <div
-              className={`bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 origin-top transition-all duration-200 cursor-default ${
+              className={`bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 origin-top transition-all  cursor-default ${
                 shoMegaMenu ? "" : "opacity-0 invisible scale-y-95"
               }`}
               data-blank={true}
@@ -74,7 +74,7 @@ const Header = () => {
                       <button className="dana-bold border-l border-solid border-light h-1/2 px-6">
                         {item.name}
                       </button>
-                      <div className="bg-white border-t border-solid border-light w-full p-3 px-6 rounded-b-xl absolute top-[4.5rem] left-0 bottom-0 overflow-y-auto cursor-default opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50">
+                      <div className="bg-white border-t border-solid border-light w-full py-3 px-6 rounded-b-xl absolute top-[4.5rem] left-0 bottom-0 overflow-y-auto cursor-default opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-50">
                         <ul className="w-max h-full flex flex-wrap flex-col gap-y-3 gap-x-16">
                           {item.menu.map((menuItem) => (
                             <li key={uuid()}>
