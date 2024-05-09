@@ -5,7 +5,7 @@ import path from "path"
 import { v1 as uuid } from "uuid"
 
 import { ProfileSchemaT, getErrors, profileSchema } from "@/utils/lib/zod-schemas"
-import { prisma } from "@/utils/lib/client"
+import { prisma } from "@/prisma/client"
 import getMe from "./getMe"
 import FormStateT from "@/types/formState.types"
 

@@ -1,5 +1,5 @@
-import { CATEGORIES, CITIES, COOPERATION_TYPES, PROVINCES, TAGS } from "../initialData"
-import { prisma } from "../../prisma/client"
+import { CATEGORIES, CITIES, COOPERATION_TYPES, PROVINCES, TAGS } from "./../utils/initialData"
+import { prisma } from "./client"
 
 const main = async () => {
   await prisma.categories.deleteMany()
