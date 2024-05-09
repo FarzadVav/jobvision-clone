@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} utils/lib/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.12.0",
     "@tabler/icons-react": "^3.1.0",
@@ -41,6 +44,7 @@
     "postcss": "^8",
     "prisma": "^5.12.0",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

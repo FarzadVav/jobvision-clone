@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { Toaster } from "react-hot-toast"
 
-import addInitialDatasToDB from "./actions/addInitialDatasToDB"
 import Header from "@/components/modules/Header"
 import Footer from "@/components/modules/Footer"
 import "./globals.css"
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  await addInitialDatasToDB()
 
   return (
     <html lang="fa" dir="rtl">
