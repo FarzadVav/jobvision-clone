@@ -278,10 +278,12 @@ const Header = () => {
               </Button>
             </li>
             <li className="w-full" onClick={() => setMobileMegaMenu("jobAds")}>
-              <Button className="w-full justify-between" size={"xl"}>
-                همه آگهی ها
-                <IconChevronLeft className="icon" />
-              </Button>
+              <Link className="w-full" href={"/jobs"}>
+                <Button className="w-full justify-between" size={"xl"}>
+                  همه آگهی ها
+                  <IconChevronLeft className="icon" />
+                </Button>
+              </Link>
             </li>
             {content?.megaMenu.map((item) => (
               <li key={uuid()} className="w-full" onClick={() => setMobileMegaMenu(item.id)}>
