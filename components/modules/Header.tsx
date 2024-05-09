@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
@@ -21,6 +21,7 @@ import MobileMenu from "../MobileMenu"
 import Skeleton from "../Skeleton"
 
 const Header = () => {
+  const router = useRouter()
   const pathname = usePathname()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null)
@@ -37,11 +38,14 @@ const Header = () => {
               <Image src="/images/logo.svg" height={20.63} width={100} alt="لوگوی جاب ویژن" />
             </Button>
           </Link>
-          <div className="border-b-2 border-solid border-transparent h-[calc(100%-2px)] flex items-center px-4 mt-[1px] group cursor-pointer transition-colors hover:border-primary">
+          <div
+            className="border-b-2 border-solid border-transparent h-[calc(100%-2px)] flex items-center px-4 mt-[1px] group cursor-pointer transition-colors hover:border-primary"
+            onClick={() => router.push("/jobs")}
+          >
             فرصت های شغلی
             {/* Mega menu */}
             <div className="bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 opacity-0 invisible scale-y-95 origin-top transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:scale-y-100">
-              <div className="container shadow-xl bg-white h-[calc(100%-1.5rem)] mx-auto rounded-b-xl px-0 relative cursor-default">
+              <div className="container shadow-xl bg-white h-[calc(100%-1.5rem)] rounded-b-xl px-0 relative cursor-default">
                 <ul className="border-t border-solid border-light w-full h-[4.5rem] flex">
                   {content?.megaMenu.map((item) => (
                     <li key={uuid()} className="h-full flex items-center cursor-pointer group/item">
@@ -83,7 +87,7 @@ const Header = () => {
                     </Button>
                   </Link>
                 </ul>
-                <div className="border-t border-solid border-light w-full h-[calc(100%-4.5rem)] flex flex-col justify-center items-center mx-auto">
+                <div className="border-t border-solid border-light w-full h-[calc(100%-4.5rem)] flex flex-col justify-center items-center overflow-y-auto">
                   <Image
                     src="/images/chart.svg"
                     height={250}
