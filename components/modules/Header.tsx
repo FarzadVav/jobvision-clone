@@ -1,9 +1,9 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
 import {
@@ -23,10 +23,18 @@ import Skeleton from "../Skeleton"
 const Header = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const [shoMegaMenu, setShoMegaMenu] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null)
   const { data: content } = useSWR("/api/content", contentFetcher)
   const { data: user, isLoading } = useSWR("/api/getMe" + pathname, getMeFetcher)
+
+  useEffect(() => {
+    setShoMegaMenu(false)
+    setShowMobileMenu(false)
+    setMobileMegaMenu(null)
+  }, [pathname, searchParams])
 
   return (
     <>
@@ -39,13 +47,27 @@ const Header = () => {
             </Button>
           </Link>
           <div
-            className="border-b-2 border-solid border-transparent h-[calc(100%-2px)] flex items-center px-4 mt-[1px] group cursor-pointer transition-colors hover:border-primary"
+            className={`border-b-2 border-solid h-[calc(100%-2px)] flex items-center px-4 mt-[1px] group cursor-pointer transition-colors ${
+              shoMegaMenu ? "border-primary" : "border-transparent"
+            }`}
+            onMouseEnter={() => setShoMegaMenu(true)}
+            onMouseLeave={() => setShoMegaMenu(false)}
             onClick={() => router.push("/jobs")}
           >
             فرصت های شغلی
             {/* Mega menu */}
-            <div className="bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 opacity-0 invisible scale-y-95 origin-top transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:scale-y-100">
-              <div className="container shadow-xl bg-white h-[calc(100%-1.5rem)] rounded-b-xl px-0 relative cursor-default">
+            <div
+              className={`bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 origin-top transition-all duration-200 cursor-default ${
+                shoMegaMenu ? "" : "opacity-0 invisible scale-y-95"
+              }`}
+              data-blank={true}
+              onMouseMove={(event) => {
+                const elem = event.target as HTMLElement
+                if (elem.dataset.blank) setShoMegaMenu(false)
+              }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="container shadow-xl bg-white h-[calc(100%-1.5rem)] rounded-b-xl px-0 relative">
                 <ul className="border-t border-solid border-light w-full h-[4.5rem] flex">
                   {content?.megaMenu.map((item) => (
                     <li key={uuid()} className="h-full flex items-center cursor-pointer group/item">
