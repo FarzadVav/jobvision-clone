@@ -57,7 +57,7 @@ const Header = () => {
             فرصت های شغلی
             {/* Mega menu */}
             <div
-              className={`bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 origin-top transition-all  cursor-default ${
+              className={`bg-dark/25 backdrop-blur-sm h-[calc(100vh-4.5rem)] fixed top-[4.5rem] left-0 right-0 origin-top transition-all cursor-default ${
                 shoMegaMenu ? "" : "opacity-0 invisible scale-y-95"
               }`}
               data-blank={true}
