@@ -96,11 +96,11 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
             {jobAd.is_remote ? <span className="bordered-text">دورکاری</span> : null}
           </div>
           <div className="flex items-center mt-2">
-            {jobAd.company.city ? (
-              <span className="left-bordered-text">
-                {jobAd.company.city?.province.name}، {jobAd.company.city?.name}
-              </span>
-            ) : null}
+            <span className="left-bordered-text">
+              {jobAd.company.city
+                ? `${jobAd.company.city?.province.name}، ${jobAd.company.city?.name}`
+                : "موقعیت نامعلوم"}
+            </span>
             <span className="text-success">{salaryCalculationForView(jobAd.salary)}</span>
           </div>
         </div>

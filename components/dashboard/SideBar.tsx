@@ -55,7 +55,7 @@ const SideBar = () => {
           {isLoading ? (
             <Skeleton className="w-1/2 h-full" />
           ) : (
-            <h1 className="text-center truncate">{company?.name}</h1>
+            <h1 className="text-center truncate">{company?.name || "شرکت ناشناس"}</h1>
           )}
         </Title>
         <ul className="w-full mt-3">

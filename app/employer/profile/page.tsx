@@ -43,7 +43,7 @@ const Page = () => {
       <div className="twin-input-wrapper">
         <div>
           <Label className="mb-3" htmlFor="name">
-            <IconPencilMinus className="icon ml-3" />
+            <IconPencilMinus className="icon" />
             نام شرکت
           </Label>
           <Input
@@ -57,7 +57,7 @@ const Page = () => {
         </div>
         <div>
           <Label className="mb-3" htmlFor="year">
-            <IconCalendarEvent className="icon ml-3" />
+            <IconCalendarEvent className="icon" />
             سال تاسیس
           </Label>
           <Input
@@ -74,7 +74,7 @@ const Page = () => {
       <div className="twin-input-wrapper mt-6">
         <div>
           <Label className="mb-3" htmlFor="minEmployee">
-            <IconUserMinus className="icon ml-3" />
+            <IconUserMinus className="icon" />
             حداقل تعداد کارکنان
           </Label>
           <Input
@@ -88,7 +88,7 @@ const Page = () => {
         </div>
         <div>
           <Label className="mb-3" htmlFor="maxEmployee">
-            <IconUserPlus className="icon ml-3" />
+            <IconUserPlus className="icon" />
             حداکثر آنها
           </Label>
           <Input
@@ -103,7 +103,7 @@ const Page = () => {
       </div>
 
       <Label className="mt-6 mb-3" htmlFor="city">
-        <IconMapPin className="icon ml-3" />
+        <IconMapPin className="icon" />
         شهر شما
       </Label>
       <AutoComplete
@@ -116,7 +116,7 @@ const Page = () => {
       />
 
       <Label className="mt-6 mb-3" htmlFor="about">
-        <IconInfoCircle className="icon ml-3" />
+        <IconInfoCircle className="icon" />
         درباره شرکت
       </Label>
       <TextArea
@@ -128,7 +128,7 @@ const Page = () => {
       />
 
       <Label className="mt-6 mb-3" htmlFor="activity">
-        <IconListSearch className="icon ml-3" />
+        <IconListSearch className="icon" />
         حوزه فعالیت
       </Label>
       <Input
@@ -141,7 +141,7 @@ const Page = () => {
       />
 
       <Label className="mt-6 mb-3" htmlFor="file">
-        <IconPhoto className="icon ml-3" />
+        <IconPhoto className="icon" />
         عکس {company?.logo ? "لوگوی جدید" : "لوگو"}
       </Label>
       <Input
