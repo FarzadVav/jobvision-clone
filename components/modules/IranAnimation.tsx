@@ -450,7 +450,7 @@ const IranAnimation = () => {
         </g>
         {svgPath.x !== 0 && svgPath.y !== 0 ? (
           <foreignObject
-            className={"w-96 h-24 -translate-x-48 translate-y-7 overflow-visible z-50"}
+            className={"w-96 h-24 -translate-x-48 translate-y-7 overflow-visible z-30"}
             x={svgPath.x}
             y={svgPath.y}
           >

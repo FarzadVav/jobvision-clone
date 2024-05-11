@@ -89,7 +89,7 @@ const SideBar = () => {
           </Button>
         </div>
       </aside>
-      <menu className="bg-primary/10 backdrop-blur-xl border-t border-solid border-white/10 w-screen fixed bottom-0 left-0 z-40 lg:hidden">
+      <menu className="bg-primary/10 backdrop-blur-xl border-t border-solid border-white/10 w-screen fixed bottom-0 left-0 z-10 lg:hidden">
         <ul className="container text-primary flex justify-between items-center gap-1 py-3">
           {links.map((link) => (
             <li key={uuid()}>

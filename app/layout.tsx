@@ -4,6 +4,8 @@ import { Toaster } from "react-hot-toast"
 import Header from "@/components/modules/Header"
 import Footer from "@/components/modules/Footer"
 import "./globals.css"
+import { Suspense } from "react"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Jobvision Clone",
@@ -14,10 +16,24 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="fa" dir="rtl">
       <body>
-        <Header />
-        {children}
-        <Footer />
-        <Toaster />
+        <Suspense
+          fallback={
+            <div className="center bg-white w-screen h-screen fixed top-0 left-0 z-50">
+              <Image
+                className="animate-pulse"
+                src="/images/logo.svg"
+                height={20.63}
+                width={100}
+                alt="لوگوی جاب ویژن"
+              />
+            </div>
+          }
+        >
+          <Header />
+          {children}
+          <Footer />
+          <Toaster />
+        </Suspense>
       </body>
     </html>
   )
