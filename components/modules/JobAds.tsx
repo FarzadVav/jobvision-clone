@@ -34,7 +34,7 @@ const JobAds = () => {
         ) : (
           <Alert variant={"warning"} message="فرصت شغلی برای جستجوی شما پیدا نشد" />
         )
-      }, [jobAds])}
+      }, [jobAds, isLoading])}
     </aside>
   )
 }
