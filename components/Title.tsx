@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react"
 import { VariantProps, cva } from "class-variance-authority"
 
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 
 const titleVariants = cva("w-full flex items-center", {
   variants: {

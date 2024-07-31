@@ -1,7 +1,7 @@
 import React, { ReactNode, forwardRef } from "react"
 import { createPortal } from "react-dom"
 
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 import Title from "./Title"
 import Button, { ButtonVariantsT } from "./Button"
 

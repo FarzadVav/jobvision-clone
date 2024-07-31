@@ -5,7 +5,7 @@ import Image from "next/image"
 import { IconStarFilled } from "@tabler/icons-react"
 
 import JobAdsT from "@/types/jobads.types"
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 import Button from "./Button"
 import { releaseDateCalculation, salaryCalculationForView } from "@/utils/jobAd"
 

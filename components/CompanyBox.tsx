@@ -3,7 +3,7 @@ import Link from "next/link"
 import { IconArrowLeft, IconStarFilled } from "@tabler/icons-react"
 
 import CompaniesT from "@/types/companies.types"
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 import Button from "./Button"
 
 type CompanyBoxProps = {

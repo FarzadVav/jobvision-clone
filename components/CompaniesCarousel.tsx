@@ -8,7 +8,7 @@ import "swiper/css"
 import "swiper/css/navigation"
 
 import { companiesFetcher } from "@/utils/fetcher"
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 import CompanyBox from "./CompanyBox"
 import Skeleton from "./Skeleton"
 

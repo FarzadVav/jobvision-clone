@@ -1,4 +1,4 @@
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 import { FC, PropsWithChildren } from "react"
 
 type SkeletonProps = {

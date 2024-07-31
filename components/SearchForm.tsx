@@ -5,7 +5,7 @@ import { useRef } from "react"
 import useSWR from "swr"
 
 import { contentFetcher } from "@/utils/fetcher"
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 import { FILTER_KEYS } from "@/utils/initialData"
 import Input from "./form/Input"
 import Button from "./Button"

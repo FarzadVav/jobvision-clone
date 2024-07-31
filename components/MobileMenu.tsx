@@ -2,7 +2,7 @@ import { forwardRef } from "react"
 import { createPortal } from "react-dom"
 
 import { VariantProps, cva } from "class-variance-authority"
-import { cn } from "@/utils/lib/tw"
+import { cn } from "@/utils/tw"
 
 const mobileMenuVariants = cva(
   "animate-fade animate-duration-300 bg-dark/25 w-screen h-screen max-h-dvh fixed top-0 left-0 z-50 cursor-zoom-out",
