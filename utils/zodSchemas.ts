@@ -1,4 +1,4 @@
-import { ZodError, array, z } from "zod";
+import { ZodError, z } from "zod";
 
 // use for form fields
 export const getErrors = (zodErrors: ZodError) => {
