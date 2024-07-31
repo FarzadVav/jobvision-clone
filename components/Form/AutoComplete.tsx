@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 
-import { cn } from "../../utils/lib/tw"
+import { cn } from "../../utils/tw"
 
 interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> {
   wrapperclassName?: string

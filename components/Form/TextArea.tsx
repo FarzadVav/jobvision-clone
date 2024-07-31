@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import { IconAsterisk } from "@tabler/icons-react"
 
-import { cn } from "../../utils/lib/tw"
+import { cn } from "../../utils/tw"
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string | null

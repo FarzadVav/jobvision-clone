@@ -1,6 +1,6 @@
 "use server"
 
-import { NewJobAdSchemaT, getErrors, newJobAdSchema } from "@/utils/lib/zod-schemas"
+import { NewJobAdSchemaT, getErrors, newJobAdSchema } from "@/utils/zod-schemas"
 import { prisma } from "@/prisma/client"
 import getMe from "./getMe"
 import FormStateT from "@/types/formState.types"
