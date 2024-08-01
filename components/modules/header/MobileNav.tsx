@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import useSWR from "swr"
 import { IconLogin, IconMenuDeep, IconUser, IconX } from "@tabler/icons-react"
 
-import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
+import { getMeFetcher } from "@/utils/fetcher"
 import Button from "../../Button"
 import MobileMenu from "../../MobileMenu"
 import MobileMenuContent from "./MobileMenuContent"
