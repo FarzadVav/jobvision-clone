@@ -17,12 +17,12 @@ import FormStateT from "@/types/formState.types"
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
 import changeProfile from "@/app/actions/changeProfile"
 import Button from "@/components/Button"
-import Input from "@/components/modules/Form/Input"
-import TextArea from "@/components/modules/Form/TextArea"
+import Input from "@/components/modules/forms/Input"
+import TextArea from "@/components/modules/forms/TextArea"
 import toast from "react-hot-toast"
-import Label from "@/components/modules/Form/Label"
+import Label from "@/components/modules/forms/Label"
 import Alert from "@/components/Alert"
-import AutoComplete from "@/components/modules/Form/AutoComplete"
+import AutoComplete from "@/components/modules/forms/AutoComplete"
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
