@@ -11,35 +11,34 @@ type MobileMenuContentProps = {
   setMenu: (menu: string | null) => void
 }
 
+const invisibleClass = "translate-x-full opacity-0 invisible"
+
 const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
   const { data: content } = useSWR("/api/content", contentFetcher)
 
   return (
     <div className="min-h-[60vh] w-full flex items-start justify-center">
       {/* first menu */}
-      <ul className={`header_mobile-menu_slide ${!menu ? "" : "translate-x-full"}`}>
+      <ul className={`header_mobile-menu_slide ${menu ? invisibleClass : ""}`}>
         <li className="w-full" onClick={() => setMenu("jobAds")}>
           <Button className="w-full justify-between" size={"xl"}>
             فرصت های شغلی
             <IconChevronLeft className="icon" />
           </Button>
         </li>
-        <li className="w-full" onClick={() => setMenu("jobAds")}>
+        <li className="w-full">
           <Button size={"xl"}>محصولات</Button>
         </li>
-        <li className="w-full" onClick={() => setMenu("jobAds")}>
+        <li className="w-full">
           <Button size={"xl"}>رده بندی شرکت ها</Button>
         </li>
-        <li
-          className="border-b border-solid border-white/10 w-full pb-3 mb-3"
-          onClick={() => setMenu("jobAds")}
-        >
+        <li className="border-b border-solid border-white/10 w-full pb-3 mb-3">
           <Button size={"xl"}>رزومه ساز</Button>
         </li>
-        <li className="w-full" onClick={() => setMenu("jobAds")}>
+        <li className="w-full">
           <Button size={"xl"}>کارفرمایان</Button>
         </li>
-        <li className="w-full px-5" onClick={() => setMenu("jobAds")}>
+        <li className="w-full px-5">
           <Button className="mt-3" variant={"danger"} size={"xl"}>
             گزارش کارنامه بازار کار
           </Button>
@@ -48,14 +47,14 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
       {/* first menu */}
 
       {/* second menu */}
-      <ul className={`header_mobile-menu_slide ${menu === "jobAds" ? "" : "translate-x-full"}`}>
+      <ul className={`header_mobile-menu_slide ${menu === "jobAds" ? "" : invisibleClass}`}>
         <li className="header_mobile-menu_back" onClick={() => setMenu(null)}>
           <Button className="w-full justify-between" size={"xl"}>
             بازگشت
             <IconChevronRight className="icon" />
           </Button>
         </li>
-        <li className="w-full" onClick={() => setMenu("jobAds")}>
+        <li className="w-full">
           <Link className="w-full" href={"/jobs"}>
             <Button className="w-full justify-between" size={"xl"}>
               همه آگهی ها
@@ -77,7 +76,7 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
       {/* third menu */}
       <ul
         className={`header_mobile-menu_slide ${
-          content?.megaMenu.some((item) => item.id === menu) ? "translate-x-0" : "translate-x-full"
+          content?.megaMenu.some((item) => item.id === menu) ? "" : invisibleClass
         }`}
       >
         <li className="header_mobile-menu_back" onClick={() => setMenu("jobAds")}>
