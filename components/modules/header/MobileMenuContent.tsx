@@ -17,7 +17,7 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
   const { data: content } = useSWR("/api/content", contentFetcher)
 
   return (
-    <div className="min-h-[60vh] w-full flex items-start justify-center">
+    <div className="h-[60vh] w-full flex items-start justify-center">
       {/* first menu */}
       <ul className={`header_mobile-menu_slide ${menu ? invisibleClass : ""}`}>
         <li className="w-full" onClick={() => setMenu("jobAds")}>
