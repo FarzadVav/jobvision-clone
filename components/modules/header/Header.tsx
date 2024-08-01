@@ -16,9 +16,9 @@ import {
 } from "@tabler/icons-react"
 
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
-import Button from "../Button"
-import MobileMenu from "../MobileMenu"
-import Skeleton from "../Skeleton"
+import Button from "../../Button"
+import MobileMenu from "../../MobileMenu"
+import Skeleton from "../../Skeleton"
 
 const Header = () => {
   const router = useRouter()
