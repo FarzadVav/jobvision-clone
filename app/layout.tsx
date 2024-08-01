@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Toaster } from "react-hot-toast"
 
-import Header from "@/components/modules/Header"
+import Header from "@/components/modules/header/Header"
 import Footer from "@/components/modules/Footer"
 import "./globals.css"
 import { Suspense } from "react"
