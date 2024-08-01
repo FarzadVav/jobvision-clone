@@ -48,7 +48,7 @@ const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
           {...props}
         >
           <menu
-            className={`light-border border-t bg-primary text-white w-screen h-max max-h-[70vh] p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0 transition-transform cursor-default ${
+            className={`light-border border-t bg-primary text-white w-screen h-max p-3 pt-9 rounded-t-3xl absolute bottom-0 left-0 transition-transform cursor-default ${
               state ? "" : "translate-y-full"
             }`}
             onClick={(event) => event.stopPropagation()}

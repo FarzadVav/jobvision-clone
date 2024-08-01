@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { v4 as uuid } from "uuid"
 import {
@@ -12,7 +13,6 @@ import {
   IconUsersGroup,
 } from "@tabler/icons-react"
 
-import IranAnimation from "@/components/modules/IranAnimation"
 import Title from "@/components/Title"
 import Button from "@/components/Button"
 import SearchForm from "@/components/SearchForm"
@@ -22,6 +22,9 @@ import HonorBox from "@/components/modules/HonorBox"
 import CtaBox from "@/components/modules/CtaBox"
 import { ACCORDIONS } from "@/utils/initialData"
 import Accordion from "@/components/modules/accordions/Accordion"
+const IranAnimation = dynamic(() => import("@/components/modules/IranAnimation"), {
+  ssr: false,
+})
 
 const Page = () => {
   return (
@@ -67,7 +70,7 @@ const Page = () => {
               </Button>
             </div>
           </div>
-          <div className={"min-w-[450px] hidden justify-center items-center lg:flex"}>
+          <div className={"min-w-[450px] h-[400px] hidden justify-center items-center lg:flex"}>
             <IranAnimation />
           </div>
         </div>
