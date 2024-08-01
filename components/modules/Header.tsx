@@ -146,22 +146,22 @@ const Header = () => {
             {/* Mega menu */}
           </div>
           <Link className="h-full" href={"/"}>
-            <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
+            <Button className="h-full" variant={"darkLink"}>
               محصولات
             </Button>
           </Link>
           <Link className="h-full" href={"/"}>
-            <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
+            <Button className="h-full" variant={"darkLink"}>
               رده بندی شرکت ها
             </Button>
           </Link>
           <Link className="h-full" href={"/"}>
-            <Button className="text-dark h-full hover:decoration-dark" variant={"link"}>
+            <Button className="h-full" variant={"darkLink"}>
               رزومه ساز
             </Button>
           </Link>
           <Link className="h-full max-xl:hidden" href={"/"}>
-            <Button className="h-full" variant={"link"}>
+            <Button className="h-full" variant={"dangerLink"}>
               گزارش حقوق ۱۴۰۳
             </Button>
           </Link>
@@ -179,16 +179,14 @@ const Header = () => {
               </Link>
             ) : (
               <Link href={"/register"}>
-                <Button variant={"fill"}>
+                <Button variant={"lightFill"}>
                   ورود / ثبت نام
                   <IconLogin className="icon" />
                 </Button>
               </Link>
             )}
-            <Link className="border-r border-solid border-light mr-3" href={""}>
-              <Button className="text-dark hover:decoration-dark" variant={"link"}>
-                بخش کارفرمایان
-              </Button>
+            <Link className="border-r border-solid border-light mr-4" href={""}>
+              <Button variant={"darkLink"}>بخش کارفرمایان</Button>
             </Link>
           </div>
         </nav>
