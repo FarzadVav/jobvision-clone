@@ -2,24 +2,16 @@
 
 import { usePathname, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconLogin,
-  IconMenuDeep,
-  IconUser,
-  IconX,
-} from "@tabler/icons-react"
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react"
 
-import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
+import { contentFetcher } from "@/utils/fetcher"
 import Button from "../../Button"
 import MobileMenu from "../../MobileMenu"
-import Skeleton from "../../Skeleton"
-import MegaMenu from "./MegaMenu"
+import Nav from "./Nav"
+import MobileNav from "./MobileNav"
 
 const Header = () => {
   const pathname = usePathname()
@@ -27,7 +19,6 @@ const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null)
   const { data: content } = useSWR("/api/content", contentFetcher)
-  const { data: user, isLoading } = useSWR("/api/getMe" + pathname, getMeFetcher)
 
   useEffect(() => {
     setShowMobileMenu(false)
@@ -37,92 +28,8 @@ const Header = () => {
   return (
     <>
       <header className="bg-primary border-b border-solid border-white/10 w-full sticky top-0 z-40 lg:bg-white lg:border-light">
-        <nav className="container w-full h-[4.5rem] hidden items-center lg:flex">
-          <Link className="h-full" href={"/"}>
-            <Button className="h-full">
-              <Image src="/images/logo.svg" height={20.63} width={100} alt="لوگوی جاب ویژن" />
-            </Button>
-          </Link>
-          <MegaMenu />
-          <Link className="h-full" href={"/"}>
-            <Button className="h-full" variant={"darkLink"}>
-              محصولات
-            </Button>
-          </Link>
-          <Link className="h-full" href={"/"}>
-            <Button className="h-full" variant={"darkLink"}>
-              رده بندی شرکت ها
-            </Button>
-          </Link>
-          <Link className="h-full" href={"/"}>
-            <Button className="h-full" variant={"darkLink"}>
-              رزومه ساز
-            </Button>
-          </Link>
-          <Link className="h-full max-xl:hidden" href={"/"}>
-            <Button className="h-full" variant={"dangerLink"}>
-              گزارش حقوق ۱۴۰۳
-            </Button>
-          </Link>
-          <div className="flex items-center mr-auto">
-            {isLoading ? (
-              <Skeleton>
-                <Button className="w-32"></Button>
-              </Skeleton>
-            ) : user ? (
-              <Link href={"/employer"}>
-                <Button variant={"fill"}>
-                  پنل مدیریت
-                  <IconUser className="icon" />
-                </Button>
-              </Link>
-            ) : (
-              <Link href={"/register"}>
-                <Button variant={"lightFill"}>
-                  ورود / ثبت نام
-                  <IconLogin className="icon" />
-                </Button>
-              </Link>
-            )}
-            <Link className="border-r border-solid border-light mr-4" href={""}>
-              <Button variant={"darkLink"}>بخش کارفرمایان</Button>
-            </Link>
-          </div>
-        </nav>
-        {/* mobile nav */}
-        <nav className="container h-[4.5rem] flex justify-between items-center lg:hidden">
-          <Button
-            className="text-white h-full"
-            aria-label="mobile menu toggle"
-            onClick={() => setShowMobileMenu(true)}
-          >
-            <IconMenuDeep
-              className={`icon absolute transition-opacity ${showMobileMenu ? "opacity-0" : ""}`}
-            />
-            <IconX
-              className={`icon absolute transition-opacity ${showMobileMenu ? "" : "opacity-0"}`}
-            />
-          </Button>
-          <Link className="h-full" href={"/"}>
-            <Button className="h-full" aria-label="jobvision logo">
-              <Image src="/images/logo-white.svg" height={33.5} width={76} alt="لوگوی جاب ویژن" />
-            </Button>
-          </Link>
-          {user ? (
-            <Link className="h-full" href={"/employer"}>
-              <Button className="text-white h-full">
-                <IconUser className="icon" />
-              </Button>
-            </Link>
-          ) : (
-            <Link className="h-full" href={"/register"}>
-              <Button className="text-white h-full">
-                <IconLogin className="icon" />
-              </Button>
-            </Link>
-          )}
-        </nav>
-        {/* mobile nav */}
+        <Nav />
+        <MobileNav />
       </header>
 
       <MobileMenu
