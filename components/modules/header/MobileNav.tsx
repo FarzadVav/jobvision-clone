@@ -11,13 +11,14 @@ import { getMeFetcher } from "@/utils/fetcher"
 import Button from "../../Button"
 import MobileMenu from "../../MobileMenu"
 import MobileMenuContent from "./MobileMenuContent"
+import Skeleton from "@/components/Skeleton"
 
 const MobileNav = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null)
-  const { data: user } = useSWR("/api/getMe" + pathname, getMeFetcher)
+  const { data: user, isLoading } = useSWR("/api/getMe" + pathname, getMeFetcher)
 
   useEffect(() => {
     setShowMobileMenu(false)
@@ -33,10 +34,10 @@ const MobileNav = () => {
           onClick={() => setShowMobileMenu(true)}
         >
           <IconMenuDeep
-            className={`icon absolute transition-opacity ${showMobileMenu ? "opacity-0" : ""}`}
+            className={`icon absolute transition-all ${showMobileMenu ? "opacity-0 scale-0" : ""}`}
           />
           <IconX
-            className={`icon absolute transition-opacity ${showMobileMenu ? "" : "opacity-0"}`}
+            className={`icon absolute transition-all ${showMobileMenu ? "" : "opacity-0 scale-0"}`}
           />
         </Button>
         <Link className="h-full" href={"/"}>
@@ -44,19 +45,17 @@ const MobileNav = () => {
             <Image src="/images/logo-white.svg" height={33.5} width={76} alt="لوگوی جاب ویژن" />
           </Button>
         </Link>
-        {user ? (
-          <Link className="h-full" href={"/employer"}>
-            <Button className="text-white h-full">
+        <Link className="h-full" href={user ? "/employer" : "/register"}>
+          <Button className="text-white h-full">
+            {isLoading ? (
+              <Skeleton className="size-5" />
+            ) : user ? (
               <IconUser className="icon" />
-            </Button>
-          </Link>
-        ) : (
-          <Link className="h-full" href={"/register"}>
-            <Button className="text-white h-full">
+            ) : (
               <IconLogin className="icon" />
-            </Button>
-          </Link>
-        )}
+            )}
+          </Button>
+        </Link>
       </nav>
 
       <MobileMenu
