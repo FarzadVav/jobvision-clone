@@ -1,6 +1,5 @@
-import { usePathname, useSearchParams, useRouter } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
@@ -10,24 +9,31 @@ import { contentFetcher } from "@/utils/fetcher"
 import Button from "../../Button"
 
 const MegaMenu = () => {
+  const { data: content } = useSWR("/api/content", contentFetcher)
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const router = useRouter()
   const [showMegaMenu, setShowMegaMenu] = useState(false)
-  const { data: content } = useSWR("/api/content", contentFetcher)
+  const [megaMenuItem, setMegaMenuItem] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     setShowMegaMenu(false)
+    setMegaMenuItem(undefined)
   }, [pathname, searchParams])
+
+  useEffect(() => {
+    setMegaMenuItem(content?.megaMenu[0].id)
+  }, [content])
 
   return (
     <div
-      className={`border-b-2 border-solid h-[calc(100%-2px)] flex items-center px-4 group transition-colors ${
+      className={`border-b border-solid h-full flex items-center px-4 transition-colors ${
         showMegaMenu ? "border-primary" : "border-transparent"
       }`}
-      onMouseEnter={() => setShowMegaMenu(true)}
+      onMouseEnter={() => {
+        setShowMegaMenu(true)
+        setMegaMenuItem(content?.megaMenu[0].id)
+      }}
       onMouseLeave={() => setShowMegaMenu(false)}
-      onClick={() => router.push("/jobs")}
     >
       <span>فرصت های شغلی</span>
       <div
@@ -40,15 +46,25 @@ const MegaMenu = () => {
           if (elem.dataset.blank) setShowMegaMenu(false)
         }}
       >
-        <div className="container h-[calc(100%-1.5rem)]">
+        <div className="container h-[calc(100%-7vh)]">
           <div className="shadow-xl bg-white w-full h-full rounded-b-xl relative">
-            <ul className="border-t border-solid border-light w-full h-[4.5rem] flex">
+            <ul className="border-y border-solid border-light w-full h-[4.5rem] flex">
               {content?.megaMenu.map((item) => (
-                <li key={uuid()} className="h-full flex items-center cursor-pointer group/item">
-                  <button className="dana-bold border-l border-solid border-light h-1/2 px-6">
+                <li
+                  key={uuid()}
+                  className={`border-b border-solid h-full flex items-center ${
+                    megaMenuItem === item.id ? "border-dark" : "border-transparent"
+                  }`}
+                  onMouseEnter={() => setMegaMenuItem(item.id)}
+                >
+                  <span className="dana-bold border-l border-solid border-light h-1/2 px-6">
                     {item.name}
-                  </button>
-                  <div className="bg-white border-t border-solid border-light w-full py-3 px-6 rounded-b-xl absolute top-[4.5rem] left-0 bottom-0 overflow-y-auto cursor-default opacity-0 invisible group-hover/item:visible group-hover/item:opacity-100 group-hover/item:z-10">
+                  </span>
+                  <div
+                    className={`w-full py-3 px-6 absolute top-[4.5rem] left-0 bottom-0 overflow-y-auto ${
+                      megaMenuItem === item.id ? "" : "opacity-0 invisible"
+                    }`}
+                  >
                     <ul className="w-max h-full flex flex-wrap flex-col gap-y-3 gap-x-16">
                       {item.menu.map((menuItem) => (
                         <li key={uuid()}>
@@ -62,10 +78,10 @@ const MegaMenu = () => {
                             {menuItem.subMenu.map((subMenuItem) => (
                               <li key={uuid()}>
                                 <Link
-                                  className="text-dark flex items-center text-sm text-right py-1 group/sub hover:text-primary"
+                                  className="text-dark flex items-center text-sm text-right py-1 hover:text-primary"
                                   href={`/jobs?${menuItem.query}=${subMenuItem.id}`}
                                 >
-                                  <IconChevronLeft className="icon-sm text-dark ml-1 opacity-60 group-hover/sub:text-primary group-hover/sub:opacity-100" />
+                                  <IconChevronLeft className="icon-sm ml-1 opacity-60" />
                                   {subMenuItem.name}
                                 </Link>
                               </li>
@@ -83,33 +99,6 @@ const MegaMenu = () => {
                 </Button>
               </Link>
             </ul>
-            <div className="border-t border-solid border-light w-full h-[calc(100%-4.5rem)] flex flex-col justify-center items-center overflow-y-auto">
-              <Image src="/images/chart.svg" height={250} width={349.16} alt="نمودار بازارکار" />
-              <p className="text-dark text-center mt-3">
-                در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و منتشر
-                می‌شوند. به صفحه
-                <br />
-                استخدام‌های سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز
-                شوید.
-              </p>
-              <ul className="flex justify-center items-start mt-4">
-                <li>
-                  <Link href={"/"}>
-                    <Button variant={"link"}>لینک پیوست 1</Button>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"}>
-                    <Button variant={"link"}>لینک پیوست 2</Button>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"}>
-                    <Button variant={"link"}>لینک پیوست 3</Button>
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
