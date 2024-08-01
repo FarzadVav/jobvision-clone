@@ -16,6 +16,7 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
 
   return (
     <div className="min-h-[60vh] w-full flex items-start justify-center">
+      {/* first menu */}
       <ul className={`header_mobile-menu_slide ${!menu ? "" : "translate-x-full"}`}>
         <li className="w-full" onClick={() => setMenu("jobAds")}>
           <Button className="w-full justify-between" size={"xl"}>
@@ -44,7 +45,9 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
           </Button>
         </li>
       </ul>
+      {/* first menu */}
 
+      {/* second menu */}
       <ul className={`header_mobile-menu_slide ${menu === "jobAds" ? "" : "translate-x-full"}`}>
         <li className="header_mobile-menu_back" onClick={() => setMenu(null)}>
           <Button className="w-full justify-between" size={"xl"}>
@@ -69,7 +72,9 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
           </li>
         ))}
       </ul>
+      {/* second menu */}
 
+      {/* third menu */}
       <ul
         className={`header_mobile-menu_slide ${
           content?.megaMenu.some((item) => item.id === menu) ? "translate-x-0" : "translate-x-full"
@@ -105,6 +110,7 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
             ))
         })}
       </ul>
+      {/* third menu */}
     </div>
   )
 }
