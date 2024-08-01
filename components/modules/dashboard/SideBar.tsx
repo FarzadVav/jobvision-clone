@@ -16,14 +16,14 @@ import {
   IconUserEdit,
 } from "@tabler/icons-react"
 
-import Button from "../Button"
-import Title from "../Title"
+import Button from "../../Button"
+import Title from "../../Title"
 import { getMeFetcher } from "@/utils/fetcher"
 import logOut from "@/app/actions/logOut"
 import { useState } from "react"
-import MobileMenu from "../MobileMenu"
-import Modal from "../Modal"
-import Skeleton from "../Skeleton"
+import MobileMenu from "../../MobileMenu"
+import Modal from "../../Modal"
+import Skeleton from "../../Skeleton"
 
 const links = [
   { href: "/employer", value: "داشبورد", icon: <IconLayoutDashboard className="icon" /> },

@@ -1,4 +1,4 @@
-import SideBar from "@/components/dashboard/SideBar"
+import SideBar from "@/components/modules/dashboard/SideBar"
 import { PropsWithChildren } from "react"
 
 const layout: React.FC<PropsWithChildren> = async ({ children }) => {

@@ -5,7 +5,7 @@ import { IconCaretDownFilled } from "@tabler/icons-react"
 
 import AccordionTypes from "@/types/accordion.types"
 import AccordionWithToggle from "@/hocs/AccordionWithToggle"
-import Title from "../Title"
+import Title from "../../Title"
 
 const Accordion = ({
   toggle,

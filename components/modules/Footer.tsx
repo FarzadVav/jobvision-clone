@@ -13,10 +13,10 @@ import {
 } from "@tabler/icons-react"
 
 import { FOOTER_ACCORDIONS, FOOTER_LINKS } from "@/utils/initialData"
-import FAQAccordion from "../accordions/FAQAccordion"
+import FAQAccordion from "./accordions/FAQAccordion"
 import Title from "../Title"
 import ToggalableSectionOfFooter from "./ToggalableSectionOfFooter"
-import LinksAccordion from "../accordions/LinksAccordion"
+import LinksAccordion from "./accordions/LinksAccordion"
 import Button from "../Button"
 
 const WITHOUT_FOOTER_ROUTES = ["employer"]

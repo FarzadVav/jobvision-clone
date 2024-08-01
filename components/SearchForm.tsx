@@ -7,9 +7,9 @@ import useSWR from "swr"
 import { contentFetcher } from "@/utils/fetcher"
 import { cn } from "@/utils/tw"
 import { FILTER_KEYS } from "@/utils/initialData"
-import Input from "./form/Input"
+import Input from "./modules/Form/Input"
 import Button from "./Button"
-import AutoComplete from "./form/AutoComplete"
+import AutoComplete from "./modules/Form/AutoComplete"
 import search from "@/app/actions/search"
 
 const SearchForm = ({ className }: { className?: string }) => {

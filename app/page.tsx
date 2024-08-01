@@ -21,7 +21,7 @@ import CompaniesCarousel from "@/components/CompaniesCarousel"
 import HonorBox from "@/components/modules/HonorBox"
 import CtaBox from "@/components/modules/CtaBox"
 import { ACCORDIONS } from "@/utils/initialData"
-import Accordion from "@/components/accordions/Accordion"
+import Accordion from "@/components/modules/accordions/Accordion"
 
 const Page = () => {
   return (
