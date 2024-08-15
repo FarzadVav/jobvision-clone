@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
+import { useIntersectionObserver } from "@uidotdev/usehooks"
 import { IconCaretDownFilled } from "@tabler/icons-react"
 
 import AccordionTypes from "@/types/accordion.types"
@@ -15,22 +16,17 @@ const Accordion = ({
   title,
   content,
 }: AccordionTypes) => {
-  const accordionParrentRef = useRef<HTMLLIElement>(null)
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: "-250px",
+  })
 
   useEffect(() => {
-    const handler = () => {
-      if (
-        (accordionParrentRef.current?.getBoundingClientRect().top || 0) <=
-          window.innerHeight / 1.75 &&
-        length === 1
-      ) {
-        toggleHandler(true)
-      }
+    if (length === 1 && entry?.isIntersecting) {
+      toggleHandler(true)
     }
-
-    window.addEventListener("scroll", handler)
-    return () => window.removeEventListener("scroll", handler)
-  }, [])
+  }, [entry?.isIntersecting])
 
   return (
     <>
@@ -38,7 +34,7 @@ const Accordion = ({
         className={`bg-white w-full flex justify-between items-center py-1.5 mt-6 relative ${
           length !== 1 ? "cursor-pointer" : "cursor-not-allowed"
         } group first-of-type:mt-0 sm:py-3`}
-        ref={accordionParrentRef}
+        ref={ref}
         onClick={() => length !== 1 && toggleHandler()}
       >
         <div
