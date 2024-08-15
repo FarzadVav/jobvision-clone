@@ -50,7 +50,7 @@ const Nav = () => {
           </Skeleton>
         ) : user ? (
           <Link href={"/employer"}>
-            <Button variant={"fill"}>
+            <Button variant={"lightFill"}>
               پنل مدیریت
               <IconUser className="icon" />
             </Button>

@@ -46,7 +46,7 @@ const SearchForm = ({ className }: { className?: string }) => {
           data={content?.cities.map((city) => city.name) || []}
           autoComplete="off"
         />
-        <Button className="max-sm:w-full" variant={"primary"} size={"lg"}>
+        <Button className="max-sm:w-full" variant={"primaryFill"} size={"lg"}>
           جستجو
         </Button>
       </div>

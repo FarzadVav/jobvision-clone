@@ -61,11 +61,11 @@ const Page = () => {
               فعلی تکنولوژی مورد نیاز و کاربردهای متنوع کاربردی می باشد.
             </p>
             <div className="hidden items-center mt-9 lg:flex">
-              <Button size={"lg"} variant={"primary"}>
+              <Button size={"lg"} variant={"primaryFill"}>
                 شروع رایگان
                 <IconArrowLeft className="icon-lg" />
               </Button>
-              <Button className="mr-3" size={"lg"} variant={"link"}>
+              <Button className="mr-3" size={"lg"} variant={"primaryLink"}>
                 ساخت رزومه
               </Button>
             </div>
@@ -93,7 +93,7 @@ const Page = () => {
               می‌شوند، به سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز
               شوید.
             </p>
-            <Button className="mt-4 max-md:mx-auto" variant={"dark"}>
+            <Button className="mt-4 max-md:mx-auto" variant={"darkFill"}>
               مشاهده فرصت‌های شغلی
             </Button>
           </div>
@@ -152,7 +152,7 @@ const Page = () => {
         <p className="text-lg text-center my-6">
           از آخرین فرصت‌های شغلی معتبرترین شرکت‌های ایران باخبر شده و در آنها استخدام شوید.
         </p>
-        <Button variant={"primary"} size={"lg"}>
+        <Button variant={"primaryFill"} size={"lg"}>
           ثبت نام کنید
           <IconHandClick className="icon-lg" />
         </Button>

@@ -39,7 +39,7 @@ const MobileMenuContent = ({ menu, setMenu }: MobileMenuContentProps) => {
           <Button size={"xl"}>کارفرمایان</Button>
         </li>
         <li className="w-full px-5">
-          <Button className="mt-3" variant={"danger"} size={"xl"}>
+          <Button className="mt-3" variant={"dangerFill"} size={"xl"}>
             گزارش کارنامه بازار کار
           </Button>
         </li>

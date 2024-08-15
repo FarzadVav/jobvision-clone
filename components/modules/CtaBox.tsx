@@ -19,7 +19,7 @@ const CtaBox = ({ src, title, text, btn }: CtaBoxProps) => {
           <h5>{title}</h5>
         </Title>
         <p className="mt-3 text-center lg:text-right">{text}</p>
-        <Button className="w-full mt-4 lg:w-max" variant={"primary"}>
+        <Button className="w-full mt-4 lg:w-max" variant={"primaryFill"}>
           {btn}
         </Button>
       </div>

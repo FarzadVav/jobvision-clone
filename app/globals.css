@@ -303,7 +303,6 @@ a {
 .show-message-box {
   animation: show-message-box 1s ease forwards;
 }
-
 @keyframes show-message-box {
   0% {
     opacity: 0;
@@ -318,7 +317,6 @@ a {
 .hidden-message-box {
   animation: hidden-message-box 1s ease forwards;
 }
-
 @keyframes hidden-message-box {
   0% {
     opacity: 1;

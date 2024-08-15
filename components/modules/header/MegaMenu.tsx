@@ -57,7 +57,7 @@ const MegaMenu = () => {
                   }`}
                   onMouseEnter={() => setMegaMenuItem(item.id)}
                 >
-                  <span className="dana-bold border-l border-solid border-light h-1/2 px-6">
+                  <span className="dana-bold row border-l border-solid border-light h-1/2 px-6">
                     {item.name}
                   </span>
                   <div
@@ -94,7 +94,7 @@ const MegaMenu = () => {
                 </li>
               ))}
               <Link className="h-full" href={"/jobs"}>
-                <Button className="h-full" variant={"link"}>
+                <Button className="h-full" variant={"primaryLink"}>
                   همه آگهی ها
                 </Button>
               </Link>
