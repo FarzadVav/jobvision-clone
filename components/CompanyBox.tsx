@@ -19,13 +19,15 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
         className
       )}
     >
-      <Image
-        className="border border-solid border-light object-fill object-center rounded-md"
-        src={company.logo || ""}
-        alt={`لوگوی شرکت ${company.name || "ناشناس"}`}
-        height={80}
-        width={80}
-      />
+      <div className="border border-solid border-light size-20 p-1.5 rounded-md">
+        <Image
+          className="size-full"
+          src={company.logo || "/images/company.png"}
+          alt={`لوگوی شرکت ${company.name || "ناشناس"}`}
+          height={128}
+          width={128}
+        />
+      </div>
       <Button className="dana-bold w-max mt-4 px-0" variant={"primaryLink"}>
         {company.name || "شرکت ناشناس"}
       </Button>
