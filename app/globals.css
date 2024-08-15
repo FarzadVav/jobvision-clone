@@ -132,11 +132,11 @@ a {
   }
 
   .row {
-    @apply w-full flex items-center
+    @apply w-full flex items-center;
   }
 
   .center {
-    @apply w-full flex justify-center items-center
+    @apply w-full flex justify-center items-center;
   }
 
   .my-pages {

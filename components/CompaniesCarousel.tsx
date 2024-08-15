@@ -49,7 +49,7 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
           modules={[Autoplay, Navigation]}
         >
           {companies?.slice(0, 10).map((company) => (
-            <SwiperSlide key={uuid()} className="h-[17rem] pb-6 max-sm:!w-2/3">
+            <SwiperSlide key={uuid()} className="h-[17rem] pb-6 max-sm:!w-[85%]">
               <CompanyBox key={uuid()} className="w-full" company={company} />
             </SwiperSlide>
           ))}
