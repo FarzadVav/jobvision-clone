@@ -26,9 +26,9 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
         height={80}
         width={80}
       />
-      <button className="dana-bold underline decoration-transparent w-max mt-4 transition-all hover:decoration-dark">
+      <Button className="dana-bold w-max mt-4 px-0" variant={"primaryLink"}>
         {company.name || "شرکت ناشناس"}
-      </button>
+      </Button>
       <div className="flex items-center mt-2">
         <IconStarFilled className="icon-xs text-warning" />
         <span className="text-xs h-3 inline-block mr-1.5">{company.score}</span>
