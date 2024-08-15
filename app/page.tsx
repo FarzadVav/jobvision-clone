@@ -146,10 +146,10 @@ const Page = () => {
       </div>
 
       <div className="bg-gradient-to-t from-light to-white w-full hidden flex-col items-center py-9 sm:flex">
-        <Title className="justify-center" size={"lg"}>
-          <h6>زندگی شغلی رویایی خود را بسازید</h6>
+        <Title className="justify-center" size={"xl"}>
+          <h6>زندگی شغلی رویایی خود را با جاب ویژن بسازید</h6>
         </Title>
-        <p className="text-lg text-center my-6">
+        <p className="text-lg text-center mb-6 mt-9">
           از آخرین فرصت‌های شغلی معتبرترین شرکت‌های ایران باخبر شده و در آنها استخدام شوید.
         </p>
         <Button variant={"primaryFill"} size={"lg"}>
