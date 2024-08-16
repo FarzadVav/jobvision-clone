@@ -1,27 +1,22 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useState } from "react"
-import toast from "react-hot-toast"
 
 import register from "@/app/actions/register"
 import Button from "@/components/Button"
 import Input from "@/components/modules/forms/Input"
 import Title from "@/components/Title"
+import createActionState from "@/utils/formActions"
+import FormActionMessages from "@/components/FormActionMessages"
 
-export type registerFormT = {
-  isSuccess?: boolean
-  message?: string
-  fields?: {
-    email?: string
-    password?: string
-  }
+export type RegisterFieldsT = {
+  email?: string
+  password?: string
 }
 
 const Page = () => {
-  const router = useRouter()
-  const [formState, setFormState] = useState<registerFormT>({ fields: {} } as registerFormT)
+  const [formState, setFormState] = useState(createActionState<RegisterFieldsT>({}))
 
   return (
     <div className="container h-[calc(100vh-4.5rem)] flex items-center">
@@ -36,11 +31,7 @@ const Page = () => {
           className="w-full px-3 my-3 lg:px-6"
           action={async (formData: FormData) => {
             const newState = await register(formData)
-            setFormState(newState || ({ fields: {} } as registerFormT))
-            if (newState?.isSuccess) {
-              toast.success("به جاب‌ویژن خوش اومدی")
-              router.replace("/employer")
-            }
+            newState && setFormState(newState)
           }}
         >
           <Input
@@ -58,7 +49,8 @@ const Page = () => {
             dir="ltr"
             error={formState.fields?.password}
           />
-          <Button className="w-full mt-3" size={"lg"} variant={"primary"}>
+          <FormActionMessages messages={formState.messages} />
+          <Button className="w-full mt-3" size={"lg"} variant={"primaryFill"}>
             ادامه
           </Button>
         </form>

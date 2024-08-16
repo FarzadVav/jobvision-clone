@@ -1,30 +1,36 @@
 "use server"
 
+import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
 import { z } from "zod"
 
-import { registerFormT } from "@/app/register/page"
 import { comparePassword, getToken, hashPassword } from "@/utils/auth"
 import { prisma } from "@/prisma/client"
+import createActionState from "@/utils/formActions"
+import { RegisterFieldsT } from "../register/page"
+import FormActionsT from "@/types/formActions.types"
 
 
-const register = async (formData: FormData): Promise<registerFormT> => {
+const register = async (formData: FormData): Promise<FormActionsT<RegisterFieldsT> | undefined> => {
   const email = formData.get("email") as string
   const password = formData.get("password") as string
 
-  let formState: registerFormT = {}
+  const formState = createActionState<RegisterFieldsT>({})
 
   if (!z.string().email().safeParse(email).success) {
-    return formState = { fields: { email: "ایمیل را به درستی وارد کنید" } }
+    formState.fields.email = "ایمیل را به درستی وارد کنید"
+    return formState
   }
   if (!z.string().min(4).safeParse(password).success) {
-    return formState = { fields: { password: "رمز عبور امن تری وارد کنید" } }
+    formState.fields.password = "رمز عبور امن تری وارد کنید"
+    return formState
   }
 
   try {
     const user = await prisma.companies.findUnique({ where: { email } })
     if (user && !comparePassword(password, user.password)) {
-      return formState = { fields: { password: "رمز عبور به درستی وارد نشده است!" } }
+      formState.messages = ["ایمیل یا رمز عبور به درستی وارد نشده است!"]
+      return formState
     }
 
     const currentPassword = user?.password || hashPassword(password) as string
@@ -42,10 +48,11 @@ const register = async (formData: FormData): Promise<registerFormT> => {
     }
   } catch (error) {
     console.log("Unknown error on [registering] --->", error)
-    return formState = { message: "یک خطای ناشناس در سرور رخ داده است، بعدا تلاش کنید" }
+    formState.messages = ["خطایی ناشناس در سرور رخ داده است، بعدا تلاش کنید"]
+    return formState
   }
 
-  return formState = { isSuccess: true }
+  redirect("/employer")
 }
 
 export default register

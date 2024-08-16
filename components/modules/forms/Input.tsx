@@ -21,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ error, className, ...p
         {...props}
       />
       {error ? (
-        <p className="text-danger text-sm flex items-center mt-3">
+        <p className="row text-danger text-sm mt-3">
           <IconAsterisk className="icon-xs" />
           <span className="mr-2">{error}</span>
         </p>
