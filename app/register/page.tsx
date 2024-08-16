@@ -27,6 +27,7 @@ const Page = () => {
         <span className="block text-sm text-center px-3 lg:px-9 mt-3">
           به تیم بزرگ جاب‌ویژن خوش اومدی
         </span>
+
         <form
           className="w-full px-3 my-3 lg:px-6"
           action={async (formData: FormData) => {
@@ -49,11 +50,14 @@ const Page = () => {
             dir="ltr"
             error={formState.fields.password}
           />
+
           <FormActionMessages messages={formState.messages} />
+          
           <Button className="w-full mt-3" size={"lg"} variant={"primaryFill"}>
             ادامه
           </Button>
         </form>
+
         <div className="bg-light/25 border-t border-solid border-light p-3 lg:p-6">
           <p className="text-sm text-center">
             مشکلی پیش آمده است؟
