@@ -1,14 +1,14 @@
 "use server"
 
 import { redirect } from "next/navigation"
-import { cookies } from "next/headers"
 import { z } from "zod"
 
-import { comparePassword, getToken, hashPassword } from "@/utils/auth"
 import { prisma } from "@/prisma/client"
 import createActionState from "@/utils/formActions"
 import { RegisterFieldsT } from "../register/page"
 import FormActionsT from "@/types/formActions.types"
+import { compareHashed, hashString } from "@/utils/bcrypt"
+import { createSession } from "@/utils/session"
 
 
 const register = async (formData: FormData): Promise<FormActionsT<RegisterFieldsT> | undefined> => {
@@ -16,7 +16,6 @@ const register = async (formData: FormData): Promise<FormActionsT<RegisterFields
   const password = formData.get("password") as string
 
   const formState = createActionState<RegisterFieldsT>({})
-
   if (!z.string().email().safeParse(email).success) {
     formState.fields.email = "ایمیل را به درستی وارد کنید"
     return formState
@@ -27,27 +26,24 @@ const register = async (formData: FormData): Promise<FormActionsT<RegisterFields
   }
 
   try {
-    const user = await prisma.companies.findUnique({ where: { email } })
-    if (user && !comparePassword(password, user.password)) {
+    let user = await prisma.companies.findUnique({ where: { email } })
+    if (user && !compareHashed(password, user.password)) {
       formState.messages = ["ایمیل یا رمز عبور به درستی وارد نشده است!"]
       return formState
     }
 
-    const currentPassword = user?.password || hashPassword(password) as string
-    const token = getToken({ email, password: currentPassword }) as string
-
-    cookies().set("token", token, { path: "/", httpOnly: true, maxAge: 2_592_000 })
-
     if (!user) {
-      await prisma.companies.create({
+      const hashedPassword = hashString(password)
+      user = await prisma.companies.create({
         data: {
           email,
-          password: currentPassword
+          password: hashedPassword
         }
       })
     }
+    createSession({ email, password: user.password })
   } catch (error) {
-    console.log("Unknown error on [registering] --->", error)
+    console.log("Unknown error in register.ts --->", error)
     formState.messages = ["خطایی ناشناس در سرور رخ داده است، بعدا تلاش کنید"]
     return formState
   }
