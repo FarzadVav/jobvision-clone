@@ -39,7 +39,7 @@ const Page = () => {
             placeholder="example@gmail.com"
             name="email"
             dir="ltr"
-            error={formState.fields?.email}
+            error={formState.fields.email}
           />
           <Input
             className="mt-3"
@@ -47,7 +47,7 @@ const Page = () => {
             placeholder="pass****"
             name="password"
             dir="ltr"
-            error={formState.fields?.password}
+            error={formState.fields.password}
           />
           <FormActionMessages messages={formState.messages} />
           <Button className="w-full mt-3" size={"lg"} variant={"primaryFill"}>
