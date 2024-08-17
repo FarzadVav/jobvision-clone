@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import useSWR from "swr"
+import { v4 as uuid } from "uuid"
 import {
   IconCalendarEvent,
   IconInfoCircle,
@@ -13,7 +14,6 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react"
 
-import FormStateT from "@/types/formState.types"
 import { contentFetcher, getMeFetcher } from "@/utils/fetcher"
 import changeProfile from "@/app/actions/changeProfile"
 import Button from "@/components/Button"
@@ -23,20 +23,33 @@ import toast from "react-hot-toast"
 import Label from "@/components/modules/forms/Label"
 import Alert from "@/components/Alert"
 import AutoComplete from "@/components/modules/forms/AutoComplete"
+import createActionState from "@/utils/formActions"
+
+export type ProfileFieldsT = {
+  name?: string
+  year?: string
+  minEmployee?: string
+  maxEmployee?: string
+  city?: string
+  about?: string
+  activity?: string
+  file?: string
+  knowledgeBased?: string
+}
 
 const Page = () => {
   const { data: content } = useSWR("/api/content", contentFetcher)
   const { data: company } = useSWR("/api/getMe", getMeFetcher)
-  const [formState, setFormState] = useState<FormStateT>({ fields: {} })
+  const [formState, setFormState] = useState(createActionState<ProfileFieldsT>({}))
 
   return (
     <form
       className="w-full"
       action={async (formData: FormData) => {
         const newState = await changeProfile(formData)
-        setFormState(newState || { fields: {} })
-        if (newState?.isSuccess) {
-          toast.success("اطلاعات شما با موفقیت ثبت شد")
+        if (newState) {
+          setFormState(newState)
+          newState.success && toast.success("اطلاعات شما با موفقیت ثبت شد")
         }
       }}
     >
@@ -140,16 +153,25 @@ const Page = () => {
         error={formState.fields.activity}
       />
 
-      <Label className="mt-6 mb-3" htmlFor="file">
-        <IconPhoto className="icon" />
-        عکس {company?.logo ? "لوگوی جدید" : "لوگو"}
-      </Label>
+      <div className="row mt-6 mb-3">
+        <Label htmlFor="file">
+          <IconPhoto className="icon" />
+          فایل لوگو
+        </Label>
+        {company?.logo ? (
+          <a className="mr-3" href={company?.logo} target="_blank" download>
+            <Button variant={"primaryLink"} type="button">
+              مشاهده قبلی
+            </Button>
+          </a>
+        ) : null}
+      </div>
       <Input
         id="file"
         type="file"
         name="file"
         accept=".png, .jpg, .jpeg"
-        error={formState.fields.fileSize}
+        error={formState.fields.file}
       />
 
       <Label className="mt-6 mb-3" htmlFor="knowledgeBased">
@@ -163,9 +185,9 @@ const Page = () => {
         />
       </Label>
 
-      {formState.message ? (
-        <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
-      ) : null}
+      {formState.messages.map((message) => (
+        <Alert key={uuid()} className="mt-6" message={message} variant={"warning"} size={"lg"} />
+      ))}
 
       <Button className="mt-6 max-sm:w-full" variant={"primaryFill"} size={"lg"}>
         ثبت اطلاعات

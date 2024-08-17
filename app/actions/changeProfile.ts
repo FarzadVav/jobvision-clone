@@ -4,12 +4,16 @@ import { unlink, writeFile } from "fs"
 import path from "path"
 import { v1 as uuid } from "uuid"
 
-import { ProfileSchemaT, getErrors, profileSchema } from "@/utils/zodSchemas"
+import { getErrors, profileSchema } from "@/utils/zodSchemas"
 import { prisma } from "@/prisma/client"
-import getMe from "./getMe"
-import FormStateT from "@/types/formState.types"
+import { getUser } from "@/utils/prismaFetchers"
+import FormActionsT from "@/types/formActions.types"
+import { ProfileFieldsT } from "../employer/profile/page"
+import createActionState from "@/utils/formActions"
 
-const changeProfile = async (formData: FormData) => {
+const changeProfile = async (
+  formData: FormData
+): Promise<FormActionsT<ProfileFieldsT> | undefined> => {
   const name = formData.get("name") as string
   const year = formData.get("year") as string
   const minEmployee = formData.get("minEmployee") as string
@@ -20,7 +24,8 @@ const changeProfile = async (formData: FormData) => {
   const file = formData.get("file") as File
   const knowledgeBased = formData.get("knowledgeBased") as "on"
 
-  const fields: ProfileSchemaT = {
+  const formState = createActionState<ProfileFieldsT>({})
+  const checkFields = profileSchema.safeParse({
     name,
     year,
     employee: {
@@ -31,18 +36,48 @@ const changeProfile = async (formData: FormData) => {
     about,
     activity,
     fileSize: file.size
-  }
-  const checkFields = profileSchema.safeParse(fields)
+  })
 
-  const formState: FormStateT = {
-    fields: checkFields.success ? {} : getErrors(checkFields.error)
+  if (!checkFields.success) {
+    formState.fields = getErrors(checkFields.error)
+    return formState
   }
-  if (!checkFields.success) return formState
 
   try {
-    const user = await getMe()
-    const currentCity = await prisma.cities.findUnique({ where: { name: city } })
+    const user = await getUser()
 
+    if (file.size > 0) {
+      const buffer = Buffer.from(await file.arrayBuffer())
+      const fileName = uuid() + "_" + file.name
+      writeFile(
+        path.join(process.cwd(), "public/uploads/" + fileName),
+        buffer,
+        async (err) => {
+          if (!err) {
+            if (user?.logo) {
+              unlink(path.join(process.cwd(), "public/", user?.logo || ""), err => {
+                if (err) {
+                  console.error("error on unlink a file in changeProfile.ts:", err)
+                  formState.messages = ["خطایی ناشناس در سرور رخ داده است، بعدا تلاش کنید"]
+                  return formState
+                }
+              })
+            }
+
+            await prisma.companies.update({
+              where: { email: user?.email },
+              data: { logo: `/uploads/${fileName}` }
+            })
+          } else {
+            console.error("error on write a file in changeProfile.ts:", err)
+            formState.messages = ["خطایی ناشناس در سرور رخ داده است، بعدا تلاش کنید"]
+            return formState
+          }
+        }
+      )
+    }
+
+    const currentCity = await prisma.cities.findUnique({ where: { name: city } })
     await prisma.companies.update({
       where: { email: user?.email },
       data: {
@@ -55,39 +90,14 @@ const changeProfile = async (formData: FormData) => {
         knowledgeBased: knowledgeBased === "on"
       }
     })
-
-    if (file.size > 0) {
-      const buffer = Buffer.from(await file.arrayBuffer())
-      const fileName = uuid() + "_" + file.name
-      writeFile(
-        path.join(process.cwd(), "public/uploads/" + fileName),
-        buffer,
-        async (err) => {
-          if (!err) {
-            await prisma.companies.update({
-              where: { email: user?.email },
-              data: { logo: `/uploads/${fileName}` }
-            })
-
-            if (user?.logo) {
-              unlink(path.join(process.cwd(), "public/", user?.logo || ""), err => {
-                console.error("error on unlink a file in [changeProfile.ts]", err)
-              })
-            }
-          }
-        }
-      )
-    }
-
-    formState.isSuccess = true
-    formState.message = undefined
-    return formState
   } catch (error) {
-    console.log("Unknown server error on update [companies] --->", error)
-    formState.isSuccess = false
-    formState.message = "هنگام ثبت اطلاعات شما خطایی رخ داده است، لطفا بعدا تلاش کنید."
+    console.log("Unknown error in changeProfile.ts --->", error)
+    formState.messages = ["خطایی ناشناس در سرور رخ داده است، بعدا تلاش کنید"]
     return formState
   }
+
+  formState.success = true
+  return formState
 }
 
 export default changeProfile

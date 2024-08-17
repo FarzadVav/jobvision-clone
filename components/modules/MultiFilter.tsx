@@ -18,13 +18,17 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [showList, setShowList] = useState<string | null>(null)
+  const [showList, setShowList] = useState(false)
   const id = useId()
 
   useEffect(() => {
     const fn = (event: MouseEvent) => {
       const element = event.target as HTMLElement
-      element.dataset.id !== id && setShowList(null)
+      if (element.dataset.id === id) {
+        setShowList((prev) => !prev)
+      } else {
+        setShowList(false)
+      }
     }
 
     window.addEventListener("click", fn)
@@ -48,7 +52,6 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
       <Button
         className={`rounded-full relative z-10 active:scale-100`}
         variant={searchParams.has(query) ? "primaryFill" : "lightGhost"}
-        onClick={() => setShowList((prev) => (!!prev ? null : id))}
         data-id={id}
       >
         {name}
@@ -56,6 +59,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
           className={`icon transition-transform ${showList ? "-scale-y-100" : ""}`}
           data-id={id}
         />
+
         <ul
           className={`bg-white border border-solid border-light shadow-lg w-max p-1.5 rounded-md absolute top-[3rem] transition-all ${
             showList ? "" : "-translate-y-3 opacity-0 invisible"
@@ -77,7 +81,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
         </ul>
       </Button>
 
-      <MobileMenu breakPoint={"md"} state={!!showList} closingHandler={() => setShowList(null)}>
+      <MobileMenu breakPoint={"md"} state={showList} closingHandler={() => setShowList(false)}>
         {filters.map((filter) => (
           <Button
             key={uuid()}
@@ -87,7 +91,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
             size={"xl"}
             onClick={() => {
               mutateFilter(query, filter.key)
-              setShowList(null)
+              setShowList(false)
             }}
           >
             {filter.name}
