@@ -1,7 +1,6 @@
 import ContentT from "@/types/content.types";
-import JobAdsT from "@/types/jobads.types";
 import { FILTER_KEYS } from "./initialData";
-import CompaniesT from "@/types/companies.types";
+import { CompaniesT, JobAdsT } from "@/types/prisma.types";
 
 export const getMeFetcher = () => fetch("/api/getMe")
   .then((res) => res.json())

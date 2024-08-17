@@ -10,9 +10,9 @@ export type CompaniesT = Prisma.CompaniesGetPayload<{
 export type JobAdsT = Prisma.JobAdsGetPayload<{
   include: {
     category: true,
-    company: true,
+    company: { include: { city: true } },
     cooperation_type: true,
-    tags: true
+    tags: { include: { current_job_ad: true, current_tag: true } }
   }
 }>
 
