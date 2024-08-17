@@ -1,11 +1,11 @@
+import Image from "next/image"
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { Toaster } from "react-hot-toast"
 
 import Header from "@/components/modules/header/Header"
 import Footer from "@/components/modules/Footer"
 import "./globals.css"
-import { Suspense } from "react"
-import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Jobvision Clone",
