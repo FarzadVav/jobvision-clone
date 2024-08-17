@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
+import { v4 as uuid } from "uuid"
 import toast from "react-hot-toast"
 import {
   IconAlignBoxLeftMiddle,
@@ -20,7 +21,7 @@ import {
   IconWorld,
 } from "@tabler/icons-react"
 
-import FormStateT from "@/types/formState.types"
+import createActionState from "@/utils/formActions"
 import addNewJobAd from "@/app/actions/addNewJobAd"
 import Input from "@/components/modules/forms/Input"
 import TextArea from "@/components/modules/forms/TextArea"
@@ -33,12 +34,36 @@ import Label from "@/components/modules/forms/Label"
 import Alert from "@/components/Alert"
 import ContentT from "@/types/content.types"
 
+export type NewJobAdFieldsT = {
+  title?: string
+  description?: string
+  workTimes?: string
+  businessTrips?: string
+  minAge?: string
+  maxAge?: string
+  minSalary?: string
+  maxSalary?: string
+  showMaxSalary?: string
+  gender?: string
+  category?: string
+  cooperationType?: string
+  tags?: string
+  benefits?: string
+  abilities?: string
+  education?: string
+  languages?: string
+  techs?: string
+  endMilitaryService?: string
+  isUrgent?: string
+  isRemote?: string
+}
+
 type NewJobAdFormT = {
   content: ContentT
 }
 
 const NewJobAdForm = ({ content }: NewJobAdFormT) => {
-  const [formState, setFormState] = useState<FormStateT>({ fields: {} })
+  const [formState, setFormState] = useState(createActionState<NewJobAdFieldsT>({}))
   const [showMaxSalary, setShowMaxSalary] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -48,10 +73,12 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
       ref={formRef}
       action={async (formData: FormData) => {
         const newState = await addNewJobAd(formData)
-        setFormState(newState || { fields: {} })
-        if (newState?.isSuccess) {
-          toast.success("آگهی جدید با موفقیت ثبت شد")
-          formRef.current?.reset()
+        if (newState) {
+          setFormState(newState)
+          if (newState.success) {
+            toast.success("آگهی جدید با موفقیت ثبت شد")
+            formRef.current?.reset()
+          }
         }
       }}
     >
@@ -257,9 +284,9 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
         </Label>
       </div>
 
-      {formState.message ? (
-        <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
-      ) : null}
+      {formState.messages.map((message) => (
+        <Alert key={uuid()} className="mt-6" message={message} variant={"warning"} size={"lg"} />
+      ))}
 
       <Button className="mt-6 max-sm:w-full" variant={"primaryFill"} size={"lg"}>
         ایجاد آگهی

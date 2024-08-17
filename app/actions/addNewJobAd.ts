@@ -1,11 +1,15 @@
 "use server"
 
-import { NewJobAdSchemaT, getErrors, newJobAdSchema } from "@/utils/zodSchemas"
+import { getErrors, newJobAdSchema } from "@/utils/zodSchemas"
 import { prisma } from "@/prisma/client"
-import getMe from "./getMe"
-import FormStateT from "@/types/formState.types"
+import FormActionsT from "@/types/formActions.types"
+import { NewJobAdFieldsT } from "@/components/NewJobAdForm"
+import createActionState from "@/utils/formActions"
+import { getCompany } from "@/utils/prismaFetchers"
 
-const addNewJobAd = async (formData: FormData) => {
+const addNewJobAd = async (
+  formData: FormData
+): Promise<FormActionsT<NewJobAdFieldsT> | undefined> => {
   const title = formData.get("title") as string
   const description = formData.get("description") as string
   const workTimes = formData.get("workTimes") as string
@@ -28,7 +32,8 @@ const addNewJobAd = async (formData: FormData) => {
   const isUrgent = formData.get("is_urgent") as ("on" | null)
   const isRemote = formData.get("is_remote") as ("on" | null)
 
-  const fields: NewJobAdSchemaT = {
+  const formState = createActionState<NewJobAdFieldsT>({})
+  const checkFields = newJobAdSchema.safeParse({
     title,
     description,
     workTimes,
@@ -45,56 +50,63 @@ const addNewJobAd = async (formData: FormData) => {
     category,
     cooperationType,
     tags: JSON.parse(tags),
-  }
-  const checkFields = newJobAdSchema.safeParse(fields)
-  const formState: FormStateT = {
-    fields: checkFields.success ? {} : getErrors(checkFields.error)
-  }
-  if (!checkFields.success) return formState
-
-  try {
-    const user = await getMe()
-    if (user) {
-      const currentCategory = await prisma.categories.findUnique({ where: { name: category } })
-      const currentCooperationType = await prisma.cooperationTypes.findUnique({ where: { name: cooperationType } })
-      const currentTags = await prisma.tags.findMany({ where: { name: { in: JSON.parse(tags) } } })
-
-      await prisma.jobAds.create({
-        data: {
-          title,
-          description,
-          work_times: workTimes,
-          business_trips: businessTrips,
-          age: [+minAge, +maxAge],
-          salary: showMaxSalary === "on" ? [+minSalary, +maxSalary] : [+minSalary],
-          gender: gender === "male",
-          benefits: JSON.parse(benefits),
-          abilities: JSON.parse(abilities),
-          education: JSON.parse(education),
-          languages: JSON.parse(languages),
-          techs: JSON.parse(techs),
-          end_military_service: endMilitaryService === "on",
-          is_urgent: isUrgent === "on",
-          is_remote: isRemote === "on",
-          category_id: currentCategory?.id || "",
-          cooperation_type_id: currentCooperationType?.id || "",
-          company_id: user.id,
-          tags: {
-            create: currentTags.map(tag => ({ tag_id: tag.id }))
-          },
-        }
-      })
-
-      formState.isSuccess = true
-      formState.message = null
-      return formState
-    }
-  } catch (error) {
-    console.log("Unknown server error on create new [jobAds] --->", error)
-    formState.isSuccess = false
-    formState.message = "هنگام ایجاد آگهی خطایی رخ داده است، لطفا بعدا تلاش کنید."
+  })
+  if (!checkFields.success) {
+    formState.fields = getErrors(checkFields.error)
     return formState
   }
+
+  try {
+    const user = await getCompany()
+    if (!user) {
+      formState.messages = ["مشکلی در احراز هویت پیش آمده"]
+      return formState
+    }
+
+    const currentCategory = await prisma.categories.findUnique({
+      where: { name: category }
+    })
+    const currentCooperationType = await prisma.cooperationTypes.findUnique({
+      where: { name: cooperationType }
+    })
+    const currentTags = await prisma.tags.findMany({
+      where: { name: { in: JSON.parse(tags) } }
+    })
+
+    await prisma.jobAds.create({
+      data: {
+        title,
+        description,
+        work_times: workTimes,
+        business_trips: businessTrips,
+        age: [+minAge, +maxAge],
+        salary: showMaxSalary === "on" ? [+minSalary, +maxSalary] : [+minSalary],
+        gender: gender === "male",
+        benefits: JSON.parse(benefits),
+        abilities: JSON.parse(abilities),
+        education: JSON.parse(education),
+        languages: JSON.parse(languages),
+        techs: JSON.parse(techs),
+        end_military_service: endMilitaryService === "on",
+        is_urgent: isUrgent === "on",
+        is_remote: isRemote === "on",
+        category_id: currentCategory?.id || "",
+        cooperation_type_id: currentCooperationType?.id || "",
+        company_id: user.id,
+        tags: {
+          create: currentTags.map(tag => ({ tag_id: tag.id }))
+        },
+      }
+    })
+
+  } catch (error) {
+    console.log("Unknown error in addNewJobAd.ts --->", error)
+    formState.messages = ["خطایی ناشناس در سرور رخ داده است، بعدا تلاش کنید"]
+    return formState
+  }
+
+  formState.success = true
+  return formState
 }
 
 export default addNewJobAd

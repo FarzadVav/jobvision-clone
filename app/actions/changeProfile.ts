@@ -37,7 +37,6 @@ const changeProfile = async (
     activity,
     fileSize: file.size
   })
-
   if (!checkFields.success) {
     formState.fields = getErrors(checkFields.error)
     return formState
