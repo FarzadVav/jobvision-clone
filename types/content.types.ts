@@ -1,4 +1,4 @@
-import { Categories, Cities, CooperationTypes, Provinces, Tags } from "@prisma/client"
+import { CategoriesT, CitiesT, CooperationTypesT, ProvincesT, TagsT } from "./prisma.types"
 
 export type MegaMenuT = {
   id: string
@@ -12,11 +12,11 @@ export type MegaMenuT = {
 }
 
 type ContentT = {
-  categories: (Categories & { tags: Tags[] })[]
-  tags: Tags[]
-  provinces: (Provinces & { cities: Cities[] })[]
-  cities: Cities[]
-  cooperationTypes: CooperationTypes[]
+  categories: CategoriesT[]
+  tags: TagsT[]
+  provinces: ProvincesT[]
+  cities: CitiesT[]
+  cooperationTypes: CooperationTypesT[]
   megaMenu: MegaMenuT[]
 }
 

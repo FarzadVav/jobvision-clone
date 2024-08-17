@@ -6,10 +6,10 @@ import { v1 as uuid } from "uuid"
 
 import { getErrors, profileSchema } from "@/utils/zodSchemas"
 import { prisma } from "@/prisma/client"
-import { getUser } from "@/utils/prismaFetchers"
+import { getCompany } from "@/utils/prismaFetchers"
 import FormActionsT from "@/types/formActions.types"
-import { ProfileFieldsT } from "../employer/profile/page"
 import createActionState from "@/utils/formActions"
+import { ProfileFieldsT } from "@/components/modules/ProfileForm"
 
 const changeProfile = async (
   formData: FormData
@@ -44,7 +44,7 @@ const changeProfile = async (
   }
 
   try {
-    const user = await getUser()
+    const user = await getCompany()
 
     if (file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer())
