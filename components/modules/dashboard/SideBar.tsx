@@ -65,10 +65,9 @@ const SideBar = () => {
                 <Button
                   className={`${
                     pathname.endsWith(link.href)
-                      ? "text-primary"
-                      : "bg-primary text-white hover:bg-white hover:text-primary"
+                      ? "bg-white text-primary"
+                      : "hover:bg-white hover:text-primary"
                   } w-full`}
-                  variant={"outline"}
                 >
                   {link.value}
                 </Button>
@@ -77,13 +76,17 @@ const SideBar = () => {
           ))}
         </ul>
         <div className="w-full flex justify-center items-center mt-6">
-          <Button aria-label="details" title="جزئیات">
+          <Button aria-label="details" title="جزئیات" variant={"lightGhost"}>
             <IconDots className="icon" />
           </Button>
-          <Button aria-label="notifications" title="اعلان ها">
+          <Button aria-label="notifications" title="اعلان ها" variant={"lightGhost"}>
             <IconBell className="icon" />
           </Button>
-          <Button className="mr-auto" variant={"danger"} onClick={() => setShowLogOutModal(true)}>
+          <Button
+            className="mr-auto"
+            variant={"dangerFill"}
+            onClick={() => setShowLogOutModal(true)}
+          >
             خروج
             <IconLogout className="icon" />
           </Button>
@@ -106,11 +109,12 @@ const SideBar = () => {
               </Link>
             </li>
           ))}
-          <li className="mr-auto">
+          <li className="mr-auto ">
             <Button
               aria-label="details"
               title="جزئیات"
               onClick={() => setShowMobileMenu((prev) => !prev)}
+              variant={"lightGhost"}
             >
               <IconDots className="icon" />
             </Button>
@@ -124,16 +128,16 @@ const SideBar = () => {
         closingHandler={() => setShowMobileMenu(false)}
       >
         <div className="w-full flex gap-3">
-          <Button className="text-dark flex-1" aria-label="notification" variant={"fill"}>
+          <Button className="text-dark flex-1" aria-label="notification" variant={"lightGhost"}>
             <IconBell className="icon" />
           </Button>
-          <Button className="text-dark flex-1" aria-label="verified" variant={"fill"}>
+          <Button className="text-dark flex-1" aria-label="verified" variant={"lightGhost"}>
             <IconFileCheck className="icon" />
           </Button>
           <Button
             className="flex-1"
             aria-label="logout"
-            variant={"danger"}
+            variant={"dangerFill"}
             onClick={() => {
               setShowMobileMenu(false)
               setShowLogOutModal(true)
@@ -149,7 +153,7 @@ const SideBar = () => {
         state={showLogOutModal}
         topic="آیا برای خروج از حسابتات اطمینان دارید؟"
         message="ممکن است در فرایند استخدام مشکلی به وجود بیاید و شما از ارسال رزومه کارجویان بی خبر باشید و به نتیجه دلخواه خودتان نرسید."
-        buttonVariant={"danger"}
+        buttonVariant={"dangerFill"}
         acceptAction={() => logOut()}
         closingHandler={() => setShowLogOutModal(false)}
       />

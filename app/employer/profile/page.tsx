@@ -167,7 +167,7 @@ const Page = () => {
         <Alert className="mt-6" message={formState.message} variant={"warning"} size={"lg"} />
       ) : null}
 
-      <Button className="mt-6 max-sm:w-full" variant={"primary"} size={"lg"}>
+      <Button className="mt-6 max-sm:w-full" variant={"primaryFill"} size={"lg"}>
         ثبت اطلاعات
       </Button>
     </form>

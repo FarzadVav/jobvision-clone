@@ -28,7 +28,7 @@ const SingleFilter = ({ route, name }: SingleFilterProps) => {
   return (
     <Button
       className="rounded-full"
-      variant={pathname.includes(route) ? "primary" : "outline"}
+      variant={pathname.includes(route) ? "primaryFill" : "lightGhost"}
       onClick={() => mutateFilter(route)}
     >
       {name}

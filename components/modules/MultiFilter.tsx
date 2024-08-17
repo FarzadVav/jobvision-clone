@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { MouseEvent, useEffect, useState } from "react"
+import { useEffect, useId, useState } from "react"
 import { v4 as uuid } from "uuid"
 import { IconChevronDown } from "@tabler/icons-react"
 
@@ -18,11 +18,14 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [showList, setShowList] = useState(false)
-  const [listPosition, setListPosition] = useState<"LEFT" | "RIGHT">("LEFT")
+  const [showList, setShowList] = useState<string | null>(null)
+  const id = useId()
 
   useEffect(() => {
-    const fn = () => setShowList(false)
+    const fn = (event: MouseEvent) => {
+      const element = event.target as HTMLElement
+      element.dataset.id !== id && setShowList(null)
+    }
 
     window.addEventListener("click", fn)
     return () => window.removeEventListener("click", fn)
@@ -40,32 +43,23 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
     router.push(pathname + "?" + params.toString())
   }
 
-  const clickHandler = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    event.stopPropagation()
-
-    const positionStatus =
-      Math.floor(window.innerWidth - (event.currentTarget?.getBoundingClientRect().left || 0)) >
-      window.innerWidth / 2
-
-    setShowList((prev) => !prev)
-    if (window.innerWidth >= 640) setListPosition(positionStatus ? "LEFT" : "RIGHT")
-  }
-
   return (
     <>
       <Button
-        className={`rounded-full relative z-10 ${showList ? "" : "overflow-hidden"}`}
-        variant={searchParams.has(query) ? "primary" : "outline"}
-        onClick={clickHandler}
+        className={`rounded-full relative z-10 active:scale-100`}
+        variant={searchParams.has(query) ? "primaryFill" : "lightGhost"}
+        onClick={() => setShowList((prev) => (!!prev ? null : id))}
+        data-id={id}
       >
         {name}
         <IconChevronDown
           className={`icon transition-transform ${showList ? "-scale-y-100" : ""}`}
+          data-id={id}
         />
         <ul
-          className={`bg-white border border-solid border-light shadow-lg w-72 p-1.5 rounded-md absolute top-[3rem] transition-all max-sm:hidden ${
-            listPosition === "LEFT" ? "left-0" : "right-0"
-          } ${showList ? "" : "-translate-y-6 opacity-0 invisible"}`}
+          className={`bg-white border border-solid border-light shadow-lg w-max p-1.5 rounded-md absolute top-[3rem] transition-all ${
+            showList ? "" : "-translate-y-3 opacity-0 invisible"
+          } max-md:hidden`}
         >
           {filters.map((filter) => (
             <li
@@ -74,7 +68,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
                 searchParams.has(query, filter.key)
                   ? "dana-bold text-primary hover:text-danger"
                   : ""
-              } text-dark w-full py-1.5 rounded-md transition-colors hover:bg-light/50`}
+              } text-dark w-full py-1.5 px-16 rounded-md transition-colors hover:bg-light/50`}
               onClick={() => mutateFilter(query, filter.key)}
             >
               {filter.name}
@@ -83,7 +77,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
         </ul>
       </Button>
 
-      <MobileMenu state={showList} closingHandler={() => setShowList(false)}>
+      <MobileMenu breakPoint={"md"} state={!!showList} closingHandler={() => setShowList(null)}>
         {filters.map((filter) => (
           <Button
             key={uuid()}
@@ -93,7 +87,7 @@ const MultiFilter = ({ query, name, filters }: MultiFilterProps) => {
             size={"xl"}
             onClick={() => {
               mutateFilter(query, filter.key)
-              setShowList(false)
+              setShowList(null)
             }}
           >
             {filter.name}
