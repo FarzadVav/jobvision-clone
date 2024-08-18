@@ -1,22 +1,36 @@
 "use client"
 
-import { forwardRef, useEffect, useState } from "react"
+import { Dispatch, forwardRef, SetStateAction, useEffect, useState } from "react"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 import { v4 as uuid } from "uuid"
 
-import { cn } from "../../../utils/tw"
+import { cn } from "@/utils/tw"
 
 interface MultiSelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  data: string[]
+  selectedData: string[]
+  setSelectedData: Dispatch<SetStateAction<string[]>>
   wrapperclassName?: string
   error?: string | null
-  data: string[]
 }
 
 const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
-  ({ wrapperclassName, error, className, data, name, placeholder, ...props }, ref) => {
+  (
+    {
+      wrapperclassName,
+      error,
+      className,
+      data,
+      name,
+      placeholder,
+      selectedData,
+      setSelectedData,
+      ...props
+    },
+    ref
+  ) => {
     const [value, setValue] = useState("")
     const [isFocus, setIsFocus] = useState(false)
-    const [selectedData, setSelectedData] = useState<string[]>([])
 
     useEffect(() => {
       const clickHandler = () => setIsFocus(false)
@@ -32,7 +46,6 @@ const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(
           onClick={(event) => event.stopPropagation()}
         >
           <div className="w-full flex items-center relative">
-            <input type="hidden" name={name} value={JSON.stringify(selectedData)} />
             <input
               className={cn(
                 `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${

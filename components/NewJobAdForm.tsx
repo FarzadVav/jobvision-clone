@@ -26,7 +26,6 @@ import addNewJobAd from "@/app/actions/addNewJobAd"
 import Input from "@/components/modules/forms/Input"
 import TextArea from "@/components/modules/forms/TextArea"
 import SelectBox from "@/components/modules/forms/SelectBox"
-import AutoComplete from "@/components/modules/forms/AutoComplete"
 import MultiSelect from "@/components/modules/forms/MultiSelect"
 import ComboBox from "@/components/modules/forms/ComboBox"
 import Button from "@/components/Button"
@@ -43,19 +42,9 @@ export type NewJobAdFieldsT = {
   maxAge?: string
   minSalary?: string
   maxSalary?: string
-  showMaxSalary?: string
-  gender?: string
   category?: string
   cooperationType?: string
   tags?: string
-  benefits?: string
-  abilities?: string
-  education?: string
-  languages?: string
-  techs?: string
-  endMilitaryService?: string
-  isUrgent?: string
-  isRemote?: string
 }
 
 type NewJobAdFormT = {
@@ -64,6 +53,14 @@ type NewJobAdFormT = {
 
 const NewJobAdForm = ({ content }: NewJobAdFormT) => {
   const [formState, setFormState] = useState(createActionState<NewJobAdFieldsT>({}))
+  // Manual fields {
+  const [tags, setTags] = useState<string[]>([])
+  const [benefits, setBenefits] = useState<string[]>([])
+  const [abilities, setAbilities] = useState<string[]>([])
+  const [education, setEducation] = useState<string[]>([])
+  const [languages, setLanguages] = useState<string[]>([])
+  const [techs, setTechs] = useState<string[]>([])
+  // Manual fields }
   const [showMaxSalary, setShowMaxSalary] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -72,12 +69,23 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
       className="w-full"
       ref={formRef}
       action={async (formData: FormData) => {
+        formData.append("tags", JSON.stringify(tags))
+        formData.append("benefits", JSON.stringify(benefits))
+        formData.append("abilities", JSON.stringify(abilities))
+        formData.append("education", JSON.stringify(education))
+        formData.append("languages", JSON.stringify(languages))
+        formData.append("techs", JSON.stringify(techs))
         const newState = await addNewJobAd(formData)
         if (newState) {
           setFormState(newState)
           if (newState.success) {
-            toast.success("آگهی جدید با موفقیت ثبت شد")
+            setBenefits([])
+            setAbilities([])
+            setEducation([])
+            setLanguages([])
+            setTechs([])
             formRef.current?.reset()
+            toast.success("آگهی جدید با موفقیت ثبت شد")
           }
         }
       }}
@@ -190,6 +198,7 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
           className="mr-3 mb-0.5"
           name="show-maxSalary"
           type="checkbox"
+          checked={showMaxSalary}
           onChange={(e) => setShowMaxSalary(e.target.checked)}
         />
       </label>
@@ -199,6 +208,7 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
         جنسیت
       </Label>
       <SelectBox id="gender" name="gender">
+        <option value="">فرقی ندارد</option>
         <option value="male">مرد</option>
         <option value="female">زن</option>
       </SelectBox>
@@ -207,25 +217,31 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
         <IconBriefcase className="icon" />
         دسته بندی شغلی
       </Label>
-      <AutoComplete
-        id="category"
-        error={formState.fields.category}
-        data={content?.categories.map((category) => category.name) || []}
-        name="category"
-        placeholder="یک مورد را سرچ و انتخاب کنید"
-      />
+      <SelectBox id="category" name="category" error={formState.fields.category}>
+        <option value="">انتخاب نشده</option>
+        {content?.categories.map((category) => (
+          <option key={uuid()} value={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </SelectBox>
 
       <Label className="mt-6 mb-3" htmlFor="cooperationType">
         <IconFileDescription className="icon" />
         نوع قرارداد
       </Label>
-      <AutoComplete
+      <SelectBox
         id="cooperationType"
-        error={formState.fields.cooperationType}
-        data={content?.cooperationTypes.map((type) => type.name) || []}
         name="cooperationType"
-        placeholder="یک مورد را سرچ و انتخاب کنید"
-      />
+        error={formState.fields.cooperationType}
+      >
+        <option value="">انتخاب نشده</option>
+        {content?.cooperationTypes.map((type) => (
+          <option key={uuid()} value={type.id}>
+            {type.name}
+          </option>
+        ))}
+      </SelectBox>
 
       <Label className="mt-6 mb-3" htmlFor="tags">
         <IconTags className="icon" />
@@ -233,41 +249,67 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
       </Label>
       <MultiSelect
         id="tags"
-        data={content?.tags.map((tag) => tag.name) || []}
-        error={formState.fields.tags}
-        name="tags"
         placeholder="چند مورد را سرچ و انتخاب کنید"
+        data={content?.tags.map((tag) => tag.name) || []}
+        selectedData={tags}
+        setSelectedData={setTags}
+        error={formState.fields.tags}
       />
 
       <Label className="mt-6 mb-3" htmlFor="benefits">
         <IconSparkles className="icon" />
         مزیت های این شغل
       </Label>
-      <ComboBox id="benefits" name="benefits" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox
+        id="benefits"
+        placeholder="چند مورد را اضافه کنید"
+        dataList={benefits}
+        setDataList={setBenefits}
+      />
 
       <Label className="mt-6 mb-3" htmlFor="abilities">
         <IconAlignBoxLeftMiddle className="icon" />
         شاخص های کلیدی فرد
       </Label>
-      <ComboBox id="abilities" name="abilities" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox
+        id="abilities"
+        placeholder="چند مورد را اضافه کنید"
+        dataList={abilities}
+        setDataList={setAbilities}
+      />
 
       <Label className="mt-6 mb-3" htmlFor="education">
         <IconSchool className="icon" />
         مدارک تحصیلی
       </Label>
-      <ComboBox id="education" name="education" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox
+        id="education"
+        placeholder="چند مورد را اضافه کنید"
+        dataList={education}
+        setDataList={setEducation}
+      />
 
       <Label className="mt-6 mb-3" htmlFor="languages">
         <IconWorld className="icon" />
         زبان های بین المللی
       </Label>
-      <ComboBox id="languages" name="languages" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox
+        id="languages"
+        placeholder="چند مورد را اضافه کنید"
+        dataList={languages}
+        setDataList={setLanguages}
+      />
 
       <Label className="mt-6 mb-3" htmlFor="techs">
         <IconComponents className="icon" />
         تکنولوژی ها
       </Label>
-      <ComboBox id="techs" name="techs" placeholder="چند مورد را اضافه کنید" />
+      <ComboBox
+        id="techs"
+        placeholder="چند مورد را اضافه کنید"
+        dataList={techs}
+        setDataList={setTechs}
+      />
 
       <div className="w-full flex flex-wrap items-center gap-x-6 gap-y-3 mt-6">
         <Label htmlFor="end_military_service">

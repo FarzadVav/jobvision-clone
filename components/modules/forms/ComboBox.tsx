@@ -1,24 +1,25 @@
-import { KeyboardEvent, forwardRef, useState } from "react"
+import { Dispatch, KeyboardEvent, SetStateAction, forwardRef, useState } from "react"
 import toast from "react-hot-toast"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconPlus, IconTrash } from "@tabler/icons-react"
 
 import { cn } from "../../../utils/tw"
 
-interface ComboBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type ComboBoxProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  dataList: string[]
+  setDataList: Dispatch<SetStateAction<string[]>>
   wrapperclassName?: string
   error?: string | null
 }
 
 const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
-  ({ wrapperclassName, error, className, name, ...props }, ref) => {
+  ({ wrapperclassName, error, className, name, dataList, setDataList, ...props }, ref) => {
     const [value, setValue] = useState("")
-    const [list, setList] = useState<string[]>([])
 
     const addItem = () => {
       if (!value.length) return
-      if (list.includes(value)) return toast.error("این آیتم از قبل اضافه شده است")
-      setList((prev) => [...prev, value])
+      if (dataList.includes(value)) return toast.error("این آیتم از قبل اضافه شده است")
+      setDataList((prev) => [...prev, value])
       setValue("")
     }
 
@@ -33,7 +34,6 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
       <>
         <div className={cn("w-full", wrapperclassName)}>
           <div className="w-full flex items-center relative">
-            <input type="hidden" name={name} value={JSON.stringify(list)} />
             <input
               className={cn(
                 `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
@@ -55,8 +55,8 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
             </div>
           </div>
           <ul className="w-full mt-3">
-            {list.length ? (
-              list.map((item) => (
+            {dataList.length ? (
+              dataList.map((item) => (
                 <li
                   key={uuid()}
                   className="border-solid border-light w-full flex justify-between items-center text-sm px-3 py-1.5 rounded-md transition-colors hover:bg-light/50 last-of-type:border-b last-of-type:rounded-b-none group"
@@ -64,7 +64,9 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
                   <span>{item}</span>
                   <IconTrash
                     className="icon-sm opacity-0 text-danger cursor-pointer transition-opacity group-hover:opacity-100"
-                    onClick={() => setList((prev) => prev.filter((listItem) => listItem !== item))}
+                    onClick={() =>
+                      setDataList((prev) => prev.filter((listItem) => listItem !== item))
+                    }
                   />
                 </li>
               ))

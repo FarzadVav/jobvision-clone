@@ -63,12 +63,6 @@ const addNewJobAd = async (
       return formState
     }
 
-    const currentCategory = await prisma.categories.findUnique({
-      where: { name: category }
-    })
-    const currentCooperationType = await prisma.cooperationTypes.findUnique({
-      where: { name: cooperationType }
-    })
     const currentTags = await prisma.tags.findMany({
       where: { name: { in: JSON.parse(tags) } }
     })
@@ -81,7 +75,7 @@ const addNewJobAd = async (
         business_trips: businessTrips,
         age: [+minAge, +maxAge],
         salary: showMaxSalary === "on" ? [+minSalary, +maxSalary] : [+minSalary],
-        gender: gender === "male",
+        gender: gender ? gender === "male" : null,
         benefits: JSON.parse(benefits),
         abilities: JSON.parse(abilities),
         education: JSON.parse(education),
@@ -90,8 +84,8 @@ const addNewJobAd = async (
         end_military_service: endMilitaryService === "on",
         is_urgent: isUrgent === "on",
         is_remote: isRemote === "on",
-        category_id: currentCategory?.id || "",
-        cooperation_type_id: currentCooperationType?.id || "",
+        category_id: category,
+        cooperation_type_id: cooperationType,
         company_id: user.id,
         tags: {
           create: currentTags.map(tag => ({ tag_id: tag.id }))

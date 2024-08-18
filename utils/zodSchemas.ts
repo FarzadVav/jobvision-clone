@@ -10,7 +10,6 @@ export const getErrors = (zodErrors: ZodError) => {
   return fields
 }
 
-// employer profile
 export const profileSchema = z.object({
   name: z.string()
     .min(3, { message: "نام شرکت کوتاه است" })
@@ -31,9 +30,7 @@ export const profileSchema = z.object({
   fileSize: z.number()
     .max(1024 * 1024 * 3, { message: "حجم عکس نباید بیشتر از 3 مگابایت باشد" })
 })
-export type ProfileSchemaT = z.infer<typeof profileSchema>
 
-// new jobAd
 export const newJobAdSchema = z.object({
   title: z.string()
     .min(3, { message: "عنوان آگهی کوتاه است" })
@@ -88,4 +85,3 @@ export const newJobAdSchema = z.object({
   cooperationType: z.string().min(1, { message: "لطفا نوع قرارداد را انتخاب کنید" }),
   tags: z.string().array().min(1, { message: "لطفا حداقل یک تگ شغلی انتخاب کنید" }),
 })
-export type NewJobAdSchemaT = z.infer<typeof newJobAdSchema>

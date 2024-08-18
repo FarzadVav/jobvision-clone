@@ -66,10 +66,10 @@ model JobAds {
   description          String           @db.Text
   work_times           String
   business_trips       String
-  gender               Boolean?         @default(true)
-  end_military_service Boolean?         @default(false)
+  gender               Boolean?
+  end_military_service Boolean?
+  is_remote            Boolean?
   is_urgent            Boolean?         @default(false)
-  is_remote            Boolean?         @default(false)
   age                  Json
   salary               Json
   benefits             Json?            @default("[]")
