@@ -3,8 +3,11 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Autoplay } from "swiper/modules"
 import { v4 as uuid } from "uuid"
 import { IconArrowLeft } from "@tabler/icons-react"
+import "swiper/css"
 
 import { contentFetcher, suggesttedJobAdsFetcher } from "@/utils/fetcher"
 import JobAdBox from "../JobAdBox"
@@ -49,23 +52,23 @@ const SuggestedJobAds = () => {
         {prevCategories.length ? "مشاغل پیشنهادی" : "لیست مشاغل"}
       </BreakLine>
 
-      <div className="w-full flex flex-wrap gap-3 mt-6">
+      <div className="w-full flex flex-wrap gap-3 mt-6 max-md:hidden">
         {jobAdsisLoading ? (
           <>
-            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
-            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
-            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
-            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
-            <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="h-52 jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="h-52 jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="h-52 jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="h-52 jobAd_size-1 xl:jobAd_size-2" />
+            <Skeleton className="h-52 jobAd_size-1 xl:jobAd_size-2" />
           </>
         ) : (
           jobAds?.map((jobAd) => {
             if (jobAd) {
               return (
-                <JobAdBox className="md:jobAd_size-1 xl:jobAd_size-2" key={uuid()} jobAd={jobAd} />
+                <JobAdBox className="jobAd_size-1 xl:jobAd_size-2" key={uuid()} jobAd={jobAd} />
               )
             } else {
-              return <Skeleton key={uuid()} className="jobAd_size-1 h-52 xl:jobAd_size-2" />
+              return <Skeleton key={uuid()} className="h-52 jobAd_size-1 xl:jobAd_size-2" />
             }
           })
         )}
@@ -96,7 +99,7 @@ const SuggestedJobAds = () => {
             <Skeleton className="w-1/12 h-3" />
           </div>
         ) : content ? (
-          <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2 max-md:hidden">
+          <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2">
             <ul className="size-full flex flex-wrap items-center group">
               {content?.tags.slice(0, 14).map((tag) => (
                 <li key={uuid()} className="suggested-link">
@@ -115,6 +118,36 @@ const SuggestedJobAds = () => {
             </ul>
           </div>
         ) : null}
+      </div>
+
+      <div className="w-full h-[calc(13rem+2px)] mt-6 md:hidden">
+        {jobAdsisLoading ? (
+          <div className="h-full row gap-3">
+            <Skeleton className="w-[90%] h-full" />
+            <Skeleton className="w-[10%] h-full rounded-l-none" />
+          </div>
+        ) : (
+          <Swiper
+            className="w-full h-full rounded-md"
+            spaceBetween={12}
+            slidesPerView={"auto"}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+          >
+            {jobAds?.map((jobAd) => {
+              if (jobAd) {
+                return (
+                  <SwiperSlide key={uuid()} className="!w-[90%] h-full p-[1px]">
+                    <JobAdBox className="w-full" jobAd={jobAd} />
+                  </SwiperSlide>
+                )
+              }
+            })}
+          </Swiper>
+        )}
       </div>
     </>
   )

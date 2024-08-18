@@ -2,9 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { IconArrowLeft, IconStarFilled } from "@tabler/icons-react"
 
-import CompaniesT from "@/types/companies.types"
 import { cn } from "@/utils/tw"
 import Button from "./Button"
+import { CompaniesT } from "@/types/prisma.types"
 
 type CompanyBoxProps = {
   company: CompaniesT
@@ -15,11 +15,11 @@ const CompanyBox = ({ company, className }: CompanyBoxProps) => {
   return (
     <div
       className={cn(
-        "bg-white text-dark border border-solid border-light w-56 h-[17rem] flex flex-col p-3 rounded-md",
+        "bg-white text-dark ring-1 ring-light w-56 h-[17rem] flex flex-col p-3 rounded-md",
         className
       )}
     >
-      <div className="border border-solid border-light size-20 p-1.5 rounded-md">
+      <div className="ring-1 ring-light size-20 p-1.5 rounded-md">
         <Image
           className="size-full rounded-md"
           src={company.logo || "/images/company.png"}

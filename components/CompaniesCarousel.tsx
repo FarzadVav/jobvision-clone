@@ -16,7 +16,7 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
   const { data: companies, isLoading } = useSWR("/api/companies", companiesFetcher)
 
   return (
-    <div className={cn("w-full h-[17rem]", className)}>
+    <div className={cn("w-full h-[calc(17rem+2px)]", className)}>
       {isLoading ? (
         <div className="center gap-3 h-full">
           <Skeleton className="w-2/3 h-full pb-6" />
@@ -49,8 +49,8 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
           modules={[Autoplay, Navigation]}
         >
           {companies?.slice(0, 10).map((company) => (
-            <SwiperSlide key={uuid()} className="h-[17rem] pb-6 max-sm:!w-[85%]">
-              <CompanyBox key={uuid()} className="w-full" company={company} />
+            <SwiperSlide key={uuid()} className="h-full p-[1px] max-sm:!w-[90%]">
+              <CompanyBox className="w-full" company={company} />
             </SwiperSlide>
           ))}
         </Swiper>
