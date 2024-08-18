@@ -5,38 +5,38 @@ import { useFormStatus } from "react-dom"
 import { cva, type VariantProps } from "class-variance-authority"
 import { PulseLoader } from "react-spinners"
 
-import { cn } from "../utils/tw"
+import { cn } from "@/utils/tw"
 
 const buttonVariants = cva(
-  "min-w-max flex justify-center items-center gap-2 rounded cursor-pointer transition active:scale-95 disabled:cursor-not-allowed",
+  "min-w-max flex justify-center items-center gap-2 rounded cursor-pointer transition active:scale-95 disabled:opacity-25 disabled:active:scale-100 disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
         primaryFill: "bg-primary text-white hover:bg-primary/95",
-        primaryGhost: "hover:bg-primary/50",
+        primaryGhost: "text-primary hover:bg-primary/25",
         primaryOutline: "border border-solid border-primary",
         primaryLink: "text-primary underline decoration-transparent hover:decoration-primary",
-        
+
         dangerFill: "bg-danger text-white hover:bg-danger/95",
-        dangerGhost: "hover:bg-danger/50",
+        dangerGhost: "text-danger hover:bg-danger/25",
         dangerOutline: "border border-solid border-danger",
         dangerLink: "text-danger underline decoration-transparent hover:decoration-danger",
 
         successFill: "bg-success text-white hover:bg-success/95",
-        successGhost: "hover:bg-success/50",
+        successGhost: "text-success hover:bg-success/25",
         successOutline: "border border-solid border-success",
         successLink: "text-success underline decoration-transparent hover:decoration-success",
 
         warningFill: "bg-warning text-white hover:bg-warning/95",
-        warningGhost: "hover:bg-warning/50",
+        warningGhost: "text-warning hover:bg-warning/25",
         warningOutline: "border border-solid border-warning",
         warningLink: "text-warning underline decoration-transparent hover:decoration-warning",
 
         darkFill: "bg-dark text-white hover:bg-dark/95",
-        darkGhost: "hover:bg-dark/50",
+        darkGhost: "hover:bg-dark/25",
         darkOutline: "border border-solid border-dark",
         darkLink: "text-dark underline decoration-transparent hover:decoration-dark",
-        
+
         lightFill: "bg-light text-dark hover:bg-light/95",
         lightGhost: "hover:bg-light/50",
         lightOutline: "border border-solid border-light",

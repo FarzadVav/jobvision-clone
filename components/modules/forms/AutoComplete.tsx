@@ -1,20 +1,24 @@
 "use client"
 
-import { forwardRef, useEffect, useId, useState } from "react"
+import { Dispatch, forwardRef, SetStateAction, useEffect, useId, useState } from "react"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 
-import { cn } from "../../../utils/tw"
+import { cn } from "@/utils/tw"
 
-interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type AutoCompleteProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  inputValue: string
+  setInputValue: Dispatch<SetStateAction<string>>
   wrapperclassName?: string
   error?: string | null
   data: string[]
 }
 
 const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
-  ({ value, wrapperclassName, error, defaultValue, className, data, ...props }, ref) => {
-    const [inputValue, setInputValue] = useState("")
+  (
+    { wrapperclassName, error, defaultValue, className, data, inputValue, setInputValue, ...props },
+    ref
+  ) => {
     const [isFocus, setIsFocus] = useState(false)
     const id = useId()
 
@@ -35,8 +39,8 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                 className
               )}
               ref={ref}
+              value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              value={value || inputValue}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
               {...props}

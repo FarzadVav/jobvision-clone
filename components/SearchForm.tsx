@@ -1,7 +1,7 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import useSWR from "swr"
 
 import { contentFetcher } from "@/utils/fetcher"
@@ -14,8 +14,12 @@ import search from "@/app/actions/search"
 
 const SearchForm = ({ className }: { className?: string }) => {
   const searchParams = useSearchParams()
-  const { data: content } = useSWR("/api/content", contentFetcher)
+  // Manual fields {
+  const [category, setCategory] = useState("")
+  const [city, setCity] = useState("")
+  // Manual fields }
   const formRef = useRef<HTMLFormElement>(null)
+  const { data: content } = useSWR("/api/content", contentFetcher)
 
   return (
     <form
@@ -34,17 +38,21 @@ const SearchForm = ({ className }: { className?: string }) => {
       <div className="w-full flex items-center gap-3 max-sm:flex-col">
         <AutoComplete
           placeholder="گروه شغلی"
-          defaultValue={searchParams.get(FILTER_KEYS.category) || ""}
-          name={FILTER_KEYS.category}
-          data={content?.categories.map((category) => category.name) || []}
           autoComplete="off"
+          name={FILTER_KEYS.category}
+          inputValue={category}
+          setInputValue={setCategory}
+          defaultValue={searchParams.get(FILTER_KEYS.category) || ""}
+          data={content?.categories.map((category) => category.name) || []}
         />
         <AutoComplete
           placeholder="شهر"
-          defaultValue={searchParams.get(FILTER_KEYS.city) || ""}
-          name={FILTER_KEYS.city}
-          data={content?.cities.map((city) => city.name) || []}
           autoComplete="off"
+          name={FILTER_KEYS.city}
+          inputValue={city}
+          setInputValue={setCity}
+          defaultValue={searchParams.get(FILTER_KEYS.city) || ""}
+          data={content?.cities.map((city) => city.name) || []}
         />
         <Button className="max-sm:w-full" variant={"primaryFill"} size={"lg"}>
           جستجو
