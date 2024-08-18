@@ -24,7 +24,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       icon,
       topic,
       message,
-      buttonVariant = "primary",
+      buttonVariant,
       acceptAction,
       closingHandler,
       onClick = () => {},
@@ -55,16 +55,16 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             >
               <div className="row items-start">
                 {icon}
-                <Title className={icon ? "mr-3" : ""} size={"sm"} font={"danaBold"}>
+                <Title className={icon ? "mr-3" : ""} size={"xs"} font={"danaBold"}>
                   <h6>{topic}</h6>
                 </Title>
               </div>
               <p className="w-full mt-3">{message}</p>
               <div className="row mt-6">
-                <Button variant={buttonVariant} onClick={acceptAction}>
+                <Button variant={buttonVariant || "primaryFill"} onClick={acceptAction}>
                   تایید
                 </Button>
-                <Button className="mr-3" variant={"ghost"} onClick={closingHandler}>
+                <Button className="mr-3" variant={"darkGhost"} onClick={closingHandler}>
                   بستن
                 </Button>
               </div>

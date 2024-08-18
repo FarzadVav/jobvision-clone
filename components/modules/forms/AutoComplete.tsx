@@ -1,6 +1,6 @@
 "use client"
 
-import { Dispatch, forwardRef, SetStateAction, useEffect, useId, useState } from "react"
+import { Dispatch, forwardRef, SetStateAction, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import { IconAsterisk, IconChevronDown } from "@tabler/icons-react"
 
@@ -20,7 +20,6 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     ref
   ) => {
     const [isFocus, setIsFocus] = useState(false)
-    const id = useId()
 
     useEffect(() => {
       setInputValue(defaultValue?.toString() || "")
@@ -29,9 +28,8 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     return (
       <>
         <div className={cn("w-full relative", wrapperclassName)}>
-          <label className="flex items-center relative cursor-pointer" htmlFor={id}>
+          <div className="w-full row relative">
             <input
-              id={id}
               className={cn(
                 `ring-1 h-11 w-full pr-5 pl-12 rounded-md transition-shadow focus:ring-2 focus:rounded-b-none file:h-11 file:-mr-5 file:border-0 file:px-5 file:rounded-r-md file:ml-5 file:cursor-pointer ${
                   error ? "ring-danger" : "ring-light hover:ring-2 focus:ring-primary"
@@ -45,12 +43,12 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
               onBlur={() => setIsFocus(false)}
               {...props}
             />
-            <div className="h-11 w-12 flex justify-center items-center absolute left-0 top-0">
+            <div className="h-11 w-12 center absolute left-0">
               <IconChevronDown
                 className={`icon transition-transform ${isFocus ? "-scale-y-100" : ""}`}
               />
             </div>
-          </label>
+          </div>
 
           <ul
             className={`bg-white border border-solid border-light shadow-lg max-h-[50vh] w-full px-1.5 py-1.5 rounded-b-md absolute left-0 top-full transition-all overflow-y-auto ${

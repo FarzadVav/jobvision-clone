@@ -60,10 +60,11 @@ model Companies {
   name           String?
   about          String?   @db.Text
   activity       String?   @db.VarChar(64)
-  score          Int       @default(5)
+  minEmployees   Int?
+  maxEmployees   Int?
+  score          Int?      @default(5)
   year           Int?
   knowledgeBased Boolean?  @default(false)
-  employees      Json?     @default("[2, 5]")
   city_id        String?
   city           Cities?   @relation(fields: [city_id], references: [id], onDelete: Cascade)
   job_ads        JobAds[]

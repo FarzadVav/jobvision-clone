@@ -15,13 +15,7 @@ export const profileSchema = z.object({
     .min(3, { message: "نام شرکت کوتاه است" })
     .max(64, { message: "نام شرکت نمی‌تواند طولانی باشد" }),
   year: z.string().length(4, { message: "سال تاسیس باید 4 رقمی باشد" }),
-  employee: z.object({
-    minEmployee: z.number().min(2, { message: "تعداد کارکنان شرکت باید حداقل 2 نفر باشند" }),
-    maxEmployee: z.number(),
-  }).refine(({ maxEmployee, minEmployee }) => (maxEmployee > minEmployee), {
-    message: "حداکثر تعداد کارکنان باید بیشتر از حداقل آن باشد",
-    path: ["maxEmployee"]
-  }),
+  minEmployee: z.number().min(2, "تعداد کارکنان شرکت باید حداقل 2 نفر باشند"),
   city: z.string().min(1, { message: "لطفا شهری که شرکت در آن واقع شده را انتخاب کنید" }),
   about: z.string().min(3, { message: "متن معرفی شرکت کوتاه است" }),
   activity: z.string()

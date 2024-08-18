@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache"
 import { unlink, writeFile } from "fs"
 import path from "path"
 import { v1 as uuid } from "uuid"
@@ -22,16 +23,13 @@ const changeProfile = async (
   const about = formData.get("about") as string
   const activity = formData.get("activity") as string
   const file = formData.get("file") as File
-  const knowledgeBased = formData.get("knowledgeBased") as "on"
+  const knowledgeBased = formData.get("knowledgeBased") as ("on" | null)
 
   const formState = createActionState<ProfileFieldsT>({})
   const checkFields = profileSchema.safeParse({
     name,
     year,
-    employee: {
-      minEmployee: +minEmployee,
-      maxEmployee: +maxEmployee,
-    },
+    minEmployee: +minEmployee,
     city,
     about,
     activity,
@@ -85,7 +83,10 @@ const changeProfile = async (
         about,
         activity,
         city_id: currentCity?.id,
-        employees: [+minEmployee, +maxEmployee],
+        minEmployees: +minEmployee,
+        maxEmployees: +maxEmployee > +minEmployee
+          ? +maxEmployee
+          : +minEmployee + 5,
         knowledgeBased: knowledgeBased === "on"
       }
     })
@@ -95,6 +96,7 @@ const changeProfile = async (
     return formState
   }
 
+  revalidatePath("/employer/profile")
   formState.success = true
   return formState
 }

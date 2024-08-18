@@ -1,13 +1,12 @@
-import { Categories, Tags, Provinces, Cities, CooperationTypes } from "@prisma/client"
 import { v4 as uuid } from "uuid"
 
-export const CATEGORIES: Categories[] = [
+export const CATEGORIES = [
   { id: uuid(), name: "برنامه نویسی" },
   { id: uuid(), name: "گرافیک" },
   { id: uuid(), name: "مارکتینگ" }
 ]
 
-export const TAGS: Tags[] = [
+export const TAGS = [
   { id: uuid(), name: "فرانت اند", category_id: CATEGORIES[0].id },
   { id: uuid(), name: "بک اند", category_id: CATEGORIES[0].id },
   { id: uuid(), name: "فول استک", category_id: CATEGORIES[0].id },
@@ -29,13 +28,13 @@ export const TAGS: Tags[] = [
   { id: uuid(), name: "بازاریاب", category_id: CATEGORIES[2].id },
 ]
 
-export const PROVINCES: Provinces[] = [
+export const PROVINCES = [
   { id: uuid(), name: "خراسان رضوی" },
   { id: uuid(), name: "تهران" },
   { id: uuid(), name: "شمال" }
 ]
 
-export const CITIES: Cities[] = [
+export const CITIES = [
   { id: uuid(), name: "مشهد", province_id: PROVINCES[0].id },
   { id: uuid(), name: "نیشابور", province_id: PROVINCES[0].id },
   { id: uuid(), name: "سبزوار", province_id: PROVINCES[0].id },
@@ -51,7 +50,7 @@ export const CITIES: Cities[] = [
   { id: uuid(), name: "گیلان", province_id: PROVINCES[2].id },
 ]
 
-export const COOPERATION_TYPES: CooperationTypes[] = [
+export const COOPERATION_TYPES = [
   { id: uuid(), name: "تمام وقت" },
   { id: uuid(), name: "پاره وقت" },
   { id: uuid(), name: "پروژه ای" }

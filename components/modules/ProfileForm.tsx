@@ -29,7 +29,6 @@ export type ProfileFieldsT = {
   name?: string
   year?: string
   minEmployee?: string
-  maxEmployee?: string
   city?: string
   about?: string
   activity?: string
@@ -44,6 +43,9 @@ type ProfileFormT = {
 
 const ProfileForm = ({ content, company }: ProfileFormT) => {
   const [formState, setFormState] = useState(createActionState<ProfileFieldsT>({}))
+  // Manual fields {
+  const [city, setCity] = useState("")
+  // Manual fields }
 
   return (
     <form
@@ -97,9 +99,9 @@ const ProfileForm = ({ content, company }: ProfileFormT) => {
             id="minEmployee"
             type="number"
             name="minEmployee"
-            defaultValue={company?.employees[0]}
+            defaultValue={company?.minEmployees?.toString()}
             placeholder="از 10 نفر"
-            error={formState.fields.minEmployee?.toString()}
+            error={formState.fields.minEmployee}
           />
         </div>
         <div>
@@ -111,9 +113,8 @@ const ProfileForm = ({ content, company }: ProfileFormT) => {
             id="maxEmployee"
             type="number"
             name="maxEmployee"
-            defaultValue={company?.employees[1]}
+            defaultValue={company?.maxEmployees?.toString()}
             placeholder="تا 15 نفر"
-            error={formState.fields.maxEmployee?.toString()}
           />
         </div>
       </div>
@@ -126,6 +127,8 @@ const ProfileForm = ({ content, company }: ProfileFormT) => {
         id="city"
         name="city"
         placeholder="یک شهر انتخاب کنید"
+        inputValue={city}
+        setInputValue={setCity}
         defaultValue={company?.city?.name}
         data={content?.cities.map((city) => city.name) || []}
         error={formState.fields.city}

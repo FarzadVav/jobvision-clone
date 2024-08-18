@@ -1,11 +1,11 @@
 "use server"
 
-import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
-const logOut = async () => {
-  cookies().delete("token")
+import { deleteSession } from "@/utils/session"
 
+const logOut = async () => {
+  deleteSession()
   redirect("/")
 }
 
