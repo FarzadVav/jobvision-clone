@@ -84,6 +84,7 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
             setEducation([])
             setLanguages([])
             setTechs([])
+            setShowMaxSalary(false)
             formRef.current?.reset()
             toast.success("آگهی جدید با موفقیت ثبت شد")
           }

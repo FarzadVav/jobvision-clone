@@ -8,10 +8,12 @@ datasource db {
 }
 
 model Categories {
-  id      String   @id @default(uuid())
-  name    String   @unique
-  tags    Tags[]
-  job_ads JobAds[]
+  id         String    @id @default(uuid())
+  name       String    @unique
+  tags       Tags[]
+  job_ads    JobAds[]
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model Tags {
@@ -20,12 +22,16 @@ model Tags {
   category_id String
   category    Categories     @relation(fields: [category_id], references: [id], onDelete: Cascade)
   job_ads     TagsOnJobAds[]
+  created_at  DateTime?      @default(now())
+  updated_at  DateTime?      @updatedAt
 }
 
 model Provinces {
-  id     String   @id @default(uuid())
-  name   String   @unique
-  cities Cities[]
+  id         String    @id @default(uuid())
+  name       String    @unique
+  cities     Cities[]
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model Cities {
@@ -34,12 +40,16 @@ model Cities {
   province_id String
   province    Provinces   @relation(fields: [province_id], references: [id], onDelete: Cascade)
   companies   Companies[]
+  created_at  DateTime?   @default(now())
+  updated_at  DateTime?   @updatedAt
 }
 
 model CooperationTypes {
-  id      String   @id @default(uuid())
-  name    String   @unique
-  job_ads JobAds[]
+  id         String    @id @default(uuid())
+  name       String    @unique
+  job_ads    JobAds[]
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model Companies {
@@ -58,6 +68,7 @@ model Companies {
   city           Cities?   @relation(fields: [city_id], references: [id], onDelete: Cascade)
   job_ads        JobAds[]
   created_at     DateTime? @default(now())
+  updated_at     DateTime? @updatedAt
 }
 
 model JobAds {
@@ -66,32 +77,37 @@ model JobAds {
   description          String           @db.Text
   work_times           String
   business_trips       String
+  minAge               Int
+  maxAge               Int
+  minSalary            Int
+  maxSalary            Int?
+  end_military_service Boolean          @default(false)
+  is_remote            Boolean          @default(false)
+  is_urgent            Boolean          @default(false)
   gender               Boolean?
-  end_military_service Boolean?
-  is_remote            Boolean?
-  is_urgent            Boolean?         @default(false)
-  age                  Json
-  salary               Json
   benefits             Json?            @default("[]")
   abilities            Json?            @default("[]")
   education            Json?            @default("[]")
   languages            Json?            @default("[]")
   techs                Json?            @default("[]")
+  tags                 TagsOnJobAds[]
   category_id          String
   category             Categories       @relation(fields: [category_id], references: [id], onDelete: Cascade)
   cooperation_type_id  String
   cooperation_type     CooperationTypes @relation(fields: [cooperation_type_id], references: [id], onDelete: Cascade)
   company_id           String
   company              Companies        @relation(fields: [company_id], references: [id], onDelete: Cascade)
-  tags                 TagsOnJobAds[]
   created_at           DateTime?        @default(now())
+  updated_at           DateTime?        @updatedAt
 }
 
 model TagsOnJobAds {
-  tag_id         String @default(uuid())
-  current_tag    Tags   @relation(fields: [tag_id], references: [id], onDelete: Cascade)
-  job_ad_id      String @default(uuid())
-  current_job_ad JobAds @relation(fields: [job_ad_id], references: [id], onDelete: Cascade)
+  tag_id         String    @default(uuid())
+  current_tag    Tags      @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  job_ad_id      String    @default(uuid())
+  current_job_ad JobAds    @relation(fields: [job_ad_id], references: [id], onDelete: Cascade)
+  created_at     DateTime? @default(now())
+  updated_at     DateTime? @updatedAt
 
   @@id([tag_id, job_ad_id])
 }

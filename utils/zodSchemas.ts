@@ -43,44 +43,13 @@ export const newJobAdSchema = z.object({
   businessTrips: z.string()
     .min(3, { message: "شرح سفر های کاری آگهی کوتاه است" })
     .max(128, { message: "شرح سفر های کاری آگهی نمی‌تواند طولانی باشد" }),
-  age: z.object({
-    minAge: z.number()
-      .min(18, { message: "سن کارجو باید حداقل 18 باشد" })
-      .max(60, { message: "حداقل سن کارجو نمی‌تواند بیشتر از 60 سال باشد" }),
-    maxAge: z.number()
-      .max(70, { message: "سن کارجو نمی‌تواند بیشتر از 70 باشد" }),
-  }).superRefine(({ minAge, maxAge }, ctx) => {
-    if (maxAge <= minAge) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "حداکثر سن کارجو نمی‌تواند کمتر از حداقل آن باشد",
-        path: ["maxAge"]
-      })
-    }
-
-    return z.NEVER
-  }),
-  salary: z.object({
-    minSalary: z.number().min(5, { message: "مبلغ استخدام باید حداقل 5 میلیون باشد" }),
-    maxSalary: z.number(),
-    showMaxSalary: z.boolean(),
-  }).superRefine(({ minSalary, maxSalary, showMaxSalary }, ctx) => {
-    if (showMaxSalary && (maxSalary <= minSalary)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "حداقل مبلغ استخدام نمی‌تواند بیشتر از حداکثر آن باشد",
-        path: ["maxSalary"]
-      })
-    }
-
-    if (showMaxSalary && (maxSalary - minSalary > 10)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "اختلاف قیمت نمی‌تواند بیشتر از 10 میلیون باشد",
-        path: ["maxSalary"]
-      })
-    }
-  }),
+  minAge: z.number()
+    .min(18, "حداقل سن کارجو 18 می‌باشد")
+    .max(50, "حداکثر سن برای این فیلد 50 می‌باشد"),
+  maxAge: z.number()
+    .min(18, "حداقل سن برای این فیلد 18 می‌باشد")
+    .max(60, "حداکثر سن کارجو 60 می‌باشد"),
+  minSalary: z.number().min(5, "حداقل حقوق 5 میلیون تومان می‌باشد"),
   category: z.string().min(1, { message: "لطفا یک دسته بندی را انتخاب کنید" }),
   cooperationType: z.string().min(1, { message: "لطفا نوع قرارداد را انتخاب کنید" }),
   tags: z.string().array().min(1, { message: "لطفا حداقل یک تگ شغلی انتخاب کنید" }),

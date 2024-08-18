@@ -14,23 +14,26 @@ const addNewJobAd = async (
   const description = formData.get("description") as string
   const workTimes = formData.get("workTimes") as string
   const businessTrips = formData.get("businessTrips") as string
+
   const minAge = formData.get("minAge") as string
   const maxAge = formData.get("maxAge") as string
   const minSalary = formData.get("minSalary") as string
   const maxSalary = formData.get("maxSalary") as string
-  const showMaxSalary = formData.get("show-maxSalary") as ("on" | null)
-  const gender = formData.get("gender") as ("male" | "female" | "")
+
+  const gender = formData.get("gender") as string
+  const endMilitaryService = formData.get("end_military_service") as ("on" | null)
+  const isUrgent = formData.get("is_urgent") as ("on" | null)
+  const isRemote = formData.get("is_remote") as ("on" | null)
+
   const category = formData.get("category") as string
   const cooperationType = formData.get("cooperationType") as string
+
   const tags = formData.get("tags") as string
   const benefits = formData.get("benefits") as string
   const abilities = formData.get("abilities") as string
   const education = formData.get("education") as string
   const languages = formData.get("languages") as string
   const techs = formData.get("techs") as string
-  const endMilitaryService = formData.get("end_military_service") as ("on" | null)
-  const isUrgent = formData.get("is_urgent") as ("on" | null)
-  const isRemote = formData.get("is_remote") as ("on" | null)
 
   const formState = createActionState<NewJobAdFieldsT>({})
   const checkFields = newJobAdSchema.safeParse({
@@ -38,15 +41,9 @@ const addNewJobAd = async (
     description,
     workTimes,
     businessTrips,
-    age: {
-      minAge: +minAge,
-      maxAge: +maxAge,
-    },
-    salary: {
-      minSalary: +minSalary,
-      maxSalary: +maxSalary,
-      showMaxSalary: showMaxSalary === "on",
-    },
+    minAge: +minAge,
+    maxAge: +maxAge,
+    minSalary: +minSalary,
     category,
     cooperationType,
     tags: JSON.parse(tags),
@@ -73,17 +70,25 @@ const addNewJobAd = async (
         description,
         work_times: workTimes,
         business_trips: businessTrips,
-        age: [+minAge, +maxAge],
-        salary: showMaxSalary === "on" ? [+minSalary, +maxSalary] : [+minSalary],
-        gender: gender ? gender === "male" : null,
+        minAge: +minAge,
+        maxAge: +maxAge > +minAge
+          ? +maxAge
+          : +minAge + 5,
+        minSalary: +minSalary,
+        maxSalary: maxSalary
+          ? +maxSalary > +minSalary
+            ? +maxSalary
+            : +minSalary + 5
+          : null,
         benefits: JSON.parse(benefits),
         abilities: JSON.parse(abilities),
         education: JSON.parse(education),
         languages: JSON.parse(languages),
         techs: JSON.parse(techs),
+        gender: gender ? gender === "male" : null,
         end_military_service: endMilitaryService === "on",
-        is_urgent: isUrgent === "on",
         is_remote: isRemote === "on",
+        is_urgent: isUrgent === "on",
         category_id: category,
         cooperation_type_id: cooperationType,
         company_id: user.id,
