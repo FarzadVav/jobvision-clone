@@ -58,7 +58,17 @@ const SuggestedJobAds = () => {
             <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
             <Skeleton className="w-full h-52 md:jobAd_size-1 xl:jobAd_size-2" />
           </>
-        ) : null}
+        ) : (
+          jobAds?.map((jobAd) => {
+            if (jobAd) {
+              return (
+                <JobAdBox className="md:jobAd_size-1 xl:jobAd_size-2" key={uuid()} jobAd={jobAd} />
+              )
+            } else {
+              return <Skeleton key={uuid()} className="jobAd_size-1 h-52 xl:jobAd_size-2" />
+            }
+          })
+        )}
 
         {contentisLoading ? (
           <div className="w-full h-52 flex flex-wrap items-center gap-3 md:jobAd_size-1 xl:jobAd_size-2">
@@ -85,19 +95,7 @@ const SuggestedJobAds = () => {
             <Skeleton className="w-2/12 h-3" />
             <Skeleton className="w-1/12 h-3" />
           </div>
-        ) : null}
-
-        {jobAds?.map((jobAd) => {
-          if (jobAd) {
-            return (
-              <JobAdBox className="md:jobAd_size-1 xl:jobAd_size-2" key={uuid()} jobAd={jobAd} />
-            )
-          } else {
-            return <Skeleton key={uuid()} className="jobAd_size-1 h-52 xl:jobAd_size-2" />
-          }
-        })}
-
-        {content ? (
+        ) : content ? (
           <div className="jobAd_size-1 h-52 max-h-52 xl:jobAd_size-2 max-md:hidden">
             <ul className="size-full flex flex-wrap items-center group">
               {content?.tags.slice(0, 14).map((tag) => (

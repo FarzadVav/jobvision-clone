@@ -1,13 +1,13 @@
 "use client"
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import { IconStarFilled } from "@tabler/icons-react"
 
-import JobAdsT from "@/types/jobads.types"
+import { JobAdsT } from "@/types/prisma.types"
+import { releaseDateCalculation, salaryCalculationForView } from "@/utils/jobAd"
 import { cn } from "@/utils/tw"
 import Button from "./Button"
-import { releaseDateCalculation, salaryCalculationForView } from "@/utils/jobAd"
 
 type JobAdBoxProps = {
   jobAd: JobAdsT
@@ -16,7 +16,6 @@ type JobAdBoxProps = {
 
 const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
   const isSelected = searchParams.toString().includes(jobAd.id)
 
@@ -52,7 +51,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
   return (
     <article
       className={cn(
-        "bg-white ring-1 ring-light h-52 max-h-52 w-full flex flex-col p-3 rounded-md relative cursor-pointer group",
+        "bg-white ring-1 ring-light h-52 w-full flex flex-col p-3 rounded-md relative cursor-pointer group",
         isSelected ? "ring-primary/50" : "",
         jobAd.is_urgent ? "pr-[calc(0.75rem+3px)]" : "",
         className
@@ -101,22 +100,23 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
                 ? `${jobAd.company.city?.province.name}، ${jobAd.company.city?.name}`
                 : "موقعیت نامعلوم"}
             </span>
-            <span className="text-success">{salaryCalculationForView(jobAd.salary)}</span>
+            <span className="text-success">
+              {salaryCalculationForView(jobAd.minSalary, jobAd.maxSalary)}
+            </span>
           </div>
         </div>
       </div>
-      <div className="border-t border-dashed border-light text-xs flex items-center pt-3 mt-auto">
-        <span className="h-8 flex items-center">
-          {releaseDateCalculation(new Date(jobAd.created_at || ""))}
-        </span>
+      <div className="border-t border-dashed border-light row text-xs pt-3 mt-auto">
+        <span>{releaseDateCalculation(new Date(jobAd.created_at || ""))}</span>
         {jobAd.is_urgent ? (
           <span className="bg-danger/10 text-danger px-3 py-1 mr-auto rounded-full">فوری</span>
         ) : null}
-        {pathname.includes("/jobs") ? null : (
-          <Button className={jobAd.is_urgent ? "mr-3" : "mr-auto"} variant={"success"} size={"sm"}>
-            ارسال رزومه
-          </Button>
-        )}
+        <Button
+          className={jobAd.is_urgent ? "mr-3" : "mr-auto"}
+          variant={isSelected ? "primaryFill" : "successFill"}
+        >
+          ارسال رزومه
+        </Button>
       </div>
     </article>
   )

@@ -1,10 +1,7 @@
-export const salaryCalculationForView = (salary: [number, number?]) => {
-  let currentSalary: string = salary[0].toString()
-  if (salary[1]) currentSalary += " " + `تا ${salary[1]}`
-  currentSalary += " " + "میلیون"
-
-  return currentSalary
-}
+export const salaryCalculationForView = (
+  minSalary: number,
+  maxSalary: number | null
+) => `${minSalary} ${maxSalary ? `تا ${maxSalary}` : ""} میلیون`
 
 export const releaseDateCalculation = (date: Date) => {
   const now = new Date()
