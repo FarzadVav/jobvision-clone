@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useSearchParams } from "next/navigation"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import useSWR from "swr"
 import { v4 as uuid } from "uuid"
 

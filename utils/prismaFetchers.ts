@@ -14,7 +14,7 @@ export const getCompany = async (session?: string) => {
 
   const company = prisma.companies.findUnique({
     where: { email: verifiedSession.email, password: verifiedSession.password },
-    include: { city: true, job_ads: true }
+    include: { city: { include: { province: true } }, job_ads: true }
   })
   if (!company) {
     return null
