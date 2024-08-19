@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+import { cookieOptions } from './utils/session'
+
 export const middleware = async (request: NextRequest) => {
   const url = request.url
-  const session = request.cookies.get("session")?.value || ""
+  console.log(url)
+  const session = request.cookies.get(cookieOptions.name)?.value || ""
 
   const { status } = await fetch(process.env.BASE_URL + "/api/getMe", {
     headers: { Authorization: session }

@@ -1,21 +1,14 @@
-import { prisma } from "@/prisma/client"
-import { verifySession } from "@/utils/session"
+import { getCompany } from "@/utils/prismaFetchers"
 
 export const dynamic = "force-dynamic"
 
 export const GET = async (request: Request) => {
-  const token = request.headers.get("Authorization") || ""
-  const session = await verifySession(token)
+  const session = request.headers.get("Authorization") || ""
+  const company = await getCompany(session)
 
-  if (!session) return Response.json(null, { status: 403 })
-
-  const company = await prisma.companies.findUnique({
-    where: { email: session.email },
-    include: { city: { include: { province: true } } }
-  })
-  if (company) {
-    return Response.json(company)
+  if (!company) {
+    return Response.json(null, { status: 404 })
   }
 
-  return Response.json(null, { status: 404 })
+  return Response.json(company)
 }

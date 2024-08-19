@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import useSWR from "swr"
@@ -32,10 +32,11 @@ const links = [
 ]
 
 const SideBar = () => {
-  const pathname = usePathname()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showLogOutModal, setShowLogOutModal] = useState(false)
   const { data: company, isLoading } = useSWR("/api/getMe", getMeFetcher)
+  const pathname = usePathname()
+  const router = useRouter()
 
   return (
     <>
@@ -154,7 +155,10 @@ const SideBar = () => {
         topic="آیا برای خروج از حسابتات اطمینان دارید؟"
         message="ممکن است در فرایند استخدام مشکلی به وجود بیاید و شما از ارسال رزومه کارجویان بی خبر باشید و به نتیجه دلخواه خودتان نرسید."
         buttonVariant={"dangerFill"}
-        acceptAction={() => logOut()}
+        acceptAction={async () => {
+          await logOut()
+          router.replace("/")
+        }}
         closingHandler={() => setShowLogOutModal(false)}
       />
     </>

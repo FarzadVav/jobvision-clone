@@ -1,7 +1,9 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 import register from "@/app/actions/register"
 import Button from "@/components/Button"
@@ -17,6 +19,7 @@ export type RegisterFieldsT = {
 
 const Page = () => {
   const [formState, setFormState] = useState(createActionState<RegisterFieldsT>({}))
+  const router = useRouter()
 
   return (
     <div className="container h-[calc(100vh-4.5rem)] flex items-center">
@@ -32,7 +35,13 @@ const Page = () => {
           className="w-full px-3 my-3 lg:px-6"
           action={async (formData: FormData) => {
             const newState = await register(formData)
-            newState && setFormState(newState)
+            if (newState) {
+              setFormState(newState)
+              if (newState.success) {
+                toast.success("به جاب‌ویژن خوش آمدید!")
+                router.replace("/employer/profile")
+              }
+            }
           }}
         >
           <Input
@@ -52,7 +61,7 @@ const Page = () => {
           />
 
           <FormActionMessages messages={formState.messages} />
-          
+
           <Button className="w-full mt-3" size={"lg"} variant={"primaryFill"}>
             ادامه
           </Button>

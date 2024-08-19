@@ -49,8 +49,3 @@ export const verifySession = async (cookie?: string) => {
   const session = await decryptSession(myCookie)
   return session
 }
-
-export const deleteSession = () => {
-  cookies().delete(cookieOptions.name)
-  redirect("/")
-}

@@ -5,30 +5,30 @@ import ContentT from "@/types/content.types"
 import { verifySession } from "./session"
 import { FILTER_KEYS } from "./initialData"
 
-export const getCompany = async (cookie?: string) => {
-  const session = await verifySession(cookie)
+export const getCompany = async (session?: string) => {
+  const verifiedSession = await verifySession(session)
 
-  if (!session) {
+  if (!verifiedSession) {
     return null
   }
 
-  const companyy = prisma.companies.findUnique({
-    where: { email: session.email, password: session.password },
+  const company = prisma.companies.findUnique({
+    where: { email: verifiedSession.email, password: verifiedSession.password },
     include: { city: true, job_ads: true }
   })
-  if (!companyy) {
+  if (!company) {
     return null
   }
 
-  return companyy
+  return company
 }
 
 export const getContent = async () => {
-  const categories = await prisma.categories.findMany({ include: { tags: true } })
-  const tags = await prisma.tags.findMany()
+  const categories = await prisma.categories.findMany({ include: { tags: true, job_ads: true } })
+  const tags = await prisma.tags.findMany({ include: { category: true, job_ads: true } })
   const provinces = await prisma.provinces.findMany({ include: { cities: true } })
-  const cities = await prisma.cities.findMany()
-  const cooperationTypes = await prisma.cooperationTypes.findMany()
+  const cities = await prisma.cities.findMany({ include: { companies: true, province: true } })
+  const cooperationTypes = await prisma.cooperationTypes.findMany({ include: { job_ads: true } })
 
   const content: ContentT = {
     categories,

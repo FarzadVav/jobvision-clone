@@ -1,12 +1,9 @@
 "use server"
 
-import { redirect } from "next/navigation"
+import { cookies } from "next/headers"
 
-import { deleteSession } from "@/utils/session"
+import { cookieOptions } from "@/utils/session"
 
-const logOut = async () => {
-  deleteSession()
-  redirect("/")
-}
+const logOut = async () => cookies().delete(cookieOptions.name)
 
 export default logOut

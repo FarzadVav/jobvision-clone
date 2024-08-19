@@ -187,7 +187,9 @@ const SelectedJobAd = () => {
               <div className="border-b border-solid border-light selected-jobad_details pb-6 mb-6">
                 <div className="item">
                   <span className="key">حقوق</span>
-                  <span className="value">{salaryCalculationForView(selectedJobAd.salary)}</span>
+                  <span className="value">
+                    {salaryCalculationForView(selectedJobAd.minSalary, selectedJobAd.maxSalary)}
+                  </span>
                 </div>
                 <div className="item">
                   <span className="key">محل کار</span>
@@ -206,9 +208,9 @@ const SelectedJobAd = () => {
                 <div className="item">
                   <span className="key">مزایا و تهسیلات</span>
                   <span className="value">
-                    {selectedJobAd.benefits.length
-                      ? selectedJobAd.benefits.map((benefit, i) => {
-                          if (i < selectedJobAd?.benefits.length - 1) {
+                    {(selectedJobAd.benefits as []).length
+                      ? (selectedJobAd.benefits as []).map((benefit, i) => {
+                          if (i < (selectedJobAd?.benefits as []).length - 1) {
                             return (
                               <p key={uuid()} className="benefit">
                                 {benefit}
@@ -243,7 +245,7 @@ const SelectedJobAd = () => {
                     {selectedJobAd.title.length > 100 ? "..." : null}
                   </h2>
                 </Title>
-                <Button className={"mr-3"} variant={"success"}>
+                <Button className={"mr-3"} variant={"successFill"}>
                   ارسال رزومه
                 </Button>
               </div>
@@ -268,7 +270,7 @@ const SelectedJobAd = () => {
               </div>
               <div className="w-full flex items-center mt-4">
                 <span className="text-success">
-                  {salaryCalculationForView(selectedJobAd.salary)}
+                  {salaryCalculationForView(selectedJobAd.minSalary, selectedJobAd.maxSalary)}
                 </span>
                 <Button className="mr-auto" size={"sm"}>
                   <IconShare className="icon" />
@@ -282,7 +284,7 @@ const SelectedJobAd = () => {
                 <div className="min-w-max flex items-center" title="تعداد کارکنان شرکت">
                   <IconUser className="icon" />
                   <p className="mr-3">
-                    {selectedJobAd.company.employees[0]} تا {selectedJobAd.company.employees[1]} نفر
+                    {selectedJobAd.company.minEmployees} تا {selectedJobAd.company.maxEmployees} نفر
                   </p>
                 </div>
                 {selectedJobAd.company.activity ? (
@@ -322,9 +324,9 @@ const SelectedJobAd = () => {
                         <div className="item">
                           <span className="key">مزایا و تسهیلات</span>
                           <div className="value">
-                            {selectedJobAd.benefits.length
-                              ? selectedJobAd.benefits.map((benefit, i) => {
-                                  if (i < selectedJobAd?.benefits.length - 1) {
+                            {(selectedJobAd.benefits as []).length
+                              ? (selectedJobAd.benefits as []).map((benefit, i) => {
+                                  if (i < (selectedJobAd.benefits as []).length - 1) {
                                     return (
                                       <p key={uuid()} className="benefit">
                                         {benefit}
@@ -349,8 +351,8 @@ const SelectedJobAd = () => {
                       <span>شاخص های کلیدی از نظر کارفرما</span>
                     </Title>
                     <ul className="w-full flex flex-wrap gap-2 mt-3">
-                      {selectedJobAd.abilities.length
-                        ? selectedJobAd.abilities.map((ability) => (
+                      {(selectedJobAd.abilities as []).length
+                        ? (selectedJobAd.abilities as []).map((ability) => (
                             <li
                               key={uuid()}
                               className="border border-solid border-dark min-w-max text-center px-2 rounded"
@@ -374,7 +376,7 @@ const SelectedJobAd = () => {
                         <div className="key">سن</div>
                         <div className="value">
                           <span>
-                            {selectedJobAd.age[0]} تا {selectedJobAd.age[1]}
+                            {selectedJobAd.minAge} تا {selectedJobAd.minAge}
                           </span>
                         </div>
                       </li>
@@ -403,8 +405,8 @@ const SelectedJobAd = () => {
                       <li className="selected-jobAd_ability mt-2">
                         <div className="key">تحصیلات</div>
                         <div className="value">
-                          {selectedJobAd.education.length
-                            ? selectedJobAd.education.map((education) => (
+                          {(selectedJobAd.education as []).length
+                            ? (selectedJobAd.education as []).map((education) => (
                                 <span key={uuid()} className="list-items">
                                   {education}
                                 </span>
@@ -415,8 +417,8 @@ const SelectedJobAd = () => {
                       <li className="selected-jobAd_ability mt-2">
                         <div className="key">زبان ها</div>
                         <div className="value">
-                          {selectedJobAd.languages.length
-                            ? selectedJobAd.languages.map((language) => (
+                          {(selectedJobAd.languages as []).length
+                            ? (selectedJobAd.languages as []).map((language) => (
                                 <span key={uuid()} className="list-items">
                                   {language}
                                 </span>
@@ -427,8 +429,8 @@ const SelectedJobAd = () => {
                       <li className="selected-jobAd_ability mt-2">
                         <div className="key">تکنولوژی ها</div>
                         <div className="value">
-                          {selectedJobAd.techs.length
-                            ? selectedJobAd.techs.map((tech) => (
+                          {(selectedJobAd.techs as []).length
+                            ? (selectedJobAd.techs as []).map((tech) => (
                                 <span key={uuid()} className="list-items">
                                   {tech}
                                 </span>
@@ -514,8 +516,8 @@ const SelectedJobAd = () => {
                       <div className="item">
                         <span className="key">اندازه سازمان</span>
                         <p className="value">
-                          {selectedJobAd.company.employees[0]} تا{" "}
-                          {selectedJobAd.company.employees[1]} نفر
+                          {selectedJobAd.company.minEmployees} تا{" "}
+                          {selectedJobAd.company.maxEmployees} نفر
                         </p>
                       </div>
                       <div className="item">

@@ -1,6 +1,5 @@
 "use server"
 
-import { redirect } from "next/navigation"
 import { z } from "zod"
 
 import { prisma } from "@/prisma/client"
@@ -48,7 +47,8 @@ const register = async (formData: FormData): Promise<FormActionsT<RegisterFields
     return formState
   }
 
-  redirect("/employer")
+  formState.success = true
+  return formState
 }
 
 export default register

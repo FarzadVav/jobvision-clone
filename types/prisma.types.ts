@@ -2,7 +2,7 @@ import { Prisma } from "@prisma/client"
 
 export type CompaniesT = Prisma.CompaniesGetPayload<{
   include: {
-    city: true,
+    city: { include: { province: true } },
     job_ads: true
   }
 }>
