@@ -18,13 +18,7 @@ const CompaniesCarousel = ({ className }: { className?: string }) => {
   return (
     <div className={cn("w-full h-[calc(17rem+2px)]", className)}>
       {isLoading ? (
-        <div className="center gap-3 h-full">
-          <Skeleton className="w-2/3 h-full pb-6" />
-          <Skeleton className="w-2/3 h-full pb-6" />
-          <Skeleton className="w-2/3 h-full pb-6" />
-          <Skeleton className="w-2/3 h-full pb-6" />
-          <Skeleton className="w-2/3 h-full pb-6" />
-        </div>
+        <Skeleton className="w-full h-full" />
       ) : (
         <Swiper
           className="w-full h-full rounded-md"

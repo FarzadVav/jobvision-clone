@@ -331,4 +331,10 @@ a {
     transform: scale(0);
   }
 }
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
 /* Animations */
