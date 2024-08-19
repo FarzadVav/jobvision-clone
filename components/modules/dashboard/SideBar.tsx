@@ -93,6 +93,7 @@ const SideBar = () => {
           </Button>
         </div>
       </aside>
+
       <menu className="bg-primary/10 backdrop-blur-xl border-t border-solid border-white/10 w-screen fixed bottom-0 left-0 z-10 lg:hidden">
         <ul className="container text-primary flex justify-between items-center gap-1 py-3">
           {links.map((link) => (
@@ -128,15 +129,25 @@ const SideBar = () => {
         state={showMobileMenu}
         closingHandler={() => setShowMobileMenu(false)}
       >
-        <div className="w-full flex gap-3">
-          <Button className="text-dark flex-1" aria-label="notification" variant={"lightGhost"}>
+        <div className="row w-full flex-col gap-3">
+          <Button
+            className="w-full justify-between sm:w-1/2"
+            aria-label="notification"
+            variant={"lightGhost"}
+          >
+            اعلان ها
             <IconBell className="icon" />
           </Button>
-          <Button className="text-dark flex-1" aria-label="verified" variant={"lightGhost"}>
+          <Button
+            className="w-full justify-between sm:w-1/2"
+            aria-label="verified"
+            variant={"lightGhost"}
+          >
+            درخواست های استخدام
             <IconFileCheck className="icon" />
           </Button>
           <Button
-            className="flex-1"
+            className="w-full justify-between sm:w-1/2"
             aria-label="logout"
             variant={"dangerFill"}
             onClick={() => {
@@ -144,6 +155,7 @@ const SideBar = () => {
               setShowLogOutModal(true)
             }}
           >
+            خروج از حساب
             <IconLogout className="icon" />
           </Button>
         </div>
