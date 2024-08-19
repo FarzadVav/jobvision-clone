@@ -36,124 +36,33 @@ const SelectedJobAd = () => {
 
   if (isLoading)
     return (
-      <div className="w-full h-full px-3 py-4">
-        <div className="w-full max-lg:hidden">
-          <div className="center">
-            <Skeleton className="h-6 w-1/2" />
-            <Skeleton className="h-6 w-1/4 mr-auto" />
-          </div>
-          <Skeleton className="h-6 w-1/3 mt-6" />
-          <div className="center mt-6">
-            <Skeleton className="h-6 w-1/3" />
-            <Skeleton className="h-6 w-1/4 mr-auto" />
-          </div>
-          <Skeleton className="h-9 w-full mt-9" />
-        </div>
-
-        <div className="w-full lg:hidden">
-          <div className="row items-start gap-3">
-            <Skeleton className="h-20 w-20" />
-            <div className="w-2/3">
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-3 w-1/3 mt-3" />
-            </div>
-          </div>
-          <div className="center gap-3 mt-6">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-          <div className="center gap-3 mt-3">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-          <div className="center gap-3 mt-3">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-          <div className="center gap-3 mt-3">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-          <div className="center gap-3 mt-3">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-          <div className="center gap-3 mt-3">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-          <div className="center gap-3 mt-3 sm:hidden">
-            <Skeleton className="h-9 w-1/2" />
-            <Skeleton className="h-9 w-1/2" />
-          </div>
-        </div>
-
-        <div className="row gap-3 mt-6">
-          <Skeleton className="h-9 w-1/3 xl:w-1/6" />
-          <Skeleton className="h-9 w-1/3 xl:w-1/6" />
-          <Skeleton className="h-9 w-1/3 xl:w-1/6" />
-        </div>
-
-        <div className="w-full mt-6 max-lg:hidden">
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full mt-3" />
-          <Skeleton className="h-6 w-full mt-3" />
-          <Skeleton className="h-6 w-full mt-3" />
-          <Skeleton className="h-6 w-full mt-3" />
-        </div>
-
-        <Skeleton className="h-6 w-full mt-6" />
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-6 w-1/5" />
-          <Skeleton className="h-6 w-1/5" />
-          <Skeleton className="h-6 w-1/5" />
-          <Skeleton className="h-6 w-1/5" />
-          <Skeleton className="h-6 w-1/5" />
-        </div>
-
-        <Skeleton className="h-6 w-full mt-6" />
-        <Skeleton className="h-3 w-full mt-3" />
-        <Skeleton className="h-3 w-full mt-3" />
-        <Skeleton className="h-3 w-full mt-3" />
-        <Skeleton className="h-3 w-full mt-3" />
-        <Skeleton className="h-3 w-full mt-3 md:hidden" />
-        <Skeleton className="h-3 w-full mt-3 md:hidden" />
-        <Skeleton className="h-3 w-full mt-3 sm:hidden" />
-        <Skeleton className="h-3 w-full mt-3 sm:hidden" />
-        <Skeleton className="h-3 w-full mt-3 sm:hidden" />
-
-        <Skeleton className="h-6 w-1/3 mt-6" />
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-        <div className="center gap-3 mt-3">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-        <div className="center gap-3 mt-3 max-lg:hidden">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-2/3" />
-        </div>
-
-        <Skeleton className="h-9 w-full mt-6" />
-        <Skeleton className="h-6 w-full mt-6" />
+      <div className="w-full h-full space-y-3 p-3 overflow-y-auto">
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-10" />
+        <Skeleton className="w-full h-52" />
       </div>
     )
 
@@ -384,7 +293,7 @@ const SelectedJobAd = () => {
                         <div className="key">جنسیت</div>
                         <div className="value">
                           <span>
-                            {typeof selectedJobAd.gender === null
+                            {typeof selectedJobAd.gender === typeof null
                               ? "فرقی ندارد"
                               : selectedJobAd.gender
                               ? "مرد"

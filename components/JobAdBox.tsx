@@ -52,7 +52,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
     <article
       className={cn(
         "bg-white ring-1 ring-light h-52 flex flex-col p-3 rounded-md relative group",
-        isSelected ? "ring-primary/50" : "cursor-pointer",
+        isSelected ? "ring-primary" : "cursor-pointer",
         jobAd.is_urgent ? "pr-[calc(0.75rem+3px)]" : "",
         className
       )}
@@ -85,10 +85,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           </div>
         </div>
         <div className="mr-3 text-xs sm:text-sm">
-          <span className="dana-bold inline-block text-base">
-            {jobAd.title.slice(0, 70)}
-            {jobAd.title.length > 70 ? "..." : null}
-          </span>
+          <span className="dana-bold text-base line-clamp-2">{jobAd.title}</span>
           <div className="flex items-center mt-2">
             <span>{jobAd.company.name || "شرکت ناشناس"}</span>
             <span className="bordered-text">{jobAd.cooperation_type.name}</span>
@@ -106,7 +103,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           </div>
         </div>
       </div>
-      <div className="border-t border-dashed border-light row text-xs pt-3 mt-auto">
+      <div className="border-t border-dashed border-light row pt-3 mt-auto">
         <span>{releaseDateCalculation(new Date(jobAd.created_at || ""))}</span>
         {jobAd.is_urgent ? (
           <span className="bg-danger/10 text-danger px-3 py-1 mr-auto rounded-full">فوری</span>
@@ -115,7 +112,7 @@ const JobAdBox = ({ jobAd, className }: JobAdBoxProps) => {
           className={jobAd.is_urgent ? "mr-3" : "mr-auto"}
           variant={isSelected ? "primaryFill" : "successFill"}
         >
-          ارسال رزومه
+          {isSelected ? "انتخاب شده" : "ارسال رزومه"}
         </Button>
       </div>
     </article>

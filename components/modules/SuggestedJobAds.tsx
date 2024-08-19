@@ -27,7 +27,7 @@ const SuggestedJobAds = () => {
       ? prevCategories.length
         ? "پیشنهاد شده بر اساس رفتار و عملکرد شما"
         : `${jobAds?.length || ""} آگهی شغلی در ${content?.cities.length || ""} شهر مختلف`
-      : ""
+      : "***"
 
   useEffect(() => {
     setPrevCategories(JSON.parse(localStorage.getItem("prevCategories") || "[]"))
@@ -52,7 +52,11 @@ const SuggestedJobAds = () => {
         }
         description={breakLineDescription}
       >
-        {prevCategories ? (prevCategories.length ? "مشاغل پیشنهادی" : "لیست مشاغل") : null}
+        {prevCategories
+          ? prevCategories.length
+            ? "مشاغل پیشنهادی"
+            : "لیست مشاغل"
+          : "در حال تحلیل..."}
       </BreakLine>
 
       <div className="w-full h-[648px] flex flex-wrap gap-3 mt-6 max-md:hidden xl:h-[428px]">

@@ -21,21 +21,17 @@ const JobAds = () => {
   )
 
   return (
-    <aside className="bg-white min-h-[calc(100vh-6rem)] w-full rounded-md lg:p-3 lg:w-2/5 xl:w-1/3">
-      {useMemo(() => {
-        return jobAds?.length ? (
-          jobAds.map((jobAd) => (
-            <JobAdBox key={uuid()} className="mt-3 first-of-type:mt-0" jobAd={jobAd} />
-          ))
-        ) : fetchCount !== 0 ? (
-          <Alert variant={"warning"} message="فرصت شغلی برای جستجوی شما پیدا نشد" />
-        ) : null
-      }, [fetchCount])}
+    <aside className="bg-white w-full h-max flex flex-wrap gap-3 rounded-md lg:p-3 lg:w-2/5 xl:w-1/3">
+      {jobAds?.length ? (
+        jobAds.map((jobAd) => (
+          <JobAdBox key={uuid()} className="w-full md:jobAd_size-1 lg:w-full" jobAd={jobAd} />
+        ))
+      ) : fetchCount !== 0 ? (
+        <Alert variant={"warning"} message="فرصت شغلی برای جستجوی شما پیدا نشد" />
+      ) : null}
 
       {isLoading && fetchCount === 0
-        ? [...Array(3)].map(() => (
-            <Skeleton key={uuid()} className="h-52 mt-3 first-of-type:mt-0" />
-          ))
+        ? [...Array(5)].map(() => <Skeleton key={uuid()} className="w-full h-52" />)
         : null}
     </aside>
   )
