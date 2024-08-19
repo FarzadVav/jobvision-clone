@@ -221,7 +221,7 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
       <SelectBox id="category" name="category" error={formState.fields.category}>
         <option value="">انتخاب نشده</option>
         {content?.categories.map((category) => (
-          <option key={uuid()} value={category.id}>
+          <option key={category.id} value={category.id}>
             {category.name}
           </option>
         ))}
@@ -238,7 +238,7 @@ const NewJobAdForm = ({ content }: NewJobAdFormT) => {
       >
         <option value="">انتخاب نشده</option>
         {content?.cooperationTypes.map((type) => (
-          <option key={uuid()} value={type.id}>
+          <option key={type.id} value={type.id}>
             {type.name}
           </option>
         ))}
